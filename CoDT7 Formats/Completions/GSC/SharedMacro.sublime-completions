@@ -1,0 +1,11 @@
+{
+	"scope": "(source.gsc) & (meta.block)",
+	"completions":
+	[
+		"REGISTER_SYSTEM",
+		"REGISTER_SYSTEM_EX",
+		"IS_TRUE",
+		"VAL",
+		"ARRAY_ADD"
+	]
+}

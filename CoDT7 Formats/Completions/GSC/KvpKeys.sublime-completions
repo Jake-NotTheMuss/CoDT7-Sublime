@@ -1,0 +1,16 @@
+{
+	"scope": "(source.gsc) & (meta.kvp-argument-key.gsc) & (string.quoted.double)",
+	"completions":
+	[
+		"targetname",
+		"target",
+		"script_noteworthy",
+		"script_linkname",
+		"script_label",
+		"script_string",
+		"classname",
+		"script_unitrigger_type",
+		"scriptbundlename",
+		"prefabname"
+	]
+}

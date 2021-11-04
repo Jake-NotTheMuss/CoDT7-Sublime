@@ -1,0 +1,69 @@
+/* SYNTAX TEST "Packages/CoDT7 Formats/Zone.sublime-syntax" */
+
+>mode,core
+/*^^^^^^^^ meta.header */
+/* <- punctuation.header-directive */
+/*^ keyword */
+/*   ^ punctuation.separator */
+/*    ^ constant.language */
+
+#include "core_mod.class"
+/*^^^^^^^^^^^^^^^^^^^^^^^ meta.preprocessor.include */
+/* <- keyword.control.import.include */
+/*       ^^^^^^^^^^^^^^^^ string.quoted.double */
+/*       ^ punctuation.definition.string.begin */
+/*                      ^ punctuation.definition.string.end */
+
+/////////////////////////////////
+/* ^ comment.line.double-slash */
+/* <- punctuation.definition.comment */
+
+>level.xpak_write,ZONENAME
+/*^^^^^^^^^^^^^^^^^^^^^^^^ meta.header */
+/* <- punctuation.header-directive */
+/*^ constant.language */
+/*    ^ punctuation.accessor */
+/*     ^ variable.parameter */
+/*               ^ punctuation.separator */
+/*                ^ support.constant */
+
+>level.umbra_accurate_occlusion_threshold,768
+/*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.header */
+/* <- punctuation.header-directive */
+/*^ constant.language */
+/*    ^ punctuation.accessor */
+/*     ^ variable.parameter */
+/*                                       ^ punctuation.separator */
+/*                                        ^^^ meta.number.integer.decimal constant.numeric.value */
+
+include,base_patch
+/*^^^^^^^^^^^^^^^^ meta.directive */
+/* <- keyword */
+/*     ^ punctuation.separator */
+
+#ifdef PC
+/*^^^^^^^ meta.preprocessor */
+/* <- keyword.control.import */
+ignore_type,all|-xmodel
+/*^^^^^^^^^^^^^^^^^^^^^ meta.directive */
+/* <- keyword */
+/*         ^ punctuation.separator */
+/*          ^ variable.language */
+/*             ^^ keyword.operator */
+/*               ^ entity.name.type */
+xmodel,p7_lab_sector_livingroom_screen_wall
+/*     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.asset-name */
+/*    ^ punctuation.separator */
+ignore_type,reset
+/*^^^^^^^^^^^^^^^ meta.directive */
+/* <- keyword */
+/*         ^ punctuation.separator */
+/*          ^ variable.language */
+#endif
+/*^^^^ meta.preprocessor */
+/* <- keyword.control.import */
+
+rawfile,mod.cfg
+/*      ^^^^^^^ meta.asset-name */
+/*^ support.type */
+/*     ^ punctuation.separator */

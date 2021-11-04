@@ -1,0 +1,106 @@
+%YAML 1.2
+---
+# http://www.sublimetext.com/docs/3/syntax.html
+
+# This file is part of the T7-Sublime project.
+# T7-Sublime is an enhanced syntax-highlighting package for (almost) all Call of Duty Black Ops III developer file formats.
+# Localized String files contain language-specific implementations of strings.
+
+name: Localized Strings
+file_extensions:
+  - str
+scope: source.str
+
+variables:
+  identifier: \b[[:upper:][:digit:]_]+\b
+  meta_keywords: 'VERSION|CONFIG|FILENOTES|ENDMARKER'
+  languages: 'LANG_ENGLISH|LANG_ENGLISHARABIC|LANG_FRENCH|LANG_GERMAN|LANG_ITALIAN|LANG_JAPANESE|LANG_POLISH|LANG_PORTUGUESE|LANG_RUSSIAN|LANG_SIMPLIFIEDCHINESE|LANG_SPANISH|LANG_TRADITIONALCHINESE'
+
+contexts:
+  main:
+    - include: meta
+    - include: body
+    - include: scope:source.t7formats#comments
+
+  meta:
+    - match: '(?=^\s*({{meta_keywords}})\b)'
+      push:
+        - meta_content_scope: meta.meta-marker.str
+        - match: '^\s*({{meta_keywords}})\b'
+          captures:
+            1: support.constant.str
+        - include: literal-strings
+        - match: $\n
+          pop: true
+
+  body:
+    - match: '^\s*(REFERENCE)\b'
+      captures:
+        1: support.constant.str markup.italic
+      push:
+        - meta_scope: meta.string-reference.str
+        - match: $\n
+          pop: true
+        - match: '{{identifier}}'
+          scope: entity.name.string-reference.str
+    - match: '^\s*({{languages}})\b'
+      captures:
+        1: constant.language.str
+      push:
+        - meta_scope: meta.string-implementation.str
+        - match: $\n
+          pop: true
+        - include: strings
+    - include: strings
+
+  literal-strings:
+    - match: '"'
+      scope: punctuation.definition.string.begin.str
+      push:
+        - meta_scope: string.quoted.double.str
+        - match: '"'
+          scope: punctuation.definition.string.end.str
+          pop: true
+
+  strings:
+    - match: '"'
+      scope: punctuation.definition.string.begin.str
+      push:
+        - meta_scope: string.quoted.double.str
+        - match: '"'
+          scope: punctuation.definition.string.end.str
+          pop: true
+        - include: string_escaped_char
+        - include: string_placeholder
+
+  string_escaped_char:
+    - match: (\\)$\n
+      captures:
+        1: punctuation.separator.continuation.str
+    - match: \\(?:\\|[abefnrtv\'"?]|[0-3][0-9](0,2)|[4-7][0-9]?|x[a-fA-F0-9]+|u[a-fA-F0-9]{4}|U[a-fA-F0-9]{8})
+      scope: constant.character.escape.str
+    - match: \\.
+      scope: invalid.illegal.unknown-escape.str
+
+  string_placeholder:
+    - match: '(?=\[\s*\{)'
+      push:
+        - meta_content_scope: meta.string-placeholder.str
+        - match: '\['
+          scope: keyword.other.str markup.italic punctuation.section.brackets.begin.str
+          set:
+            - meta_content_scope: meta.string-placeholder.str markup.italic
+            - match: '\]'
+              scope: meta.string-placeholder.str keyword.other.str markup.italic punctuation.section.brackets.end.str
+              pop: true
+            - match: '\{'
+              scope: punctuation.section.block.begin.str
+              push:
+                - meta_scope: variable.language.str
+                - match: '\}'
+                  scope: punctuation.section.block.end.str
+                  pop: true
+    - match: '\^\d'
+      scope: constant.other.placeholder.str
+    - match: '&&\d*'
+      scope: constant.other.placeholder.str

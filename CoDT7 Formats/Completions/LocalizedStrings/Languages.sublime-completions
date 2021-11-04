@@ -1,0 +1,18 @@
+{
+	"scope": "source.str - (meta.string-reference, meta.string-implementation, string.quoted)",
+	"completions":
+	[
+		"LANG_ENGLISH",
+		"LANG_ENGLISHARABIC",
+		"LANG_FRENCH",
+		"LANG_GERMAN",
+		"LANG_ITALIAN",
+		"LANG_JAPANESE",
+		"LANG_POLISH",
+		"LANG_PORTUGUESE",
+		"LANG_RUSSIAN",
+		"LANG_SIMPLIFIEDCHINESE",
+		"LANG_SPANISH",
+		"LANG_TRADITIONALCHINESE"
+	]
+}

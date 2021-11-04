@@ -1,0 +1,18 @@
+{
+	"scope": "(source.gsc) & (meta.clientfield-pool.gsc) & (string.quoted.double)",
+	"completions":
+	[
+		"missile",
+		"scriptmover",
+		"actor",
+		"toplayer",
+		"world",
+		"clientuimodel",
+		"allplayers",
+		"vehicle",
+		"zbarrier",
+		"playercorpse",
+		"helicopter",
+		"plane"
+	]
+}

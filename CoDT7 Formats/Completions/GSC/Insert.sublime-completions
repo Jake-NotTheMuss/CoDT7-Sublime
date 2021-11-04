@@ -1,0 +1,8 @@
+{
+	"scope": "(source.gsc) & (meta.preprocessor.insert)",
+	"completions":
+	[
+		"scripts\\shared\\shared.gsh",
+		"scripts\\shared\\version.gsh"
+	]
+}

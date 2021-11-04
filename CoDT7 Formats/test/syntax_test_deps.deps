@@ -1,0 +1,54 @@
+/* SYNTAX TEST "Packages/CoDT7 Formats/ZoneDeps.sublime-syntax" */
+
+version,123456789,123
+/*^^^^^^^^^^^^^^^^^^^ meta.info-line */
+/* <- support */
+/*     ^ punctuation.separator */
+/*      ^^^^^^^^^ meta.number constant.numeric.value */
+/*               ^ punctuation.separator */
+/*                ^^^ meta.number constant.numeric.value */
+
+ignore_missing_shipped,core_pre_gfx
+/*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.directive */
+/* <- keyword */
+/*                    ^ punctuation.separator */
+
+scriptparsetree,scripts/zm/_load.gsc
+/*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.dependency-header */
+/* <- support.type */
+/*             ^ punctuation.separator */
+/*              ^ entity.name.asset */
+
+file,C:\Program Files\steam\steamapps\common\Call of Duty Black Ops III\mods\shadows_egg_classics\scripts\zm\_load.gsc,1627841505,
+/*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.dependency-item */
+/*^ support.constant */
+/*  ^ punctuation.separator */
+/*   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ entity.name.filename */
+/*                                                                                                                    ^ punctuation.separator */
+/*                                                                                                                     ^ constant.numeric.value */
+/*                                                                                                                               ^ punctuation.separator */
+
+texturecombo,zm_mod
+/*^^^^^^^^^^^^^^^^^ meta.dependency-header */
+/* <- entity.name.type */
+/*          ^ punctuation.separator */
+/*           ^ entity.name.asset */
+
+assetlist,zm_mod
+/*^^^^^^^^^^^^^^ meta.info-line */
+/* <- support.constant */
+/*       ^ punctuation.separator */
+/*        ^ constant */
+
+spawn,expect,core_all
+/*^^^^^^^^^^^^^^^^^^^ meta.dependency-item */
+/* <- support.constant */
+/*   ^ punctuation.separator */
+/*    ^ keyword */
+/*          ^ punctuation.separator */
+
+errorcount,0
+/*^^^^^^^^^^ meta.info-line */
+/* <- support */
+/*        ^ punctuation.separator */
+/*         ^ meta.number constant.numeric.value */

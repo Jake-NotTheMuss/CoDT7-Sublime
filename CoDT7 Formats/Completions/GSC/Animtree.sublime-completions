@@ -1,0 +1,24 @@
+{
+	"scope": "(source.gsc) & (meta.animtree.gsc) & (string.quoted.double)",
+	"completions":
+	[
+		"all_player",
+		"bouncing_betty",
+		"fxanim_props",
+		"generic_human",
+		"generic",
+		"mechz_claw",
+		"mp_autoturret",
+		"mp_emp_power_core",
+		"mp_microwaveturret",
+		"mp_missile_drone",
+		"mp_riotshield",
+		"mp_trophy_system",
+		"mp_vehicles",
+		"zm_ally",
+		"zombie_beacon",
+		"zombie_cymbal_monkey",
+		"zombie_meat",
+		"zombie_turbine"
+	]
+}

@@ -1,0 +1,18 @@
+{
+	"scope": "(source.gsc) & (meta.compiler.using.gsc)",
+	"completions":
+	[
+		"scripts\\codescripts\\struct",
+		"scripts\\shared\\array_shared",
+		"scripts\\shared\\clientfield_shared",
+		"scripts\\shared\\flag_shared",
+		"scripts\\shared\\util_shared",
+		"scripts\\shared\\callbacks_shared",
+		"scripts\\shared\\math_shared",
+		"scripts\\shared\\spawner_shared",
+		"scripts\\shared\\system_shared",
+		"scripts\\shared\\ai\\zombie_utility",
+		"scripts\\zm\\_zm_utility",
+		"scripts\\zm\\_zm_weapons"
+	]
+}

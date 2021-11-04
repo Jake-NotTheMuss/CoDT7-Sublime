@@ -1,0 +1,7 @@
+{
+	"scope": "(source.gsc) & (meta.anim-alias)",
+	"completions":
+	[
+		"test_anim"
+	]
+}

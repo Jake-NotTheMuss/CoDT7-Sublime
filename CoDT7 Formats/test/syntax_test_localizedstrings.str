@@ -1,0 +1,66 @@
+// SYNTAX TEST "Packages/CoDT7 Formats/LocalizedStrings.sublime-syntax"
+VERSION     "1"
+//^^^^^^^^^^^^^ meta.meta-marker
+// <- support.constant
+//          ^^^ string.quoted.double
+//          ^ punctuation.definition.string.begin
+//            ^ punctuation.definition.string.end
+CONFIG      "C:\projects\cod\t7\bin\StringEd.cfg"
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.meta-marker
+// <- support.constant
+//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ string.quoted.double
+//          ^ punctuation.definition.string.begin
+//                                              ^ punctuation.definition.string.end
+//             ^ - invalid - constant
+//                      ^ - invalid - constant
+//                          ^ - invalid - constant
+//                            ^ - invalid - constant
+//                               ^ - invalid - constant
+FILENOTES   ""
+//^^^^^^^^^^^^ meta.meta-marker
+// <- support.constant
+//          ^^ string.quoted.double
+//          ^ punctuation.definition.string.begin
+//           ^ punctuation.definition.string.end
+
+REFERENCE         REGULAR_STRING
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string-reference
+// <- support.constant
+//                ^ entity.name.string-reference
+LANG_ENGLISH      "Regular string"
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string-implementation
+// <- constant.language
+//                ^^^^^^^^^^^^^^^^ string.quoted.double
+//                ^ punctuation.definition.string.begin
+//                               ^ punctuation.definition.string.end
+
+REFERENCE         ESCAPED_CHAR
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string-reference
+// <- support.constant
+//                ^ entity.name.string-reference
+LANG_ENGLISH      "String with escaped character\n"
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string-implementation
+// <- constant.language
+//                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ string.quoted.double
+//                ^ punctuation.definition.string.begin
+//                                                ^ punctuation.definition.string.end
+//                                              ^^ constant.character.escape
+
+REFERENCE         PLACEHOLDER
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string-reference
+// <- support.constant
+//                ^ entity.name.string-reference
+LANG_ENGLISH      "Press and hold ^7[{+activate}]^3 to open door. [Cost: 500]"
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string-implementation
+// <- constant.language
+//                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ string.quoted.double
+//                ^ punctuation.definition.string.begin
+//                                                                           ^ punctuation.definition.string.end
+//                                ^^ constant.other.placeholder
+//                                               ^^ constant.other.placeholder
+//                                  ^^^^^^^^^^^^^ meta.string-placeholder
+//                                   ^^^^^^^^^^^ variable.language
+
+ENDMARKER
+//^^^^^^^ meta.meta-marker
+// <- support.constant

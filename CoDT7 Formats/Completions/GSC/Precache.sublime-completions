@@ -1,0 +1,34 @@
+{
+	"scope": "(source.gsc) & (meta.asset-type) & (string.quoted.double)",
+	"completions":
+	[
+		"vehicle",
+		"model",
+		"playercharacter",
+		"aitype",
+		"character",
+		"xmodelalias",
+		"weapon",
+		"zbarrier",
+		"rumble",
+		"shellshock",
+		"xcam",
+		"destructible",
+		"streamerhint",
+		"headicon",
+		"statusicon",
+		"locationselector",
+		"menu",
+		"material",
+		"string",
+		"debugstring",
+		"eventstring",
+		"triggerstring",
+		"objective",
+		"fx",
+		"lui_menu",
+		"lui_menu_data",
+		"client_fx",
+		"client_tagfxset"
+	]
+}
