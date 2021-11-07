@@ -44,7 +44,7 @@ variables:
   # keywords
   control_keywords: 'if|else|while|for|foreach|in|do|return|continue|break|switch|case|default'
   non_func_keywords: 'if|for|foreach|switch|while'
-  procedural_keywords: 'isdefined|wait|waittill|waittillmatch|notify|endon|assert|assertmsg|gettime|vectorscale|waitrealtime'
+  procedural_keywords: 'isdefined|wait|waittillmatch|waittill|notify|endon|assert|assertmsg|gettime|vectorscale|waitrealtime'
   reserved_identifiers: '{{procedural_keywords}}|waittillframeend|profilestart|profilestop'
   modifiers: 'const|private|autoexec'
   langauge_constants: 'undefined|self|world|classes|level|game|anim|vararg|false|true'
@@ -60,7 +60,7 @@ variables:
   # functions where kvp's are inputs
   kvp_function_lookahead: 'struct\s*::\s*get(_array)?|{{sys_namespace_maybe}}(getent|getentarray|getnode|getnodearray|getvehiclenode|getvehiclenodearray)'
   # opeators where thread signal strings are inputs
-  thread_signal_operator_lookahead: 'waittill|waittillmatch|notify|endon'
+  thread_signal_operator_lookahead: 'waittillmatch|waittill|notify|endon'
   # functions where thread signal strings are inputs
   thread_signal_function_lookahead: 'flag\s*::\s*[sg]et\w*|\w*\s*::\s*\w*(wait_?till|notify|endon)\w*'
   # more lookaheads for auto completions
@@ -820,6 +820,7 @@ contexts:
         - match: '#/'
           scope: punctuation.section.devblock.end.gsc
           pop: true
+        - include: global
         - include: statements
 
   parens:
@@ -924,7 +925,7 @@ contexts:
     - include: array-variable-name
 
   access:
-    - match: '(?<=[[:alnum:]_])\s*(\.)(?!\.)'
+    - match: '(?<=[[:alnum:]_]|\))\s*(\.)(?!\.)'
       captures:
         1: meta.member-access.gsc punctuation.accessor.gsc
       push:
