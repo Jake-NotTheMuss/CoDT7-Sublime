@@ -42,7 +42,7 @@ variables:
   basic_types: 'function'
 
   # keywords
-  control_keywords: 'if|else|while|for|foreach|in|do|return|continue|break|switch|case|default'
+  control_keywords: 'if|else|while|for|foreach|in|do|return|continue|break|switch|case|default|thread'
   non_func_keywords: 'if|for|foreach|switch|while'
   procedural_keywords: 'isdefined|wait|waittillmatch|waittill|notify|endon|assert|assertmsg|gettime|vectorscale|waitrealtime'
   reserved_identifiers: '{{procedural_keywords}}|waittillframeend|profilestart|profilestop'
@@ -820,7 +820,8 @@ contexts:
         - match: '#/'
           scope: punctuation.section.devblock.end.gsc
           pop: true
-        - include: global
+        - match: '^\s*(?=({{modifiers}}|function|class)\b)'
+          push: global-modifier
         - include: statements
 
   parens:
@@ -925,9 +926,10 @@ contexts:
     - include: array-variable-name
 
   access:
-    - match: '(?<=[[:alnum:]_]|\))\s*(\.)(?!\.)'
+    - match: '(?<=[[:alnum:]_]|\))\s*((\.)\s*)(?!\s*\.)'
       captures:
-        1: meta.member-access.gsc punctuation.accessor.gsc
+        1: meta.member-access.gsc
+        2: punctuation.accessor.gsc
       push:
         - meta_content_scope: meta.member-access.gsc
         - match: '\bsize\b'
@@ -940,7 +942,7 @@ contexts:
     - include: access-illegal
 
   access-illegal:
-    - match: '\.{2,}'
+    - match: '(\.\s*?){2,}'
       scope: invalid.illegal.syntax.gsc
 
   modifiers:
@@ -1268,7 +1270,7 @@ contexts:
         #- include: modifiers
         - match: '(?={{identifier}})'
           push:
-            - meta_scope: entity.other.inherited-class.gsc
+            - meta_scope: entity.name.parent-class.gsc
             - match: '{{identifier}}'
             - match: ''
               pop: true
@@ -1332,7 +1334,7 @@ contexts:
     - include: preprocessor-data-structures
     - match: '^\s*(?=(constructor|destructor)\s*(\(|$))'
       push: data-structures-modifier
-    - match: '^\s*(?=(var|function)\b)'
+    - match: '^\s*(?=(({{modifiers}})\s*)*(var|function)\b)'
       push: data-structures-modifier
     - include: expressions
 
