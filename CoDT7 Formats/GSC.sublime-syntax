@@ -165,7 +165,7 @@ contexts:
       scope: punctuation.operator.comparison.gsc
     - include: operator-ampersand
     - include: operator-percent-sign
-    - match: \+|\-|(?<!#)/(?!#)|\||\^|\~|\!
+    - match: \+|\-|\*|(?<!#)/(?!#)|\||\^|\~|\!
       scope: punctuation.operator.arithmetic.gsc
     - match: '\='
       scope: punctuation.operator.assignment.gsc
@@ -700,14 +700,7 @@ contexts:
 
   preprocessor-convention-ignore-uppercase-ident-lines:
     - match: '^(\s*{{macro_identifier}})+\s*$'
-      scope: meta.assumed-macro.c
-      push:
-        - match: '\s*({{identifier}})(?=\s*\()'
-          captures:
-            1: meta.function.c entity.name.function.c
-          set: function-definition-params
-        - match: ^
-          pop: true
+      scope: meta.assumed-macro.gsc
 
   preprocessor-expressions:
     - include: preprocessor-macro-define
@@ -926,7 +919,7 @@ contexts:
     - include: array-variable-name
 
   access:
-    - match: '(?<=[[:alnum:]_]|\))\s*((\.)\s*)(?!\s*\.)'
+    - match: '(?<=[[:alnum:]_]|\))\s*((\.)\s*)(?!\s*(\.|\d))'
       captures:
         1: meta.member-access.gsc
         2: punctuation.accessor.gsc
