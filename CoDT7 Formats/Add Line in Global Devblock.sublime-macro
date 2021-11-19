@@ -1,0 +1,6 @@
+[
+	/* Global devblocks shouldn't indent, so we just add 2 newlines */
+	{"command": "insert", "args": {"characters": "\n\n"} },
+	{"command": "move", "args": {"by": "lines", "forward": false} },
+	{"command": "move_to", "args": {"to": "hardeol", "extend": false} }
+]
