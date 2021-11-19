@@ -11,7 +11,7 @@
 /*       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.group */
 /*       ^ punctuation.section.group.begin */
 /*                                           ^ punctuation.section.group.end */
-/*         ^^^^ meta.asset-type string.quoted.double */
+/*         ^^^^ string.quoted.double */
 /*         ^ punctuation.definition.string.begin */
 /*            ^ punctuation.definition.string.end */  
 /*             ^ punctuation.separator */
@@ -26,12 +26,12 @@
 /*             ^ punctuation.terminator */
 
 #using_animtree("generic");
-/*^^^^^^^^^^^^^^^^^^^^^^^^^ meta.compiler.using-animtree */
-/* <- keyword.control.import.using-animtree */
+/*^^^^^^^^^^^^^^^^^^^^^^^^^ meta.compiler.using_animtree */
+/* <- keyword.control.import.using_animtree */
 /*             ^^^^^^^^^^^ meta.group */
 /*             ^ punctuation.section.group.begin */
 /*                       ^ punctuation.section.group.end */
-/*              ^^^^^^^^^ meta.animtree string.quoted.double */
+/*              ^^^^^^^^^ string.quoted.double */
 /*              ^ punctuation.definition.string.begin */
 /*                      ^ punctuation.definition.string.end */
 /*                        ^ punctuation.terminator */
@@ -48,7 +48,7 @@ function animtreetest()
 }
 
 function array_test( &array, array )
-/*                   ^ punctuation.operator.pass-by-reference */
+/*                   ^ punctuation.operator.address-of */
 /*                    ^ - support */
 /*                           ^ - support */
 {
@@ -89,8 +89,8 @@ function operators_test()
 
 
 function main(){
-  a=5,b=0;
-  while(a>0)b++;
+  a=5;
+  while(a>0)a--;
   /*     ^ punctuation.operator.comparison */
   /*      ^ meta.number constant.numeric.value */
   /*         ^^ punctuation.operator.arithmetic */
@@ -126,7 +126,7 @@ class foo {
 /*                                        ^ comment.block */
 /*                                                              ^ constant.language */
 /*                                                                   ^ punctuation.accessor */
-/*                                                                            ^ keyword.operator.word */
+/*                                                                            ^ keyword */
 /*                                                                                  ^ comment.line */
 
 #insert \
@@ -235,7 +235,7 @@ THIS_IS_REALLY_JUST_A_MACRO_AND_NOT_A_RETURN_TYPE
 /* <- meta.assumed-macro */
 
 function main() {
-/* <- storage.type */
+/* <- keyword.declaration */
     /*   ^ meta.function entity.name.function */
     return 0;
 }
@@ -359,7 +359,7 @@ function foo(val, val2)
 /////////////////////////////////////////////
 
 function /* comment */ myfunc
-/* <- storage.type */
+/* <- keyword.declaration */
 /*       ^ comment.block */
 /*                     ^^^^^^ meta.function entity.name.function */
   (a)
@@ -383,7 +383,7 @@ MACRO1 function MACRO2 myfuncname () {
 /*                     ^^^^^^^^^^^^^^^ meta.function */
 /*                                ^^ meta.function.parameters */
 /*                                   ^ meta.block punctuation.section.block.begin
-/*     ^ storage.type */
+/*     ^ keyword.declaration */
 /*                     ^ entity.name.function */
 
         do {
@@ -404,11 +404,11 @@ private function MACRO funcname(){}
 /*                     ^^^^^^^^^^^^ meta.function */
 /*                             ^^ meta.function.parameters */
 /* ^ storage.modifier */
-/*      ^ storage.type */
+/*      ^ keyword.declaration */
 /*                     ^ entity.name.function */
 
 MACRO function
-/*    ^ storage.type */
+/*    ^ keyword.declaration */
 funcname2
 /* ^ entity.name.function */
 ()
@@ -442,7 +442,7 @@ funcname2
 /////////////////////////////////////////////
 // Numeric Constants
 /////////////////////////////////////////////
-
+function numbers(){
 
 dec0 = 0;
 /*     ^ meta.number.integer.decimal constant.numeric.value */
@@ -493,7 +493,7 @@ f = 1.+1..;
 /*      ^^ invalid.illegal.syntax */
 /*        ^ punctuation.terminator - constant */
 
-
+}
 /////////////////////////////////////////////
 // Control Keywords
 /////////////////////////////////////////////

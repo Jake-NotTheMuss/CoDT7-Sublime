@@ -74,36 +74,7 @@ contexts:
 
   numbers:
     # decimal float
-    - match: |-
-        (?x:
-          \b({{dec_digits}})
-          (?:
-            ( (\.)
-              (?:
-                {{dec_digits}} {{dec_exponent}}?
-                | {{dec_exponent}}
-                | (?!\.)
-              )
-            )
-          ) ({{dec_suffix}})?
-          | ( (\.) {{dec_digits}} {{dec_exponent}}? ) ({{dec_suffix}})?
-        )
-      scope: meta.number.float.decimal.zone
-      captures:
-        1: constant.numeric.value.zone
-        2: constant.numeric.value.zone
-        3: punctuation.separator.decimal.zone
-        4: invalid.illegal.numeric.suffix.zone
-        5: constant.numeric.value.zone
-        6: punctuation.separator.decimal.zone
-        7: invalid.illegal.numeric.suffix.zone
-
-    # decimal integer
-    - match: \b({{dec_digits}})({{dec_suffix}})?
-      scope: meta.number.integer.decimal.zone
-      captures:
-        1: constant.numeric.value.zone
-        2: invalid.illegal.numeric.suffix.zone
+    - include: scope:source.t7formats#numbers
 
   comments:
     - include: scope:source.t7formats#comments
@@ -317,10 +288,6 @@ contexts:
     - include: preprocessor-line-continuation
     - include: preprocessor-line-ending
     - include: preprocessor-comments
-    # - match: '\{'
-    #   scope: punctuation.section.block.begin.zone
-    # - match: '\}'
-    #   scope: punctuation.section.block.end.zone
     - include: expressions
 
   preprocessor-other:

@@ -198,6 +198,10 @@ contexts:
     - match: $\n
       pop: true
 
+  preprocessor-line-ending-lookahead:
+    - match: (?=$\n)
+      pop: true
+
   # Comment handling in preprocessor directives are complicated by the fact
   # that a single-line comment will normally consume the newline to prevent
   # completions from being presented to the user. Additionally, a multi-line

@@ -1,5 +1,5 @@
 {
-	"scope": "(source.gsc) & (meta.block) - (meta.external-function-call, string.quoted.double, meta.member-access)",
+	"scope": "(source.gsc) - (meta.compiler, entity.name, meta.external-function-call, string.quoted.double, meta.member-access)",
 	"completions":
 	[
 		"ActivateClientExploder",
