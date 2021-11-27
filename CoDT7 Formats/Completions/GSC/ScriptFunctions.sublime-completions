@@ -110,6 +110,7 @@
 		"zm_altbody_beast::grapple_watch",
 		"zm_altbody_beast::bm_zombie_melee_kill",
 		"zm_altbody_beast::bm_zombie_grapple_kill",
+		"zm_train::autosend_train",
 		"_zm_weap_elemental_bow_storm::elem_storm_fx",
 		"_zm_weap_elemental_bow_storm::elem_storm_whirlwind_rumble",
 		"_zm_weap_elemental_bow_storm::elem_storm_bolt_fx",
