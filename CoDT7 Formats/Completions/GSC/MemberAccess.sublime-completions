@@ -7076,6 +7076,11 @@
 		"claw_extend_r_pos",
 		"rocket_lifter",
 		"rocket_lifter_arm",
-		"rocket_lifter_clamps"
+		"rocket_lifter_clamps",
+		"bgb_machine_user",
+		"train_board_time",
+		"bgb_pack",
+		"weaponbgbuse",
+		"weaponbgbgrab"
 	]
 }
