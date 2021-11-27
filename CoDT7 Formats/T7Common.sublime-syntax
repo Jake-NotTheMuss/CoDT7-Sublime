@@ -136,45 +136,6 @@ contexts:
         1: constant.numeric.value.t7formats
         2: invalid.illegal.numeric.suffix.t7formats
 
-  strings:
-    - match: '"'
-      scope: punctuation.definition.string.begin.t7formats
-      push:
-        - meta_scope: string.quoted.double.t7formats
-        - match: '"'
-          scope: punctuation.definition.string.end.t7formats
-          pop: true
-        - include: string_escaped_char
-
-  string_escaped_char:
-    - match: (\\)$\n
-      captures:
-        1: punctuation.separator.continuation.t7formats
-    - match: \\(?:\\|[abefnrtv\'"?]|[0-3][0-9](0,2)|[4-7][0-9]?|x[a-fA-F0-9]+|u[a-fA-F0-9]{4}|U[a-fA-F0-9]{8})
-      scope: constant.character.escape.t7formats
-    - match: \\.
-      scope: invalid.illegal.unknown-escape.t7formats
-
-  operators:
-    - match: (?:\+\+|\-\-)
-      scope: punctuation.operator.arithmetic.t7formats
-    - match: '->|::'
-      scope: punctuation.accessor.t7formats
-    - match: \+\=|\-\=|\*\=|/\=|%\=|&\=|\|\=|\^\=|>>\=|<<\=
-      scope: punctuation.operator.assignment.augmented.t7formats
-    - match: <<|>>|&&|\|\|
-      scope: punctuation.operator.arithmetic.t7formats
-    - match: <\=|>\=|\=\=|<|>|\!\=|\=\=\=|\!\=\=
-      scope: punctuation.operator.comparison.t7formats
-    - match: \+|\-|(?<!#)/(?!#)|%|\||\^|\~|\!
-      scope: punctuation.operator.arithmetic.t7formats
-    - match: '&(?!\s*")'
-      scope: punctuation.operator.address-of.t7formats
-    - match: '\='
-      scope: punctuation.operator.assignment.t7formats
-    - match: '\?|:'
-      scope: punctuation.operator.ternary.t7formats
-
   preprocessor-disabled:
     - match: '^\s*(#\s*if(n?def)?)\b'
       captures:
