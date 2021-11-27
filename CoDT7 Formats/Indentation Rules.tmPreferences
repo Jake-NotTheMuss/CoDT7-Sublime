@@ -23,7 +23,7 @@
 		</string>
 
 		<key>unIndentedLinePattern</key>
-		<string><![CDATA[^\s*((/\*|.*\*/|//|\#(?!/)).*)?$]]></string>
+		<string><![CDATA[^\s*((/\*|.*\*/|//|\#\s*\w+).*)?$]]></string>
 	</dict>
 </dict>
 </plist>
