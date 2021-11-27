@@ -1,0 +1,7 @@
+{
+  "scope": "(source.gsc) & (meta.compiler.include.gsc)",
+  "completions":
+  [
+    "maps\\_utility"
+  ]
+}
