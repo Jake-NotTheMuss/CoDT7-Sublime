@@ -36,8 +36,8 @@ variables:
   identifier: \b[[:alpha:]_][[:alnum:]_]*\b
   macro_identifier: \b[[:upper:]_][[:upper:][:digit:]_]{2,}\b # only uppercase, at least 3 chars
 
-  asset_types: '(?i:physpreset|physconstraints|destructibledef|xanim|xmodel|xmodelmesh|material|computeshaderset|techset|image|sound|sound_patch|col_map|com_map|game_map|map_ents|gfx_map|lightdef|lensflaredef|ui_map|font|fonticon|weapon|weapondef|weaponvariant|weaponfull|cgmediatable|playersoundstable|playerfxtable|sharedweaponsounds|attachment|attachmentunique|weaponcamo|customizationtable|customizationtable_feimages|customizationtablecolor|snddriverglobals|tagfx|klf|impactsfxtable|impactsoundstable|player_character|aitype|character|xmodelalias|structuredtable|leaderboarddef|ddl|glasses|texturelist|vehicle|addon_map_ents|tracer|slug|surfacefxtable|surfacesounddef|footsteptable|entityfximpacts|entitysoundimpacts|zbarrier|vehiclefxdef|vehiclesounddef|typeinfo|scriptbundle|scriptbundlelist|rumble|bulletpenetration|locdmgtable|aimtable|animselectortable|animmappingtable|animstatemachine|behaviortree|behaviorstatemachine|sanim|lightdescription|shellshock|xcam|bgcache|texturecombo|flametable|bitfield|attachmentcosmeticvariant|maptable|maptableloadingimages|medal|medaltable|objective|objectivelist|umbra_tome|navmesh|navvolume|binaryhtml|laser|beam|streamerhint)'
-  raw_types: '(?i:localize|rawfile|stringtable|scriptparsetree|keyvaluepairs|ttf|fx)'
+  asset_types: '(?i:physpreset|physconstraints|destructibledef|xanim|xmodel|xmodelmesh|material|computeshaderset|techset|image|sound|sound_patch|col_map|com_map|game_map|map_ents|gfx_map|lightdef|lensflaredef|ui_map|font|fonticon|weapon|weapondef|weaponvariant|weaponfull|cgmediatable|playersoundstable|playerfxtable|sharedweaponsounds|attachment|attachmentunique|weaponcamo|customizationtable|customizationtable_feimages|customizationtablecolor|snddriverglobals|tagfx|impactsfxtable|impactsoundstable|player_character|aitype|character|xmodelalias|structuredtable|leaderboarddef|ddl|glasses|texturelist|vehicle|addon_map_ents|tracer|slug|surfacefxtable|surfacesounddef|footsteptable|entityfximpacts|entitysoundimpacts|zbarrier|vehiclefxdef|vehiclesounddef|typeinfo|scriptbundle|scriptbundlelist|rumble|bulletpenetration|locdmgtable|aimtable|animselectortable|animmappingtable|animstatemachine|behaviortree|behaviorstatemachine|sanim|lightdescription|shellshock|xcam|bgcache|texturecombo|flametable|attachmentcosmeticvariant|maptable|maptableloadingimages|medal|medaltable|objective|objectivelist|umbra_tome|navmesh|navvolume|binaryhtml|laser|beam)'
+  raw_types: '(?i:localize|rawfile|stringtable|scriptparsetree|keyvaluepairs|ttf|fx|klf|bitfield|streamerhint)'
 
   all_types: '{{asset_types}}|{{raw_types}}'
 
@@ -116,7 +116,7 @@ contexts:
     - include: preprocessor-rule-other-global
 
   preprocessor-rule-enabled-global:
-    - match: '^\s*((#\s*if)\s+(?i:(1)|(true)))\b'
+    - match: ^\s*((#\s*if)\s+(?i:(1)|(true)))\b
       captures:
         1: meta.preprocessor.zone
         2: keyword.control.import.zone
@@ -143,7 +143,7 @@ contexts:
             - include: global
 
   preprocessor-rule-disabled-global:
-    - match: '^\s*((#\s*if)\s+(?i:(0)|(false)))\b'
+    - match: ^\s*((#\s*if)\s+(?i:(0)|(false)))\b
       captures:
         1: meta.preprocessor.zone
         2: keyword.control.import.zone
@@ -158,7 +158,7 @@ contexts:
           captures:
             1: meta.preprocessor.zone keyword.control.import.else.zone
           push:
-            - match: '(?=^\s*#\s*endif\b)'
+            - match: (?=^\s*#\s*endif\b)
               pop: true
             - include: preprocessor-global
             - include: global
@@ -170,7 +170,7 @@ contexts:
             - include: preprocessor-disabled
 
   preprocessor-rule-other-global:
-    - match: '^\s*(#\s*(?:if|ifdef|ifndef))\b'
+    - match: ^\s*(#\s*(?:if|ifdef|ifndef))\b
       captures:
         1: keyword.control.import.zone
       push:
@@ -240,7 +240,7 @@ contexts:
         - match: '({{identifier}})(?=\()'
           scope: entity.name.function.preprocessor.zone
           set:
-            - match: '\('
+            - match: \(
               scope: punctuation.section.group.begin.zone
               set: preprocessor-macro-params
         - match: '{{identifier}}'
@@ -251,7 +251,7 @@ contexts:
     - meta_scope: meta.preprocessor.macro.parameters.zone meta.group.zone
     - match: '{{identifier}}'
       scope: variable.parameter.zone
-    - match: '\)'
+    - match: \)
       scope: punctuation.section.group.end.zone
       set: preprocessor-macro-definition
     - match: ','
@@ -299,7 +299,7 @@ contexts:
         - include: preprocessor-line-continuation
         - include: preprocessor-line-ending
         - include: preprocessor-comments
-    - match: '^\s*(#\s*endif)\b'
+    - match: ^\s*(#\s*endif)\b
       captures:
         1: meta.preprocessor.zone keyword.control.import.zone
     - match: ^\s*(#\s*include)\b
@@ -428,71 +428,56 @@ contexts:
   raw-asset:
     - include: scriptparsetree
     - include: stringtable
+    # - include: fx
+    # - include: ttf
+    # - include: bitfield
+    # - include: klf
+
+  asset-generic:
+    - match: $\n
+      pop: true
+    - include: asset-type
+    - match: ','
+      scope: punctuation.separator.zone
+      push:
+        - meta_content_scope: meta.asset-name.zone
+        - match: $\n
+          scope: meta.asset-name.zone
+          pop: 2
+        - include: extra-comma
 
   scriptparsetree:
-    - match: '(?=^\s*scriptparsetree\b)'
+    - match: (?=^\s*(?i:scriptparsetree)\b)
       push:
-        - meta_content_scope: meta.scriptparsetree.zone
-        - match: $\n
-          scope: meta.scriptparsetree.zone
-          pop: true
-        - include: asset-type
-        - match: ','
-          scope: punctuation.separator.zone
-          set:
-            - meta_content_scope: meta.scriptparsetree.zone meta.asset-name.zone
-            - match: $\n
-              scope: meta.scriptparsetree.zone meta.asset-name.zone
-              pop: true
-            - include: extra-comma
+        - meta_scope: meta.scriptparsetree.zone
+        - include: asset-generic
 
   stringtable:
-    - match: '(?=^\s*stringtable\b)'
+    - match: (?=^\s*(?i:stringtable)\b)
       push:
-        - meta_content_scope: meta.stringtable.zone
-        - match: $\n
-          scope: meta.stringtable.zone
-          pop: true
-        - include: asset-type
-        - match: ','
-          scope: punctuation.separator.zone
-          set:
-            - meta_content_scope: meta.stringtable.zone meta.asset-name.zone
-            - match: $\n
-              scope: meta.stringtable.zone meta.asset-name.zone
-              pop: true
-            - include: extra-comma
+        - meta_scope: meta.stringtable.zone
+        - include: asset-generic
 
   fx:
-    - match: '(?=^\s*fx\b)'
+    - match: (?=^\s*(?i:fx)\b)
       push:
-        - meta_content_scope: meta.fx.zone
-        - match: $\n
-          scope: meta.fx.zone
-          pop: true
-        - include: asset-type
-        - match: ','
-          scope: punctuation.separator.zone
-          set:
-            - meta_content_scope: meta.fx.zone meta.asset-name.zone
-            - match: $\n
-              scope: meta.fx.zone meta.asset-name.zone
-              pop: true
-            - include: extra-comma
+        - meta_scope: meta.fx.zone
+        - include: asset-generic
 
   ttf:
-    - match: '(?=^\s*ttf\b)'
+    - match: (?=^\s*(?i:ttf)\b)
       push:
-        - meta_content_scope: meta.ttf.zone
-        - match: $\n
-          scope: meta.ttf.zone
-          pop: true
-        - include: asset-type
-        - match: ','
-          scope: punctuation.separator.zone
-          set:
-            - meta_content_scope: meta.ttf.zone meta.asset-name.zone
-            - match: $\n
-              scope: meta.ttf.zone meta.asset-name.zone
-              pop: true
-            - include: extra-comma
+        - meta_scope: meta.ttf.zone
+        - include: asset-generic
+
+  bitfield:
+    - match: (?=^\s*(?i:bitfield)\b)
+      push:
+        - meta_scope: meta.bitfield.zone
+        - include: asset-generic
+
+  klf:
+    - match: (?=^\s*(?i:klf)\b)
+      push:
+        - meta_scope: meta.klf.zone
+        - include: asset-generic
