@@ -1240,8 +1240,6 @@ contexts:
         - include: expressions
     - match: '(?={{identifier}}\s*\()'
       set: global-function-t5
-    - match: (?=\W)
-      pop: true
 
 
                    ###  #      ###  ###     #   #
