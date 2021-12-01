@@ -19,11 +19,11 @@ Current Support:
 - Zone (.zone, .zpkg, .class)
 - Zone Dependency (.deps)
 - Localized Strings (.str)
+- FX (.efx)
 
 Future Support:
 
 - XASSET_EXPORT (.xmodel_export, .xanim_export, .nt_export, .xcam_export)
-- FX (.efx)
 - Vision (.vision)
 
 ... to name a few.
