@@ -15,11 +15,17 @@ variables:
   identifier: \b[[:alpha:]_][[:alnum:]_]*\b
 
 contexts:
+  prototype:
+    - include: comments
+
   main:
     - include: directive
     - include: global
 
 ############[ EXPRESSIONS ]###################################################
+
+  comments:
+    - include: scope:source.t7formats#comments
 
   strings:
     - match: '"'
@@ -31,6 +37,8 @@ contexts:
           pop: true
 
   numbers:
+    - match: '-'
+      scope: punctuation.negation.fx
     - include: scope:source.t7formats#numbers
 
   block:
@@ -67,9 +75,11 @@ contexts:
       push:
         - meta_scope: meta.block.fx
         - match: '\}'
-          scope: punctuation.section.block.begin.fx
+          scope: punctuation.section.block.end.fx
           pop: true
         - include: statements
+    - match: '\}'
+      scope: invalid.illegal.stray-bracket-end.fx
 
   expressions:
     - include: numbers
@@ -78,8 +88,6 @@ contexts:
     - include: keywords
     - match: '{{identifier}}'
       scope: constant.language.fx
-    - match: '\}'
-      scope: invalid.illegal.stray-bracket-end.fx
 
   statements:
     - match: '{{identifier}}'

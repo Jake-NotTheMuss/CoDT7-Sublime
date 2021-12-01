@@ -1,0 +1,47 @@
+/* SYNTAX TEST "Packages/CoDT7 Formats/FX.sublime-syntax" */
+
+flags spawnRelative;
+/* <- variable */
+/*    ^ - variable */
+/*                 ^ punctuation.terminator */
+number -0;
+/* <- variable */
+/*     ^ punctuation */
+/*      ^ constant.numeric.value */
+/*       ^ punctuation.terminator */
+
+{
+/* <- meta.block punctuation.section.block.begin */
+  flags looping;
+/*^ variable */
+/*      ^ - variable */
+/*             ^ punctuation.terminator */
+  dynamicLight2
+/*^ variable */
+  {
+/*^ meta.block punctuation.section.block.begin */
+    new
+/*  ^ keyword */
+    {
+/*  ^ meta.block punctuation.section.block.begin */
+      radius 1
+/*    ^ variable */
+/*           ^ constant.numeric.value */
+      _color 1.0 1.0 1.0 1.0
+/*    ^ variable */
+/*           ^^^ constant.numeric.value */
+/*            ^ punctuation.separator.decimal */
+/*               ^^^ constant.numeric.value */
+/*                ^ punctuation.separator.decimal */
+/*                   ^^^ constant.numeric.value */
+/*                    ^ punctuation.separator.decimal */
+/*                       ^^^ constant.numeric.value */
+/*                        ^ punctuation.separator.decimal */
+    };
+/*  ^ meta.block punctuation.section.block.end */
+/*   ^ punctuation.terminator */
+  };
+/*^ meta.block punctuation.section.block.end */
+/* ^ punctuation.terminator */
+}
+/* <- meta.block punctuation.section.block.end */
