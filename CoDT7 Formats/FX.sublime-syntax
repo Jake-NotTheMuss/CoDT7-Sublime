@@ -38,7 +38,7 @@ contexts:
 
   numbers:
     - match: '-'
-      scope: punctuation.operator.negation.fx
+      scope: punctuation.operator.arithmetic.fx
     - include: scope:source.t7formats#numbers
 
   block:
