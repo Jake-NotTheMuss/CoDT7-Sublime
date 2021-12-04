@@ -20,11 +20,12 @@ Current Support:
 - Zone Dependency (.deps)
 - Localized Strings (.str)
 - FX (.efx)
+- XAsset (.xmodel_export, .xanim_export, .nt_export, .xcam_export)
 
 Future Support:
 
-- XASSET_EXPORT (.xmodel_export, .xanim_export, .nt_export, .xcam_export)
 - Vision (.vision)
+- Lensflare (.klf)
 
 ... to name a few.
 
