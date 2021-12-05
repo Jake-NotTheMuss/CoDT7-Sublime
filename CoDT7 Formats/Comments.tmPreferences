@@ -2,7 +2,7 @@
 <plist version="1.0">
 <dict>
 	<key>scope</key>
-	<string>source.gsc, source.zone, source.deps, source.str, source.fx, source.export</string>
+	<string>source.gsc, source.zone, source.deps, source.str, source.fx, source.export, source.vision</string>
 	<key>settings</key>
 	<dict>
 		<key>shellVariables</key>

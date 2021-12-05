@@ -1,0 +1,38 @@
+%YAML 1.2
+---
+# http://www.sublimetext.com/docs/3/syntax.html
+
+# This file is part of the T7-Sublime project.
+# T7-Sublime is an enhanced syntax-highlighting package for (almost) all Call of Duty Black Ops III developer file formats.
+# Vision files contain audio-visual filtering information used for modifying the character of color and sound in-game.
+
+name: Vision
+file_extensions:
+  - vision
+scope: source.vision
+
+variables:
+  parameters: 'vk(?:TT|TS|TC|TO|RGB0|L0|M0|RGB1|L1|M1|RGB2|L2|RGB3|L3|M3|RGB4|L4|M4|RM)'
+
+contexts:
+  prototype:
+    - include: scope:source.t7formats#comments
+
+  main:
+    - match: '\b{{parameters}}\b'
+      scope: variable.language.vision
+    - match: \w+
+      scope: support.constant.vision
+    - include: strings
+
+  strings:
+    - match: '"'
+      scope: punctuation.definition.string.begin.vision
+      push:
+        - meta_scope: string.quoted.double.vision
+        - match: '"'
+          scope: punctuation.definition.string.end.vision
+          pop: true
+        - match: '-'
+          scope: punctuation.operator.arithmetic.vision
+        - include: scope:source.t7formats#numbers

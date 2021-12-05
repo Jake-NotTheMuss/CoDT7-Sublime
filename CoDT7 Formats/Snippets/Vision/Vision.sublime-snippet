@@ -1,0 +1,24 @@
+<snippet>
+  <description>Color Defs</description>
+  <content><![CDATA[vkTT ""
+vkTS ""
+vkTC ""
+vkTO ""
+vkRGB0 ""
+vkL0 ""
+vkM0 ""
+vkRGB1 ""
+vkL1 ""
+vkM1 ""
+vkRGB2 ""
+vkL2 ""
+vkRGB3 ""
+vkL3 ""
+vkM3 ""
+vkRGB4 ""
+vkL4 ""
+vkM4 ""
+vkRM ""]]></content>
+  <tabTrigger>vkTT</tabTrigger>
+  <scope>source.vision</scope>
+</snippet>

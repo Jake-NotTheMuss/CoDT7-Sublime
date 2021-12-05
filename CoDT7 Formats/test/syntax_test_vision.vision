@@ -1,0 +1,10 @@
+/* SYNTAX TEST "Packages/CoDT7 Formats/Vision.sublime-syntax" */
+
+vkTT "-6500.000000"
+/* <- variable */
+/*   ^ punctuation.definition.string.begin */
+/*                ^ punctuation.definition.string.end */
+/*   ^^^^^^^^^^^^^^ string.quoted.double */
+/*     ^^^^^^^^^^^ constant.numeric.value */
+/*    ^ punctuation.operator */
+/*         ^ punctuation.separator.decimal */
