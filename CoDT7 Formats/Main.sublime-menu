@@ -1,0 +1,16 @@
+[
+	{
+		"id": "edit",
+		"children":
+		[
+			{
+				"id": "comment",
+				"children":
+				[
+					{ "command": "toggle_documentation", "caption": "Toggle Documentation Block" }
+				]
+			},
+			{ "command": "toggle_devblock", "caption": "Toggle Developer Block", "mnemonic": "D" }
+		]
+	}
+]

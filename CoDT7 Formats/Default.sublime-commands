@@ -1,0 +1,4 @@
+[
+	{ "caption": "Toggle Documentation Block", "command": "toggle_documentation" },
+	{ "caption": "Toggle Developer Block", "command": "toggle_devblock" }
+]

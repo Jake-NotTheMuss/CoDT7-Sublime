@@ -71,7 +71,7 @@ contexts:
   main:
     - include: preprocessor-global
     - include: compiler-global
-    - include: devblock
+    - include: devblock-global
     - include: global
 
   global:
@@ -825,11 +825,15 @@ contexts:
           pop: true
         - include: statements
 
-  devblock:
+  devblock-global:
     - match: '/#'
       scope: punctuation.section.devblock.begin.gsc
-    - match: '#/'
-      scope: punctuation.section.devblock.end.gsc
+      push:
+        - meta_scope: meta.devblock.gsc
+        - match: '#/'
+          scope: punctuation.section.devblock.end.gsc
+          pop: true
+        - include: global
 
   parens:
     - match: \(
@@ -848,6 +852,16 @@ contexts:
         - meta_scope: meta.brackets.gsc
         - match: \]
           scope: punctuation.section.brackets.end.gsc
+          pop: true
+        - include: expressions
+
+  devblock:
+    - match: '/#'
+      scope: punctuation.section.devblock.begin.gsc
+      push:
+        - meta_scope: meta.devblock.gsc
+        - match: '#/'
+          scope: punctuation.section.devblock.end.gsc
           pop: true
         - include: expressions
 
