@@ -36,8 +36,6 @@ contexts:
   main:
     - include: comments
     - include: numbers
-    - include: operators
-    - include: strings
 
   comments:
     - match: ^/\* =(\s*.*?)\s*= \*/$\n?

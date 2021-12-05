@@ -1019,7 +1019,7 @@ contexts:
   function-call-before-paren:
     - include: builtin-functions
     - include: script-functions
-    - include: '::'
+    - match: '::'
       scope: punctuation.accessor.gsc
     - match: '{{identifier}}'
 
