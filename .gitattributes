@@ -9,4 +9,4 @@
 *.tmLanguage linguist-language=XML
 *.tmPreferences linguist-language=XML
 
-CoDT7\ Formats/** linguist-detectable
+CoDT7[[:space:]]Formats/** linguist-detectable
