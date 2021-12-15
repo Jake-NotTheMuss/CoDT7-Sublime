@@ -9,7 +9,7 @@
 name: Zone Dependencies
 file_extensions:
   - deps
-scope: source.deps
+scope: text.codt7.zonedeps
 extends: 'Packages/CoDT7 Formats/Zone.sublime-syntax'
 
 variables:
@@ -19,7 +19,7 @@ variables:
 contexts:
   main:
     - include: global
-    - include: scope:source.t7formats#comments
+    - include: scope:source.codt7.common#comments
 
   global:
     - include: meta-info
@@ -29,41 +29,41 @@ contexts:
   meta-info:
     - match: '^\s*(?=({{meta_info_keys}})\b)'
       push:
-        - meta_content_scope: meta.info-line.deps
+        - meta_content_scope: meta.info-line.codt7.zonedeps
         - match: $\n
           pop: true
         - match: '(assetlist)\s*(,)\s*(\w+)$'
           captures:
-            1: support.constant.deps markup.italic
-            2: punctuation.separator.deps
-            3: constant.other.deps
+            1: support.constant.codt7.zonedeps markup.italic
+            2: punctuation.separator.codt7.zonedeps
+            3: constant.other.codt7.zonedeps
         - match: '\b({{meta_info_keys}})\b'
-          scope: support.constant.deps markup.italic
+          scope: support.constant.codt7.zonedeps markup.italic
         - include: non-words
 
   non-words:
     - match: ','
-      scope: punctuation.separator.deps
+      scope: punctuation.separator.codt7.zonedeps
     - include: numbers
 
   assets:
     - match: '^\s*(?=({{all_types}})\b)'
       push:
-        - meta_content_scope: meta.dependency-header.deps
+        - meta_content_scope: meta.dependency-header.codt7.zonedeps
         - match: $\n
           pop: true
         - include: asset-type
         - match: ','
-          scope: punctuation.separator.deps
+          scope: punctuation.separator.codt7.zonedeps
           set:
-            - meta_content_scope: meta.dependency-header.deps entity.name.asset.deps
+            - meta_content_scope: meta.dependency-header.codt7.zonedeps entity.name.asset.codt7.zonedeps
             - match: $\n
               pop: true
             - match: ','
-              scope: invalid.illegal.unexpected-character.deps
+              scope: invalid.illegal.unexpected-character.codt7.zonedeps
     - match: '^\s*(?=({{dep_keys}})\b)'
       push:
-        - meta_content_scope: meta.dependency-item.deps
+        - meta_content_scope: meta.dependency-item.codt7.zonedeps
         - match: $\n
           pop: true
         - match: '(?=file\b)'
@@ -73,43 +73,43 @@ contexts:
 
   dep-type-common:
     - match: '\b{{dep_keys}}\b'
-      scope: support.constant.deps markup.italic
+      scope: support.constant.codt7.zonedeps markup.italic
 
   dep-type-file:
-    - meta_content_scope: meta.dependency-item.file.deps
+    - meta_content_scope: meta.dependency-item.file.codt7.zonedeps
     - match: $\n
       pop: true
     - include: dep-type-common
     - match: ','
-      scope: punctuation.separator.deps
+      scope: punctuation.separator.codt7.zonedeps
       set: file-name
 
   file-name:
-    - meta_content_scope: meta.dependency-item.deps entity.name.filename.deps
+    - meta_content_scope: meta.dependency-item.codt7.zonedeps entity.name.filename.codt7.zonedeps
     - match: $\n
       pop: true
     - match: '(?=,|$)'
       set: comma-separated-numbers
 
   comma-separated-numbers:
-    - meta_content_scope: meta.dependency-item.deps
+    - meta_content_scope: meta.dependency-item.codt7.zonedeps
     - match: $\n
       pop: true
     - match: ','
-      scope: punctuation.separator.deps
+      scope: punctuation.separator.codt7.zonedeps
       push:
-        - meta_content_scope: constant.numeric.value.deps
+        - meta_content_scope: constant.numeric.value.codt7.zonedeps
         - match: '(?=,|$)'
           pop: true
         - match: '[^\h\.]'
-          scope: invalid.illegal.unexpected-character.deps
+          scope: invalid.illegal.unexpected-character.codt7.zonedeps
 
   dep-type-spawn:
-    - meta_content_scope: meta.dependency-item.spawn.deps
+    - meta_content_scope: meta.dependency-item.spawn.codt7.zonedeps
     - match: $\n
       pop: true
     - include: dep-type-common
     - match: ','
-      scope: punctuation.separator.deps
+      scope: punctuation.separator.codt7.zonedeps
     - match: '\b({{header_identifiers}})\b'
       scope: keyword.other markup.italic

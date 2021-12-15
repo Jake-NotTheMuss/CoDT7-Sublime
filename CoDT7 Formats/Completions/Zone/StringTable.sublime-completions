@@ -1,5 +1,5 @@
 {
-	"scope": "(source.zone) & (meta.stringtable) & (meta.asset-name)",
+	"scope": "(text.codt7.zone) & (meta.stringtable) & (meta.asset-name)",
 	"completions":
 	[
 		"gamedata/",

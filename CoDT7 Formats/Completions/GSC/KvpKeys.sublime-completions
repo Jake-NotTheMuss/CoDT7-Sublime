@@ -1,5 +1,5 @@
 {
-	"scope": "(source.gsc) & (meta.kvp-argument-key.gsc) & (string.quoted.double)",
+	"scope": "(source.codt7.gsc) & (meta.kvp-argument-key.codt7.gsc) & (string.quoted.double)",
 	"completions":
 	[
 		"targetname",

@@ -1,5 +1,5 @@
 {
-	"scope": "(source.gsc) & (meta.weapon-name.gsc) & (string.quoted.double)",
+	"scope": "(source.codt7.gsc) & (meta.weapon-name.codt7.gsc) & (string.quoted.double)",
 	"completions":
 	[
 		"pistol_revolver38",

@@ -5,7 +5,7 @@
 	<key>name</key>
 	<string>Symbol List: Namespace</string>
 	<key>scope</key>
-	<string>source.gsc entity.name.namespace</string>
+	<string>source.codt7.gsc entity.name.namespace</string>
 	<key>settings</key>
 	<dict>
 		<key>showInSymbolList</key>

@@ -1,5 +1,5 @@
 {
-	"scope": "(source.gsc) & (meta.compiler.using.gsc)",
+	"scope": "(source.codt7.gsc) & (meta.compiler.using.codt7.gsc)",
 	"completions":
 	[
 		"scripts\\codescripts\\struct",

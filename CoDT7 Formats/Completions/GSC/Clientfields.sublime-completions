@@ -1,5 +1,5 @@
 {
-	"scope": "(source.gsc) & (meta.clientfield-name.gsc) & (string.quoted.double)",
+	"scope": "(source.codt7.gsc) & (meta.clientfield-name.codt7.gsc) & (string.quoted.double)",
 	"completions":
 	[
 		"bm_superbeast",

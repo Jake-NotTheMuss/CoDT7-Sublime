@@ -9,7 +9,7 @@
 name: Localized Strings
 file_extensions:
   - str
-scope: source.str
+scope: source.codt7.localizedstrings
 
 variables:
   identifier: \b[[:upper:][:digit:]_]+\b
@@ -20,15 +20,15 @@ contexts:
   main:
     - include: meta
     - include: body
-    - include: scope:source.t7formats#comments
+    - include: scope:source.codt7.common#comments
 
   meta:
     - match: '(?=^\s*({{meta_keywords}})\b)'
       push:
-        - meta_content_scope: meta.meta-marker.str
+        - meta_content_scope: meta.meta-marker.codt7.localizedstrings
         - match: '^\s*({{meta_keywords}})\b'
           captures:
-            1: support.constant.str
+            1: support.constant.codt7.localizedstrings
         - include: literal-strings
         - match: $\n
           pop: true
@@ -36,18 +36,18 @@ contexts:
   body:
     - match: '^\s*(REFERENCE)\b'
       captures:
-        1: support.constant.str markup.italic
+        1: support.constant.codt7.localizedstrings markup.italic
       push:
-        - meta_scope: meta.string-reference.str
+        - meta_scope: meta.string-reference.codt7.localizedstrings
         - match: $\n
           pop: true
         - match: '{{identifier}}'
-          scope: entity.name.string-reference.str
+          scope: entity.name.string-reference.codt7.localizedstrings
     - match: '^\s*({{languages}})\b'
       captures:
-        1: constant.language.str
+        1: constant.language.codt7.localizedstrings
       push:
-        - meta_scope: meta.string-implementation.str
+        - meta_scope: meta.string-implementation.codt7.localizedstrings
         - match: $\n
           pop: true
         - include: strings
@@ -55,20 +55,20 @@ contexts:
 
   literal-strings:
     - match: '"'
-      scope: punctuation.definition.string.begin.str
+      scope: punctuation.definition.string.begin.codt7.localizedstrings
       push:
-        - meta_scope: string.quoted.double.str
+        - meta_scope: string.quoted.double.codt7.localizedstrings
         - match: '"'
-          scope: punctuation.definition.string.end.str
+          scope: punctuation.definition.string.end.codt7.localizedstrings
           pop: true
 
   strings:
     - match: '"'
-      scope: punctuation.definition.string.begin.str
+      scope: punctuation.definition.string.begin.codt7.localizedstrings
       push:
-        - meta_scope: string.quoted.double.str
+        - meta_scope: string.quoted.double.codt7.localizedstrings
         - match: '"'
-          scope: punctuation.definition.string.end.str
+          scope: punctuation.definition.string.end.codt7.localizedstrings
           pop: true
         - include: string_escaped_char
         - include: string_placeholder
@@ -76,31 +76,31 @@ contexts:
   string_escaped_char:
     - match: (\\)$\n
       captures:
-        1: punctuation.separator.continuation.str
+        1: punctuation.separator.continuation.codt7.localizedstrings
     - match: \\(?:\\|[abefnrtv\'"?]|[0-3][0-9](0,2)|[4-7][0-9]?|x[a-fA-F0-9]+|u[a-fA-F0-9]{4}|U[a-fA-F0-9]{8})
-      scope: constant.character.escape.str
+      scope: constant.character.escape.codt7.localizedstrings
     - match: \\.
-      scope: invalid.illegal.unknown-escape.str
+      scope: invalid.illegal.unknown-escape.codt7.localizedstrings
 
   string_placeholder:
     - match: '(?=\[\s*\{)'
       push:
-        - meta_content_scope: meta.string-placeholder.str
+        - meta_content_scope: meta.string-placeholder.codt7.localizedstrings
         - match: '\['
-          scope: keyword.other.str markup.italic punctuation.section.brackets.begin.str
+          scope: keyword.other.codt7.localizedstrings markup.italic punctuation.section.brackets.begin.codt7.localizedstrings
           set:
-            - meta_content_scope: meta.string-placeholder.str markup.italic
+            - meta_content_scope: meta.string-placeholder.codt7.localizedstrings markup.italic
             - match: '\]'
-              scope: meta.string-placeholder.str keyword.other.str markup.italic punctuation.section.brackets.end.str
+              scope: meta.string-placeholder.codt7.localizedstrings keyword.other.codt7.localizedstrings markup.italic punctuation.section.brackets.end.codt7.localizedstrings
               pop: true
             - match: '\{'
-              scope: punctuation.section.block.begin.str
+              scope: punctuation.section.block.begin.codt7.localizedstrings
               push:
-                - meta_scope: variable.language.str
+                - meta_scope: variable.language.codt7.localizedstrings
                 - match: '\}'
-                  scope: punctuation.section.block.end.str
+                  scope: punctuation.section.block.end.codt7.localizedstrings
                   pop: true
     - match: '\^\d'
-      scope: constant.other.placeholder.str
+      scope: constant.other.placeholder.codt7.localizedstrings
     - match: '&&\d*'
-      scope: constant.other.placeholder.str
+      scope: constant.other.placeholder.codt7.localizedstrings

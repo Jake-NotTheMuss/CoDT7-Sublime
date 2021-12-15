@@ -1,5 +1,5 @@
 {
-	"scope": "source.str - (meta.string-reference, meta.string-implementation, string.quoted)",
+	"scope": "text.codt7.localizedstrings - (meta.string-reference, meta.string-implementation, string.quoted)",
 	"completions":
 	[
 		"LANG_ENGLISH",

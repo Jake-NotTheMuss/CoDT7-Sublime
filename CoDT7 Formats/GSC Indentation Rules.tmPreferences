@@ -2,7 +2,7 @@
 <plist version="1.0">
 <dict>
 	<key>scope</key>
-	<string>source.gsc</string>
+	<string>source.codt7.gsc</string>
 	<key>settings</key>
 	<dict>
 		<key>decreaseIndentPattern</key>

@@ -2,7 +2,7 @@
 <plist version="1.0">
 <dict>
   <key>scope</key>
-  <string>source.gsc entity.name.class</string>
+  <string>source.codt7.gsc entity.name.class</string>
   <key>settings</key>
   <dict>
     <key>showInSymbolList</key>

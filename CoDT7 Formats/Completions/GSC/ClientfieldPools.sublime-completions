@@ -1,5 +1,5 @@
 {
-	"scope": "(source.gsc) & (meta.clientfield-pool.gsc) & (string.quoted.double)",
+	"scope": "(source.codt7.gsc) & (meta.clientfield-pool.codt7.gsc) & (string.quoted.double)",
 	"completions":
 	[
 		"missile",

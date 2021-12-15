@@ -1,5 +1,5 @@
 {
-	"scope": "(source.gsc) & (meta.anim-alias)",
+	"scope": "(source.codt7.gsc) & (meta.anim-alias)",
 	"completions":
 	[
 		"test_anim"

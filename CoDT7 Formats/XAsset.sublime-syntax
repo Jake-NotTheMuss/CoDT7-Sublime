@@ -11,7 +11,7 @@ file_extensions:
   - xmodel_export
   - xanim_export
   - nt_export
-scope: source.export
+scope: text.codt7.xasset
 
 variables:
   checksum_tokens: 'NUMBONES|NUMPARTS|NUMFRAMES|NUMKEYS|NUMVERTS32|NUMVERTS|NUMFACES|NUMOBJECTS|NUMMATERIALS'
@@ -20,7 +20,7 @@ variables:
 contexts:
   prototype:
     - match: '-'
-      scope: punctuation.operator.negation.export
+      scope: punctuation.operator.negation.codt7.xasset
     - include: numbers
     - include: strings
     - include: global-param
@@ -31,29 +31,29 @@ contexts:
     - include: global
 
   comments:
-    - include: scope:source.t7formats#comments
+    - include: scope:source.codt7.common#comments
 
   numbers:
-    - include: scope:source.t7formats#numbers
+    - include: scope:source.codt7.common#numbers
 
   strings:
     - match: '"'
-      scope: punctuation.definition.string.begin.export
+      scope: punctuation.definition.string.begin.codt7.xasset
       push:
-        - meta_scope: string.quoted.double.export
+        - meta_scope: string.quoted.double.codt7.xasset
         - match: '"'
-          scope: punctuation.definition.string.end.export
+          scope: punctuation.definition.string.end.codt7.xasset
           pop: true
 
   directive:
     - match: ^\s*(?:(MODEL)|(ANIMATION))\b
       captures:
-        1: keyword.directive.model.export
-        2: keyword.directive.animation.export
+        1: keyword.directive.model.codt7.xasset
+        2: keyword.directive.animation.codt7.xasset
     - match: ^\s*(VERSION)\s+(\d*)
       captures:
-        1: keyword.directive.version.export
-        2: constant.numeric.export-version.export
+        1: keyword.directive.version.codt7.xasset
+        2: constant.numeric.export-version.codt7.xasset
 
   global:
     - include: comments
@@ -65,7 +65,7 @@ contexts:
 
   global-param:
     - match: '\b({{global_params}})\b'
-      scope: variable.language.export
+      scope: variable.language.codt7.xasset
 
   block-end:
     - match: '(?=\b{{checksum_tokens}}\b)'
@@ -75,79 +75,79 @@ contexts:
     - meta_include_prototype: false
     # XMDDEL
     - match: \bNUMBONES\b
-      scope: variable.language.export
+      scope: variable.language.codt7.xasset
       set: bone-block
     - match: \b(NUMVERTS32|NUMVERTS)\b
-      scope: variable.language.export
+      scope: variable.language.codt7.xasset
       set: vert-block
     - match: \bNUMFACES\b
-      scope: variable.language.export
+      scope: variable.language.codt7.xasset
       set: tri-block
     - match: \bNUMOBJECTS\b
-      scope: variable.language.export
+      scope: variable.language.codt7.xasset
       set: object-block
     - match: \bNUMMATERIALS\b
-      scope: variable.language.export
+      scope: variable.language.codt7.xasset
       set: material-block
     # XANIM
     - match: \bNUMPARTS\b
-      scope: variable.language.export
+      scope: variable.language.codt7.xasset
       set: part-block
     - match: \bNUMFRAMES\b
-      scope: variable.language.export
+      scope: variable.language.codt7.xasset
       set: frame-block
     - match: \bNUMKEYS\b
-      scope: variable.language.export
+      scope: variable.language.codt7.xasset
       set: key-block
 
 ###########[ XMODEL ]########################################################################################
 
   bone-block:
     - match: \bNUMCOSMETICS\b
-      scope: variable.language.export
+      scope: variable.language.codt7.xasset
     - match: \bBONE\b
-      scope: storage.type.export
+      scope: storage.type.codt7.xasset
     - match: \b(OFFSET|SCALE|X|Y|Z)\b
-      scope: variable.parameter.export
+      scope: variable.parameter.codt7.xasset
 
   vert-block:
     - match: \b(VERT32|VERT)\b
-      scope: storage.type.export
+      scope: storage.type.codt7.xasset
     - match: \b(OFFSET|BONES|BONE)\b
-      scope: variable.parameter.export
+      scope: variable.parameter.codt7.xasset
 
   tri-block:
     - match: \b(TRI)\b
-      scope: storage.type.export
+      scope: storage.type.codt7.xasset
     - match: \b(VERT32|VERT|NORMAL|COLOR|UV)\b
-      scope: variable.parameter.export
+      scope: variable.parameter.codt7.xasset
 
   object-block:
     - match: \b(OBJECT)\b
-      scope: storage.type.export
+      scope: storage.type.codt7.xasset
 
   material-block:
     - match: \b(MATERIAL)\b
-      scope: storage.type.export
+      scope: storage.type.codt7.xasset
     - match: \b(COLOR|TRANSPARENCY|AMBIENTCOLOR|INCANDESCENCE|COEFFS|GLOW|REFRACTIVE|SPECULARCOLOR|REFLECTIVECOLOR|REFLECTIVE|BLINN|PHONG)\b
-      scope: variable.parameter.export
+      scope: variable.parameter.codt7.xasset
 
 ###########[ XANIM ]#########################################################################################
 
   part-block:
     - match: \b(PART)\b
-      scope: storage.type.export
+      scope: storage.type.codt7.xasset
 
   frame-block:
     - match: \b(FRAME)\b
-      scope: storage.type.export
+      scope: storage.type.codt7.xasset
     - match: \b(PART|OFFSET|SCALE|X|Y|Z)\b
-      scope: variable.parameter.export
+      scope: variable.parameter.codt7.xasset
 
 ###########[ NT ]############################################################################################
 
   key-block:
     - match: \b(KEY)\b
-      scope: storage.type.export
+      scope: storage.type.codt7.xasset
     - match: \b(FRAME)\b
-      scope: variable.parameter.export
+      scope: variable.parameter.codt7.xasset

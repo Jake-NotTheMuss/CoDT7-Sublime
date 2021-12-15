@@ -1,5 +1,5 @@
 {
-	"scope": "(source.zone) & (meta.scriptparsetree) & (meta.asset-name)",
+	"scope": "(text.codt7.zone) & (meta.scriptparsetree) & (meta.asset-name)",
 	"completions":
 	[
 		"scripts/codescripts/",

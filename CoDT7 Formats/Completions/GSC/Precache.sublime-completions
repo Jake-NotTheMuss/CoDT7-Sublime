@@ -1,5 +1,5 @@
 {
-	"scope": "(source.gsc) & (meta.asset-type) & (string.quoted.double)",
+	"scope": "(source.codt7.gsc) & (meta.asset-type) & (string.quoted.double)",
 	"completions":
 	[
 		"vehicle",

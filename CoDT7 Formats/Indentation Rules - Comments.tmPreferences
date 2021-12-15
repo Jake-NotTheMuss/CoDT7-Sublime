@@ -2,7 +2,7 @@
 <plist version="1.0">
 <dict>
 	<key>scope</key>
-	<string><![CDATA[(source.gsc | source.zone | source.deps | source.str) & comment.block]]></string>
+	<string><![CDATA[(source.codt7) & comment.block]]></string>
 	<key>settings</key>
 	<dict>
 		<key>unIndentedLinePattern</key>

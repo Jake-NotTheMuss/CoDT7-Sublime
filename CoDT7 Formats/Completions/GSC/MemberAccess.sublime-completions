@@ -1,5 +1,5 @@
 {
-	"scope": "(source.gsc) & (meta.member-access)",
+	"scope": "(source.codt7.gsc) & (meta.member-access)",
 	"completions":
 	[
 		"_effect",

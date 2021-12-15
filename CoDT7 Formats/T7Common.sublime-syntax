@@ -4,11 +4,11 @@
 
 # This file is part of the T7-Sublime project.
 # T7-Sublime is an enhanced syntax-highlighting package for (almost) all Call of Duty Black Ops III developer file formats.
-# T7 Common is an internal library containing common rules which are used by the visible syntax files.
+# T7 Source Common is an internal library containing common rules which commonly used in source-code contexts.
 
 name: T7 Common
 hidden: true
-scope: source.t7formats
+scope: source.codt7.common
 
 variables:
   # number digits
@@ -39,32 +39,32 @@ contexts:
 
   comments:
     - match: ^/\* =(\s*.*?)\s*= \*/$\n?
-      scope: comment.block.t7formats
+      scope: comment.block.codt7.common
       captures:
-        1: meta-toc-list.banner.block.t7formats
+        1: meta-toc-list.banner.block.codt7.common
     - match: /\*
-      scope: punctuation.definition.comment.t7formats
+      scope: punctuation.definition.comment.codt7.common
       push:
-        - meta_scope: comment.block.t7formats
+        - meta_scope: comment.block.codt7.common
         - match: \*/
-          scope: punctuation.definition.comment.t7formats
+          scope: punctuation.definition.comment.codt7.common
           pop: true
         - match: ^\s*(\*)(?!/)
           captures:
-            1: punctuation.definition.comment.t7formats
+            1: punctuation.definition.comment.codt7.common
     - match: \*/(?!\*)
-      scope: invalid.illegal.stray-comment-end.t7formats
+      scope: invalid.illegal.stray-comment-end.codt7.common
     - match: ^// =(\s*.*?)\s*=\s*$\n?
-      scope: comment.line.banner.t7formats
+      scope: comment.line.banner.codt7.common
       captures:
-        1: meta.toc-list.banner.line.t7formats
+        1: meta.toc-list.banner.line.codt7.common
     - match: //
-      scope: punctuation.definition.comment.t7formats
+      scope: punctuation.definition.comment.codt7.common
       push:
-        - meta_scope: comment.line.double-slash.t7formats
+        - meta_scope: comment.line.double-slash.codt7.common
         - match: '(\\)$\n'
           captures:
-            1: punctuation.separator.continuation.t7formats
+            1: punctuation.separator.continuation.codt7.common
         - match: \n
           pop: true
 
@@ -84,74 +84,74 @@ contexts:
           ) ({{dec_suffix}})?
           | ( (\.) {{dec_digits}} {{dec_exponent}}? ) ({{dec_suffix}})?
         )
-      scope: meta.number.float.decimal.t7formats
+      scope: meta.number.float.decimal.codt7.common
       captures:
-        1: constant.numeric.value.t7formats
-        2: constant.numeric.value.t7formats
-        3: punctuation.separator.decimal.t7formats
-        4: invalid.illegal.numeric.suffix.t7formats
-        5: constant.numeric.value.t7formats
-        6: punctuation.separator.decimal.t7formats
-        7: invalid.illegal.numeric.suffix.t7formats
+        1: constant.numeric.value.codt7.common
+        2: constant.numeric.value.codt7.common
+        3: punctuation.separator.decimal.codt7.common
+        4: invalid.illegal.numeric.suffix.codt7.common
+        5: constant.numeric.value.codt7.common
+        6: punctuation.separator.decimal.codt7.common
+        7: invalid.illegal.numeric.suffix.codt7.common
 
     # hexadecimal float
     - match: \b(0[xX])({{hex_digit}}*(\.){{hex_digit}}*{{hex_exponent}})({{dec_suffix}})?
-      scope: meta.number.float.hexadecimal.t7formats
+      scope: meta.number.float.hexadecimal.codt7.common
       captures:
-        1: constant.numeric.base.t7formats
-        2: constant.numeric.value.t7formats
-        3: punctuation.separator.decimal.t7formats
-        4: invalid.illegal.numeric.suffix.t7formats
+        1: constant.numeric.base.codt7.common
+        2: constant.numeric.value.codt7.common
+        3: punctuation.separator.decimal.codt7.common
+        4: invalid.illegal.numeric.suffix.codt7.common
 
     # binary integer
     - match: \b(0[bB])({{bin_digit}}*)({{bin_suffix}})?
-      scope: meta.number.integer.binary.t7formats
+      scope: meta.number.integer.binary.codt7.common
       captures:
-        1: constant.numeric.base.t7formats
-        2: constant.numeric.value.t7formats
-        3: invalid.illegal.numeric.suffix.t7formats
+        1: constant.numeric.base.codt7.common
+        2: constant.numeric.value.codt7.common
+        3: invalid.illegal.numeric.suffix.codt7.common
 
     # hexadecimal integer
     - match: \b(0[xX])({{hex_digit}}*)({{hex_suffix}})?
-      scope: meta.number.integer.hexadecimal.t7formats
+      scope: meta.number.integer.hexadecimal.codt7.common
       captures:
-        1: constant.numeric.base.t7formats
-        2: constant.numeric.value.t7formats
-        3: invalid.illegal.numeric.suffix.t7formats
+        1: constant.numeric.base.codt7.common
+        2: constant.numeric.value.codt7.common
+        3: invalid.illegal.numeric.suffix.codt7.common
 
     # octal integer
     - match: \b(0)({{oct_digit}}+)({{oct_suffix}})?
-      scope: meta.number.integer.octal.t7formats
+      scope: meta.number.integer.octal.codt7.common
       captures:
-        1: constant.numeric.base.t7formats
-        2: constant.numeric.value.t7formats
-        3: invalid.illegal.numeric.suffix.t7formats
+        1: constant.numeric.base.codt7.common
+        2: constant.numeric.value.codt7.common
+        3: invalid.illegal.numeric.suffix.codt7.common
 
     # decimal integer
     - match: \b({{dec_digits}})({{dec_suffix}})?
-      scope: meta.number.integer.decimal.t7formats
+      scope: meta.number.integer.decimal.codt7.common
       captures:
-        1: constant.numeric.value.t7formats
-        2: invalid.illegal.numeric.suffix.t7formats
+        1: constant.numeric.value.codt7.common
+        2: invalid.illegal.numeric.suffix.codt7.common
 
   preprocessor-disabled:
     - match: '^\s*(#\s*if(n?def)?)\b'
       captures:
-        1: meta.preprocessor.t7formats
+        1: meta.preprocessor.codt7.common
       push:
         - match: '^\s*(#\s*endif)\b'
           captures:
-            1: meta.preprocessor.t7formats
+            1: meta.preprocessor.codt7.common
           pop: true
         - include: preprocessor-disabled
 
   preprocessor-line-continuation:
     - match: '(\\)$\n'
       captures:
-        1: punctuation.separator.continuation.t7formats
+        1: punctuation.separator.continuation.codt7.common
     - match: \\(\s+?)$
       captures:
-        1: invalid.illegal.space-after-continuation.t7formats
+        1: invalid.illegal.space-after-continuation.codt7.common
 
   preprocessor-line-ending:
     - match: $\n
@@ -167,21 +167,21 @@ contexts:
   # comment without a line continuation ends at the newline.
   preprocessor-comments:
     - match: /\*
-      scope: punctuation.definition.comment.t7formats
+      scope: punctuation.definition.comment.codt7.common
       push:
-        - meta_scope: comment.block.t7formats
+        - meta_scope: comment.block.codt7.common
         - match: '\\$\n'
-          scope: punctuation.separator.continuation.t7formats
+          scope: punctuation.separator.continuation.codt7.common
         - match: \*/
-          scope: punctuation.definition.comment.t7formats
+          scope: punctuation.definition.comment.codt7.common
           pop: true
     - match: //
-      scope: punctuation.definition.comment.t7formats
+      scope: punctuation.definition.comment.codt7.common
       push:
-        - meta_scope: comment.line.double-slash.t7formats
+        - meta_scope: comment.line.double-slash.codt7.common
         - match: '(\\)$\n'
           captures:
-            1: punctuation.separator.continuation.t7formats
+            1: punctuation.separator.continuation.codt7.common
           pop: true
         - match: (?=\n)
           pop: true

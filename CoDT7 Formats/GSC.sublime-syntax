@@ -11,7 +11,7 @@ file_extensions:
   - gsc
   - csc
   - gsh
-scope: source.gsc
+scope: source.codt7.gsc
 
 variables:
   # number digits
@@ -91,111 +91,111 @@ contexts:
 
 
   comments:
-    - include: scope:source.t7formats#comments
+    - include: scope:source.codt7.common#comments
     - match: '/@'
-      scope: punctuation.definition.comment.gsc
+      scope: punctuation.definition.comment.codt7.gsc
       push:
-        - meta_scope: comment.block.decumentation.gsc
+        - meta_scope: comment.block.decumentation.codt7.gsc
         - match: '@/'
-          scope: punctuation.definition.comment.gsc
+          scope: punctuation.definition.comment.codt7.gsc
           pop: true
 
   numbers:
-    - include: scope:source.t7formats#numbers
+    - include: scope:source.codt7.common#numbers
 
   strings:
     - match: '"'
-      scope: punctuation.definition.string.begin.gsc
+      scope: punctuation.definition.string.begin.codt7.gsc
       push:
-        - meta_scope: string.quoted.double.gsc
+        - meta_scope: string.quoted.double.codt7.gsc
         - match: '"'
-          scope: punctuation.definition.string.end.gsc
+          scope: punctuation.definition.string.end.codt7.gsc
           pop: true
         - include: string_escaped_char
 
   string_escaped_char:
     - match: (\\)$\n
       captures:
-        1: punctuation.separator.continuation.gsc
+        1: punctuation.separator.continuation.codt7.gsc
     - match: \\(?:\\|[abefnrtv\'"?]|[0-3][0-9]{0,2}|[4-7][0-9]?|x[a-fA-F0-9]+|u[a-fA-F0-9]{4}|U[a-fA-F0-9]{8})
-      scope: constant.character.escape.gsc
+      scope: constant.character.escape.codt7.gsc
     - match: \\.
-      scope: invalid.illegal.unknown-escape.gsc
+      scope: invalid.illegal.unknown-escape.codt7.gsc
 
   operator-ampersand:
     # bitwise-and
     - match: '(?<={{variable_or_constant_border}})\s*(&)\s*(?!(?i:array)\b)(?={{variable_or_constant_border}})'
       captures:
-        1: punctuation.operator.arithmetic.gsc
+        1: punctuation.operator.arithmetic.codt7.gsc
     - match: '(?<={{variable_or_constant_border}})\s*(&)\s*(?i:array)'
       captures:
-        1: punctuation.operator.arithmetic.gsc
+        1: punctuation.operator.arithmetic.codt7.gsc
     # address-of
     - match: (?<!{{variable_or_constant_border}})\s*(&)(?=\s*{{identifier}})
       captures:
-        1: punctuation.operator.address-of.gsc
+        1: punctuation.operator.address-of.codt7.gsc
       push: builtin-function-call-maybe
 
   operator-percent-sign:
     # modulus
     - match: '(?<={{variable_or_constant_border}})\s*(%)\s*(?={{variable_or_constant_border}})'
       captures:
-        1: punctuation.operator.arithmetic.gsc
+        1: punctuation.operator.arithmetic.codt7.gsc
     # anim reference
     - match: '(?<!{{variable_or_constant_border}})\s*((%)\s*)(?=\w)'
       captures:
-        1: meta.anim-reference.gsc string.unquoted.gsc
-        2: punctuation.operator.other.gsc
+        1: meta.anim-reference.codt7.gsc string.unquoted.codt7.gsc
+        2: punctuation.operator.other.codt7.gsc
       push:
-        - meta_scope: meta.anim-reference.gsc string.unquoted.gsc
+        - meta_scope: meta.anim-reference.codt7.gsc string.unquoted.codt7.gsc
         - match: '(?=[^\w:])'
           pop: true
 
   operator-expression-evaluation:
     - match: \[\[
-      scope: punctuation.definition.expression-evaluation.begin.gsc
+      scope: punctuation.definition.expression-evaluation.begin.codt7.gsc
       push:
-        - meta_scope: meta.expression-evaluation.gsc
+        - meta_scope: meta.expression-evaluation.codt7.gsc
         - match: \]\]
-          scope: punctuation.definition.expression-evaluation.end.gsc
+          scope: punctuation.definition.expression-evaluation.end.codt7.gsc
           pop: true
         - include: expressions
 
   operators:
     - match: (?:\+\+|\-\-)
-      scope: punctuation.operator.arithmetic.gsc
+      scope: punctuation.operator.arithmetic.codt7.gsc
     - match: '->|::'
-      scope: punctuation.accessor.gsc
+      scope: punctuation.accessor.codt7.gsc
     - match: \+\=|\-\=|\*\=|/\=|%\=|&\=|\|\=|\^\=|>>\=|<<\=
-      scope: punctuation.operator.assignment.augmented.gsc
+      scope: punctuation.operator.assignment.augmented.codt7.gsc
     - match: <<|>>|&&|\|\|
-      scope: punctuation.operator.arithmetic.gsc
+      scope: punctuation.operator.arithmetic.codt7.gsc
     - match: <\=|>\=|<|>|\=\=\=|\!\=\=|\=\=|\!\=
-      scope: punctuation.operator.comparison.gsc
+      scope: punctuation.operator.comparison.codt7.gsc
     - match: \+|\-|\*|/|\||\^|\~|\!
-      scope: punctuation.operator.arithmetic.gsc
+      scope: punctuation.operator.arithmetic.codt7.gsc
     - match: '\='
-      scope: punctuation.operator.assignment.gsc
+      scope: punctuation.operator.assignment.codt7.gsc
     - match: '\?|:'
-      scope: punctuation.operator.ternary.gsc
+      scope: punctuation.operator.ternary.codt7.gsc
     - include: operator-ampersand
     - include: operator-percent-sign
     - include: operator-expression-evaluation
 
   preprocessor-disabled:
-    - include: scope:source.t7formats#preprocessor-disabled
+    - include: scope:source.codt7.common#preprocessor-disabled
 
   preprocessor-line-continuation:
-    - include: scope:source.t7formats#preprocessor-line-continuation
+    - include: scope:source.codt7.common#preprocessor-line-continuation
 
   preprocessor-line-ending:
-    - include: scope:source.t7formats#preprocessor-line-ending
+    - include: scope:source.codt7.common#preprocessor-line-ending
 
   preprocessor-line-ending-lookahead:
-    - include: scope:source.t7formats#preprocessor-line-ending-lookahead
+    - include: scope:source.codt7.common#preprocessor-line-ending-lookahead
 
   preprocessor-comments:
-    - include: scope:source.t7formats#preprocessor-comments
+    - include: scope:source.codt7.common#preprocessor-comments
 
 
   ###   ###   ####  ###   ###     ###    ###  ####   ###   ###    ###   ###
@@ -225,20 +225,20 @@ contexts:
   preprocessor-rule-enabled-global:
     - match: ^\s*((#\s*if)\s+(?i:(1)|(true)))\b
       captures:
-        1: meta.preprocessor.gsc
-        2: keyword.control.import.gsc
-        3: meta.number.integer.decimal.gsc constant.numeric.value.gsc
-        4: constant.language.gsc
+        1: meta.preprocessor.codt7.gsc
+        2: keyword.control.import.codt7.gsc
+        3: meta.number.integer.decimal.codt7.gsc constant.numeric.value.codt7.gsc
+        4: constant.language.codt7.gsc
       push:
         - match: ^\s*(#\s*endif)\b
           captures:
-            1: meta.preprocessor.gsc keyword.control.import.gsc
+            1: meta.preprocessor.codt7.gsc keyword.control.import.codt7.gsc
           pop: true
         - match: ^\s*(#\s*else)\b
           captures:
-            1: meta.preprocessor.gsc keyword.control.import.else.gsc
+            1: meta.preprocessor.codt7.gsc keyword.control.import.else.codt7.gsc
           push:
-            - meta_content_scope: comment.block.preprocessor.else-branch.gsc
+            - meta_content_scope: comment.block.preprocessor.else-branch.codt7.gsc
             - match: (?=^\s*#\s*endif\b)
               pop: true
             - include: preprocessor-disabled
@@ -253,18 +253,18 @@ contexts:
   preprocessor-rule-disabled-global:
     - match: ^\s*((#\s*if)\s+(?i:(0)|(false)))\b
       captures:
-        1: meta.preprocessor.gsc
-        2: keyword.control.import.gsc
-        3: meta.number.integer.decimal.gsc constant.numeric.value.gsc
-        4: constant.language.gsc
+        1: meta.preprocessor.codt7.gsc
+        2: keyword.control.import.codt7.gsc
+        3: meta.number.integer.decimal.codt7.gsc constant.numeric.value.codt7.gsc
+        4: constant.language.codt7.gsc
       push:
         - match: ^\s*(#\s*endif)\b
           captures:
-            1: meta.preprocessor.gsc keyword.control.import.gsc
+            1: meta.preprocessor.codt7.gsc keyword.control.import.codt7.gsc
           pop: true
         - match: ^\s*(#\s*else)\b
           captures:
-            1: meta.preprocessor.gsc keyword.control.import.else.gsc
+            1: meta.preprocessor.codt7.gsc keyword.control.import.else.codt7.gsc
           push:
             - match: (?=^\s*#\s*endif\b)
               pop: true
@@ -273,7 +273,7 @@ contexts:
             - include: global
         - match: ""
           push:
-            - meta_scope: comment.block.preprocessor.if-branch.gsc
+            - meta_scope: comment.block.preprocessor.if-branch.codt7.gsc
             - match: (?=^\s*#\s*(else|endif)\b)
               pop: true
             - include: preprocessor-disabled
@@ -281,9 +281,9 @@ contexts:
   preprocessor-rule-other-global:
     - match: ^\s*(#\s*(?:if|ifdef|ifndef))\b
       captures:
-        1: keyword.control.import.gsc
+        1: keyword.control.import.codt7.gsc
       push:
-        - meta_scope: meta.preprocessor.gsc
+        - meta_scope: meta.preprocessor.codt7.gsc
         - include: preprocessor-line-continuation
         - include: preprocessor-comments
         # Enter a new scope where all elif/else branches have their
@@ -300,48 +300,48 @@ contexts:
   preprocessor-if-branch-global:
     - match: ^\s*(#\s*endif)\b
       captures:
-        1: meta.preprocessor.gsc keyword.control.import.gsc
+        1: meta.preprocessor.codt7.gsc keyword.control.import.codt7.gsc
       pop: true
     - match: (?=^\s*#\s*(elif|else)\b)
       push: preprocessor-elif-else-branch-global
     - match: \{
-      scope: punctuation.section.block.begin.gsc
+      scope: punctuation.section.block.begin.codt7.gsc
       set: preprocessor-block-if-branch-global
     - include: preprocessor-global
     - include: negated-block
     - include: global
 
   preprocessor-block-if-branch-global:
-    - meta_scope: meta.block.gsc
+    - meta_scope: meta.block.codt7.gsc
     - match: ^\s*(#\s*endif)\b
       captures:
-        1: meta.preprocessor.gsc keyword.control.import.gsc
+        1: meta.preprocessor.codt7.gsc keyword.control.import.codt7.gsc
       set: preprocessor-block-finish-global
     - match: (?=^\s*#\s*(elif|else)\b)
       push: preprocessor-elif-else-branch-global
     - match: \}
-      scope: punctuation.section.block.end.gsc
+      scope: punctuation.section.block.end.codt7.gsc
       set: preprocessor-if-branch-global
     - include: statements
 
   preprocessor-block-finish-global:
-    - meta_scope: meta.block.gsc
+    - meta_scope: meta.block.codt7.gsc
     - match: ^\s*(#\s*(?:if|ifdef|ifndef))\b
       captures:
-        1: meta.preprocessor.gsc keyword.control.import.gsc
+        1: meta.preprocessor.codt7.gsc keyword.control.import.codt7.gsc
       set: preprocessor-block-finish-if-branch-global
     - match: \}
-      scope: punctuation.section.block.end.gsc
+      scope: punctuation.section.block.end.codt7.gsc
       pop: true
     - include: statements
 
   preprocessor-block-finish-if-branch-global:
     - match: ^\s*(#\s*endif)\b
       captures:
-        1: meta.preprocessor.gsc keyword.control.import.gsc
+        1: meta.preprocessor.codt7.gsc keyword.control.import.codt7.gsc
       pop: true
     - match: \}
-      scope: punctuation.section.block.end.gsc
+      scope: punctuation.section.block.end.codt7.gsc
       set: preprocessor-if-branch-global
     - include: statements
 
@@ -362,20 +362,20 @@ contexts:
   preprocessor-rule-enabled-statements:
     - match: ^\s*((#\s*if)\s+(?i:(1)|(true)))\b
       captures:
-        1: meta.preprocessor.gsc
-        2: keyword.control.import.gsc
-        3: meta.number.integer.decimal.gsc constant.numeric.value.gsc
-        4: constant.language.gsc
+        1: meta.preprocessor.codt7.gsc
+        2: keyword.control.import.codt7.gsc
+        3: meta.number.integer.decimal.codt7.gsc constant.numeric.value.codt7.gsc
+        4: constant.language.codt7.gsc
       push:
         - match: ^\s*(#\s*endif)\b
           captures:
-            1: meta.preprocessor.gsc keyword.control.import.gsc
+            1: meta.preprocessor.codt7.gsc keyword.control.import.codt7.gsc
           pop: true
         - match: ^\s*(#\s*else)\b
           captures:
-            1: meta.preprocessor.gsc keyword.control.import.else.gsc
+            1: meta.preprocessor.codt7.gsc keyword.control.import.else.codt7.gsc
           push:
-            - meta_content_scope: comment.block.preprocessor.else-branch.gsc
+            - meta_content_scope: comment.block.preprocessor.else-branch.codt7.gsc
             - match: (?=^\s*#\s*endif\b)
               pop: true
             - include: preprocessor-disabled
@@ -389,18 +389,18 @@ contexts:
   preprocessor-rule-disabled-statements:
     - match: ^\s*((#\s*if)\s+(?i:(0)|(false)))\b
       captures:
-        1: meta.preprocessor.gsc
-        2: keyword.control.import.gsc
-        3: meta.number.integer.decimal.gsc constant.numeric.value.gsc
-        4: constant.language.gsc
+        1: meta.preprocessor.codt7.gsc
+        2: keyword.control.import.codt7.gsc
+        3: meta.number.integer.decimal.codt7.gsc constant.numeric.value.codt7.gsc
+        4: constant.language.codt7.gsc
       push:
         - match: ^\s*(#\s*endif)\b
           captures:
-            1: meta.preprocessor.gsc keyword.control.import.gsc
+            1: meta.preprocessor.codt7.gsc keyword.control.import.codt7.gsc
           pop: true
         - match: ^\s*(#\s*else)\b
           captures:
-            1: meta.preprocessor.gsc keyword.control.import.else.gsc
+            1: meta.preprocessor.codt7.gsc keyword.control.import.else.codt7.gsc
           push:
             - match: (?=^\s*#\s*endif\b)
               pop: true
@@ -408,7 +408,7 @@ contexts:
             - include: statements
         - match: ""
           push:
-            - meta_scope: comment.block.preprocessor.if-branch.gsc
+            - meta_scope: comment.block.preprocessor.if-branch.codt7.gsc
             - match: (?=^\s*#\s*(else|endif)\b)
               pop: true
             - include: preprocessor-disabled
@@ -416,9 +416,9 @@ contexts:
   preprocessor-rule-other-statements:
     - match: ^\s*(#\s*(?:if|ifdef|ifndef))\b
       captures:
-        1: keyword.control.import.gsc
+        1: keyword.control.import.codt7.gsc
       push:
-        - meta_scope: meta.preprocessor.gsc
+        - meta_scope: meta.preprocessor.codt7.gsc
         - include: preprocessor-line-continuation
         - include: preprocessor-comments
         # Enter a new scope where all elif/else branches have their
@@ -435,12 +435,12 @@ contexts:
   preprocessor-if-branch-statements:
     - match: ^\s*(#\s*endif)\b
       captures:
-        1: meta.preprocessor.gsc keyword.control.import.gsc
+        1: meta.preprocessor.codt7.gsc keyword.control.import.codt7.gsc
       pop: true
     - match: (?=^\s*#\s*(elif|else)\b)
       push: preprocessor-elif-else-branch-statements
     - match: \{
-      scope: punctuation.section.block.begin.gsc
+      scope: punctuation.section.block.begin.codt7.gsc
       set: preprocessor-block-if-branch-statements
     - match: (?=(?!{{non_func_keywords}}){{identifier}}\s*\()
       set: preprocessor-if-branch-function-call
@@ -448,65 +448,65 @@ contexts:
     - include: statements
 
   preprocessor-if-branch-function-call:
-    - meta_content_scope: meta.function-call.gsc
+    - meta_content_scope: meta.function-call.codt7.gsc
     - match: '{{identifier}}'
     - match: '\{'
-      scope: meta.group.gsc punctuation.section.group.begin.gsc
+      scope: meta.group.codt7.gsc punctuation.section.group.begin.codt7.gsc
       set: preprocessor-if-branch-function-call-arguments
 
   preprocessor-if-branch-function-call-arguments:
-    - meta_content_scope: meta.function-call.gsc meta.group.gsc
+    - meta_content_scope: meta.function-call.codt7.gsc meta.group.codt7.gsc
     - match: \)
-      scope: meta.function-call.gsc meta.group.gsc punctuation.section.group.end.gsc
+      scope: meta.function-call.codt7.gsc meta.group.codt7.gsc punctuation.section.group.end.codt7.gsc
       set: preprocessor-if-branch-statements
     - match: ^\s*(#\s*(?:elif|else))\b
       captures:
-        1: meta.preprocessor.gsc keyword.control.import.gsc
+        1: meta.preprocessor.codt7.gsc keyword.control.import.codt7.gsc
       set: preprocessor-if-branch-statements
     - match: ^\s*(#\s*endif)\b
       captures:
-        1: meta.preprocessor.gsc keyword.control.import.gsc
+        1: meta.preprocessor.codt7.gsc keyword.control.import.codt7.gsc
       set: preprocessor-if-branch-function-call-arguments-finish
     - include: expressions
 
   preprocessor-if-branch-function-call-arguments-finish:
-    - meta_content_scope: meta.function-call.gsc meta.group.gsc
+    - meta_content_scope: meta.function-call.codt7.gsc meta.group.codt7.gsc
     - match: \)
-      scope: meta.function-call.gsc meta.group.gsc punctuation.section.group.end.gsc
+      scope: meta.function-call.codt7.gsc meta.group.codt7.gsc punctuation.section.group.end.codt7.gsc
       pop: true
     - include: expressions
 
   preprocessor-block-if-branch-statements:
-    - meta_scope: meta.block.gsc
+    - meta_scope: meta.block.codt7.gsc
     - match: ^\s*(#\s*endif)\b
       captures:
-        1: meta.preprocessor.gsc keyword.control.import.gsc
+        1: meta.preprocessor.codt7.gsc keyword.control.import.codt7.gsc
       set: preprocessor-block-finish-statements
     - match: (?=^\s*#\s*(elif|else)\b)
       push: preprocessor-elif-else-branch-statements
     - match: \}
-      scope: punctuation.section.block.end.gsc
+      scope: punctuation.section.block.end.codt7.gsc
       set: preprocessor-if-branch-statements
     - include: statements
 
   preprocessor-block-finish-statements:
-    - meta_scope: meta.block.gsc
+    - meta_scope: meta.block.codt7.gsc
     - match: ^\s*(#\s*(?:if|ifdef|ifndef))\b
       captures:
-        1: meta.preprocessor.gsc keyword.control.import.gsc
+        1: meta.preprocessor.codt7.gsc keyword.control.import.codt7.gsc
       set: preprocessor-block-finish-if-branch-statements
     - match: \}
-      scope: punctuation.section.block.end.gsc
+      scope: punctuation.section.block.end.codt7.gsc
       pop: true
     - include: statements
 
   preprocessor-block-finish-if-branch-statements:
     - match: ^\s*(#\s*endif)\b
       captures:
-        1: meta.preprocessor.gsc keyword.control.import.gsc
+        1: meta.preprocessor.codt7.gsc keyword.control.import.codt7.gsc
       pop: true
     - match: \}
-      scope: punctuation.section.block.end.gsc
+      scope: punctuation.section.block.end.codt7.gsc
       set: preprocessor-if-branch-statements
     - include: statements
 
@@ -520,10 +520,10 @@ contexts:
 
   negated-block:
     - match: '\}'
-      scope: punctuation.section.block.end.gsc
+      scope: punctuation.section.block.end.codt7.gsc
       push:
         - match: '\{'
-          scope: punctuation.section.block.begin.gsc
+          scope: punctuation.section.block.begin.codt7.gsc
           pop: true
         - match: (?=^\s*#\s*(elif|else|endif)\b)
           pop: true
@@ -532,67 +532,67 @@ contexts:
   preprocessor-macro-define:
     - match: ^\s*(#\s*define)\b
       captures:
-        1: meta.preprocessor.macro.gsc keyword.control.import.define.gsc
+        1: meta.preprocessor.macro.codt7.gsc keyword.control.import.define.codt7.gsc
       push:
-        - meta_content_scope: meta.preprocessor.macro.gsc
+        - meta_content_scope: meta.preprocessor.macro.codt7.gsc
         - include: preprocessor-line-continuation
         - include: preprocessor-line-ending
         - include: preprocessor-comments
         - match: '({{identifier}})(?=\()'
-          scope: entity.name.function.preprocessor.gsc
+          scope: entity.name.function.preprocessor.codt7.gsc
           set:
             - match: '\('
-              scope: punctuation.section.group.begin.gsc
+              scope: punctuation.section.group.begin.codt7.gsc
               set: preprocessor-macro-params
         - match: '{{identifier}}'
-          scope: entity.name.constant.preprocessor.gsc
+          scope: entity.name.constant.preprocessor.codt7.gsc
           set: preprocessor-macro-definition
 
   preprocessor-macro-params:
-    - meta_scope: meta.preprocessor.macro.parameters.gsc meta.group.gsc
+    - meta_scope: meta.preprocessor.macro.parameters.codt7.gsc meta.group.codt7.gsc
     - match: '{{identifier}}'
-      scope: variable.parameter.gsc
+      scope: variable.parameter.codt7.gsc
     - match: \)
-      scope: punctuation.section.group.end.gsc
+      scope: punctuation.section.group.end.codt7.gsc
       set: preprocessor-macro-definition
     - match: ','
-      scope: punctuation.separator.gsc
+      scope: punctuation.separator.codt7.gsc
       push:
         - match: '{{identifier}}'
-          scope: variable.parameter.gsc
+          scope: variable.parameter.codt7.gsc
           pop: true
         - include: preprocessor-line-continuation
         - include: preprocessor-comments
         - match: '(?=\))'
           pop: true
         - match: (/\*).*(\*/)
-          scope: comment.block.gsc
+          scope: comment.block.codt7.gsc
           captures:
-            1: punctuation.definition.comment.gsc
-            2: punctuation.definition.comment.gsc
+            1: punctuation.definition.comment.codt7.gsc
+            2: punctuation.definition.comment.codt7.gsc
         - match: '\S+?'
-          scope: invalid.illegal.unexpected-character.gsc
+          scope: invalid.illegal.unexpected-character.codt7.gsc
     - include: preprocessor-line-continuation
     - include: preprocessor-comments
     - match: (/\*).*(\*/)
       captures:
-        1: punctuation.definition.comment.gsc
-        2: punctuation.definition.comment.gsc
+        1: punctuation.definition.comment.codt7.gsc
+        2: punctuation.definition.comment.codt7.gsc
     - match: '\S+?'
-      scope: invalid.illegal.unexpected-character.gsc
+      scope: invalid.illegal.unexpected-character.codt7.gsc
     - match: $\n
-      scope: invalid.illegal.unexpected-end-of-line.gsc
+      scope: invalid.illegal.unexpected-end-of-line.codt7.gsc
 
   preprocessor-macro-definition:
-    - meta_content_scope: meta.preprocessor.macro.gsc
+    - meta_content_scope: meta.preprocessor.macro.codt7.gsc
     - include: preprocessor-line-continuation
     - include: preprocessor-line-ending
     - include: preprocessor-comments
     # Don't define blocks in define statements
     - match: '\{'
-      scope: punctuation.section.block.begin.gsc
+      scope: punctuation.section.block.begin.codt7.gsc
     - match: '\}'
-      scope: punctuation.section.block.end.gsc
+      scope: punctuation.section.block.end.codt7.gsc
     - include: expressions
 
   preprocessor-practical-workarounds:
@@ -602,40 +602,40 @@ contexts:
   preprocessor-convention-ignore-uppercase-calls-without-semicolon:
     - match: ^\s*{{macro_identifier}}\s*(\()(?=[^\)]*\)\s*$)
       captures:
-        1: punctuation.section.group.begin.gsc
+        1: punctuation.section.group.begin.codt7.gsc
       push:
-        - meta_scope: meta.assumed-macro.gsc
+        - meta_scope: meta.assumed-macro.codt7.gsc
         - match: \)
-          scope: punctuation.section.group.end.gsc
+          scope: punctuation.section.group.end.codt7.gsc
           pop: true
         - include: expressions
 
   preprocessor-convention-ignore-uppercase-ident-lines:
     - match: ^(\s*{{macro_identifier}})+\s*$
-      scope: meta.assumed-macro.gsc
+      scope: meta.assumed-macro.codt7.gsc
 
   preprocessor-other:
     - match: ^\s*(#\s*(?:if|ifdef|ifndef|elif|else|undef))\b
       captures:
-        1: keyword.control.import.gsc
+        1: keyword.control.import.codt7.gsc
       push:
-        - meta_scope: meta.preprocessor.gsc
+        - meta_scope: meta.preprocessor.codt7.gsc
         - include: preprocessor-line-continuation
         - include: preprocessor-line-ending
         - include: preprocessor-comments
     - match: ^\s*(#\s*endif)\b
       captures:
-        1: meta.preprocessor.gsc keyword.control.import.gsc
+        1: meta.preprocessor.codt7.gsc keyword.control.import.codt7.gsc
     - match: ^\s*(#\s*insert)\b
       captures:
-        1: keyword.control.import.insert.gsc
+        1: keyword.control.import.insert.codt7.gsc
       push:
-        - meta_scope: meta.preprocessor.insert.gsc
+        - meta_scope: meta.preprocessor.insert.codt7.gsc
         - include: preprocessor-line-continuation
         - include: preprocessor-line-ending
         - include: preprocessor-line-ending
         - match: ';'
-          scope: punctuation.terminator.gsc
+          scope: punctuation.terminator.codt7.gsc
     - include: preprocessor-practical-workarounds
 
   preprocessor-expressions:
@@ -645,96 +645,96 @@ contexts:
   compiler-global:
     - match: ^\s*(#\s*using)\b
       captures:
-        1: keyword.control.import.using.gsc
+        1: keyword.control.import.using.codt7.gsc
       push:
-        - meta_scope: meta.compiler.using.gsc
+        - meta_scope: meta.compiler.using.codt7.gsc
         - include: preprocessor-line-ending
         - match: ';'
-          scope: punctuation.terminator.gsc
+          scope: punctuation.terminator.codt7.gsc
     - match: ^\s*(#\s*include)\b
       captures:
-        1: keyword.control.import.include.gsc
+        1: keyword.control.import.include.codt7.gsc
       push:
-        - meta_scope: meta.compiler.include.gsc
+        - meta_scope: meta.compiler.include.codt7.gsc
         - include: preprocessor-line-ending
         - match: ';'
-          scope: punctuation.terminator.gsc
+          scope: punctuation.terminator.codt7.gsc
     - match: ^\s*(#\s*namespace)\b
       captures:
-        1: keyword.control.import.namespace.gsc
+        1: keyword.control.import.namespace.codt7.gsc
       push:
-        - meta_scope: meta.compiler.namespace.gsc
+        - meta_scope: meta.compiler.namespace.codt7.gsc
         - include: preprocessor-line-ending
         - match: '{{identifier}}'
-          scope: entity.name.namespace.gsc
+          scope: entity.name.namespace.codt7.gsc
         - match: ';'
-          scope: punctuation.terminator.gsc
+          scope: punctuation.terminator.codt7.gsc
     - match: ^\s*(#\s*precache)\b
       captures:
-        1: keyword.control.import.precache.gsc
+        1: keyword.control.import.precache.codt7.gsc
       push:
-        - meta_scope: meta.compiler.precache.gsc
+        - meta_scope: meta.compiler.precache.codt7.gsc
         - include: preprocessor-line-ending
         - match: \(
-          scope: punctuation.section.group.begin.gsc
+          scope: punctuation.section.group.begin.codt7.gsc
           push:
-            - meta_scope: meta.group.gsc
+            - meta_scope: meta.group.codt7.gsc
             - include: preprocessor-line-ending-lookahead
             - match: \)
-              scope: punctuation.section.group.end.gsc
+              scope: punctuation.section.group.end.codt7.gsc
               pop: true
             - match: (?<=\()(?=\s*")
               push: string-precache-type
             - match: '"'
-              scope: punctuation.definition.string.begin.gsc
+              scope: punctuation.definition.string.begin.codt7.gsc
               push:
-                - meta_scope: string.quoted.double.gsc
+                - meta_scope: string.quoted.double.codt7.gsc
                 - include: preprocessor-line-ending-lookahead
                 - match: '"'
-                  scope: punctuation.definition.string.end.gsc
+                  scope: punctuation.definition.string.end.codt7.gsc
                   pop: true
             - match: ','
-              scope: punctuation.separator.gsc
+              scope: punctuation.separator.codt7.gsc
         - match: ';'
-          scope: punctuation.terminator.gsc
+          scope: punctuation.terminator.codt7.gsc
     - match: ^\s*(#\s*using_animtree)\b
       captures:
-        1: keyword.control.import.using_animtree.gsc
+        1: keyword.control.import.using_animtree.codt7.gsc
       push:
-        - meta_scope: meta.compiler.using_animtree.gsc
+        - meta_scope: meta.compiler.using_animtree.codt7.gsc
         - include: preprocessor-line-ending
         - match: \(
-          scope: punctuation.section.group.begin.gsc
+          scope: punctuation.section.group.begin.codt7.gsc
           push:
-            - meta_scope: meta.group.gsc
+            - meta_scope: meta.group.codt7.gsc
             - include: preprocessor-line-ending-lookahead
             - match: '"'
-              scope: punctuation.definition.string.begin.gsc
+              scope: punctuation.definition.string.begin.codt7.gsc
               push:
-                - meta_scope: string.quoted.double.gsc
-                - meta_content_scope: meta.animtree.gsc
+                - meta_scope: string.quoted.double.codt7.gsc
+                - meta_content_scope: meta.animtree.codt7.gsc
                 - include: preprocessor-line-ending-lookahead
                 - match: '"'
-                  scope: punctuation.definition.string.end.gsc
+                  scope: punctuation.definition.string.end.codt7.gsc
                   pop: true
             - match: \)
-              scope: punctuation.section.group.end.gsc
+              scope: punctuation.section.group.end.codt7.gsc
               pop: true
         - match: ';'
-          scope: punctuation.terminator.gsc
+          scope: punctuation.terminator.codt7.gsc
     - match: ^\s*(#\s*animtree)\b
       captures:
-        1: keyword.control.import.gsc
+        1: keyword.control.import.codt7.gsc
 
   string-precache-type:
     - match: '"'
-      scope: punctuation.definition.string.begin.gsc
+      scope: punctuation.definition.string.begin.codt7.gsc
       set:
-        - meta_scope: string.quoted.double.gsc
-        - meta_content_scope: meta.asset-type.gsc
+        - meta_scope: string.quoted.double.codt7.gsc
+        - meta_content_scope: meta.asset-type.codt7.gsc
         - include: preprocessor-line-ending-lookahead
         - match: '"'
-          scope: punctuation.definition.string.end.gsc
+          scope: punctuation.definition.string.end.codt7.gsc
           pop: true
     - match: (?=\S)
       pop: true
@@ -749,20 +749,20 @@ contexts:
   preprocessor-rule-enabled-data-structures:
     - match: ^\s*((#\s*if)\s+(?i:(1)|(true)))\b
       captures:
-        1: meta.preprocessor.gsc
-        2: keyword.control.import.gsc
-        3: meta.number.integer.decimal.gsc constant.numeric.value.gsc
-        4: constant.language.gsc
+        1: meta.preprocessor.codt7.gsc
+        2: keyword.control.import.codt7.gsc
+        3: meta.number.integer.decimal.codt7.gsc constant.numeric.value.codt7.gsc
+        4: constant.language.codt7.gsc
       push:
         - match: ^\s*(#\s*endif)\b
           captures:
-            1: meta.preprocessor.gsc keyword.control.import.gsc
+            1: meta.preprocessor.codt7.gsc keyword.control.import.codt7.gsc
           pop: true
         - match: ^\s*(#\s*else)\b
           captures:
-            1: meta.preprocessor.gsc keyword.control.import.else.gsc
+            1: meta.preprocessor.codt7.gsc keyword.control.import.else.codt7.gsc
           push:
-            - meta_content_scope: comment.block.preprocessor.else-branch.gsc
+            - meta_content_scope: comment.block.preprocessor.else-branch.codt7.gsc
             - match: (?=^\s*#\s*endif\b)
               pop: true
             - include: preprocessor-disabled
@@ -776,18 +776,18 @@ contexts:
   preprocessor-rule-disabled-data-structures:
     - match: ^\s*((#\s*if)\s+(?i:(0)|(false)))\b
       captures:
-        1: meta.preprocessor.gsc
-        2: keyword.control.import.gsc
-        3: meta.number.integer.decimal.gsc constant.numeric.value.gsc
-        4: constant.language.gsc
+        1: meta.preprocessor.codt7.gsc
+        2: keyword.control.import.codt7.gsc
+        3: meta.number.integer.decimal.codt7.gsc constant.numeric.value.codt7.gsc
+        4: constant.language.codt7.gsc
       push:
         - match: ^\s*(#\s*endif)\b
           captures:
-            1: meta.preprocessor.gsc keyword.control.import.gsc
+            1: meta.preprocessor.codt7.gsc keyword.control.import.codt7.gsc
           pop: true
         - match: ^\s*(#\s*else)\b
           captures:
-            1: meta.preprocessor.gsc keyword.control.import.else.gsc
+            1: meta.preprocessor.codt7.gsc keyword.control.import.else.codt7.gsc
           push:
             - match: (?=^\s*#\s*endif\b)
               pop: true
@@ -795,7 +795,7 @@ contexts:
             - include: data-structures-body
         - match: ""
           push:
-            - meta_scope: comment.block.preprocessor.if-branch.gsc
+            - meta_scope: comment.block.preprocessor.if-branch.codt7.gsc
             - match: (?=^\s*#\s*(else|endif)\b)
               pop: true
             - include: preprocessor-disabled
@@ -815,53 +815,53 @@ contexts:
 
   block:
     - match: '\{'
-      scope: punctuation.section.block.begin.gsc
+      scope: punctuation.section.block.begin.codt7.gsc
       push:
-        - meta_scope: meta.block.gsc
+        - meta_scope: meta.block.codt7.gsc
         - match: (?=^\s*#\s*(elif|else|endif)\b)
           pop: true
         - match: '\}'
-          scope: punctuation.section.block.end.gsc
+          scope: punctuation.section.block.end.codt7.gsc
           pop: true
         - include: statements
 
   devblock-global:
     - match: '/#'
-      scope: punctuation.section.devblock.begin.gsc
+      scope: punctuation.section.devblock.begin.codt7.gsc
       push:
-        - meta_scope: meta.devblock.gsc
+        - meta_scope: meta.devblock.codt7.gsc
         - match: '#/'
-          scope: punctuation.section.devblock.end.gsc
+          scope: punctuation.section.devblock.end.codt7.gsc
           pop: true
         - include: global
 
   parens:
     - match: \(
-      scope: punctuation.section.group.begin.gsc
+      scope: punctuation.section.group.begin.codt7.gsc
       push:
-        - meta_scope: meta.group.gsc
+        - meta_scope: meta.group.codt7.gsc
         - match: \)
-          scope: punctuation.section.group.end.gsc
+          scope: punctuation.section.group.end.codt7.gsc
           pop: true
         - include: expressions
 
   brackets:
     - match: \[
-      scope: punctuation.section.brackets.begin.gsc
+      scope: punctuation.section.brackets.begin.codt7.gsc
       push:
-        - meta_scope: meta.brackets.gsc
+        - meta_scope: meta.brackets.codt7.gsc
         - match: \]
-          scope: punctuation.section.brackets.end.gsc
+          scope: punctuation.section.brackets.end.codt7.gsc
           pop: true
         - include: expressions
 
   devblock:
     - match: '/#'
-      scope: punctuation.section.devblock.begin.gsc
+      scope: punctuation.section.devblock.begin.codt7.gsc
       push:
-        - meta_scope: meta.devblock.gsc
+        - meta_scope: meta.devblock.codt7.gsc
         - match: '#/'
-          scope: punctuation.section.devblock.end.gsc
+          scope: punctuation.section.devblock.end.codt7.gsc
           pop: true
         - include: expressions
 
@@ -886,23 +886,23 @@ contexts:
     - include: constants
     - include: access
     - match: ','
-      scope: punctuation.separator.gsc
+      scope: punctuation.separator.codt7.gsc
     - match: '\)|\}'
-      scope: invalid.illegal.stray-bracket-end.gsc
+      scope: invalid.illegal.stray-bracket-end.codt7.gsc
 
   late-expressions:
     - include: modifiers
     - include: types
     - include: function-call
     - match: ';'
-      scope: punctuation.terminator.gsc
+      scope: punctuation.terminator.codt7.gsc
 
   case-default:
     - match: '\b(default|case)\b'
-      scope: keyword.control.gsc
+      scope: keyword.control.codt7.gsc
       push:
         - match: ':'
-          scope: punctuation.separator.gsc
+          scope: punctuation.separator.codt7.gsc
           pop: true
         - include: expressions
 
@@ -913,10 +913,10 @@ contexts:
   keywords-parens:
     - match: '\b(?i:(waittillmatch|waittill|notify|endon))\b\s*(\()'
       captures:
-        1: keyword.operator.word.gsc
-        2: meta.group.gsc punctuation.section.group.begin.gsc
+        1: keyword.operator.word.codt7.gsc
+        2: meta.group.codt7.gsc punctuation.section.group.begin.codt7.gsc
       push:
-        - meta_content_scope: meta.group.gsc
+        - meta_content_scope: meta.group.codt7.gsc
         - match: '\)'
           scope: meta.group.c punctuation.section.group.end.c
           pop: true
@@ -925,10 +925,10 @@ contexts:
         - include: expressions
     - match: '\b(?i:({{keyword_operators}}))\b\s*(\()'
       captures:
-        1: keyword.operator.word.gsc
-        2: meta.group.gsc punctuation.section.group.begin.gsc
+        1: keyword.operator.word.codt7.gsc
+        2: meta.group.codt7.gsc punctuation.section.group.begin.codt7.gsc
       push:
-        - meta_content_scope: meta.group.gsc
+        - meta_content_scope: meta.group.codt7.gsc
         - match: '\)'
           scope: meta.group.c punctuation.section.group.end.c
           pop: true
@@ -936,46 +936,46 @@ contexts:
 
   keywords:
     - match: \bbreak\b
-      scope: keyword.control.flow.break.gsc
+      scope: keyword.control.flow.break.codt7.gsc
     - match: \bcontinue\b
-      scope: keyword.control.flow.continue.gsc
+      scope: keyword.control.flow.continue.codt7.gsc
     - match: \bthread\b
-      scope: keyword.control.flow.thread.gsc
+      scope: keyword.control.flow.thread.codt7.gsc
     - match: \breturn\b
-      scope: keyword.control.flow.return.gsc
+      scope: keyword.control.flow.return.codt7.gsc
     - match: \b({{control_keywords}})\b
-      scope: keyword.control.gsc
+      scope: keyword.control.codt7.gsc
     - match: \b(?i:({{keyword_operators}}))\b
-      scope: keyword.operator.word.gsc
+      scope: keyword.operator.word.codt7.gsc
     - match: \bnew\b
-      scope: keyword.declaration.new.gsc
+      scope: keyword.declaration.new.codt7.gsc
     - match: '#\s*animtree\b'
-      scope: variable.language.gsc
+      scope: variable.language.codt7.gsc
 
   constants:
     - match: \b(?i:({{language_constant}}))\b
-      scope: constant.language.gsc
+      scope: constant.language.codt7.gsc
     - match: \b(__FILE__|__LINE__|FASTFILE)\b
-      scope: support.constant.gsc
+      scope: support.constant.codt7.gsc
 
   variables:
     - include: array-variable-name
 
   access-illegal:
     - match: '\.(\s*\.)+'
-      scope: invalid.illegal.syntax.gsc
+      scope: invalid.illegal.syntax.codt7.gsc
 
   access:
     - match: '(\.)\s*(?!\.)'
-      scope: meta.member-access.gsc
+      scope: meta.member-access.codt7.gsc
       captures:
-        1: punctuation.accessor.gsc
+        1: punctuation.accessor.codt7.gsc
       push:
-        - meta_content_scope: meta.member-access.gsc
+        - meta_content_scope: meta.member-access.codt7.gsc
         - match: \bsize\b
-          scope: keyword.other.gsc
+          scope: keyword.other.codt7.gsc
         - match: '{{identifier}}'
-          scope: variable.other.member.gsc
+          scope: variable.other.member.codt7.gsc
         - include: access
         - match: '(?=\W)'
           pop: true
@@ -983,11 +983,11 @@ contexts:
 
   modifiers:
     - match: \b({{modifiers}})\b
-      scope: storage.modifier.gsc
+      scope: storage.modifier.codt7.gsc
 
   types:
     - match: '\b({{basic_types}})\b'
-      scope: storage.type.gsc
+      scope: storage.type.codt7.gsc
 
   # due to the large amount of builtins, we should check for a possible builtin call
   # and then push a new context to capture, otherwise input starts to lag
@@ -995,7 +995,7 @@ contexts:
     # sys namespace - builtin call
     - match: '\b(?i:sys)\s*(::)'
       captures:
-        1: punctuation.accessor.gsc
+        1: punctuation.accessor.codt7.gsc
       push: builtin-function-call-maybe
     # call without a namespace specifier - possibly a builtin call
     - match: '(?<!::)(?=\s*{{identifier}}\s*\()'
@@ -1003,7 +1003,7 @@ contexts:
 
   builtin-function-call-maybe:
     - match: \b(?i:({{function_builtin}}))\b
-      scope: support.function.builtin.gsc
+      scope: support.function.builtin.codt7.gsc
       pop: true
     - match: (?=\S)
       pop: true
@@ -1016,13 +1016,13 @@ contexts:
   # context and capture everything there
   script-function-call-maybe:
     - match: '\b(?i:{{namespace}})\s*(::)\s*\w*'
-      scope: meta.developer-function-name.gsc
+      scope: meta.developer-function-name.codt7.gsc
       captures:
-        1: punctuation.accessor.gsc
+        1: punctuation.accessor.codt7.gsc
     - match: '{{identifier}}\s*(::)\s*\w*'
-      scope: meta.function-name.gsc
+      scope: meta.function-name.codt7.gsc
       captures:
-        1: punctuation.accessor.gsc
+        1: punctuation.accessor.codt7.gsc
     - match: (?=\S)
       pop: true
 
@@ -1034,13 +1034,13 @@ contexts:
     - include: builtin-functions
     - include: script-functions
     - match: '::'
-      scope: punctuation.accessor.gsc
+      scope: punctuation.accessor.codt7.gsc
     - match: '{{identifier}}'
 
   function-call:
     - match: (?=({{identifier}}\s*::\s*)?{{identifier}}\s*\()
       push:
-        - meta_content_scope: meta.function-call.gsc
+        - meta_content_scope: meta.function-call.codt7.gsc
         - match: \b(?=(?i:{{thread_signal_function_lookahead}})\s*\()
           set: function-call-thread-signal
         - match: \b(?=(?i:{{kvp_function_lookahead}})\s*\()
@@ -1054,11 +1054,11 @@ contexts:
         # - match: \b(?=(?i:{{sound_function_lookahead}})\s*\()
         - include: function-call-before-paren
         - match: \(
-          scope: meta.group.gsc punctuation.section.group.begin.gsc
+          scope: meta.group.codt7.gsc punctuation.section.group.begin.codt7.gsc
           set:
-            - meta_content_scope: meta.function-call.gsc meta.group.gsc
+            - meta_content_scope: meta.function-call.codt7.gsc meta.group.codt7.gsc
             - match: \)
-              scope: meta.function-call.gsc meta.group.gsc punctuation.section.group.end.gsc
+              scope: meta.function-call.codt7.gsc meta.group.codt7.gsc punctuation.section.group.end.codt7.gsc
               pop: true
             - include: expressions
     - include: script-functions
@@ -1068,14 +1068,14 @@ contexts:
   # such as util::waittill_any(), flag::get(), etc.
   # Adds an additional meta scope for auto-completions
   function-call-thread-signal:
-    - meta_content_scope: meta.function-call.gsc
+    - meta_content_scope: meta.function-call.codt7.gsc
     - include: function-call-before-paren
     - match: \(
-      scope: meta.group.gsc punctuation.section.group.begin.gsc
+      scope: meta.group.codt7.gsc punctuation.section.group.begin.codt7.gsc
       set:
-        - meta_content_scope: meta.function-call.gsc meta.group.gsc
+        - meta_content_scope: meta.function-call.codt7.gsc meta.group.codt7.gsc
         - match: \)
-          scope: meta.function-call.gsc meta.group.gsc punctuation.section.group.end.gsc
+          scope: meta.function-call.codt7.gsc meta.group.codt7.gsc punctuation.section.group.end.codt7.gsc
           pop: true
         - match: (?=")
           push: string-thread-signal
@@ -1083,25 +1083,25 @@ contexts:
 
   string-thread-signal:
     - match: '"'
-      scope: punctuation.definition.string.begin.gsc
+      scope: punctuation.definition.string.begin.codt7.gsc
       push:
-        - meta_scope: meta.thread-signal.gsc string.quoted.double.gsc
+        - meta_scope: meta.thread-signal.codt7.gsc string.quoted.double.codt7.gsc
         - match: '"'
-          scope: punctuation.definition.string.end.gsc
+          scope: punctuation.definition.string.end.codt7.gsc
           pop: true
         - include: string_escaped_char
     - match: ''
       pop: true
 
   function-call-kvp:
-    - meta_content_scope: meta.function-call.gsc
+    - meta_content_scope: meta.function-call.codt7.gsc
     - include: function-call-before-paren
     - match: \(
-      scope: meta.group.gsc punctuation.section.group.begin.gsc
+      scope: meta.group.codt7.gsc punctuation.section.group.begin.codt7.gsc
       set:
-        - meta_content_scope: meta.function-call.gsc meta.group.gsc
+        - meta_content_scope: meta.function-call.codt7.gsc meta.group.codt7.gsc
         - match: \)
-          scope: meta.function-call.gsc meta.group.gsc punctuation.section.group.end.gsc
+          scope: meta.function-call.codt7.gsc meta.group.codt7.gsc punctuation.section.group.end.codt7.gsc
           pop: true
         - match: (?<=\()(?=\s*")
           push: string-kvp-value
@@ -1111,11 +1111,11 @@ contexts:
 
   string-kvp-value:
     - match: '"'
-      scope: punctuation.definition.string.begin.gsc
+      scope: punctuation.definition.string.begin.codt7.gsc
       set:
-        - meta_scope: meta.kvp-argument-value.gsc string.quoted.double.gsc
+        - meta_scope: meta.kvp-argument-value.codt7.gsc string.quoted.double.codt7.gsc
         - match: '"'
-          scope: punctuation.definition.string.end.gsc
+          scope: punctuation.definition.string.end.codt7.gsc
           pop: true
         - include: string_escaped_char
     - match: ''
@@ -1123,25 +1123,25 @@ contexts:
 
   string-kvp-key:
     - match: '"'
-      scope: punctuation.definition.string.begin.gsc
+      scope: punctuation.definition.string.begin.codt7.gsc
       set:
-        - meta_scope: meta.kvp-argument-key.gsc string.quoted.double.gsc
+        - meta_scope: meta.kvp-argument-key.codt7.gsc string.quoted.double.codt7.gsc
         - match: '"'
-          scope: punctuation.definition.string.end.gsc
+          scope: punctuation.definition.string.end.codt7.gsc
           pop: true
         - include: string_escaped_char
     - match: ''
       pop: true
 
   function-call-weapon-name:
-    - meta_content_scope: meta.function-call.gsc
+    - meta_content_scope: meta.function-call.codt7.gsc
     - include: function-call-before-paren
     - match: \(
-      scope: meta.group.gsc punctuation.section.group.begin.gsc
+      scope: meta.group.codt7.gsc punctuation.section.group.begin.codt7.gsc
       set:
-        - meta_content_scope: meta.function-call.gsc meta.group.gsc
+        - meta_content_scope: meta.function-call.codt7.gsc meta.group.codt7.gsc
         - match: \)
-          scope: meta.function-call.gsc meta.group.gsc punctuation.section.group.end.gsc
+          scope: meta.function-call.codt7.gsc meta.group.codt7.gsc punctuation.section.group.end.codt7.gsc
           pop: true
         - match: (?=")
           push: string-weapon-name
@@ -1149,25 +1149,25 @@ contexts:
 
   string-weapon-name:
     - match: '"'
-      scope: punctuation.definition.string.begin.gsc
+      scope: punctuation.definition.string.begin.codt7.gsc
       set:
-        - meta_scope: meta.weapon-name.gsc string.quoted.double.gsc
+        - meta_scope: meta.weapon-name.codt7.gsc string.quoted.double.codt7.gsc
         - match: '"'
-          scope: punctuation.definition.string.end.gsc
+          scope: punctuation.definition.string.end.codt7.gsc
           pop: true
         - include: string_escaped_char
     - match: ''
       pop: true
 
   function-call-clientfield-pool:
-    - meta_content_scope: meta.function-call.gsc
+    - meta_content_scope: meta.function-call.codt7.gsc
     - include: function-call-before-paren
     - match: \(
-      scope: meta.group.gsc punctuation.section.group.begin.gsc
+      scope: meta.group.codt7.gsc punctuation.section.group.begin.codt7.gsc
       set:
-        - meta_content_scope: meta.function-call.gsc meta.group.gsc
+        - meta_content_scope: meta.function-call.codt7.gsc meta.group.codt7.gsc
         - match: \)
-          scope: meta.function-call.gsc meta.group.gsc punctuation.section.group.end.gsc
+          scope: meta.function-call.codt7.gsc meta.group.codt7.gsc punctuation.section.group.end.codt7.gsc
           pop: true
         - match: (?<=\()(?=\s*")
           push: string-clientfield-pool
@@ -1175,25 +1175,25 @@ contexts:
 
   string-clientfield-pool:
     - match: '"'
-      scope: punctuation.definition.string.begin.gsc
+      scope: punctuation.definition.string.begin.codt7.gsc
       push:
-        - meta_scope: meta.clientfield-pool.gsc string.quoted.double.gsc
+        - meta_scope: meta.clientfield-pool.codt7.gsc string.quoted.double.codt7.gsc
         - match: '"'
-          scope: punctuation.definition.string.end.gsc
+          scope: punctuation.definition.string.end.codt7.gsc
           pop: true
         - include: string_escaped_char
     - match: ''
       pop: true
 
   function-call-clientfield-name:
-    - meta_content_scope: meta.function-call.gsc
+    - meta_content_scope: meta.function-call.codt7.gsc
     - include: function-call-before-paren
     - match: \(
-      scope: meta.group.gsc punctuation.section.group.begin.gsc
+      scope: meta.group.codt7.gsc punctuation.section.group.begin.codt7.gsc
       set:
-        - meta_content_scope: meta.function-call.gsc meta.group.gsc
+        - meta_content_scope: meta.function-call.codt7.gsc meta.group.codt7.gsc
         - match: \)
-          scope: meta.function-call.gsc meta.group.gsc punctuation.section.group.end.gsc
+          scope: meta.function-call.codt7.gsc meta.group.codt7.gsc punctuation.section.group.end.codt7.gsc
           pop: true
         - match: (?=")
           push: string-clientfield-name
@@ -1201,11 +1201,11 @@ contexts:
 
   string-clientfield-name:
     - match: '"'
-      scope: punctuation.definition.string.begin.gsc
+      scope: punctuation.definition.string.begin.codt7.gsc
       push:
-        - meta_scope: meta.clientfield-name.gsc string.quoted.double.gsc
+        - meta_scope: meta.clientfield-name.codt7.gsc string.quoted.double.codt7.gsc
         - match: '"'
-          scope: punctuation.definition.string.end.gsc
+          scope: punctuation.definition.string.end.codt7.gsc
           pop: true
         - include: string_escaped_char
     - match: ''
@@ -1244,12 +1244,12 @@ contexts:
       set: global-function
     - match: '{{macro_identifier}}\s*(\()(?=[^\)]+\))'
       captures:
-        1: meta.group.gsc punctuation.section.group.begin.gsc
+        1: meta.group.codt7.gsc punctuation.section.group.begin.codt7.gsc
       push:
-        - meta_scope: meta.macro-call.gsc
-        - meta_content_scope: meta.group.gsc
+        - meta_scope: meta.macro-call.codt7.gsc
+        - meta_content_scope: meta.group.codt7.gsc
         - match: \)
-          scope: meta.group.gsc punctuation.section.group.end.gsc
+          scope: meta.group.codt7.gsc punctuation.section.group.end.codt7.gsc
           pop: true
         - include: expressions
     - match: '(?={{identifier}}\s*\()'
@@ -1277,32 +1277,32 @@ contexts:
   data-structures:
     # Detect variable type definitions using class followed by a tag
     - match: \bclass\b
-      scope: keyword.declaration.class.gsc
+      scope: keyword.declaration.class.codt7.gsc
       set: data-structures-class-definition
     - match: (?=\S)
       pop: true
 
   data-structures-class-definition:
-    - meta_scope: meta.class.gsc
+    - meta_scope: meta.class.codt7.gsc
     - include: data-structures-definition-common-begin
     - match: '(?={{identifier}})'
       set:
-        - meta_scope: meta.class.gsc
+        - meta_scope: meta.class.codt7.gsc
         - match: '{{identifier}}'
-          scope: entity.name.class.gsc
+          scope: entity.name.class.codt7.gsc
           set: data-structures-class-definition-after-identifier
 
   data-structures-class-definition-after-identifier:
-    - meta_content_scope: meta.class.gsc
+    - meta_content_scope: meta.class.codt7.gsc
     - include: data-structures-definition-common-begin
     # No matching of identifiers since they should all be macros at this point
     - include: data-structures-definition-common-end
     - match: '\{'
-      scope: meta.block.gsc punctuation.section.block.begin.gsc
+      scope: meta.block.codt7.gsc punctuation.section.block.begin.codt7.gsc
       set:
-        - meta_content_scope: meta.class.gsc meta.block.gsc
+        - meta_content_scope: meta.class.codt7.gsc meta.block.codt7.gsc
         - match: '\}'
-          scope: meta.class.gsc meta.block.gsc punctuation.section.block.end.gsc
+          scope: meta.class.codt7.gsc meta.block.codt7.gsc punctuation.section.block.end.codt7.gsc
           pop: true
         - include: data-structures-body
 
@@ -1314,14 +1314,14 @@ contexts:
 
   data-structures-definition-common-end:
     - match: ':'
-      scope: punctuation.separator.gsc
+      scope: punctuation.separator.codt7.gsc
       push:
         - include: comments
         - include: preprocessor-other
         - include: modifiers
         - match: '(?={{identifier}})'
           push:
-            - meta_scope: entity.other.inherited-class.gsc
+            - meta_scope: entity.other.inherited-class.codt7.gsc
             - match: '{{identifier}}'
             - match: ''
               pop: true
@@ -1332,7 +1332,7 @@ contexts:
     # Handle macros so they aren't matched as the class name
     - match: '({{macro_identifier}})(?=\s+{{identifier}})'
       captures:
-        1: meta.assumed-macro.gsc
+        1: meta.assumed-macro.codt7.gsc
 
   data-structures-body:
     - include: preprocessor-data-structures
@@ -1346,10 +1346,10 @@ contexts:
     - include: comments
     - include: modifiers
     - match: \bdestructor(?=\s*(\(|$))
-      scope: meta.method.destructor.gsc keyword.declaration.destructor.gsc
+      scope: meta.method.destructor.codt7.gsc keyword.declaration.destructor.codt7.gsc
       set: method-definition-params
     - match: \bconstructor(?=\s*(\(|$))
-      scope: meta.method.constructor.gsc keyword.declaration.constructor.gsc
+      scope: meta.method.constructor.codt7.gsc keyword.declaration.constructor.codt7.gsc
       set: method-definition-params
     - match: '(?=\S)'
       set: data-structures-type
@@ -1363,23 +1363,23 @@ contexts:
       pop: true
 
   method-definition-params:
-    - meta_content_scope: meta.method.gsc
+    - meta_content_scope: meta.method.codt7.gsc
     - include: comments
     - match: '(?=\()'
       set:
         - match: \(
-          scope: meta.method.parameters.gsc meta.group.gsc punctuation.section.group.begin.gsc
+          scope: meta.method.parameters.codt7.gsc meta.group.codt7.gsc punctuation.section.group.begin.codt7.gsc
           set:
-            - meta_content_scope: meta.method.parameters.gsc meta.group.gsc
+            - meta_content_scope: meta.method.parameters.codt7.gsc meta.group.codt7.gsc
             - match: \)
-              scope: punctuation.section.group.end.gsc
+              scope: punctuation.section.group.end.codt7.gsc
               set: method-definition-continue
             - match: '&'
-              scope: punctuation.operator.address-of.gsc
+              scope: punctuation.operator.address-of.codt7.gsc
             - match: '{{identifier}}(?=\s*(,|\)|=))'
-              scope: variable.parameter.gsc
+              scope: variable.parameter.codt7.gsc
             - match: '='
-              scope: punctuation.operator.assignment.gsc
+              scope: punctuation.operator.assignment.codt7.gsc
               push:
                 - match: '(?=,|\))'
                   pop: true
@@ -1387,13 +1387,13 @@ contexts:
                 - include: preprocessor-line-continuation
             - include: comments
             - match: ','
-              scope: punctuation.separator.gsc
+              scope: punctuation.separator.codt7.gsc
             - include: preprocessor-line-continuation
     - match: '(?=\S)'
       pop: true
 
   method-definition-continue:
-    - meta_content_scope: meta.method.gsc
+    - meta_content_scope: meta.method.codt7.gsc
     - include: comments
     - match: '(?=\{)'
       set: method-definition-body
@@ -1401,13 +1401,13 @@ contexts:
       pop: true
 
   method-definition-body:
-    - meta_content_scope: meta.method.gsc meta.block.gsc
+    - meta_content_scope: meta.method.codt7.gsc meta.block.codt7.gsc
     - match: '\{'
-      scope: punctuation.section.block.begin.gsc
+      scope: punctuation.section.block.begin.codt7.gsc
       set:
-        - meta_content_scope: meta.method.gsc meta.block.gsc
+        - meta_content_scope: meta.method.codt7.gsc meta.block.codt7.gsc
         - match: '\}'
-          scope: meta.method.gsc meta.block.gsc punctuation.section.block.end.gsc
+          scope: meta.method.codt7.gsc meta.block.codt7.gsc punctuation.section.block.end.codt7.gsc
           pop: true
         - match: (?=^\s*#\s*(elif|else|endif)\b)
           pop: true
@@ -1433,53 +1433,53 @@ contexts:
 
   global-function-t5:
     - match: '{{identifier}}(?=\s*(\(|$))'
-      scope: meta.function.gsc entity.name.function.gsc
+      scope: meta.function.codt7.gsc entity.name.function.codt7.gsc
       set: function-definition-params
 
   global-function:
     - match: \bfunction\b
-      scope: keyword.declaration.function.gsc
+      scope: keyword.declaration.function.codt7.gsc
     - include: modifiers
     - include: comments
     # All uppercase identifier just before a newlin is most likely a macro
     - match: '([[:upper:][:digit:]_]+)\s*(\bfunction\b)?\s*$'
       captures:
-        1: meta.assumed-macro.gsc
-        2: keyword.declaration.gsc
+        1: meta.assumed-macro.codt7.gsc
+        2: keyword.declaration.codt7.gsc
     # Identifier that is not the function name - likely a macro
     - match: '{{identifier}}(?!\s*(\(|$))'
-      scope: meta.assumed-macro.gsc
+      scope: meta.assumed-macro.codt7.gsc
     # Real function definition
     - match: '{{identifier}}(?=\s*(\(|$))'
-      scope: meta.function.gsc entity.name.function.gsc
+      scope: meta.function.codt7.gsc entity.name.function.codt7.gsc
       set: function-definition-params
     - match: '(?=\S)'
       pop: true
 
   function-definition-params:
-    - meta_content_scope: meta.function.gsc
+    - meta_content_scope: meta.function.codt7.gsc
     - include: comments
     - match: '(?=\()'
       set:
         - match: '\('
-          scope: meta.function.parameters.gsc meta.group.gsc punctuation.section.group.begin.gsc
+          scope: meta.function.parameters.codt7.gsc meta.group.codt7.gsc punctuation.section.group.begin.codt7.gsc
           set:
-            - meta_content_scope: meta.function.parameters.gsc meta.group.gsc
+            - meta_content_scope: meta.function.parameters.codt7.gsc meta.group.codt7.gsc
             - match: '\)'
-              scope: punctuation.section.group.end.gsc
+              scope: punctuation.section.group.end.codt7.gsc
               set: function-definition-continue
             - match: '\.{3}(\s*\.)+'
-              scope: invalid.illegal.unexpected-character.gsc
+              scope: invalid.illegal.unexpected-character.codt7.gsc
             - match: '\.{3}'
-              scope: variable.parameter.variadic.gsc
+              scope: variable.parameter.variadic.codt7.gsc
             # Eat 1 or 2 dots to prevent premature warning
             - match: '\.*'
             - match: '&'
-              scope: punctuation.operator.address-of.gsc
+              scope: punctuation.operator.address-of.codt7.gsc
             - match: '{{identifier}}(?=\s*(,|\)|=))'
-              scope: variable.parameter.gsc
+              scope: variable.parameter.codt7.gsc
             - match: '='
-              scope: punctuation.operator.assignment.gsc
+              scope: punctuation.operator.assignment.codt7.gsc
               push:
                 - match: '(?=,|\))'
                   pop: true
@@ -1487,13 +1487,13 @@ contexts:
                 - include: preprocessor-line-continuation
             - include: comments
             - match: ','
-              scope: punctuation.separator.gsc
+              scope: punctuation.separator.codt7.gsc
             - include: preprocessor-line-continuation
     - match: (?=\S)
       pop: true
 
   function-definition-continue:
-    - meta_content_scope: meta.function.gsc
+    - meta_content_scope: meta.function.codt7.gsc
     - include: comments
     - match: '(?=\{)'
       set: function-definition-body
@@ -1501,13 +1501,13 @@ contexts:
       pop: true
 
   function-definition-body:
-    - meta_content_scope: meta.function.gsc
+    - meta_content_scope: meta.function.codt7.gsc
     - match: '\{'
-      scope: meta.block.gsc punctuation.section.block.begin.gsc
+      scope: meta.block.codt7.gsc punctuation.section.block.begin.codt7.gsc
       set:
-        - meta_content_scope: meta.function.gsc meta.block.gsc
+        - meta_content_scope: meta.function.codt7.gsc meta.block.codt7.gsc
         - match: '\}'
-          scope: meta.function.gsc meta.block.gsc punctuation.section.block.end.gsc
+          scope: meta.function.codt7.gsc meta.block.codt7.gsc punctuation.section.block.end.codt7.gsc
           pop: true
         - match: '(?=^\s*#\s*(elif|else|endif)\b)'
           pop: true

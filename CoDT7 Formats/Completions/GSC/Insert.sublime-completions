@@ -1,5 +1,5 @@
 {
-	"scope": "(source.gsc) & (meta.preprocessor.insert)",
+	"scope": "(source.codt7.gsc) & (meta.preprocessor.insert)",
 	"completions":
 	[
 		"scripts\\shared\\shared.gsh",

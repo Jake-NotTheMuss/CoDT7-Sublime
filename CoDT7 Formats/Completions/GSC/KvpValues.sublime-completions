@@ -1,5 +1,5 @@
 {
-	"scope": "(source.gsc) & (meta.kvp-argument-value.gsc) & (string.quoted.double)",
+	"scope": "(source.codt7.gsc) & (meta.kvp-argument-value.codt7.gsc) & (string.quoted.double)",
 	"completions":
 	[
 		"trig_beast_mode_kiosk",

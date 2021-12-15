@@ -1,5 +1,5 @@
 {
-	"scope": "(source.gsc) & (meta.sound-alias.gsc) & (string.quoted.double)",
+	"scope": "(source.codt7.gsc) & (meta.sound-alias.codt7.gsc) & (string.quoted.double)",
 	"completions":
 	[
 		"test_sound"

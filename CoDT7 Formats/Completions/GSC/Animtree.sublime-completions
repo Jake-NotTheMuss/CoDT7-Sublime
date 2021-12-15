@@ -1,5 +1,5 @@
 {
-	"scope": "(source.gsc) & (meta.animtree.gsc) & (string.quoted.double)",
+	"scope": "(source.codt7.gsc) & (meta.animtree.codt7.gsc) & (string.quoted.double)",
 	"completions":
 	[
 		"all_player",

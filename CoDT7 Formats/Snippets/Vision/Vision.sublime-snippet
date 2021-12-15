@@ -20,5 +20,5 @@ vkL4 ""
 vkM4 ""
 vkRM ""]]></content>
   <tabTrigger>vkTT</tabTrigger>
-  <scope>source.vision</scope>
+  <scope>text.codt7.vision</scope>
 </snippet>

@@ -1,5 +1,5 @@
 {
-	"scope": "source.zone - (meta.header, meta.asset-name)",
+	"scope": "text.codt7.zone - (meta.header, meta.asset-name)",
 	"completions":
 	[
 		"physpreset",

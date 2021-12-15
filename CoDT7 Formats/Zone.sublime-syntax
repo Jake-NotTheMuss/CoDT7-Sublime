@@ -12,7 +12,7 @@ file_extensions:
   - zone
   - zpkg
   - class
-scope: source.zone
+scope: text.codt7.zone
 
 variables:
   # number digits
@@ -65,31 +65,31 @@ contexts:
 
   strings:
     - match: '"'
-      scope: punctuation.definition.string.begin.zone
+      scope: punctuation.definition.string.begin.codt7.zone
       push:
-        - meta_scope: string.quoted.double.zone
+        - meta_scope: string.quoted.double.codt7.zone
         - match: '"'
-          scope: punctuation.definition.string.end.zone
+          scope: punctuation.definition.string.end.codt7.zone
           pop: true
 
   numbers:
     # decimal float
-    - include: scope:source.t7formats#numbers
+    - include: scope:source.codt7.common#numbers
 
   comments:
-    - include: scope:source.t7formats#comments
+    - include: scope:source.codt7.common#comments
 
   preprocessor-disabled:
-    - include: scope:source.t7formats#preprocessor-disabled
+    - include: scope:source.codt7.common#preprocessor-disabled
 
   preprocessor-line-continuation:
-    - include: scope:source.t7formats#preprocessor-line-continuation
+    - include: scope:source.codt7.common#preprocessor-line-continuation
 
   preprocessor-line-ending:
-    - include: scope:source.t7formats#preprocessor-line-ending
+    - include: scope:source.codt7.common#preprocessor-line-ending
 
   preprocessor-comments:
-    - include: scope:source.t7formats#preprocessor-comments
+    - include: scope:source.codt7.common#preprocessor-comments
 
   ###   ###   ####  ###   ###     ###    ###  ####   ###   ###    ###   ###
   #  #  #  #  #     #  #  #  #   #   #  #     #     #     #      #   #  #  #
@@ -118,20 +118,20 @@ contexts:
   preprocessor-rule-enabled-global:
     - match: ^\s*((#\s*if)\s+(?i:(1)|(true)))\b
       captures:
-        1: meta.preprocessor.zone
-        2: keyword.control.import.zone
-        3: meta.number.integer.decimal.zone constant.numeric.value.zone
-        4: constant.language.zone
+        1: meta.preprocessor.codt7.zone
+        2: keyword.control.import.codt7.zone
+        3: meta.number.integer.decimal.codt7.zone constant.numeric.value.codt7.zone
+        4: constant.language.codt7.zone
       push:
         - match: '^\s*(#\s*endif)\b'
           captures:
-            1: meta.preprocessor.zone keyword.control.import.zone
+            1: meta.preprocessor.codt7.zone keyword.control.import.codt7.zone
           pop: true
         - match: '^\s*(#\s*else)\b'
           captures:
-            1: meta.preprocessor.zone keyword.control.import.else.zone
+            1: meta.preprocessor.codt7.zone keyword.control.import.else.codt7.zone
           push:
-            - meta_content_scope: comment.block.preprocessor.else-branch.zone
+            - meta_content_scope: comment.block.preprocessor.else-branch.codt7.zone
             - match: '(?=^\s*#\s*endif\b)'
               pop: true
             - include: preprocessor-disabled
@@ -145,18 +145,18 @@ contexts:
   preprocessor-rule-disabled-global:
     - match: ^\s*((#\s*if)\s+(?i:(0)|(false)))\b
       captures:
-        1: meta.preprocessor.zone
-        2: keyword.control.import.zone
-        3: meta.number.integer.decimal.zone constant.numeric.value.zone
-        4: constant.language.zone
+        1: meta.preprocessor.codt7.zone
+        2: keyword.control.import.codt7.zone
+        3: meta.number.integer.decimal.codt7.zone constant.numeric.value.codt7.zone
+        4: constant.language.codt7.zone
       push:
         - match: '^\s*(#\s*endif)\b'
           captures:
-            1: meta.preprocessor.zone keyword.control.import.zone
+            1: meta.preprocessor.codt7.zone keyword.control.import.codt7.zone
           pop: true
         - match: '^\s*(#\s*else)\b'
           captures:
-            1: meta.preprocessor.zone keyword.control.import.else.zone
+            1: meta.preprocessor.codt7.zone keyword.control.import.else.codt7.zone
           push:
             - match: (?=^\s*#\s*endif\b)
               pop: true
@@ -164,7 +164,7 @@ contexts:
             - include: global
         - match: ""
           push:
-            - meta_scope: comment.block.preprocessor.if-branch.zone
+            - meta_scope: comment.block.preprocessor.if-branch.codt7.zone
             - match: (?=^\s*#\s*(else|endif)\b)
               pop: true
             - include: preprocessor-disabled
@@ -172,9 +172,9 @@ contexts:
   preprocessor-rule-other-global:
     - match: ^\s*(#\s*(?:if|ifdef|ifndef))\b
       captures:
-        1: keyword.control.import.zone
+        1: keyword.control.import.codt7.zone
       push:
-        - meta_scope: meta.preprocessor.zone
+        - meta_scope: meta.preprocessor.codt7.zone
         - include: preprocessor-line-continuation
         - include: preprocessor-comments
         # Enter a new scope where all elif/else branches have their
@@ -191,7 +191,7 @@ contexts:
   preprocessor-if-branch-global:
     - match: ^\s*(#\s*endif)\b
       captures:
-        1: meta.preprocessor.zone keyword.control.import.zone
+        1: meta.preprocessor.codt7.zone keyword.control.import.codt7.zone
       pop: true
     - match: (?=^\s*#\s*(elif|else)\b)
       push: preprocessor-elif-else-branch-global
@@ -231,60 +231,60 @@ contexts:
   preprocessor-macro-define:
     - match: ^\s*(#\s*define)\b
       captures:
-        1: meta.preprocessor.macro.zone keyword.control.import.define.zone
+        1: meta.preprocessor.macro.codt7.zone keyword.control.import.define.codt7.zone
       push:
-        - meta_content_scope: meta.preprocessor.macro.zone
+        - meta_content_scope: meta.preprocessor.macro.codt7.zone
         - include: preprocessor-line-continuation
         - include: preprocessor-line-ending
         - include: preprocessor-comments
         - match: '({{identifier}})(?=\()'
-          scope: entity.name.function.preprocessor.zone
+          scope: entity.name.function.preprocessor.codt7.zone
           set:
             - match: \(
-              scope: punctuation.section.group.begin.zone
+              scope: punctuation.section.group.begin.codt7.zone
               set: preprocessor-macro-params
         - match: '{{identifier}}'
-          scope: entity.name.constant.preprocessor.zone
+          scope: entity.name.constant.preprocessor.codt7.zone
           set: preprocessor-macro-definition
 
   preprocessor-macro-params:
-    - meta_scope: meta.preprocessor.macro.parameters.zone meta.group.zone
+    - meta_scope: meta.preprocessor.macro.parameters.codt7.zone meta.group.codt7.zone
     - match: '{{identifier}}'
-      scope: variable.parameter.zone
+      scope: variable.parameter.codt7.zone
     - match: \)
-      scope: punctuation.section.group.end.zone
+      scope: punctuation.section.group.end.codt7.zone
       set: preprocessor-macro-definition
     - match: ','
-      scope: punctuation.separator.zone
+      scope: punctuation.separator.codt7.zone
       push:
         - match: '{{identifier}}'
-          scope: variable.parameter.zone
+          scope: variable.parameter.codt7.zone
           pop: true
         - include: preprocessor-line-continuation
         - include: preprocessor-comments
         - match: '(?=\))'
           pop: true
         - match: (/\*).*(\*/)
-          scope: comment.block.zone
+          scope: comment.block.codt7.zone
           captures:
-            1: punctuation.definition.comment.zone
-            2: punctuation.definition.comment.zone
+            1: punctuation.definition.comment.codt7.zone
+            2: punctuation.definition.comment.codt7.zone
         - match: '\S+?'
-          scope: invalid.illegal.unexpected-character.zone
+          scope: invalid.illegal.unexpected-character.codt7.zone
     - include: preprocessor-line-continuation
     - include: preprocessor-comments
     - match: (/\*).*(\*/)
-      scope: comment.block.zone
+      scope: comment.block.codt7.zone
       captures:
-        1: punctuation.definition.comment.zone
-        2: punctuation.definition.comment.zone
+        1: punctuation.definition.comment.codt7.zone
+        2: punctuation.definition.comment.codt7.zone
     - match: '\S+?'
-      scope: invalid.illegal.unexpected-character.zone
+      scope: invalid.illegal.unexpected-character.codt7.zone
     - match: $\n
-      scope: invalid.illegal.unexpected-end-of-line.zone
+      scope: invalid.illegal.unexpected-end-of-line.codt7.zone
 
   preprocessor-macro-definition:
-    - meta_content_scope: meta.preprocessor.macro.zone
+    - meta_content_scope: meta.preprocessor.macro.codt7.zone
     - include: preprocessor-line-continuation
     - include: preprocessor-line-ending
     - include: preprocessor-comments
@@ -293,29 +293,29 @@ contexts:
   preprocessor-other:
     - match: '^\s*(#\s*(?:if|ifdef|ifndef|elif|else|undef))\b'
       captures:
-        1: keyword.control.import.zone
+        1: keyword.control.import.codt7.zone
       push:
-        - meta_scope: meta.preprocessor.zone
+        - meta_scope: meta.preprocessor.codt7.zone
         - include: preprocessor-line-continuation
         - include: preprocessor-line-ending
         - include: preprocessor-comments
     - match: ^\s*(#\s*endif)\b
       captures:
-        1: meta.preprocessor.zone keyword.control.import.zone
+        1: meta.preprocessor.codt7.zone keyword.control.import.codt7.zone
     - match: ^\s*(#\s*include)\b
       captures:
-        1: keyword.control.import.include.zone
+        1: keyword.control.import.include.codt7.zone
       push:
-        - meta_scope: meta.preprocessor.include.zone
+        - meta_scope: meta.preprocessor.include.codt7.zone
         - include: preprocessor-line-continuation
         - include: preprocessor-line-ending
         - include: preprocessor-comments
         - match: '"'
-          scope: punctuation.definition.string.begin.zone
+          scope: punctuation.definition.string.begin.codt7.zone
           push:
-            - meta_scope: string.quoted.double.include.zone
+            - meta_scope: string.quoted.double.include.codt7.zone
             - match: '"'
-              scope: punctuation.definition.string.end.zone
+              scope: punctuation.definition.string.end.codt7.zone
               pop: true
 
 
@@ -335,7 +335,7 @@ contexts:
 
   global-constants:
     - match: '\b(ZONENAME)\b'
-      scope: support.constant.zone
+      scope: support.constant.codt7.zone
 
   expressions:
     - include: preprocessor-expressions
@@ -346,30 +346,30 @@ contexts:
     - match: '\s*(?=>)'
       push:
         - match: '>'
-          scope: punctuation.header-directive.zone
+          scope: punctuation.header-directive.codt7.zone
           set:
-            - meta_scope: meta.header.zone
+            - meta_scope: meta.header.codt7.zone
             - match: '\b({{global_identifiers}})\b'
               captures:
-                1: constant.language.zone
+                1: constant.language.codt7.zone
               push:
                 - match: (?=\s*,|$\n)
                   pop: true
                 - match: '\.'
-                  scope: punctuation.accessor.zone
+                  scope: punctuation.accessor.codt7.zone
                 - match: '{{identifier}}'
                   scope: variable.parameter
             - match: '\b({{header_identifiers}})\b'
-              scope: keyword.other.zone markup.italic
+              scope: keyword.other.codt7.zone markup.italic
             - match: ','
-              scope: punctuation.separator.zone
+              scope: punctuation.separator.codt7.zone
               set:
-                - meta_content_scope: meta.header.zone
+                - meta_content_scope: meta.header.codt7.zone
                 - match: $\n
                   pop: true
                 - include: global-constants
                 - match: '\b({{header_constants}})\b'
-                  scope: constant.language.zone
+                  scope: constant.language.codt7.zone
                 - include: numbers
             - match: $\n
               pop: true
@@ -377,29 +377,29 @@ contexts:
   meta-directives:
     - match: '^\s*({{meta_directives}})\b'
       captures:
-        1: keyword.other.zone markup.italic
+        1: keyword.other.codt7.zone markup.italic
       push:
-        - meta_scope: meta.directive.zone
+        - meta_scope: meta.directive.codt7.zone
         - match: $\n
           pop: true
         - match: ','
-          scope: punctuation.separator.zone
+          scope: punctuation.separator.codt7.zone
         - match: '\b({{meta_directive_keywords}})\b'
-          scope: variable.language.zone
+          scope: variable.language.codt7.zone
         - match: '\|\-'
-          scope: keyword.operator.zone
+          scope: keyword.operator.codt7.zone
         - include: asset-type-in-line
 
   asset-name:
     - match: ','
-      scope: punctuation.separator.zone
+      scope: punctuation.separator.codt7.zone
       push:
-        - meta_content_scope: meta.asset-name.zone
+        - meta_content_scope: meta.asset-name.codt7.zone
         - match: $\n
-          scope: meta.asset-name.zone
+          scope: meta.asset-name.codt7.zone
           pop: true
         - match: ','
-          scope: invalid.illegal.unexpected-character.zone
+          scope: invalid.illegal.unexpected-character.codt7.zone
 
   asset:
     - include: asset-type
@@ -412,18 +412,18 @@ contexts:
   asset-type:
     - match: '^\s*(?:({{asset_types}})|({{raw_types}}))\b'
       captures:
-        1: entity.name.type.zone markup.italic
-        2: support.type.zone markup.italic
+        1: entity.name.type.codt7.zone markup.italic
+        2: support.type.codt7.zone markup.italic
 
   asset-type-in-line:
     - match: '\b(?:({{asset_types}})|({{raw_types}}))\b'
       captures:
-        1: entity.name.type.zone markup.italic
-        2: support.type.zone markup.italic
+        1: entity.name.type.codt7.zone markup.italic
+        2: support.type.codt7.zone markup.italic
 
   extra-comma:
     - match: ','
-      scope: invalid.illegal.unexpected-character.zone
+      scope: invalid.illegal.unexpected-character.codt7.zone
 
   raw-asset:
     - include: scriptparsetree
@@ -438,46 +438,46 @@ contexts:
       pop: true
     - include: asset-type
     - match: ','
-      scope: punctuation.separator.zone
+      scope: punctuation.separator.codt7.zone
       push:
-        - meta_content_scope: meta.asset-name.zone
+        - meta_content_scope: meta.asset-name.codt7.zone
         - match: $\n
-          scope: meta.asset-name.zone
+          scope: meta.asset-name.codt7.zone
           pop: 2
         - include: extra-comma
 
   scriptparsetree:
     - match: (?=^\s*(?i:scriptparsetree)\b)
       push:
-        - meta_scope: meta.scriptparsetree.zone
+        - meta_scope: meta.scriptparsetree.codt7.zone
         - include: asset-generic
 
   stringtable:
     - match: (?=^\s*(?i:stringtable)\b)
       push:
-        - meta_scope: meta.stringtable.zone
+        - meta_scope: meta.stringtable.codt7.zone
         - include: asset-generic
 
   fx:
     - match: (?=^\s*(?i:fx)\b)
       push:
-        - meta_scope: meta.fx.zone
+        - meta_scope: meta.fx.codt7.zone
         - include: asset-generic
 
   ttf:
     - match: (?=^\s*(?i:ttf)\b)
       push:
-        - meta_scope: meta.ttf.zone
+        - meta_scope: meta.ttf.codt7.zone
         - include: asset-generic
 
   bitfield:
     - match: (?=^\s*(?i:bitfield)\b)
       push:
-        - meta_scope: meta.bitfield.zone
+        - meta_scope: meta.bitfield.codt7.zone
         - include: asset-generic
 
   klf:
     - match: (?=^\s*(?i:klf)\b)
       push:
-        - meta_scope: meta.klf.zone
+        - meta_scope: meta.klf.codt7.zone
         - include: asset-generic

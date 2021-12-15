@@ -1,5 +1,5 @@
 {
-	"scope": "(source.gsc) & (meta.thread-signal) & (string.quoted.double)",
+	"scope": "(source.codt7.gsc) & (meta.thread-signal) & (string.quoted.double)",
 	"completions":
 	[
 		"entityshutdown",

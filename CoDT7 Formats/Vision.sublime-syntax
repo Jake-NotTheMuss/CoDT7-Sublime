@@ -9,30 +9,30 @@
 name: Vision
 file_extensions:
   - vision
-scope: source.vision
+scope: source.codt7.vision
 
 variables:
   parameters: 'vk(?:TT|TS|TC|TO|RGB0|L0|M0|RGB1|L1|M1|RGB2|L2|RGB3|L3|M3|RGB4|L4|M4|RM)'
 
 contexts:
   prototype:
-    - include: scope:source.t7formats#comments
+    - include: scope:source.codt7.common#comments
 
   main:
     - match: '\b{{parameters}}\b'
-      scope: variable.language.vision
+      scope: variable.language.codt7.vision
     - match: \w+
-      scope: support.constant.vision
+      scope: support.constant.codt7.vision
     - include: strings
 
   strings:
     - match: '"'
-      scope: punctuation.definition.string.begin.vision
+      scope: punctuation.definition.string.begin.codt7.vision
       push:
-        - meta_scope: string.quoted.double.vision
+        - meta_scope: string.quoted.double.codt7.vision
         - match: '"'
-          scope: punctuation.definition.string.end.vision
+          scope: punctuation.definition.string.end.codt7.vision
           pop: true
         - match: '-'
-          scope: punctuation.operator.arithmetic.vision
-        - include: scope:source.t7formats#numbers
+          scope: punctuation.operator.arithmetic.codt7.vision
+        - include: scope:source.codt7.common#numbers

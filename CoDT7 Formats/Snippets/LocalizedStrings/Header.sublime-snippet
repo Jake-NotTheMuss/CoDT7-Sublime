@@ -8,5 +8,5 @@ FILENOTES		""
 
 ENDMARKER]]></content>
 	<tabTrigger>VERSION</tabTrigger>
-	<scope>(source.str) - meta.string-reference - string</scope>
+	<scope>(text.codt7.localizedstrings) - meta.string-reference - string</scope>
 </snippet>

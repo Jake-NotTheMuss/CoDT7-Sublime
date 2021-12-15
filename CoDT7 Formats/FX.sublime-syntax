@@ -9,7 +9,7 @@
 name: FX
 file_extensions:
   - efx
-scope: source.fx
+scope: source.codt7.fx
 
 variables:
   identifier: \b[[:alpha:]_][[:alnum:]_]*\b
@@ -25,35 +25,35 @@ contexts:
 ############[ EXPRESSIONS ]###################################################
 
   comments:
-    - include: scope:source.t7formats#comments
+    - include: scope:source.codt7.common#comments
 
   strings:
     - match: '"'
-      scope: punctuation.definition.string.begin.fx
+      scope: punctuation.definition.string.begin.codt7.fx
       push:
-        - meta_scope: string.quoted.double.fx
+        - meta_scope: string.quoted.double.codt7.fx
         - match: '"'
-          scope: punctuation.definition.string.end.fx
+          scope: punctuation.definition.string.end.codt7.fx
           pop: true
 
   numbers:
     - match: '-'
-      scope: punctuation.operator.arithmetic.fx
-    - include: scope:source.t7formats#numbers
+      scope: punctuation.operator.arithmetic.codt7.fx
+    - include: scope:source.codt7.common#numbers
 
   block:
     - match: '\{'
-      scope: punctuation.section.block.begin.fx
+      scope: punctuation.section.block.begin.codt7.fx
       push:
-        - meta_scope: meta.block.fx
+        - meta_scope: meta.block.codt7.fx
         - match: '\}'
-          scope: punctuation.section.block.end.fx
+          scope: punctuation.section.block.end.codt7.fx
           pop: true
         - include: expressions
 
   keywords:
     - match: '\b(?i:new)\b'
-      scope: keyword.new.fx
+      scope: keyword.new.codt7.fx
       push:
         - match: '(?=\{)'
           set: new-block
@@ -65,21 +65,21 @@ contexts:
   directive:
     - match: ^(iwfx)[ \t]+(\d+)
       captures:
-        1: keyword.other.directive.iwfx.fx
-        2: constant.numeric.fx-version.fx
+        1: keyword.other.directive.iwfx.codt7.fx
+        2: constant.numeric.fx-version.codt7.fx
 
   global:
     - include: statements
     - match: '\{'
-      scope: punctuation.section.block.begin.fx
+      scope: punctuation.section.block.begin.codt7.fx
       push:
-        - meta_scope: meta.block.fx
+        - meta_scope: meta.block.codt7.fx
         - match: '\}'
-          scope: punctuation.section.block.end.fx
+          scope: punctuation.section.block.end.codt7.fx
           pop: true
         - include: statements
     - match: '\}'
-      scope: invalid.illegal.stray-bracket-end.fx
+      scope: invalid.illegal.stray-bracket-end.codt7.fx
 
   expressions:
     - include: numbers
@@ -87,35 +87,35 @@ contexts:
     - include: block
     - include: keywords
     - match: '{{identifier}}'
-      scope: constant.language.fx
+      scope: constant.language.codt7.fx
 
   statements:
     - match: '{{identifier}}'
-      scope: variable.language.fx
+      scope: variable.language.codt7.fx
       push:
         - match: ';'
-          scope: punctuation.terminator.fx
+          scope: punctuation.terminator.codt7.fx
           pop: true
         - include: expressions
 
   new-block:
     - match: '\{'
-      scope: punctuation.section.block.begin.fx
+      scope: punctuation.section.block.begin.codt7.fx
       push:
-        - meta_scope: meta.block.fx
+        - meta_scope: meta.block.codt7.fx
         - match: '\}'
-          scope: punctuation.section.block.end.fx
+          scope: punctuation.section.block.end.codt7.fx
           pop: true
         - include: new-block-statements
     - match: ';'
-      scope: punctuation.terminator.fx
+      scope: punctuation.terminator.codt7.fx
       pop: true
     - match: (?=\S)
       pop: true
 
   new-block-statements:
     - match: '{{identifier}}'
-      scope: variable.language.fx
+      scope: variable.language.codt7.fx
       push:
         - match: $\n
           pop: true
