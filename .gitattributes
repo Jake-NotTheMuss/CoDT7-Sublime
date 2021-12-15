@@ -3,8 +3,8 @@
 *.sublime-completions linguist-language=JSON
 *.sublime-keymap linguist-language=JSON
 *.sublime-macro linguist-language=JSON
+*.sublime-menu linguist-language=JSON
+*.sublime-commands linguist-language=JSON
 *.sublime-snippet linguist-language=XML
 *.tmLanguage linguist-language=XML
 *.tmPreferences linguist-language=XML
-
-CoDT7[[:space:]]Formats/** linguist-detectable

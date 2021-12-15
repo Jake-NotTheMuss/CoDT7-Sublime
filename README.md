@@ -21,11 +21,16 @@ Current Support:
 - Localized Strings (.str)
 - FX (.efx)
 - XAsset (.xmodel_export, .xanim_export, .nt_export, .xcam_export)
+- Vision (.vision)
+- Sound Alias (.alias.csv)
+- Sound Reverb (.reverb.csv)
 
 Future Support:
 
-- Vision (.vision)
 - Lensflare (.klf)
+- Sound Ambient (.ambient.csv)
+- Animtree (.atr)
+- Animtable (.ai_am, .ai_ast)
 
 ... to name a few.
 
