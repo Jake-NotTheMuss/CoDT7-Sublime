@@ -8,3 +8,5 @@
 *.sublime-snippet linguist-language=XML
 *.tmLanguage linguist-language=XML
 *.tmPreferences linguist-language=XML
+
+CoDT7\ Formats/** linguist-detectable
