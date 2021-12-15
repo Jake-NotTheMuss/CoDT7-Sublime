@@ -1,0 +1,240 @@
+%YAML 1.2
+---
+# http://www.sublimetext.com/docs/3/syntax.html
+
+# This file is part of the T7-Sublime project.
+# T7-Sublime is an enhanced syntax-highlighting package for (almost) all Call of Duty Black Ops III developer file formats.
+# Sound Common is an internal library containing common rules which are used by the visible sound syntax files.
+
+name: Sound Common
+hidden: true
+scope: text.codt7.sound.common
+version: 2
+
+variables:
+  # Invalid numeric suffix
+  dec_suffix: '[a-zA-Z_][[:alnum:]_]*'
+
+  # Listed alphabetically
+  buses: '(?i:BUS_(?:FX|VOICE|PFUTZ|HDRFX|UI|MUSIC|MOVIE|REFERENCE))'
+  buses_t5: '(?:world|fx|voice|pfutz|hdrfx|ui|music|movie|reference)'
+  context_type: 'aquifer_cockpit|battle|boot|foley|healthstate|igc|laststand|mature|movement|perspective|plr_body|plr_gender|plr_impact|plr_stance|plr_vehicle|ringoff_plr|train|vehicle|water'
+  context_type_t5: 'ringoff_plr|mature|test|hazmat'
+  context_value: 'active|silent|slomo|wet|normal|igc|human|cyber|infected|on|explicit|safe|normal|loud|quiet|player|npc|reaper|prophet|nomad|outrider|seraph|ruin|assassin|pyro|grenadier|male|female|veh|pwr_armor|stand|crouch|prone|driver|indoor|outdoor|underwater|country|city|tunnel|interior|exterior|under|over|high|low|mask'
+  context_value_t5: 'indoor|outdoor|explicit|safe|high|low|mask'
+  curve_type: '(?i:default|defaultmin|allon|alloff|(?:rcurve(?:[0-5]))|steep|sindelay|cosdelay|sin|cos|rev60|rev65)'
+  curve_type_t5: 'name|default|defaultmin|rdefault|curve0|rcurve0|curve1|rcurve1|curve2|rcurve2|curve3|rcurve3|curve4|rcurve4|curve5|rcurve5|allon|alloff|real2|log0|log1|log2|log3|sin|cos'
+  duck_names: 'amb_battle_ducker|amb_battle_ducker_half|amb_lightning_indoor|amb_lightning_sewer|cmn_3p_weapon_occ|cmn_aar_screen|cmn_bleedout|cmn_bo3_load|cmn_cc_securitybreach|cmn_cc_securitybreach_trans|cmn_cc_tacmenu|cmn_dead_turret_exp|cmn_death_coop|cmn_death_plr|cmn_death_solo|cmn_dni_interrupt|cmn_duck_all|cmn_duck_all_but_movie|cmn_duck_music|cmn_duck_music_dist|cmn_duck_underscore|cmn_duck_underscore_and_round|cmn_health_laststand|cmn_health_low|cmn_health_resurrect|cmn_igc_amb_silent|cmn_igc_bg_lower|cmn_igc_foley_lower|cmn_igc_skip|cmn_jump_land_plr|cmn_kill_foley|cmn_level_fade_immediate|cmn_level_fadeout|cmn_level_start|cmn_melee_pain|cmn_music_quiet|cmn_no_vo|cmn_override_duck|cmn_pain_plr|cmn_qtank_railgun_shot|cmn_raps_spawn|cmn_robot_behind|cmn_shock_tinitus|cmn_sniper_fire_3rd|cmn_swimming|cmn_time_freeze|cmn_ui_tac_mode|cmn_wallrun|cod_ads|cod_alloff|cod_allon|cod_doa_fps|cod_fadein|cod_hipfire|cod_hold_breath|cod_matureduck|cod_menu|cod_mpl_combat_awareness|cod_test_alias|cod_test_env|cod_xcam|cp_aquifer_breach|cp_aquifer_breach_slowmo|cp_aquifer_drown_evt|cp_aquifer_int|cp_aquifer_int_deep|cp_aquifer_outro|cp_aquifer_pip_HeroLocation|cp_aquifer_script_jet|cp_aquifer_underwater|cp_aquifer_veh_dogfight|cp_aquifer_veh_exp_hit|cp_aquifer_veh_int|cp_barge_slowtime|cp_biodome2_slide_prj|cp_biodome_acc_drive_igc|cp_biodome_acc_drive_igc_2|cp_biodome_supertree_vtol|cp_biodomes_2_end_vehicle|cp_biodomes_dive_duckambience|cp_biodomes_supertree_collapse|cp_biodomes_vtol_esc|cp_blackstation_boatride|cp_blackstation_boatride_getoff|cp_blackstation_boatride_geton|cp_blackstation_data_recorder|cp_blackstation_debris|cp_blackstation_debris_small|cp_blackstation_intro_veh|cp_blackstation_intro_veh_2|cp_blackstation_outro|cp_blackstation_scripted_wind|cp_blackstation_thunder|cp_blackstation_warlord_igc|cp_cybercore_activate|cp_cybercore_ready|cp_cybercore_unstoppable|cp_dialog|cp_infection_flyaway|cp_infection_hideout_amb|cp_infection_interface|cp_infection_intro|cp_infection_intro_2|cp_infection_intro_imp|cp_infection_labdeath|cp_infection_qt_birth|cp_infection_testlab_transition|cp_life_vinetrans|cp_lotus_delusion_overlay|cp_lotus_hospital_fade|cp_lotus_vtol_bridge|cp_lotus_vtol_hallway|cp_mi_sing_vengeance_slowmo|cp_newworld_pipes|cp_prologue_apc_door_close|cp_prologue_apc_duck_explo|cp_prologue_duck_apc_lps|cp_prologue_exit_apc|cp_prologue_outro_rippedapart|cp_prologue_outro_runup|cp_prologue_vtolflyby|cp_ramses_celing|cp_ramses_demostreet_1|cp_ramses_demostreet_2|cp_ramses_demostreet_3|cp_ramses_int_dead|cp_ramses_int_veh|cp_ramses_intro_igc|cp_ramses_jeep_drive|cp_ramses_nasser_igc|cp_ramses_outro|cp_ramses_plaza_battle|cp_ramses_pre_vtol|cp_ramses_preplaza|cp_ramses_qt_vtol|cp_ramses_qt_wallcrash|cp_ramses_quad_music|cp_ramses_raps_intro|cp_ramses_streetcollapse|cp_ramses_theater_explo|cp_ramses_trans|cp_ramses_vtol_fall|cp_ramses_vtol_impact|cp_ramses_vtol_walk|cp_ramses_wall_3p_gunfire|cp_safehouse_exit|cp_sgen_base_explo|cp_sgen_flooding|cp_sgen_flyover|cp_sgen_ghost_igc|cp_sgen_steam_duck|cp_sgen_twinrevenge_igc|cp_sgen_uw_boulder|cp_sgen_wave|cp_sh_cairo_foley_low|cp_vengeance_cafe|cp_vengeance_int|cp_vengeance_int_deep|cp_warlord_melee|cp_zmb_box_3d|cp_zmb_ending|cp_zmb_thelooper|cp_zmb_timefreeze|cp_zmb_voice|cp_zurich_duckrabbit|cp_zurich_end_duckexplo|cp_zurich_movie|cp_zurich_movie_long|cp_zurich_train|default|dummy|exp_barrel|exp_grenade|exp_medium|exp_mortar|exp_quad_rocket|exp_rocket_close|exp_rocket_quad|exp_small|exp_vehicle|exp_vehicle_close|mpl_announcer|mpl_death|mpl_duck_announcer|mpl_duck_holoscreen|mpl_endmatch|mpl_final_killcam|mpl_final_killcam_slowdown|mpl_hellstorm|mpl_post_match|mpl_postmatch|mpl_prematch|mpl_speedboost_run|prj_impact|prj_impact_plr|prj_whizby|wpn_cmn_burst_3p|wpn_cmn_shot_3p|wpn_cmn_shot_plr|wpn_cmn_suppressed_plr|wpn_hunter_missile|wpn_jet_rocket_plr|wpn_melee_knife_plr|wpn_rpg_plr|wpn_shotgun_sci|wpn_shoulder_shot_npc|wpn_sniper_shot_plr|wpn_turret_npc|wpn_turret_plr|zmb_apothifight_beam|zmb_beastmode_enter|zmb_bgb_fearinheadlights|zmb_bgb_killingtime|zmb_castle_bossbattle|zmb_castle_bossbattle_event|zmb_castle_duck_evt_3d|zmb_castle_outro|zmb_castle_timetravel|zmb_cmn_mk3_orb|zmb_cosmo_intro|zmb_cp_song_suppress|zmb_derriese_start|zmb_dialog|zmb_dialog_2d|zmb_dialog_monty|zmb_duck_close_vehicles|zmb_duck_music_3d|zmb_easter_egg_song|zmb_game_over|zmb_game_start|zmb_game_start_nofade|zmb_hd_game_start_nofade|zmb_health_low|zmb_island_dopple_scream|zmb_island_duck_bg_music|zmb_island_hallucinate|zmb_island_inside_thrasher|zmb_island_swimming|zmb_island_takeo|zmb_island_trial|zmb_laststand|zmb_margwa_smash|zmb_moon_gasmask|zmb_moon_space|zmb_radio_duck|zmb_sophia|zmb_stal_boss_fight|zmb_stal_dragon_fight|zmb_stal_outro|zmb_stal_tbc|zmb_stalingrad_pa_destruct|zmb_temple_meteor|zmb_temple_radio|zmb_umonkey|zmb_zhd_laststand|zmb_zod_apothibattle_duck|zmb_zod_apothigod|zmb_zod_beastmode|zmb_zod_cursed|zmb_zod_duck_octobomb_lp|zmb_zod_endigc|zmb_zod_scream|zmb_zod_shadbattle_duck|zmb_zod_sword|zmb_zod_sword_powerup|zmb_zod_teleport|zmb_zod_totem_charge|'
+  duck_groups: 'snp_alerts_gameplay|snp_ambience|snp_claw|snp_destructible|snp_dying|snp_dying_ice|snp_evt_2d|snp_explosion|snp_foley|snp_grenade|snp_hdrfx|snp_igc|snp_impacts|snp_menu|snp_movie|snp_music|snp_never_duck|snp_player_dead|snp_player_impacts|snp_scripted_moment|snp_set_piece|snp_special|snp_vehicle|snp_vehicle_interior|snp_voice|snp_voice_announcer|snp_weapon_decay_1p|snp_whizby|snp_wpn_1p|snp_wpn_1p_act|snp_wpn_1p_ads|snp_wpn_1p_shot|snp_wpn_3p|snp_wpn_3p_decay|snp_wpn_turret|snp_x2|snp_x3|snp_distant_explosions'
+  flux_type: '(?i:none|left_player|right_player|center_player|random_player|left_shot|center_shot|right_shot|random_direcion)'
+  futz_names: '(?i:bfutz|default|defaultbkp|(?:dlc_res_(?:[1-8]))|good_1|jet_wing_helmet|jet_wing_helmet_flying|mpl_chopper_pov|mpl_quad_pov|mpl_reaper_pov|no_gfutz|spl_asd_pov|spl_bigdog_pov|spl_heli_future|spl_quad_pov|spl_spiderbot_pov|spl_spymic|spl_tow_missile|spl_turret|spl_war_command|stereo|test_1|test_2|tueyeckert)'
+  group_names_t5: 'reference|master|voice|voice_player|voice_announcer|music|event|wpn_plr|wpn_npc|reload|shells|projectile|explosion|destructable|ambience|vehicle|foley|physics|ui|effects|underwater|wpn_heavy_plr|wpn_aslt_plr|wpn_rfl_plr|wpn_smg_plr|wpn_pis_plr|wpn_launcher_plr|wpn_launcher_npc|wpn_pis_npc|wpn_smg_npc|wpn_rfl_npc|wpn_aslt_npc|wpn_heavy_npc|wpn_dist|wpn_decay|flashbacks'
+  language_names: 'all|english|french|italian|german|spanish|russian|portuguese|mexicanspanish|polish|fulljapanese|japanese|traditionalchinese|simplifiedchinese|englisharabic|arabic'
+  limit_type: '(?i:none|oldest|reject|priority)'
+  loadspec_names: 'afghanistan|angola|apothicon_fury|art_vignette|avogadro|barrel|blackout|buildable_electrap|buildable_riotshield|buildable_turbine|buildable_turret|bump_alum_door|bump_barrel|bump_barrel_lg|bump_barrelcage|bump_bike|bump_blinds|bump_bottles|bump_branch|bump_brick|bump_cabinet|bump_car|bump_car_int|bump_cardboard|bump_cardboard_sm|bump_chain_door|bump_chainlink|bump_cloth|bump_container|bump_cupboard|bump_desk|bump_foliage|bump_fridge|bump_glass|bump_irongate|bump_locker|bump_mannequin|bump_metal_soft|bump_metal_solid|bump_metal_stall|bump_phone_booth|bump_piano|bump_pipe|bump_plastic|bump_potedplant|bump_pots|bump_rebar|bump_shelf|bump_shelf_scoot|bump_steelfence|bump_stretcher|bump_table_scoot|bump_tarp|bump_tarpcrate|bump_tire|bump_toolbox|bump_trashcan|bump_truck|bump_vend_small|bump_weights|bump_wirefence|bump_wood|campaign|cant|carpenter|char_animal|char_animal_chicken|char_animal_pig|char_bigdog|char_bot_biped|char_bow|char_brobot_biped|char_camo|char_civ|char_dog_mp|char_dog_sp|char_glove|char_horse|char_hud|char_human|char_human_hifall|char_intel|char_juggernaut|char_sergei|char_warlord|char_wea|char_woo|char_zombie|cigarette_machine|cntxt_claw|cntxt_melee_all|cntxt_melee_garotte|cntxt_melee_hatchet|cntxt_melee_knife|cntxt_melee_necksnap|common|crate|creek|cub|cuba|cuba_mp|dds_bowman|dds_br|dds_brooks|dds_cb|dds_cia|dds_civ|dds_dempsey|dds_ge|dds_hudson|dds_hudson_plr|dds_mason|dds_mason_plr|dds_nikolai|dds_reznov|dds_richtofen|dds_rn|dds_ru|dds_sog|dds_squelch|dds_takeo|dds_us|dds_vc|dds_weaver|dds_woods|dds_woods_plr|deadshot|door|door_breach|doublepoints|doubletap|dst_ac|dst_air_vent|dst_atm|dst_bank_pillar|dst_chair|dst_coffee_bag|dst_coin_stack|dst_fire_hydrant|dst_flatscreen|dst_fuel_tank_lrg|dst_fuel_tank_sm|dst_garbage_bag|dst_hotdog_cart|dst_light_pole|dst_luggage|dst_mp_propane_tank|dst_news_stand|dst_nitrogen_tank|dst_palet_wood|dst_paper_cups|dst_plant_large|dst_plant_small|dst_pot|dst_propane_tank|dst_rus_lamp|dst_server|dst_solar_panel|dst_tank_flat|dst_touchscreen|dst_transformer|dst_trash_bin|dst_turret|dst_water_fountain|dst_wheel_cart|dst_wood_shelf|dst_xlight|dtp_npc|dtp_plr|electrical|electronics|electronics_mp|engineer|fire_embers|fire_extinguisher|fish_tank|flashpoint|fly_pickup|foodstand|front_end|frontend|fullahead|game_CTF|game_dom_ge|game_dom_ja|game_dom_ru|game_dom_us|game_draw_ge|game_draw_ja|game_draw_ru|game_draw_us|game_hq_ge|game_hq_ja|game_hq_ru|game_hq_us|game_loss_ge|game_loss_ja|game_loss_ru|game_loss_us|game_sab_ge|game_sab_ja|game_sab_ru|game_sab_us|game_sd_ge|game_sd_ja|game_sd_ru|game_sd_us|game_war|game_win|gdt_camosuit|gdt_clone|gdt_combateffeciency|gdt_energyshield|gdt_hacker|gdt_heatwave|gdt_infrared|gdt_oed|gdt_powerarmor|gdt_rejack|gdt_shieldwall|gdt_speedboost|gdt_visionpulse|ge|german|glass|haiti|hellhound|hud|hue_city|instakill|int_escape|interrogation_escape|ja|japanese|jp|juggernog|jungle_building|karma|khe_sanh|knife|kowloon|losangeles|magic_box|maxammo|menu|metal_bar|mind_cntrl|monsoon|mortar|mp_killstreak|mp_kls_start|mp_menu|mp_veh_rc|mulekick|multiplayer|necksnap|nicaragua|npc|nuke|nva|op4|ops|other_mp|packapunch|pakistan|panama|pap|paper_stack|pentagon|pfx_birds|pfx_debris|pfx_elec_burst_shower_lg|pfx_elec_burst_shower_xlg|pfx_electronics|pfx_fire|pfx_fire_18wheeler|pfx_fire_embers|pfx_fire_fuel_sm|pfx_fire_line|pfx_fire_lrg|pfx_fire_palm|pfx_fire_palm_detail|pfx_fire_window_lg|pfx_fire_window_xlg|pfx_fire_xlrg|pfx_flare|pfx_generic|pfx_road_flare_dist|pfx_smolder_mortar_crater|pfx_snow|pfx_spark_burst|pfx_spark_core|pfx_spark_grind|pfx_spark_pc|pfx_spark_single|pfx_steam|pfx_thunder_close|pfx_thunder_distant|pfx_thunder_explo|pfx_thunder_lfe|pfx_thunder_strike|pfx_trail_plane_crash|pfx_water|phdflopper|phy_mp|phys_axe_head|phys_boot|phys_bread|phys_ceramic_cup|phys_chalice|phys_coin|phys_flesh|phys_foliage|phys_glass|phys_glove|phys_hand_saw|phys_hard|phys_horseshoe|phys_ladle|phys_large_hand_tool|phys_leather_helmet|phys_mann|phys_med_hand_tool|phys_metal|phys_metal_helmet|phys_oil_lamp|phys_sandal|phys_silverware|phys_small_hand_tool|phys_soft|phys_tin_cup|phys_water|phys_wood|phys_wood_mug|pip|pipe|player|player_burn|player_flashbang|player_hurt|player_hurt_bad|pmc|pow|prj_ap|prj_bolt|prj_crack|prj_energy_bolt|prj_general|prj_gren_case|prj_headshot|prj_headshot_zm|prj_juiced|prj_paintball|prj_shell|prj_spray_general|quad|quagmire|quickrevive|radio_theater|radio_verruckt|rebirth|reel_to_reel|river|rock|rocket_cp|rocket_mp|rts|rts_dockside|ru|rubble|rus|russia_mp|screecher|slide_plr|sog|soviet|sp_menu|sparks_mp|spc_crate|spc_gate|spc_gun_jam|spc_locker|spc_lockpick|spc_padlock_bolt|spc_strongbox|spc_torch|spc_torch_mon|speedcola|spl_la_1|spl_la_2|spl_wmd_sr71|st6|staminup|step_brick|step_brush|step_car|step_cardboard|step_catwalk|step_chain_door|step_container|step_corr_metal|step_crouch_run|step_crouch_walk|step_dirt|step_glass|step_gondola|step_grass|step_grate|step_gravel|step_ice_edge|step_land|step_metal|step_null|step_paper|step_prone|step_puddle|step_rock_rubble|step_rocks|step_run|step_sprint|step_stair_metal|step_tanker|step_tarp|step_truck|step_turnstile|step_twig|step_walk|step_water_small|step_wood|step_wood_board|surf_asphalt|surf_bark|surf_bodyarmor|surf_bottle|surf_brick|surf_canvas|surf_carpet|surf_ceramic|surf_cloth|surf_concrete|surf_crate|surf_cushion|surf_default|surf_dirt|surf_fern|surf_flesh|surf_foliage|surf_fruit|surf_glass|surf_glassbroken|surf_glassbulletproof|surf_glasscar|surf_grass|surf_gravel|surf_ice|surf_metal|surf_metalcar|surf_metalcatwalk|surf_metalhollow|surf_metalthin|surf_mud|surf_paintedmetal|surf_paper|surf_piano|surf_plaster|surf_plastic|surf_plate|surf_player|surf_pxtremeer|surf_rock|surf_rubber|surf_sand|surf_sandbag|surf_snow|surf_stone|surf_tallgrass|surf_teddybear|surf_vase|surf_water|surf_watershallow|surf_wood|swimming_npc|swimming_plr|switch|thief|tombstone|trap_electric|trap_fire|tst_snd_stress|typewriter|underwater_base|urn|us|usa|vault_bank|vault_weapon|veh|veh_alouette|veh_amws|veh_apc|veh_big_heli|veh_blackhawk|veh_boat|veh_btr|veh_buffel|veh_car_by|veh_chinook|veh_chopper_wash_dirt|veh_chopper_wash_water|veh_cougar|veh_dart|veh_depth_charge|veh_drone|veh_eland|veh_f35|veh_fire_scout|veh_flyby_drone|veh_flyby_heli|veh_flyby_plane|veh_flyby_wash|veh_future_heli|veh_gaz66|veh_gunship|veh_heli|veh_heli_osp_rts|veh_helicopter|veh_hind|veh_hind_angola|veh_hind_enemy|veh_hind_epow|veh_hind_pow|veh_hip|veh_hip_pow|veh_huey|veh_huey_toda|veh_hunter|veh_jeep|veh_metalstorm|veh_mig23|veh_motorcycle|veh_osprey|veh_osprey_plane|veh_pallasturret|veh_pickup|veh_qrdrone|veh_qrdrone_mp|veh_quadtank|veh_raps|veh_rc_car|veh_rc_car_bomb|veh_siegebot|veh_snowcat|veh_soct|veh_spiderbot|veh_t55|veh_train|veh_truck|veh_truck_door|veh_vtol_military|veh_wasp|veh_wheeled|veh_whl_atv|vespa|viet|vietnam_mp|vorkuta|wallbuy|war_afghanistan|war_dockside|war_socotra|war_tutorial|water_bottle|whizby_water|widows|wiiu_device_cmn|wiiu_device_mp|wiiu_device_mpzm|wiiu_device_sp|wiiu_device_zm|wmd|wmd_sr71|wood|wood_board|wpn_1887|wpn_1911_airgun|wpn_357|wpn_38|wpn_50cal|wpn_870mcs|wpn_aa|wpn_ac130_sp|wpn_ads_launcher|wpn_agr_mp|wpn_ak47|wpn_ammocrate|wpn_annihilator|wpn_apc_gren|wpn_apc_turret|wpn_ar_accurate|wpn_ar_an94|wpn_ar_cqb|wpn_ar_damage|wpn_ar_fastburst|wpn_ar_fastburst_auto|wpn_ar_long_burst|wpn_ar_m16|wpn_ar_marksman|wpn_ar_reload|wpn_ar_standard|wpn_arak|wpn_as50|wpn_asp|wpn_assault|wpn_assault_reload_npc|wpn_attack_chopper_minigun_mp|wpn_attch_fire_select|wpn_attch_gl|wpn_attch_laser|wpn_aug|wpn_aug_wmd|wpn_auto_pistol|wpn_auto_turret|wpn_auto_turret_cp|wpn_auto_turret_mp|wpn_avenger_sp|wpn_bal_knife|wpn_ball|wpn_ballista|wpn_barrettm82|wpn_beretta93r|wpn_betty|wpn_bigdog_sp|wpn_blackcell|wpn_bow_launcher|wpn_bowie|wpn_brm|wpn_browninghp|wpn_btr|wpn_btr_turret|wpn_c4|wpn_c96|wpn_c96_pap|wpn_chaser|wpn_china_lake|wpn_chop_gunner|wpn_cic_turret|wpn_claymore|wpn_cmn_sniper|wpn_colt45|wpn_commando|wpn_concussion_grenade|wpn_cougar_turret|wpn_cqb_reload|wpn_cqw|wpn_creek_shotgun|wpn_crossbow|wpn_cz75|wpn_dart|wpn_dead|wpn_deathmachine|wpn_deserttac|wpn_dgs|wpn_dragunov|wpn_drakon|wpn_dshk|wpn_dsr50|wpn_dual_hmg|wpn_emp|wpn_emp_grenade|wpn_emp_launcher|wpn_emp_sp|wpn_energypistol|wpn_energysg|wpn_enfield|wpn_evoskorpion|wpn_ex41|wpn_f35_sp|wpn_famas|wpn_firescout|wpn_fiveseven|wpn_flame_thrower|wpn_flamethrower|wpn_flare|wpn_flash_grenade|wpn_flyable_hind_rockets|wpn_fnfal|wpn_fnp45|wpn_forearm|wpn_freeze|wpn_g11|wpn_galil|wpn_gaz_quad|wpn_gaz_single|wpn_gel_gun|wpn_gersh_device|wpn_gl_rifle|wpn_gm6lynx|wpn_gravity_spikes|wpn_gren_reload|wpn_grenade|wpn_grenade_launch|wpn_hamr|wpn_hamrproto1|wpn_hamrproto2|wpn_hatchet|wpn_heli|wpn_heli_minigun_sp|wpn_hind_minigun|wpn_hind_pilot|wpn_hind_pilot_sp|wpn_hive|wpn_hk21|wpn_hk416|wpn_hk416proto1|wpn_hk416proto2|wpn_hk416proto3|wpn_hs10|wpn_huey_chaff|wpn_huey_minigun|wpn_huey_pilot_sp|wpn_huey_rockets|wpn_humangun|wpn_incendiary_grenade|wpn_insas|wpn_ithaca|wpn_jetgun|wpn_judge|wpn_juiced_shotgun|wpn_kard|wpn_kiparis|wpn_knife|wpn_knife_com|wpn_knife_mp|wpn_knife_sp|wpn_knife_tac|wpn_ks23|wpn_ksg|wpn_l96a1|wpn_lightning_gun|wpn_littlebird_minigun_mp|wpn_lmg|wpn_lmg_cqb|wpn_lmg_heavy|wpn_lmg_light|wpn_lmg_qcb|wpn_lmg_reload|wpn_lmg_reload_npc|wpn_lmg_slowfire|wpn_locus|wpn_loot3|wpn_loot4|wpn_loot5|wpn_loot6|wpn_loot7|wpn_lsat|wpn_m14|wpn_m16|wpn_m202|wpn_m208|wpn_m208_pap|wpn_m32|wpn_m32_titus|wpn_m4|wpn_m60|wpn_m60_turret|wpn_m79|wpn_mac11|wpn_machete|wpn_makarov|wpn_marksman|wpn_mcas|wpn_mg08|wpn_metalstorm|wpn_metalstormsnp|wpn_mg|wpn_mg42|wpn_mgl|wpn_micromissile|wpn_microwavegun|wpn_mini_turret|wpn_minigun|wpn_mk48|wpn_molotov|wpn_monkey|wpn_monkey_upgraded|wpn_mosin|wpn_mp_auto_turret|wpn_mp40|wpn_mp44|wpn_mp5k|wpn_mp7|wpn_mp7proto1|wpn_mpl|wpn_mr6|wpn_mrad|wpn_nailgun|wpn_nose_cannon|wpn_ns2000|wpn_olympia|wpn_overheat|wpn_p38|wpn_paintball|wpn_pbr_driver_gun|wpn_pbr_front_gunner|wpn_pbr_turret|wpn_pdw57|wpn_peacemaker|wpn_pegasus_sp|wpn_pgrenade|wpn_phalanx_minigun_sp|wpn_pickup|wpn_pickup_tech_54i|wpn_pickup_turret|wpn_pineapple|wpn_pistol|wpn_pistol_burst|wpn_pistol_fullauto|wpn_pistol_m1911|wpn_pistol_reload|wpn_pm63|wpn_pnzr|wpn_ppsh|wpn_pr|wpn_prox_grenade|wpn_psg1|wpn_python|wpn_qbb95|wpn_qcw|wpn_qcw05|wpn_qrdrone|wpn_qrdrone_mp|wpn_quadtank|wpn_raygun|wpn_raygun_mk2|wpn_rch|wpn_reload_pistol_npc|wpn_reload_rifle_npc|wpn_reload_smg_npc|wpn_revolver_reload|wpn_rifle|wpn_rifle_butt|wpn_rifle_grenade|wpn_rifle_reload|wpn_riot_shield|wpn_robot_cannon|wpn_robot_minigun|wpn_rottweil72|wpn_rpd|wpn_rpg|wpn_rpg_reload_npc|wpn_rpk|wpn_rx4storm|wpn_sa58|wpn_sabertooth|wpn_saiga12|wpn_sam_turret|wpn_sam_turret_sp|wpn_saritch|wpn_satchel|wpn_saw|wpn_scar|wpn_scope|wpn_semtex|wpn_sensor_grenade|wpn_sfb|wpn_shieva|wpn_shotgun|wpn_shotgun_full_auto|wpn_shotgun_fullauto|wpn_shotgun_olympia|wpn_shotgun_precision|wpn_shotgun_reload|wpn_shotgun_reload_npc|wpn_shotgun_semi_auto|wpn_shovel|wpn_shrinkray|wpn_siegebot_turret|wpn_sig556|wpn_skorpion|wpn_slingshot|wpn_smaw|wpn_smg|wpn_smg_ak74u|wpn_smg_burst|wpn_smg_capacity|wpn_smg_fastfire|wpn_smg_longrange|wpn_smg_mp40|wpn_smg_msmc|wpn_smg_ppsh|wpn_smg_rechamber|wpn_smg_reload|wpn_smg_standard|wpn_smg_thompson|wpn_smg_versatile|wpn_smoke_grenade|wpn_smoke_grenade_mp|wpn_smoke_grenade_sp|wpn_sniper_charge|wpn_soct|wpn_sp_auto_turret|wpn_spartan|wpn_spas|wpn_spectre|wpn_spiderbot|wpn_spike_launcher|wpn_spyder|wpn_srm1216|wpn_ssf|wpn_sten|wpn_stg44|wpn_stg44_pap|wpn_sticky_grenade|wpn_stinger|wpn_stoner63|wpn_strela|wpn_svu|wpn_sword|wpn_t55|wpn_t72_turret|wpn_tabun|wpn_talon|wpn_tar21|wpn_taser_mine|wpn_taser_mine_sp|wpn_tazer_knux|wpn_tesla|wpn_thompson|wpn_thunder|wpn_tiger_gunner|wpn_tiger_turret|wpn_tokarev|wpn_tow|wpn_type95|wpn_ubersniper|wpn_uw_gunshot|wpn_uzi|wpn_vector|wpn_vulcan|wpn_wa2000|wpn_warlord|wpn_xm25|wpn_xm53|wpn_xm8|wpn_xr2|wpn_zpu|yemen|zm_bus|zmb_ai_keeper|zmb_ai_margwa|zmb_ai_meatball|zmb_ai_parasite|zmb_ai_robothelper|zombie|zombie_drome|zombie_mus_shared|zombie_pentagon|zombie_theater'
+  loadspec_names_t5: '(?i:wpn_gaz_single|wpn_gaz_quad|wpn_aa|wpn_hind_pilot|wpn_hind_pilot_sp|wpn_huey_pilot_sp|wpn_nose_cannon|wpn_chop_gunner|wpn_deathmachine|crate|veh_t55|veh_huey_toda|dtp_plr|dtp_npc|step_land|step_sprint|step_prone|step_run|step_crouch_run|step_walk|step_dirt|step_crouch_walk|char_civ|veh|glass|electronics|rock|wood|electrical|barrel|urn|foodstand|paper_stack|fire_extinguisher|typewriter|cigarette_machine|water_bottle|fish_tank|garbage_bag|surf_fern|jungle_building|char_dog|surf_default|surf_bark|surf_brick|surf_carpet|surf_cloth|surf_concrete|surf_dirt|surf_flesh|surf_foliage|surf_glass|surf_grass|surf_gravel|surf_ice|surf_metal|vespa|surf_mud|surf_paper|surf_plaster|surf_rock|surf_sand|surf_snow|surf_water|surf_wood|surf_asphalt|surf_ceramic|surf_plastic|surf_rubber|surf_cushion|surf_fruit|surf_paintedmetal|char_human|char_woo|char_wea|char_bow|char_hud|surf_stone|char_zombie|swimming_plr|swimming_npc|door_breach|bump_chainlink|bump_bottles|bump_pots|bump_shelf|bump_cabinet|bump_desk|bump_stretcher|bump_steelfence|bump_cupboard|bump_barrel|bump_metal_soft|bump_car|bump_truck|bump_wood|bump_cloth|bump_cardboard|bump_barrel_lg|bump_barrelcage|bump_tarp|bump_mannequin|bump_fridge|bump_brick|bump_bike|bump_tire|bump_tarpcrate|bump_trashcan|bump_cardboard_sm|bump_potedplant|bump_wirefence|bump_irongate|bump_vend_small|bump_metal_stall|bump_blinds|bump_branch|bump_alum_door|step_stair_metal|step_catwalk|step_truck|step_wood|step_wood_board|step_twig|step_gondola|step_null|step_corr_metal|phys_hard|phys_glass|phys_foliage|phys_soft|phys_metal|phys_wood|phys_water|phy_mp|phys_flesh|prj_small|surf_sandbag|surf_canvas|surf_vase|surf_crate|surf_bottle|surf_plate|surf_teddybear|surf_piano|surf_player|prj_paintball|prj_large|prj_ap|prj_xtreme|surf_pxtremeer|prj_spray_small|prj_spray_large|prj_headshot|prj_bolt|prj_crack|whizby_water|menu|sp_menu|mp_menu|veh_jeep|veh_boat|veh_huey|wpn_heli|veh_hind|veh_hind_pow|veh_big_heli|veh_hip_pow|veh_apc|veh_snowcat|veh_rc_car_bomb|veh_chopper_wash_water|veh_chopper_wash_dirt|wpn_claymore|wpn_grenade|usa|german|soviet|game_CTF|us|ru|ja|ge|game_war|game_dom_us|game_dom_ru|game_dom_ja|game_dom_ge|game_hq_us|game_hq_ru|game_hq_ja|game_hq_ge|game_sab_us|game_sab_ru|game_sab_ja|game_sab_ge|game_sd_us|game_sd_ru|game_sd_ja|game_sd_ge|japanese|game_win|game_loss_us|game_loss_ja|game_loss_ru|game_loss_ge|game_draw_us|game_draw_ja|game_draw_ru|game_draw_ge|veh_heli|wpn_m60e4|wpn_huey_rockets|mp_veh_rc|mp_kls_start|jp|rus|necksnap|knife|creek|flashpoint|quagmire|hue_city|pow|pentagon|wmd|wmd_sr71|front_end|wpn_rpg|art_vignette|wpn_50cal|wpn_btr|wpn_btr_turret|wpn_pbr_turret|wpn_m60_turret|wpn_ak47|wpn_mk|wpn_aug_wmd|wpn_m16|wpn_commando|wpn_galil|wpn_m14|wpn_fnfal|wpn_assault_reload_npc|wpn_knife|wpn_shovel|wpn_famas|wpn_enfield|wpn_aug|wpn_g11|wpn_satchel|wpn_sticky_grenade|wpn_smoke_grenade|wpn_smoke_grenade_sp|wpn_smoke_grenade_mp|wpn_hatchet|wpn_rifle_grenade|wpn_molotov|wpn_c4|wpn_tabun|wpn_flare|wpn_ex41|wpn_m79|wpn_gl_rifle|wpn_attch_gl|wpn_rpk|wpn_stoner63|wpn_hk21|wpn_dshk|wpn_lmg_reload_npc|wpn_mp_auto_turret|wpn_colt45|wpn_cz75|wpn_asp|wpn_makarov|wpn_python|wpn_357|wpn_reload_pistol_npc|wpn_wa2000|wpn_dragunov|wpn_l96a1|wpn_psg1|wpn_reload_rifle_npc|wpn_hs10|wpn_rottweil72|wpn_spas|wpn_ithaca|wpn_creek_shotgun|wpn_shotgun_reload_npc|wpn_strela|wpn_m202|wpn_flyable_hind_rockets|wpn_skorpion|wpn_mp5|wpn_uzi|wpn_mac11|wpn_ak74u|wpn_kiparis|wpn_mpl|wpn_pm63|wpn_spectre|wpn_reload_smg_npc|wpn_minigun|wpn_flamethrower|wpn_crossbow|wpn_auto_turret|wpn_thunder|wpn_raygun|wpn_tesla|wpn_sabertooth|wpn_paintball|wpn_pbr_front_gunner|wpn_pbr_driver_gun|wpn_hind_minigun|wpn_huey_minigun|wpn_apc|wpn_t55|wpn_china_lake|wpn_rpg_reload_npc|wpn_overheat|zombie_mus_shared|zombie_drome|zombie_pentagon|bump_locker|bump_table_scoot|dds_vc|dds_ru|dds_mason|dds_hudson|dds_woods|dds_bowman|dds_weaver|dds_reznov|dds_brooks|dds_sog|dds_cia|dds_us|dds_mason_plr|dds_hudson_plr|dds_woods_plr|veh_motorcycle|wpn_bal_knife|wpn_semtex|wpn_huey_chaff|cntxt_melee_all|cntxt_melee_garotte|cntxt_melee_knife|cntxt_melee_hatchet|cntxt_melee_necksnap|khe_sanh|river|kowloon|dds_squelch|step_rock_rubble|bump_metal_solid|player_hurt|player_hurt_bad|mortar|wpn_slingshot|veh_truck|veh_truck_door|veh_train|wpn_ppsh|wpn_mp40|wpn_tokarev|wpn_sten|wpn_uw_gunshot|vorkuta|veh_jeep|wpn_thompson|wpn_mosin|wpn_mp44|wpn_saw|wpn_tow|wpn_ks23|wpn_1887|char_sergei|veh_hip|char_juggernaut|wpn_p38|wpn_pnzr|fullahead|char_human_hifall|player_flashbang|spl_wmd_sr71|viet|cant|sog|op4|ops|nva|rus|cub|veh_chinook|dds_rn|dds_cb|dds_ge|dds_br|cuba|rebirth|river|underwater_base|interrogation_escape|step_water_small|electronics_mp|pipe|sparks_mp|reel_to_reel|cuba_mp|russia_mp|other_mp|vietnam_mp|pap|wpn_freeze|int_escape|zombie_theater|dds_dempsey|dds_nikolai|dds_takeo|dds_richtofen|frontend|step_turnstile|wpn_gersh_device|bump_glass|step_tarp|bump_phone_booth|bump_weights|bump_pipe|step_ice_edge)'
+  pan_mode: '(?i:default|music|wpn_all|wpn_fnt|wpn_rear|wpn_left|wpn_right|music_all|fly_foot_all|front|back|front_mostly|back_mostly|all|center|center_mostly|front_and_center|lfe|quad|front_mostly_some_center|front_halfback|halffront_back|test|brass_right|brass_left|veh_back|tst_left|tst_center|tst_right|tst_surround_left|tst_surround_right|tst_lfe|tst_back_left|tst_back_right|pip|movie_vo)'
+  pan_mode_t5: '(?i:default|music|wpn_all|wpn_fnt|wpn_rear|wpn_left|wpn_right|music_all|fly_gear_front_73|fly_gear_rear_73|fly_foot_all|fly_gear_wpn_cnt|front|back|front_mostly|back_mostly|all|center|front_and_center|lfe|quad|front_mostly_some_center|front_halfback|halffront_back|test)'
+  platform_names: 'orbis|durango|pc'
+  randomize_type: '(?i:volume|pitch|variant)'
+  snapshot_groups_t5: 'reference|master|wpn_plr|wpn_heavy_plr|wpn_aslt_plr|wpn_rfl_plr|wpn_smg_plr|wpn_pis_plr|wpn_launcher_plr|wpn_launcher_npc|wpn_npc|wpn_pis_npc|wpn_smg_npc|wpn_rfl_npc|wpn_aslt_npc|wpn_heavy_npc|wpn_dist|wpn_decay|wpn_3p_turret|wpn_sabertooth_special|wpn_sabertooth_special_2|reload|shell|projectile|explosion|rpg_whine|music|ambience|voice|vehicle|vehicle_ground|foley|physics|ui|vehicle_mp|event|veh_interior|effects|zmb_desert_wind|zmb_desert_wind_debris|ambience_ext|ambience_int|mp_announcer|voice_player|vehicle_hind|veh_hind_interior|underwater|special_event|special_event_2|special_event_3|special_event_4|special_event_5|event_gun_duck|huge_explosion|zmb_music_underscore|hazmat_mask|hazmat_mask_npc|hazmat_no_occ|voice_player_hurt|flashbacks|voice_interrogator'
+  template_names: '(?i:UIN_(?:MOD|BUTTON_2D_MOD|ALERT_2D_MOD|IN_GAME_2D_MOD)|CIN_(?:LR_MOD|C_MOD|S_MOD|LFE_MOD|QUAD_MOD|LR_INGAME_MOD|C_INGAME_MOD|S_INGAME_MOD|LFE_INGAME_MOD|QUAD_INGAME_MOD)|AMB_(?:AMBIENCE_3D_MOD|AMBIENCE_AIR_2D_MOD)|EXP_(?:EXPLOSION_3D_MOD|EXPLOSION_LFE_3D_MOD|EXPLOSION_DEBRIS_3D_MOD)|DST_(?:DESTRUCTIBLE_MOD|DESTRUCTIBLE_LFE_MOD)|PHY_(?:IMP_LOUD_MOD|IMP_SOFT_MOD)|EVT_(?:EVENT_3D_MOD|EVENT_LFE_3D_MOD|EVENT_2D_MOD|EVENT_LFE_2D_MOD|EVENT_QUAD_MOD|EVENT_LFE_QUAD_MOD|EVENT_IGC_2D_MOD|EVENT_IGC_LFE_2D_MOD|2HALF_D_MOD|2HALF_D_LFE_MOD)|tst_calibration_loop_MOD|tst_calibration_MOD|s_reference|VOX_PLOT_NPC_3D_LOW_MOD)'
+  template_names_t5: '(?i:UIN_BUTTON_2D|FLY_STEP_CROUCH_WALK_PLR_2D|FLY_STEP_CROUCH_RUN_PLR_2D|FLY_STEP_WALK_PLR_2D|FLY_STEP_RUN_PLR_2D|FLY_STEP_SPRINT_PLR_2D|FLY_STEP_PRONE_PLR_2D|FLY_GEAR_FRONT_PLR_2D|FLY_GEAR_CENTER_PLR_2D|FLY_GEAR_REAR_PLR_2D|FLY_QSTEP_CROUCH_WALK_PLR_2D|FLY_QSTEP_CROUCH_RUN_PLR_2D|FLY_QSTEP_WALK_PLR_2D|FLY_QSTEP_RUN_PLR_2D|FLY_QSTEP_SPRINT_PLR_2D|FLY_QSTEP_PRONE_PLR_2D|FLY_QGEAR_FRONT_PLR_2D|FLY_QGEAR_CENTER_PLR_2D|FLY_QGEAR_REAR_PLR_2D|FLY_CM_PLR_2D|FLY_CM_LOOP_PLR_2D|FLY_STEP_CROUCH_WALK_NPC|FLY_STEP_CROUCH_RUN_NPC|FLY_STEP_WALK_NPC|FLY_STEP_RUN_NPC|FLY_STEP_SPRINT_NPC|FLY_STEP_PRONE_NPC|FLY_GEAR_FRONT_NPC|FLY_GEAR_REAR_NPC|FLY_QSTEP_CROUCH_WALK_NPC|FLY_QSTEP_CROUCH_RUN_NPC|FLY_QSTEP_WALK_NPC|FLY_QSTEP_RUN_NPC|FLY_QSTEP_SPRINT_NPC|FLY_QSTEP_PRONE_NPC|FLY_QGEAR_REAR_NPC|FLY_QGEAR_FRONT_NPC|FLY_CM_NPC|FLY_CM_LOOP_NPC|FLY_BODYFALL|FLY_DOG|CHR_DOG_EVENT|PRJ_BULLET_IMP_SMALL|PRJ_BULLET_IMP_LARGE|PRJ_BULLET_IMP_AP|PRJ_BULLET_IMP_XT|PRJ_BULLETSPRAY_IMP_SMALL|PRJ_BULLETSPRAY_IMP_LARGE|PRJ_BOLT_IMP|PRJ_WHIZBY|PRJ_WHIZBY_UW|PRJ_XTREME_IMP|PRJ_BULLET_IMP_FLUX|PRJ_BULLET_RICO_FLUX|PRJ_BULLETSPRAY_RICO_FLUX|PRJ_XTREME_IMP_FLUX|PRJ_XTREME_RICO|PRJ_BULLET_IMP_DEBRIS|PRJ_BULLET_IMP_DEBRIS_METAL|PRJ_BULLETSPRAY_IMP_DEBRIS|PRJ_BULLETSPRAY_IMP_DEBRIS_METAL|EVT_EXPLO_LARGE_DIST|EVT_EXPLO_SMALL_DIST|EVT_ALWAYS_HEARD|EVT_2D|EVT_3D|MID|VOX_LOCAL_PLR_2D|VOX_LOCAL_PLR_2D_HURT|VOX_LOCAL_PLR_2D_NO_VERB|VOX_PLOT_DIALOG|VOX_PLOT_DIALOG_DUCK_OCC|VOX_PLOT_DIALOG_NO_OCCLUDE|VOX_PLOT_DIALOG_DISTANT|VOX_PLOT_DIALOG_NO_VERB|VOX_PLOT_DIALOG_WHISPER_PFUTZ|VOX_PLOT_DIALOG_PFUTZ|VOX_PLOT_DIALOG_LOUD|VOX_PLOT_DIALOG_RADIO|VOX_PLOT_DIALOG_PLR_2D|VOX_PLOT_DIALOG_PLR_WHISPER_2D|VOX_PLOT_DIALOG_INTERROGATION_IG|VOX_PLOT_DIALOG_INTERROGATION_FE|VOX_DDS|VOX_DDS_1|VOX_DDS_2|VOX_DDS_PLR|VOX_DDS_ENEMY|VOX_DDS_CIV|VOX_DDS_MPL|VOX_MELEE_GRUNT|VOX_MELEE_GRUNT_PLR|VOX_INCIDENTAL|VOX_INCIDENTAL_WMD|VOX_PAIN_NPC|VOX_DEATH_NPC|VOX_PAIN_FRIENDLY|VOX_MP_DIALOG_ANN_2D|VOX_FUTZ_ANNOUNCER_2D|VOX_FUTZ|VOX_AMBIENT|VOX_AMBIENT2|VOX_AMBIENT_LOUD|VOX_TAPE_PLAYER|VOX_PA|VOX_PA_LOUD|VOX_ENEMY_RADIO|VOX_PA_SPECIAL|VOX_VOLUME_ZERO|PHY_IMP_LOUD|PHY_IMP_SOFT|WPN_PIST_SHOT_PLR|WPN_PIST_ACT_PLR|WPN_PIST_RING_PLR|WPN_PIST_SHOT_SIL_PLR|WPN_PIST_ACT_SIL_PLR|WPN_PIST_PLR_FLUX_L|WPN_PIST_PLR_FLUX_R|WPN_PIST_SHOT_NPC|WPN_PIST_ACT_NPC|WPN_PIST_SHOT_SIL_NPC|WPN_PIST_ACT_SIL_NPC|WPN_PIST_DIST_NPC|WPN_PIST_NPC_FLUX_L|WPN_PIST_NPC_FLUX_R|WPN_SMG_SHOT_PLR|WPN_SMG_ACT_PLR|WPN_SMG_RING_PLR|WPN_SMG_SHOT_SIL_PLR|WPN_SMG_ACT_SIL_PLR|WPN_SMG_PLR_FLUX_L|WPN_SMG_PLR_FLUX_R|WPN_SMG_SHOT_NPC|WPN_SMG_ACT_NPC|WPN_SMG_SHOT_SIL_NPC|WPN_SMG_ACT_SIL_NPC|WPN_SMG_DIST_NPC|WPN_SMG_NPC_FLUX_L|WPN_SMG_NPC_FLUX_R|WPN_ASLT_SHOT_PLR|WPN_ASLT_ACT_PLR|WPN_ASLT_RING_PLR|WPN_ASLT_SHOT_SIL_PLR|WPN_ASLT_ACT_SIL_PLR|WPN_ASLT_PLR_FLUX_L|WPN_ASLT_PLR_FLUX_R|WPN_ASLT_SHOT_NPC|WPN_ASLT_ACT_NPC|WPN_ASLT_SHOT_SIL_NPC|WPN_ASLT_ACT_SIL_NPC|WPN_ASLT_DIST_NPC|WPN_ASLT_NPC_FLUX_L|WPN_ASLT_NPC_FLUX_R|WPN_RFL_SHOT_PLR|WPN_RFL_ACT_PLR|WPN_RFL_RING_PLR|WPN_RFL_SHOT_SIL_PLR|WPN_RFL_ACT_SIL_PLR|WPN_RFL_PLR_FLUX_L|WPN_RFL_PLR_FLUX_R|WPN_RFL_SHOT_NPC|WPN_RFL_ACT_NPC|WPN_RFL_SHOT_SIL_NPC|WPN_RFL_ACT_SIL_NPC|WPN_RFL_DIST_NPC|WPN_RFL_NPC_FLUX_L|WPN_RFL_NPC_FLUX_R|WPN_SHG_SHOT_PLR|WPN_SHG_ACT_PLR|WPN_SHG_RING_PLR|WPN_DSG_SHOT_PLR|WPN_SHG_NPC_FLUX_L|WPN_SHG_NPC_FLUX_R|WPN_SHG_SHOT_NPC|WPN_SHG_ACT_NPC|WPN_SHG_DIST_NPC|WPN_SHG_PLR_FLUX_L|WPN_SHG_PLR_FLUX_R|WPN_LMG_SHOT_PLR|WPN_LMG_ACT_PLR|WPN_LMG_RING_PLR|WPN_LMG_PLR_FLUX_L|WPN_LMG_PLR_FLUX_R|WPN_LMG_SHOT_NPC|WPN_LMG_ACT_NPC|WPN_LMG_DIST_NPC|WPN_LMG_NPC_FLUX_L|WPN_LMG_NPC_FLUX_R|WPN_SHL_SHOT_PLR|WPN_SHL_ACT_PLR|WPN_SHL_RING_PLR|WPN_SHL_PLR_FLUX_L|WPN_SHL_PLR_FLUX_R|WPN_SHL_DEBRIS|WPN_SHL_SHOT_NPC|WPN_SHL_ACT_NPC|WPN_SHL_DIST_NPC|WPN_SHL_NPC_FLUX_L|WPN_SHL_NPC_FLUX_R|WPN_SHL_EXP|WPN_SHL_EXP_LFE|WPN_SHL_EXP_DIST|WPN_SHL_PROJ|WPN_GRENADE_EXP|WPN_GRENADE_HISS|WPN_GRENADE_MATERIAL|WPN_GRENADE_DIST|WPN_GRENADE_FLUX_L|WPN_GRENADE_FLUX_R|WPN_GRENADE_BOUNCE|WPN_GRENADE_EXP_LFE|WPN_ALL_RELOAD_PLR|WPN_PICKUP_PLR|WPN_SHELL_PLR|WPN_SHELL_OUT_PLR|WPN_SHELL_IN_PLR|WPN_ALL_RELOAD_NPC|WPN_PICKUP_NPC|WPN_SHELL_NPC|WPN_SHELL_OUT_NPC|WPN_SHELL_IN_NPC|WPN_ALL_MELEE_PLR|WPN_ALL_MELEE_NPC|WPN_ROCKET_HIND_FLYABLE|ZMB_VOX_PLR|ZMB_VOX_PENTAGON_PLR|ZMB_VOX_ANN_2D|ZMB_VOX_MONKEY|ZMB_ZOMBIE_AMB|ZMB_ZOMBIE_CLOSE|ZMB_PERKS_JINGLES|WPN_PAP_SHOT_PLR|WPN_PAP_SHOT_NPC|WPN_PAP_FLUX_LEFT|WPN_PAP_FLUX_RIGHT|VEH_MP_CHOPPER|EVT_MP_ARTSTRIKE|VEH_MP_JET|MUS_NORMAL_2D|MUS_NORMAL_LOOP_2D|AMB_VERY_DISTANT|AMB_250|AMB_500|AMB_1000|AMB_1500|AMB_2000|AMB_2500|AMB_3000|AMB_BG_2D|AMB_NEAR|AMB_MID|AMB_FAR|VOX_SWIM_PLR_2D|FLY_SWIM_PLR_2D|FLY_SWIM_NPC|VOX_SWIM_NPC|VEH_MOVE_NPC|VEH_IDLE_NPC)'
+  volume_groups: 'grp_(?:air|alerts|ambience|announcer|bink|destructible|explosion|foley|hdrfx|igc|impacts|lfe|master|menu|mp_game|music|physics|player_foley|player_impacts|reference|scripted_moment|set_piece|vehicle|voice|weapon|weapon_3p|weapon_decay|whizby|wpn_lfe)'
+
+contexts:
+  # Automatically included for each column context so early newlines correctly pop.
+  prototype:
+    - match: $\n
+      pop: true
+    - include: comments
+
+  main:
+    - meta_include_prototype: false
+    # immediately push into header context which handles the first row of the table
+    - match: ''
+      push: header
+
+  header:
+    - meta_content_scope: meta.header.codt7.sound.common
+    - meta_include_prototype: false
+    # Rest of file is handled in body context
+    - match: $\n
+      set: body
+    - match: \w+
+      scope: variable.parameter.codt7.sound.common
+    - match: ','
+      scope: punctuation.separator.codt7.sound.common
+
+  body:
+    - meta_include_prototype: false
+    - include: comments
+    # Go through the file line by line
+    - match: (?=\S)
+      # every sound syntax should override 'name' to plug in its particular column order
+      push: name
+
+  # dummy context - should be implemented by inheriting syntaxes
+  name:
+    - match: ''
+
+##[ COMMON CONTEXTS ]#######################################################
+
+  # to be included by the last context for a row, when only a newline or EOF is expected
+  eol-unexpected-characters:
+    - match: (?=,)
+      set: unexpected-character
+
+  unexpected-character:
+    - match: '.'
+      scope: invalid.illegal.unexpected-character.codt7.sound.common
+
+  numbers:
+    - match: '-'
+      scope: punctuation.operator.arithmetic.codt7.sound.common
+    - match: '\b(\d+)((\.)\d*)?'
+      scope: meta.number.decimal.codt7.sound.common
+      captures:
+        1: constant.numeric.value.codt7.sound.common
+        2: constant.numeric.value.codt7.sound.common
+        3: punctuation.separator.decimal.codt7.sound.common
+
+  comments:
+    - match: \#+
+      scope: punctuation.definition.comment.codt7.sound.common
+      push: comments-body
+
+  comments-body:
+    - meta_scope: comment.line.number-sign.codt7.sound.common
+    # NOTE: The reason for consuming the newline character is as follows.
+    # When triggering a snippet, its scope is tested to the *right* of the
+    # cursor. So, if you don't want your snippet to trigger in a comment,
+    # you have to use something like <scope>source.shell - comment</scope>.
+    # If the newline character is not scoped as a comment too, then that
+    # scope will never work, because the scope to the right of the cursor
+    # will never be a comment scope. That is, unless we consume the newline
+    # character (or we are editing something in the middle of an existing
+    # comment).
+    - match: \n
+      pop: 1
+
+##[ KEYWORDS ]##############################################################
+
+  buses:
+    - match: '\b({{buses}})\b'
+      scope: support.constant.codt7.sound.common
+
+  buses_t5:
+    - match: '\b({{buses_t5}})\b'
+      scope: support.constant.codt7.sound.common
+
+  flux_type:
+    - match: '\b({{flux_type}})\b'
+      scope: support.constant.codt7.sound.alias
+
+  limit_type:
+    - match: '\b({{limit_type}})\b'
+      scope: support.constant.codt7.sound.common
+
+  looping_type:
+    - match: \b(?i:(?:non)?looping)\b
+      scope: constant.language.codt7.sound.common
+
+  pan_type:
+    - match: \b(?i:2d|3d|2\.5)\b
+      scope: support.constant.codt7.sound.common
+
+  randomize_type:
+    - match: '\b({{randomize_type}})\b'
+      scope: support.constant.codt7.sound.common
+
+  storage_type:
+    - match: \b(?i:loaded|streamed)\b
+      scope: constant.language.codt7.sound.common
+
+  yesno:
+    - match: '\b(?i:yes|no)\b'
+      scope: constant.language.codt7.sound.common
+
+##[ IDENTIFIERS ]###########################################################
+
+  # Listed alphabetically
+  # Always delimit words with a dash or underscore to avoid naming conflicts
+  # with child contexts which never delimit words in context names,
+  # for example, Sound Aliases file's 'contexttype' vs this file's 'context_type'
+
+  context_type:
+    - match: '\b({{context_type}})\b'
+      scope: variable.language.codt7.sound.common
+
+  context_type_t5:
+    - match: '\b({{context_type_t5}})\b'
+      scope: variable.language.codt7.sound.common
+
+  context_value:
+    - match: '\b({{context_value}})\b'
+      scope: variable.language.codt7.sound.common
+
+  context_value_t5:
+    - match: '\b({{context_value_t5}})\b'
+      scope: variable.language.codt7.sound.common
+
+  curve_type:
+    - match: '\b({{curve_type}})\b'
+      scope: variable.language.codt7.sound.common
+
+  curve_type_t5:
+    - match: '\b({{curve_type_t5}})\b'
+      scope: variable.language.codt7.sound.common
+
+  duck_groups:
+    - match: '\b({{duck_groups}})\b'
+      scope: variable.language.sound.alias
+
+  futz_names:
+    - match: '\b({{futz_names}})\b'
+      scope: variable.language.codt7.sound.common
+
+  group_names_t5:
+    - match: '\b({{group_names_t5}})\b'
+      scope: variable.language.codt7.sound.common
+
+  language_names:
+    - match: '\b({{language_names}})\b'
+      scope: variable.language.codt7.sound.common
+
+  loadspec_names:
+    - match: '\b({{loadspec_names}})\b'
+      scope: variable.language.codt7.sound.common
+
+  loadspec_names_t5:
+    - match: '\b({{loadspec_names_t5}})\b'
+      scope: variable.language.codt7.sound.common
+
+  pan_mode:
+    - match: '\b({{pan_mode}})\b'
+      scope: support.constant.codt7.sound.common
+
+  pan_mode_t5:
+    - match: '\b({{pan_mode_t5}})\b'
+      scope: support.constant.codt7.sound.common
+
+  platform_names:
+    - match: '\b({{platform_names}})\b'
+      scope: variable.language.codt7.sound.common
+
+  snapshot_groups_t5:
+    - match: '\b({{snapshot_groups_t5}})\b'
+      scope: variable.language.codt7.sound.common
+
+  template_names:
+    - match: '\b({{template_names}})\b'
+      scope: support.constant.codt7.sound.common
+
+  template_names_t5:
+    - match: '\b({{template_names_t5}})\b'
+      scope: support.constant.codt7.sound.common
+
+  volume_groups:
+    - match: '\b({{volume_groups}})\b'
+      scope: variable.language.codt7.sound.common

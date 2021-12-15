@@ -1,0 +1,535 @@
+%YAML 1.2
+---
+# http://www.sublimetext.com/docs/3/syntax.html
+
+# This file is part of the T7-Sublime project.
+# T7-Sublime is an enhanced syntax-highlighting package for (almost) all Call of Duty Black Ops III developer file formats.
+# Sound Alias files are comma-separated tables which list audio objects. An audio object in Call of Duty is essentially the
+# set of data that completely describes a sound within the game including the path to a physical WAV file (Filespec) as well
+# as numerous fields of metadata which control playback parameters of the sound at runtime.
+
+name: T5 Sound Aliases
+first_line_match: (?i:name,file,template,loadspec,secondary,group,)
+scope: text.codt7.sound.t5alias
+version: 2
+extends: Packages/CoDT7 Formats/SoundCommon.sublime-syntax
+
+contexts:
+
+########[ PARAMETER CONTEXTS ]####################################################
+
+  name:
+    - meta_content_scope: meta.name.codt7.sound.t5alias
+    - match: \w+
+      scope: entity.name.alias.codt7.sound.t5alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: file
+
+  file:
+    - meta_content_scope: meta.file.codt7.sound.t5alias string.unquoted.codt7.sound.t5alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: template
+
+  template:
+    - meta_content_scope: meta.template.codt7.sound.t5alias
+    - include: template_names_t5
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: loadspec
+
+  loadspec:
+    - meta_content_scope: meta.loadspec.codt7.sound.t5alias
+    - include: loadspec_names_t5
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: secondary
+
+  secondary:
+    - meta_content_scope: meta.secondary.codt7.sound.t5alias
+    - match: \w+
+      scope: entity.name.alias.codt7.sound.t5alias markup.italic
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: group
+
+  group:
+    - meta_content_scope: meta.group.codt7.sound.t5alias
+    - include: group_names_t5
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: volmin
+
+  volmin:
+    - meta_content_scope: meta.vol-min.codt7.sound.t5alias
+    - include: numbers
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: volmax
+
+  volmax:
+    - meta_content_scope: meta.vol-max.codt7.sound.t5alias
+    - include: numbers
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: teamvolmod
+
+  teamvolmod:
+    - meta_content_scope: meta.team-vol-mod.codt7.sound.t5alias
+    - include: numbers
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: distmin
+
+  distmin:
+    - meta_content_scope: meta.dist-min.codt7.sound.t5alias
+    - include: numbers
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: distmax
+
+  distmax:
+    - meta_content_scope: meta.dist-max.codt7.sound.t5alias
+    - include: numbers
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: distreverbmax
+
+  distreverbmax:
+    - meta_content_scope: meta.dist-reverb-max.codt7.sound.t5alias
+    - include: numbers
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: volumefalloffcurve
+
+  volumefalloffcurve:
+    - meta_content_scope: meta.volume-falloff-curve.codt7.sound.t5alias
+    - include: curve_type_t5
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: reverbfalloffcurve
+
+  reverbfalloffcurve:
+    - meta_content_scope: meta.reverb-falloff-curve.codt7.sound.t5alias
+    - include: curve_type_t5
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: volumeminfalloffcurve
+
+  volumeminfalloffcurve:
+    - meta_content_scope: meta.volume-min-falloff-curve.codt7.sound.t5alias
+    - include: curve_type_t5
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: reverbminfalloffcurve
+
+  reverbminfalloffcurve:
+    - meta_content_scope: meta.reverb-min-falloff-curve.codt7.sound.t5alias
+    - include: curve_type_t5
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: limitcount
+
+  limitcount:
+    - meta_content_scope: meta.limit-count.codt7.sound.t5alias
+    - include: numbers
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: limittype
+
+  limittype:
+    - meta_content_scope: meta.limit-type.codt7.sound.t5alias
+    - include: limit_type
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: entitylimitcount
+
+  entitylimitcount:
+    - meta_content_scope: meta.entity-limit-count.codt7.sound.t5alias
+    - include: numbers
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: entitylimittype
+
+  entitylimittype:
+    - meta_content_scope: meta.entity-limit-type.codt7.sound.t5alias
+    - include: limit_type
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: pitchmin
+
+  pitchmin:
+    - meta_content_scope: meta.pitch-min.codt7.sound.t5alias
+    - include: numbers
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: pitchmax
+
+  pitchmax:
+    - meta_content_scope: meta.pitch-max.codt7.sound.t5alias
+    - include: numbers
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: teampitchmod
+
+  teampitchmod:
+    - meta_content_scope: meta.team-pitch-mod.codt7.sound.t5alias
+    - include: numbers
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: minpriority
+
+  minpriority:
+    - meta_content_scope: meta.min-priority.codt7.sound.t5alias
+    - include: numbers
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: maxpriority
+
+  maxpriority:
+    - meta_content_scope: meta.max-priority.codt7.sound.t5alias
+    - include: numbers
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: minprioritythreshold
+
+  minprioritythreshold:
+    - meta_content_scope: meta.min-priority-threshold.codt7.sound.t5alias
+    - include: numbers
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: maxprioritythreshold
+
+  maxprioritythreshold:
+    - meta_content_scope: meta.max-priority-threshold.codt7.sound.t5alias
+    - include: numbers
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: spatialized
+
+  spatialized:
+    - meta_content_scope: meta.spatialized.codt7.sound.t5alias
+    - include: pan_type
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: type
+
+  type:
+    - meta_content_scope: meta.type.codt7.sound.t5alias
+    - include: storage_type
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: loop
+
+  loop:
+    - meta_content_scope: meta.loop.codt7.sound.t5alias
+    - include: looping_type
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: randomizetype
+
+  randomizetype:
+    - meta_content_scope: meta.randomize-type.codt7.sound.t5alias
+    - include: randomize_type
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: probability
+
+  probability:
+    - meta_content_scope: meta.probability.codt7.sound.t5alias
+    - include: numbers
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: startdelay
+
+  startdelay:
+    - meta_content_scope: meta.start-delay.codt7.sound.t5alias
+    - include: numbers
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: reverbsend
+
+  reverbsend:
+    - meta_content_scope: meta.reverb-send.codt7.sound.t5alias
+    - include: numbers
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: duck
+
+  duck:
+    - meta_content_scope: meta.duck.codt7.sound.t5alias
+    - match: \w+
+      scope: entity.name.duck.codt7.sound.alias markup.italic
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: pan
+
+  pan:
+    - meta_content_scope: meta.pan.codt7.sound.t5alias
+    - include: pan_mode_t5
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: centersend
+
+  centersend:
+    - meta_content_scope: meta.center-send.codt7.sound.t5alias
+    - include: numbers
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: envelopmin
+
+  envelopmin:
+    - meta_content_scope: meta.envelop-min.codt7.sound.t5alias
+    - include: numbers
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: envelopmax
+
+  envelopmax:
+    - meta_content_scope: meta.envelop-max.codt7.sound.t5alias
+    - include: numbers
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: enveloppercentage
+
+  enveloppercentage:
+    - meta_content_scope: meta.envelop-percentage.codt7.sound.t5alias
+    - include: numbers
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: occlusionlevel
+
+  occlusionlevel:
+    - meta_content_scope: meta.occlusion-level.codt7.sound.t5alias
+    - include: numbers
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: occlusionwetdry
+
+  occlusionwetdry:
+    - meta_content_scope: meta.occlusion-wet-dry.codt7.sound.t5alias
+    - include: numbers
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: isbig
+
+  isbig:
+    - meta_content_scope: meta.is-big.codt7.sound.t5alias
+    - include: yesno
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: distancelpf
+
+  distancelpf:
+    - meta_content_scope: meta.distance-lpf.codt7.sound.t5alias
+    - include: yesno
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: movetype
+
+  movetype:
+    - meta_content_scope: meta.move-type.codt7.sound.t5alias
+    - include: flux_type
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: movetime
+
+  movetime:
+    - meta_content_scope: meta.move-time.codt7.sound.t5alias
+    - include: numbers
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: realdelay
+
+  realdelay:
+    - meta_content_scope: meta.real-delay.codt7.sound.t5alias
+    - include: yesno
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: subtitle
+
+  subtitle:
+    - meta_content_scope: meta.subtitle.codt7.sound.t5alias
+    - match: \w+
+      scope: entity.name.subtitle.codt7.sound.t5alias markup.italic
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: mature
+
+  mature:
+    - meta_content_scope: meta.mature.codt7.sound.t5alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: doppler
+
+  doppler:
+    - meta_content_scope: meta.doppler.codt7.sound.t5alias
+    - include: yesno
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: futz
+
+  futz:
+    - meta_content_scope: meta.futz.codt7.sound.t5alias
+    - include: yesno
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: contexttype
+
+  contexttype:
+    - meta_content_scope: meta.context-type.codt7.sound.t5alias
+    - include: context_type_t5
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: contextvalue
+
+  contextvalue:
+    - meta_content_scope: meta.context-value.codt7.sound.t5alias
+    - include: context_value_t5
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: compression
+
+  compression:
+    - meta_content_scope: meta.compression.codt7.sound.t5alias
+    - include: numbers
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: timescale
+
+  timescale:
+    - meta_content_scope: meta.timescale.codt7.sound.t5alias
+    - include: yesno
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: music
+
+  music:
+    - meta_content_scope: meta.music.codt7.sound.t5alias
+    - include: yesno
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: fadein
+
+  fadein:
+    - meta_content_scope: meta.fade-in.codt7.sound.t5alias
+    - include: numbers
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: fadeout
+
+  fadeout:
+    - meta_content_scope: meta.fade-out.codt7.sound.t5alias
+    - include: numbers
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: pcformat
+
+  pcformat:
+    - meta_content_scope: meta.pc-format.codt7.sound.t5alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: pause
+
+  pause:
+    - meta_content_scope: meta.pause.codt7.sound.t5alias
+    - include: yesno
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: stopondeath
+
+  stopondeath:
+    - meta_content_scope: meta.stop-on-death.codt7.sound.t5alias
+    - include: yesno
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: bus
+
+  bus:
+    - meta_content_scope: meta.bus.codt7.sound.t5alias
+    - include: buses_t5
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: snapshot
+
+  snapshot:
+    - meta_content_scope: meta.snapshot.codt7.sound.t5alias
+    - include: snapshot_groups_t5
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: voicelimit
+
+  voicelimit:
+    - meta_content_scope: meta.voice-limit.codt7.sound.t5alias
+    - include: yesno
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: filexenon
+
+  filexenon:
+    - meta_content_scope: meta.file-xenon.codt7.sound.t5alias string.unquoted.codt7.sound.t5alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: filesizexenon
+
+  filesizexenon:
+    - meta_content_scope: meta.file-size-xenon.codt7.sound.t5alias
+    - include: numbers
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: fileps3
+
+  fileps3:
+    - meta_content_scope: meta.file-ps-3.codt7.sound.t5alias string.unquoted.codt7.sound.t5alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: filesizeps3
+
+  filesizeps3:
+    - meta_content_scope: meta.file-size-ps-3.codt7.sound.t5alias
+    - include: numbers
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: filepc
+
+  filepc:
+    - meta_content_scope: meta.file-pc.codt7.sound.t5alias string.unquoted.codt7.sound.t5alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: filesizepc
+
+  filesizepc:
+    - meta_content_scope: meta.file-size-pc.codt7.sound.t5alias
+    - include: numbers
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set:
+        - match: (?=discdata)
+          set: filewii
+        - match: ''
+          set: sourcecsv
+
+  filewii:
+    - meta_content_scope: meta.file-wii.codt7.sound.t5alias string.unquoted.codt7.sound.t5alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: filesizewii
+
+  filesizewii:
+    - meta_content_scope: meta.file-size-wii.codt7.sound.t5alias
+    - include: numbers
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: sourcecsv
+
+  sourcecsv:
+    - meta_content_scope: meta.source-csv.codt7.sound.t5alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.t5alias
+      set: language
+
+  language:
+    - meta_content_scope: meta.language.codt7.sound.t5alias
+    - include: language_names
+    - include: eol-unexpected-characters

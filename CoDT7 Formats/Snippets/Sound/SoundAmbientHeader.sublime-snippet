@@ -1,0 +1,8 @@
+<snippet>
+  <description>Sound Ambient Header</description>
+  <content><![CDATA[Name,Loadspec,DefaultRoom,Reverb,ReverbDryLevel,ReverbWetLevel,EntityContextType0,EntityContextValue0,EntityContextType1,EntityContextValue1,EntityContextType2,EntityContextValue2,GlobalContextType,GlobalContextValue,Loop,Duck
+
+]]></content>
+  <tabTrigger>Name</tabTrigger>
+  <scope><![CDATA[text.codt7.sound.ambient & meta.header]]></scope>
+</snippet>

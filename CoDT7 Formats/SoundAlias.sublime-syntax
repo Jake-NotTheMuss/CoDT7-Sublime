@@ -1,0 +1,731 @@
+%YAML 1.2
+---
+# http://www.sublimetext.com/docs/3/syntax.html
+
+# This file is part of the T7-Sublime project.
+# T7-Sublime is an enhanced syntax-highlighting package for (almost) all Call of Duty Black Ops III developer file formats.
+# Sound Alias files are comma-separated tables which list audio objects. An audio object in Call of Duty is essentially the
+# set of data that completely describes a sound within the game including the path to a physical WAV file (Filespec) as well
+# as numerous fields of metadata which control playback parameters of the sound at runtime.
+
+name: Sound Aliases
+first_line_match: (?i:name,behavior,storage,filespec,)
+file_extensions:
+  - alias.csv
+scope: text.codt7.sound.alias
+version: 2
+extends: Packages/CoDT7 Formats/SoundCommon.sublime-syntax
+
+contexts:
+
+########[ PARAMETER CONTEXTS ]####################################################
+
+# The below contexts each process a single column. They are listed in the same order 
+# as the columns in the file, starting with 'name'. When a comma is encountered, they
+# transfer control to the next context/column.
+
+# Each column has its own particular words to match. Every context looks for a specific
+# set of words rather than a general pattern. This can make it easier to notice when you
+# are writing a value into the wrong column.
+
+# All meta scope names are used for hover-triggered popups, which display the parameter
+# of the column and the value being hovered over. The parameter name is obtained from
+# the string between 'meta.' and '.sound.alias'. For example, when hovering over
+# the 0th column, the meta scope is 'meta.name.sound.alias', and the popup will display
+# 'Name' as the parameter name. Dashes are used to delimit words in the popup script.
+# When hovering over the file spec, 'meta.file-spec.sound.alias' is the meta scope, and
+# the popuo will display 'File Spec' as the parameter name.
+
+  name:
+    - meta_content_scope: meta.name.codt7.sound.alias
+    - match: \w+
+      scope: entity.name.alias.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: behavior
+
+  behavior:
+    - meta_content_scope: meta.behavior.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: storage
+
+  storage:
+    - meta_content_scope: meta.storage.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: filespec
+    - include: storage_type
+
+  filespec:
+    - meta_content_scope: meta.file-spec.codt7.sound.alias string.unquoted.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: filespecsustain
+
+  filespecsustain:
+    - meta_content_scope: meta.file-spec-sustain.codt7.sound.alias string.unquoted.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: filespecrelease
+
+  filespecrelease:
+    - meta_content_scope: meta.file-spec-release.codt7.sound.alias string.unquoted.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: template
+
+  template:
+    - meta_content_scope: meta.template.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: loadspec
+    - include: template_names
+
+  loadspec:
+    - meta_content_scope: meta.loadspec.codt7.sound.alias
+    - match: \w+
+      scope: variable.language.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: secondary
+
+  secondary:
+    - meta_content_scope: meta.secondary.codt7.sound.alias entity.name.alias.codt7.sound.alias markup.italic
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: sustainalias
+
+  sustainalias:
+    - meta_content_scope: meta.sustain-alias.codt7.sound.alias entity.name.alias.codt7.sound.alias markup.italic
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: releasealias
+
+  releasealias:
+    - meta_content_scope: meta.release-alias.codt7.sound.alias entity.name.alias.codt7.sound.alias markup.italic
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: bus
+
+  bus:
+    - meta_content_scope: meta.bus.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: volumegroup
+    - include: buses
+
+  volumegroup:
+    - meta_content_scope: meta.volume-group.codt7.sound.alias
+    - include: volume_groups
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: duckgroup
+
+  duckgroup:
+    - meta_content_scope: meta.duck-group.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: duck
+    - include: duck_groups
+
+  duck:
+    - meta_content_scope: meta.duck.codt7.sound.alias
+    - match: \w+
+      scope: entity.name.duck.codt7.sound.alias markup.italic
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: reverbsend
+
+  reverbsend:
+    - meta_content_scope: meta.reverb-send.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: centersend
+    - include: numbers
+
+  centersend:
+    - meta_content_scope: meta.center-send.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: volmin
+    - include: numbers
+
+  volmin:
+    - meta_content_scope: meta.vol-min.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: volmax
+    - include: numbers
+
+  volmax:
+    - meta_content_scope: meta.vol-max.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: distmin
+    - include: numbers
+
+  distmin:
+    - meta_content_scope: meta.dist-min.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: distmaxdry
+    - include: numbers
+
+  distmaxdry:
+    - meta_content_scope: meta.dist-max-dry.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: distmaxwet
+    - include: numbers
+
+  distmaxwet:
+    - meta_content_scope: meta.dist-max-wet.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: drymincurve
+    - include: numbers
+
+  drymincurve:
+    - meta_content_scope: meta.dry-min-curve.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: drymaxcurve
+    - include: curve_type
+
+  drymaxcurve:
+    - meta_content_scope: meta.dry-max-curve.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: wetmincurve
+    - include: curve_type
+
+  wetmincurve:
+    - meta_content_scope: meta.wet-min-curve.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: wetmaxcurve
+    - include: curve_type
+
+  wetmaxcurve:
+    - meta_content_scope: meta.wet-max-curve.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: limitcount
+    - include: curve_type
+
+  limitcount:
+    - meta_content_scope: meta.limit-count.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: limittype
+    - include: numbers
+
+  limittype:
+    - meta_content_scope: meta.limit-type.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: entitylimitcount
+    - include: limit_type
+
+  entitylimitcount:
+    - meta_content_scope: meta.entity-limit-count.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: entitylimittype
+    - include: numbers
+
+  entitylimittype:
+    - meta_content_scope: meta.entity-limit-type.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: pitchmin
+    - include: limit_type
+
+  pitchmin:
+    - meta_content_scope: meta.pitch-min.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: pitchmax
+    - include: numbers
+
+  pitchmax:
+    - meta_content_scope: meta.pitch-max.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: prioritymin
+    - include: numbers
+
+  prioritymin:
+    - meta_content_scope: meta.priority-min.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: prioritymax
+    - include: numbers
+
+  prioritymax:
+    - meta_content_scope: meta.priority-max.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: prioritythresholdmin
+    - include: numbers
+
+  prioritythresholdmin:
+    - meta_content_scope: meta.priority-threshold-min.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: prioritythresholdmax
+    - include: numbers
+
+  prioritythresholdmax:
+    - meta_content_scope: meta.priority-threshold-max.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: amplitudepriority
+    - include: numbers
+
+  amplitudepriority:
+    - meta_content_scope: meta.amplitude-priority.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: pantype
+    - include: yesno
+
+  pantype:
+    - meta_content_scope: meta.pan-type.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: pan
+    - include: pan_type
+
+  pan:
+    - meta_content_scope: meta.pan.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: futz
+    - include: pan_mode
+
+  futz:
+    - meta_content_scope: meta.futz.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: looping
+    - include: futz_names
+
+  looping:
+    - meta_content_scope: meta.looping.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: randomizetype
+    - include: looping_type
+
+  randomizetype:
+    - meta_content_scope: meta.randomize-type.codt7.sound.alias
+    - include: randomize_type
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: probability
+
+  probability:
+    - meta_content_scope: meta.probability.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: startdelay
+    - include: numbers
+
+  startdelay:
+    - meta_content_scope: meta.start-delay.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: envelopmin
+    - include: numbers
+
+  envelopmin:
+    - meta_content_scope: meta.envelop-min.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: envelopmax
+    - include: numbers
+
+  envelopmax:
+    - meta_content_scope: meta.envelop-max.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: enveloppercent
+    - include: numbers
+
+  enveloppercent:
+    - meta_content_scope: meta.envelop-percent.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: occlusionlevel
+    - include: numbers
+
+  occlusionlevel:
+    - meta_content_scope: meta.occlusion-level.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: isbig
+    - include: numbers
+
+  isbig:
+    - meta_content_scope: meta.is-big.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: distancelpf
+    - include: yesno
+
+  distancelpf:
+    - meta_content_scope: meta.distance-LPF.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: fluxtype
+    - include: yesno
+
+  fluxtype:
+    - meta_content_scope: meta.flux-type.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: fluxtime
+    - include: flux_type
+
+  fluxtime:
+    - meta_content_scope: meta.flux-time.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: subtitle
+    - include: numbers
+
+  subtitle:
+    - meta_content_scope: meta.subtitle.codt7.sound.alias entity.name.subtitle.codt7.sound.alias markup.italic
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: doppler
+
+  doppler:
+    - meta_content_scope: meta.doppler.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: contexttype
+    - include: yesno
+
+  contexttype:
+    - meta_content_scope: meta.context-type.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: contextvalue
+    - include: context_type
+
+  contextvalue:
+    - meta_content_scope: meta.context-value.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: contexttype1
+    - include: context_value
+
+  contexttype1:
+    - meta_content_scope: meta.context-type-1.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: contextvalue1
+    - include: context_type
+
+  contextvalue1:
+    - meta_content_scope: meta.context-value-1.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: contexttype2
+    - include: context_value
+
+  contexttype2:
+    - meta_content_scope: meta.context-type-2.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: contextvalue2
+    - include: context_type
+
+  contextvalue2:
+    - meta_content_scope: meta.context-value-2.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: contexttype3
+    - include: context_value
+
+  contexttype3:
+    - meta_content_scope: meta.context-type-3.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: contextvalue3
+    - include: context_type
+
+  contextvalue3:
+    - meta_content_scope: meta.context-value-3.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: timescale
+    - include: context_value
+
+  timescale:
+    - meta_content_scope: meta.time-scale.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: ismusic
+    - include: yesno
+
+  ismusic:
+    - meta_content_scope: meta.is-music.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: iscinematic
+    - include: yesno
+
+  iscinematic:
+    - meta_content_scope: meta.is-cinematic.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: fadein
+    - include: yesno
+
+  fadein:
+    - meta_content_scope: meta.fade-in.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: fadeout
+    - include: numbers
+
+  fadeout:
+    - meta_content_scope: meta.fade-out.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: pausable
+    - include: numbers
+
+  pausable:
+    - meta_content_scope: meta.pausable.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: stoponentdeath
+    - include: yesno
+
+  stoponentdeath:
+    - meta_content_scope: meta.stop-on-ent-death.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: compression
+    - include: yesno
+
+  compression:
+    - meta_content_scope: meta.compression.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: stoponplay
+    - include: numbers
+
+  stoponplay:
+    - meta_content_scope: meta.stop-on-play.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: dopplerscale
+
+  dopplerscale:
+    - meta_content_scope: meta.doppler-scale.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: futzpatch
+    - include: numbers
+
+  futzpatch:
+    - meta_content_scope: meta.futz-patch.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: voicelimit
+    - include: futz_names
+
+  voicelimit:
+    - meta_content_scope: meta.voice-limit.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: ignoremaxdist
+    - include: yesno
+
+  ignoremaxdist:
+    - meta_content_scope: meta.ignore-max-dist.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: neverplaytwice
+    - include: yesno
+
+  neverplaytwice:
+    - meta_content_scope: meta.never-play-twice.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: continuouspan
+    - include: yesno
+
+  continuouspan:
+    - meta_content_scope: meta.continuous-pan.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: filesource
+    - include: yesno
+
+  filesource:
+    - meta_content_scope: meta.file-source.codt7.sound.alias string.unquoted.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: filesourcesustain
+
+  filesourcesustain:
+    - meta_content_scope: meta.file-source-sustain.codt7.sound.alias string.unquoted.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: filesourcerelease
+
+  filesourcerelease:
+    - meta_content_scope: meta.file-source-release.codt7.sound.alias string.unquoted.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: filetarget
+
+  filetarget:
+    - meta_content_scope: meta.file-target.codt7.sound.alias string.unquoted.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: filetargetsustain
+
+  filetargetsustain:
+    - meta_content_scope: meta.file-target-sustain.codt7.sound.alias string.unquoted.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: filetargetrelease
+
+  filetargetrelease:
+    - meta_content_scope: meta.file-target-release.codt7.sound.alias string.unquoted.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: platform
+
+  platform:
+    - meta_content_scope: meta.platform.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: language
+    - include: platform_names
+
+  language:
+    - meta_content_scope: meta.language.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: outputdevices
+    - include: language_names
+
+  outputdevices:
+    - meta_content_scope: meta.output-devices.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: platformmask
+
+  platformmask:
+    - meta_content_scope: meta.platform-mask.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: wiiumono
+
+  wiiumono:
+    - meta_content_scope: meta.wii-u-mono.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: stopalias
+    - include: yesno
+
+  stopalias:
+    - meta_content_scope: meta.stop-alias.codt7.sound.alias entity.name.alias.codt7.sound.alias markup.italic
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: distancelpfmin
+
+  distancelpfmin:
+    - meta_content_scope: meta.distance-LPF-min.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: distancelpfmax
+    - include: numbers
+
+  distancelpfmax:
+    - meta_content_scope: meta.distance-LPF-max.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: facialanimationname
+    - include: numbers
+
+  facialanimationname:
+    - meta_content_scope: meta.facial-animation-name.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: restartcontextloops
+
+  restartcontextloops:
+    - meta_content_scope: meta.restart-context-loops.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: silentincpz
+    - include: yesno
+
+  silentincpz:
+    - meta_content_scope: meta.silent-in-CPZ.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: contextfailsafe
+    - include: yesno
+
+  contextfailsafe:
+    - meta_content_scope: meta.context-failsafe.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: gpad
+    - include: yesno
+
+  gpad:
+    - meta_content_scope: meta.GPAD.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: gpadonly
+    - include: yesno
+
+  gpadonly:
+    - meta_content_scope: meta.GPAD-only.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: mutevoice
+    - include: yesno
+
+  mutevoice:
+    - meta_content_scope: meta.mute-voice.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: mutemusic
+    - include: yesno
+
+  mutemusic:
+    - meta_content_scope: meta.mute-music.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: rowsourcefilename
+    - include: yesno
+
+  rowsourcefilename:
+    - meta_content_scope: meta.row-source-file-name.codt7.sound.alias string.unquoted.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: rowsourceshortname
+
+  rowsourceshortname:
+    - meta_content_scope: meta.row-source-short-name.codt7.sound.alias
+    - match: ','
+      scope: punctuation.separator.codt7.sound.alias
+      set: rowsourcelinenumber
+
+  rowsourcelinenumber:
+    - meta_content_scope: meta.row-source-line-number.codt7.sound.alias
+    - include: numbers
+    - include: eol-unexpected-characters
