@@ -905,6 +905,8 @@ contexts:
       scope: punctuation.separator.codt7.gsc
     - match: '\)|\}'
       scope: invalid.illegal.stray-bracket-end.codt7.gsc
+    - match: '#/'
+      scope: invalid.illegal.stray-devblock-end.codt7.gsc
 
   late-expressions:
     - include: modifiers
