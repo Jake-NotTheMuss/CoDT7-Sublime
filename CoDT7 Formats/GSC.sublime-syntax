@@ -648,38 +648,51 @@ contexts:
         1: keyword.control.import.using.codt7.gsc
       push:
         - meta_scope: meta.compiler.using.codt7.gsc
+        - include: preprocessor-line-continuation
         - include: preprocessor-line-ending
+        - include: preprocessor-comments
         - match: ';'
           scope: punctuation.terminator.codt7.gsc
+          pop: true
     - match: ^\s*(#\s*include)\b
       captures:
         1: keyword.control.import.include.codt7.gsc
       push:
         - meta_scope: meta.compiler.include.codt7.gsc
+        - include: preprocessor-line-continuation
         - include: preprocessor-line-ending
+        - include: preprocessor-comments
         - match: ';'
           scope: punctuation.terminator.codt7.gsc
+          pop: true
     - match: ^\s*(#\s*namespace)\b
       captures:
         1: keyword.control.import.namespace.codt7.gsc
       push:
         - meta_scope: meta.compiler.namespace.codt7.gsc
+        - include: preprocessor-line-continuation
         - include: preprocessor-line-ending
+        - include: preprocessor-comments
         - match: '{{identifier}}'
           scope: entity.name.namespace.codt7.gsc
         - match: ';'
           scope: punctuation.terminator.codt7.gsc
+          pop: true
     - match: ^\s*(#\s*precache)\b
       captures:
         1: keyword.control.import.precache.codt7.gsc
       push:
         - meta_scope: meta.compiler.precache.codt7.gsc
+        - include: preprocessor-line-continuation
         - include: preprocessor-line-ending
+        - include: preprocessor-comments
         - match: \(
           scope: punctuation.section.group.begin.codt7.gsc
           push:
             - meta_scope: meta.group.codt7.gsc
-            - include: preprocessor-line-ending-lookahead
+            - include: preprocessor-line-continuation
+            - include: preprocessor-line-ending
+            - include: preprocessor-comments
             - match: \)
               scope: punctuation.section.group.end.codt7.gsc
               pop: true
@@ -689,7 +702,6 @@ contexts:
               scope: punctuation.definition.string.begin.codt7.gsc
               push:
                 - meta_scope: string.quoted.double.codt7.gsc
-                - include: preprocessor-line-ending-lookahead
                 - match: '"'
                   scope: punctuation.definition.string.end.codt7.gsc
                   pop: true
@@ -697,31 +709,36 @@ contexts:
               scope: punctuation.separator.codt7.gsc
         - match: ';'
           scope: punctuation.terminator.codt7.gsc
+          pop: true
     - match: ^\s*(#\s*using_animtree)\b
       captures:
         1: keyword.control.import.using_animtree.codt7.gsc
       push:
         - meta_scope: meta.compiler.using_animtree.codt7.gsc
+        - include: preprocessor-line-continuation
         - include: preprocessor-line-ending
+        - include: preprocessor-comments
         - match: \(
           scope: punctuation.section.group.begin.codt7.gsc
           push:
             - meta_scope: meta.group.codt7.gsc
-            - include: preprocessor-line-ending-lookahead
+            - include: preprocessor-line-continuation
+            - include: preprocessor-line-ending
+            - include: preprocessor-comments
+            - match: \)
+              scope: punctuation.section.group.end.codt7.gsc
+              pop: true
             - match: '"'
               scope: punctuation.definition.string.begin.codt7.gsc
               push:
                 - meta_scope: string.quoted.double.codt7.gsc
                 - meta_content_scope: meta.animtree.codt7.gsc
-                - include: preprocessor-line-ending-lookahead
                 - match: '"'
                   scope: punctuation.definition.string.end.codt7.gsc
                   pop: true
-            - match: \)
-              scope: punctuation.section.group.end.codt7.gsc
-              pop: true
         - match: ';'
           scope: punctuation.terminator.codt7.gsc
+          pop: true
     - match: ^\s*(#\s*animtree)\b
       captures:
         1: keyword.control.import.codt7.gsc
@@ -732,7 +749,6 @@ contexts:
       set:
         - meta_scope: string.quoted.double.codt7.gsc
         - meta_content_scope: meta.asset-type.codt7.gsc
-        - include: preprocessor-line-ending-lookahead
         - match: '"'
           scope: punctuation.definition.string.end.codt7.gsc
           pop: true
