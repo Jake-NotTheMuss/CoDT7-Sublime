@@ -34,12 +34,12 @@ def _popup_css():
         }
     """
 
-class ShowSoundParameters(sublime_plugin.EventListener):
+class ShowTableColumnName(sublime_plugin.EventListener):
     def on_hover(self, view, point, hover_zone):
         if not view.settings().get('show_definitions'):
             return
 
-        ShowSoundParameters.default_on_hover(view, point, hover_zone)
+        ShowTableColumnName.default_on_hover(view, point, hover_zone)
 
     def default_on_hover(view, point, hover_zone):
         if view.is_auto_complete_visible():
@@ -51,7 +51,7 @@ class ShowSoundParameters(sublime_plugin.EventListener):
         def score(scopes):
             return view.score_selector(point, scopes)
 
-        if not score('text.codt7.table.sound'):
+        if not score('text.codt7.table'):
             return
         if not score('meta'):
             return
