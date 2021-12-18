@@ -12,9 +12,9 @@
 *.tmLanguage linguist-language=XML
 *.tmPreferences linguist-language=XML
 
-"CoDT7 Formats/*" linguist-detectable
-"CoDT7 Formats/Completions/**" linguist-generated
-"CoDT7 Formats/Snippets/**" linguist-generated
-"CoDT7 Formats/test/**" -linguist-detectable
+CoDT7[[:space:]]Formats/* linguist-detectable
+CoDT7[[:space:]]Formats/Completions/** linguist-generated
+CoDT7[[:space:]]Formats/Snippets/** linguist-generated
+CoDT7[[:space:]]Formats/test/** -linguist-detectable
 other/** linguist-vendored
 samples/** linguist-vendored
