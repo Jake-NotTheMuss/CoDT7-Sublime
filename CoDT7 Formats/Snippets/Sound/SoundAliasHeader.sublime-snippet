@@ -4,5 +4,5 @@
 
 ]]></content>
   <tabTrigger>Name</tabTrigger>
-  <scope><![CDATA[text.codt7.sound.alias & meta.header]]></scope>
+  <scope><![CDATA[text.codt7.table.sound.alias & meta.header]]></scope>
 </snippet>

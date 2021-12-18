@@ -34,5 +34,5 @@ contexts:
           scope: punctuation.definition.string.end.codt7.vision
           pop: true
         - match: '-'
-          scope: punctuation.operator.arithmetic.codt7.vision
+          scope: keyword.operator.arithmetic.codt7.vision
         - include: scope:source.codt7.common#numbers

@@ -20,7 +20,7 @@ variables:
 contexts:
   prototype:
     - match: '-'
-      scope: punctuation.operator.negation.codt7.xasset
+      scope: keyword.operator.negation.codt7.xasset
     - include: numbers
     - include: strings
     - include: global-param

@@ -38,7 +38,7 @@ contexts:
 
   numbers:
     - match: '-'
-      scope: punctuation.operator.arithmetic.codt7.fx
+      scope: keyword.operator.arithmetic.codt7.fx
     - include: scope:source.codt7.common#numbers
 
   block:

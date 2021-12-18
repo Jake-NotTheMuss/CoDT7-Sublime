@@ -6,7 +6,7 @@ flags spawnRelative;
 /*                 ^ punctuation.terminator */
 number -0;
 /* <- variable */
-/*     ^ punctuation.operator */
+/*     ^ keyword.operator */
 /*      ^ constant.numeric.value */
 /*       ^ punctuation.terminator */
 

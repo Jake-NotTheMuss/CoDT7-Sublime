@@ -68,6 +68,13 @@ contexts:
         - match: \n
           pop: true
 
+  hex-numbers-without-prefix:
+    - match: \b({{hex_digit}}*)({{hex_suffix}})?
+      scope: meta.number.integer.hexadecimal.codt7.common
+      captures:
+        1: constant.numeric.value.codt7.common
+        2: invalid.illegal.numeric.suffix.codt7.common
+
   numbers:
     # decimal float
     - match: |-

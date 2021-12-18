@@ -51,7 +51,7 @@ class ShowSoundParameters(sublime_plugin.EventListener):
         def score(scopes):
             return view.score_selector(point, scopes)
 
-        if not score('text.codt7.sound'):
+        if not score('text.codt7.table.sound'):
             return
         if not score('meta'):
             return

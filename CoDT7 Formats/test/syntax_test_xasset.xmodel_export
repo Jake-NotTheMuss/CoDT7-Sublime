@@ -15,7 +15,7 @@ NUMCOSMETICS 1
 BONE 0 -1 "tag_origin"
 /* <- storage.type */
 /*   ^ constant.numeric.value */
-/*     ^ punctuation.operator */
+/*     ^ keyword.operator */
 /*      ^ constant.numeric.value */
 /*        ^ punctuation.definition.string.begin */
 /*                   ^ punctuation.definition.string.end */
@@ -59,7 +59,7 @@ MATERIAL 0 "Lambert"
 /*         ^^^^^^^^^ string.quoted.double */
 PHONG -1.000000
 /* <- variable.parameter */
-/*    ^ punctuation.operator */
+/*    ^ keyword.operator */
 /*     ^^^^^^^^ constant.numeric.value */
 /*      ^ punctuation.separator.decimal */
 

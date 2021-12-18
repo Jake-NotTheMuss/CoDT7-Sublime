@@ -8,7 +8,7 @@
 
 name: Sound Common
 hidden: true
-scope: text.codt7.sound.common
+scope: text.codt7.table.sound.common
 version: 2
 
 variables:
@@ -56,15 +56,15 @@ contexts:
       push: header
 
   header:
-    - meta_content_scope: meta.header.codt7.sound.common
+    - meta_content_scope: meta.header.codt7.table.sound.common
     - meta_include_prototype: false
     # Rest of file is handled in body context
     - match: $\n
       set: body
     - match: \w+
-      scope: variable.parameter.codt7.sound.common
+      scope: variable.parameter.codt7.table.sound.common
     - match: ','
-      scope: punctuation.separator.codt7.sound.common
+      scope: punctuation.separator.codt7.table.sound.common
 
   body:
     - meta_include_prototype: false
@@ -87,25 +87,25 @@ contexts:
 
   unexpected-character:
     - match: '.'
-      scope: invalid.illegal.unexpected-character.codt7.sound.common
+      scope: invalid.illegal.unexpected-character.codt7.table.sound.common
 
   numbers:
     - match: '-'
-      scope: punctuation.operator.arithmetic.codt7.sound.common
+      scope: keyword.operator.arithmetic.codt7.table.sound.common
     - match: '\b(\d+)((\.)\d*)?'
-      scope: meta.number.decimal.codt7.sound.common
+      scope: meta.number.decimal.codt7.table.sound.common
       captures:
-        1: constant.numeric.value.codt7.sound.common
-        2: constant.numeric.value.codt7.sound.common
-        3: punctuation.separator.decimal.codt7.sound.common
+        1: constant.numeric.value.codt7.table.sound.common
+        2: constant.numeric.value.codt7.table.sound.common
+        3: punctuation.separator.decimal.codt7.table.sound.common
 
   comments:
     - match: \#+
-      scope: punctuation.definition.comment.codt7.sound.common
+      scope: punctuation.definition.comment.codt7.table.sound.common
       push: comments-body
 
   comments-body:
-    - meta_scope: comment.line.number-sign.codt7.sound.common
+    - meta_scope: comment.line.number-sign.codt7.table.sound.common
     # NOTE: The reason for consuming the newline character is as follows.
     # When triggering a snippet, its scope is tested to the *right* of the
     # cursor. So, if you don't want your snippet to trigger in a comment,
@@ -122,39 +122,39 @@ contexts:
 
   buses:
     - match: '\b({{buses}})\b'
-      scope: support.constant.codt7.sound.common
+      scope: support.constant.codt7.table.sound.common
 
   buses_t5:
     - match: '\b({{buses_t5}})\b'
-      scope: support.constant.codt7.sound.common
+      scope: support.constant.codt7.table.sound.common
 
   flux_type:
     - match: '\b({{flux_type}})\b'
-      scope: support.constant.codt7.sound.alias
+      scope: support.constant.codt7.table.sound.alias
 
   limit_type:
     - match: '\b({{limit_type}})\b'
-      scope: support.constant.codt7.sound.common
+      scope: support.constant.codt7.table.sound.common
 
   looping_type:
     - match: \b(?i:(?:non)?looping)\b
-      scope: constant.language.codt7.sound.common
+      scope: constant.language.codt7.table.sound.common
 
   pan_type:
     - match: \b(?i:2d|3d|2\.5)\b
-      scope: support.constant.codt7.sound.common
+      scope: support.constant.codt7.table.sound.common
 
   randomize_type:
     - match: '\b({{randomize_type}})\b'
-      scope: support.constant.codt7.sound.common
+      scope: support.constant.codt7.table.sound.common
 
   storage_type:
     - match: \b(?i:loaded|streamed)\b
-      scope: constant.language.codt7.sound.common
+      scope: constant.language.codt7.table.sound.common
 
   yesno:
     - match: '\b(?i:yes|no)\b'
-      scope: constant.language.codt7.sound.common
+      scope: constant.language.codt7.table.sound.common
 
 ##[ IDENTIFIERS ]###########################################################
 
@@ -165,27 +165,27 @@ contexts:
 
   context_type:
     - match: '\b({{context_type}})\b'
-      scope: variable.language.codt7.sound.common
+      scope: variable.language.codt7.table.sound.common
 
   context_type_t5:
     - match: '\b({{context_type_t5}})\b'
-      scope: variable.language.codt7.sound.common
+      scope: variable.language.codt7.table.sound.common
 
   context_value:
     - match: '\b({{context_value}})\b'
-      scope: variable.language.codt7.sound.common
+      scope: variable.language.codt7.table.sound.common
 
   context_value_t5:
     - match: '\b({{context_value_t5}})\b'
-      scope: variable.language.codt7.sound.common
+      scope: variable.language.codt7.table.sound.common
 
   curve_type:
     - match: '\b({{curve_type}})\b'
-      scope: variable.language.codt7.sound.common
+      scope: variable.language.codt7.table.sound.common
 
   curve_type_t5:
     - match: '\b({{curve_type_t5}})\b'
-      scope: variable.language.codt7.sound.common
+      scope: variable.language.codt7.table.sound.common
 
   duck_groups:
     - match: '\b({{duck_groups}})\b'
@@ -193,48 +193,48 @@ contexts:
 
   futz_names:
     - match: '\b({{futz_names}})\b'
-      scope: variable.language.codt7.sound.common
+      scope: variable.language.codt7.table.sound.common
 
   group_names_t5:
     - match: '\b({{group_names_t5}})\b'
-      scope: variable.language.codt7.sound.common
+      scope: variable.language.codt7.table.sound.common
 
   language_names:
     - match: '\b({{language_names}})\b'
-      scope: variable.language.codt7.sound.common
+      scope: variable.language.codt7.table.sound.common
 
   loadspec_names:
     - match: '\b({{loadspec_names}})\b'
-      scope: variable.language.codt7.sound.common
+      scope: variable.language.codt7.table.sound.common
 
   loadspec_names_t5:
     - match: '\b({{loadspec_names_t5}})\b'
-      scope: variable.language.codt7.sound.common
+      scope: variable.language.codt7.table.sound.common
 
   pan_mode:
     - match: '\b({{pan_mode}})\b'
-      scope: support.constant.codt7.sound.common
+      scope: support.constant.codt7.table.sound.common
 
   pan_mode_t5:
     - match: '\b({{pan_mode_t5}})\b'
-      scope: support.constant.codt7.sound.common
+      scope: support.constant.codt7.table.sound.common
 
   platform_names:
     - match: '\b({{platform_names}})\b'
-      scope: variable.language.codt7.sound.common
+      scope: variable.language.codt7.table.sound.common
 
   snapshot_groups_t5:
     - match: '\b({{snapshot_groups_t5}})\b'
-      scope: variable.language.codt7.sound.common
+      scope: variable.language.codt7.table.sound.common
 
   template_names:
     - match: '\b({{template_names}})\b'
-      scope: support.constant.codt7.sound.common
+      scope: support.constant.codt7.table.sound.common
 
   template_names_t5:
     - match: '\b({{template_names_t5}})\b'
-      scope: support.constant.codt7.sound.common
+      scope: support.constant.codt7.table.sound.common
 
   volume_groups:
     - match: '\b({{volume_groups}})\b'
-      scope: variable.language.codt7.sound.common
+      scope: variable.language.codt7.table.sound.common

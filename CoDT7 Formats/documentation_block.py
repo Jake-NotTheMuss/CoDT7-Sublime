@@ -3,7 +3,7 @@ import sublime, sublime_plugin
 def build_documentation_block_data(view, pt):
     shell_vars = view.meta_info("shellVariables", pt)
     if not shell_vars:
-        return ([], [])
+        return []
 
     # transform the list of dicts into a single dict
     all_vars = {}

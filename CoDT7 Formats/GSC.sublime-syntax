@@ -126,26 +126,26 @@ contexts:
     # bitwise-and
     - match: '(?<={{variable_or_constant_border}})\s*(&)\s*(?!(?i:array)\b)(?={{variable_or_constant_border}})'
       captures:
-        1: punctuation.operator.arithmetic.codt7.gsc
+        1: keyword.operator.arithmetic.codt7.gsc
     - match: '(?<={{variable_or_constant_border}})\s*(&)\s*(?i:array)'
       captures:
-        1: punctuation.operator.arithmetic.codt7.gsc
+        1: keyword.operator.arithmetic.codt7.gsc
     # address-of
     - match: (?<!{{variable_or_constant_border}})\s*(&)(?=\s*{{identifier}})
       captures:
-        1: punctuation.operator.address-of.codt7.gsc
+        1: keyword.operator.address-of.codt7.gsc
       push: builtin-function-call-maybe
 
   operator-percent-sign:
     # modulus
     - match: '(?<={{variable_or_constant_border}})\s*(%)\s*(?={{variable_or_constant_border}})'
       captures:
-        1: punctuation.operator.arithmetic.codt7.gsc
+        1: keyword.operator.arithmetic.codt7.gsc
     # anim reference
     - match: '(?<!{{variable_or_constant_border}})\s*((%)\s*)(?=\w)'
       captures:
         1: meta.anim-reference.codt7.gsc string.unquoted.codt7.gsc
-        2: punctuation.operator.other.codt7.gsc
+        2: keyword.operator.other.codt7.gsc
       push:
         - meta_scope: meta.anim-reference.codt7.gsc string.unquoted.codt7.gsc
         - match: '(?=[^\w:])'
@@ -163,21 +163,21 @@ contexts:
 
   operators:
     - match: (?:\+\+|\-\-)
-      scope: punctuation.operator.arithmetic.codt7.gsc
+      scope: keyword.operator.arithmetic.codt7.gsc
     - match: '->|::'
       scope: punctuation.accessor.codt7.gsc
     - match: \+\=|\-\=|\*\=|/\=|%\=|&\=|\|\=|\^\=|>>\=|<<\=
-      scope: punctuation.operator.assignment.augmented.codt7.gsc
+      scope: keyword.operator.assignment.augmented.codt7.gsc
     - match: <<|>>|&&|\|\|
-      scope: punctuation.operator.arithmetic.codt7.gsc
+      scope: keyword.operator.arithmetic.codt7.gsc
     - match: <\=|>\=|<|>|\=\=\=|\!\=\=|\=\=|\!\=
-      scope: punctuation.operator.comparison.codt7.gsc
+      scope: keyword.operator.comparison.codt7.gsc
     - match: \+|\-|\*|/|\||\^|\~|\!
-      scope: punctuation.operator.arithmetic.codt7.gsc
+      scope: keyword.operator.arithmetic.codt7.gsc
     - match: '\='
-      scope: punctuation.operator.assignment.codt7.gsc
+      scope: keyword.operator.assignment.codt7.gsc
     - match: '\?|:'
-      scope: punctuation.operator.ternary.codt7.gsc
+      scope: keyword.operator.ternary.codt7.gsc
     - include: operator-ampersand
     - include: operator-percent-sign
     - include: operator-expression-evaluation
@@ -1393,11 +1393,11 @@ contexts:
               scope: punctuation.section.group.end.codt7.gsc
               set: method-definition-continue
             - match: '&'
-              scope: punctuation.operator.address-of.codt7.gsc
+              scope: keyword.operator.address-of.codt7.gsc
             - match: '{{identifier}}(?=\s*(,|\)|=))'
               scope: variable.parameter.codt7.gsc
             - match: '='
-              scope: punctuation.operator.assignment.codt7.gsc
+              scope: keyword.operator.assignment.codt7.gsc
               push:
                 - match: '(?=,|\))'
                   pop: true
@@ -1493,11 +1493,11 @@ contexts:
             # Eat 1 or 2 dots to prevent premature warning
             - match: '\.*'
             - match: '&'
-              scope: punctuation.operator.address-of.codt7.gsc
+              scope: keyword.operator.address-of.codt7.gsc
             - match: '{{identifier}}(?=\s*(,|\)|=))'
               scope: variable.parameter.codt7.gsc
             - match: '='
-              scope: punctuation.operator.assignment.codt7.gsc
+              scope: keyword.operator.assignment.codt7.gsc
               push:
                 - match: '(?=,|\))'
                   pop: true

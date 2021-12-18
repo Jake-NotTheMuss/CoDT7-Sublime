@@ -48,7 +48,7 @@ function animtreetest()
 }
 
 function array_test( &array, array )
-/*                   ^ punctuation.operator.address-of */
+/*                   ^ keyword.operator.address-of */
 /*                    ^ - support */
 /*                           ^ - support */
 {
@@ -58,12 +58,12 @@ function array_test( &array, array )
 /*        ^^^^^^^ meta.function-call */
 /*        ^ support.function.builtin */
   array_func_ptr = & array;
-/*                 ^ punctuation.operator.address-of */
+/*                 ^ keyword.operator.address-of */
 /*                   ^ support.function.builtin */
 
   val = 5 &array;
 /*      ^ meta.number.integer.decimal constant.numeric.value */
-/*        ^ punctuation.operator.arithmetic */
+/*        ^ keyword.operator.arithmetic */
 /*         ^ - support */
 }
 
@@ -71,19 +71,19 @@ function array_test( &array, array )
 function operators_test()
 {
   a = &init;
-/*    ^ punctuation.operator.address-of */
+/*    ^ keyword.operator.address-of */
 
   a = 4 &init;
 /*    ^ meta.number.integer.decimal constant.numeric.value */
-/*      ^ punctuation.operator.arithmetic */
+/*      ^ keyword.operator.arithmetic */
 
   root = %generic::root;
-/*       ^ - punctuation.operator.arithmetic */
+/*       ^ - keyword.operator.arithmetic */
 /*       ^^^^^^^^^^^^^^ meta.anim-reference string.unquoted */
 
   root = 4 %generic;
 /*       ^ meta.number.integer.decimal constant.numeric.value */
-/*         ^ punctuation.operator.arithmetic */
+/*         ^ keyword.operator.arithmetic */
 /*          ^ - string */
 }
 
@@ -91,9 +91,9 @@ function operators_test()
 function main(){
   a=5;
   while(a>0)a--;
-  /*     ^ punctuation.operator.comparison */
+  /*     ^ keyword.operator.comparison */
   /*      ^ meta.number constant.numeric.value */
-  /*         ^^ punctuation.operator.arithmetic */
+  /*         ^^ keyword.operator.arithmetic */
 
   level.foo = 0;
   /* <- constant.language */
@@ -152,8 +152,8 @@ scripts\shared\shared.gsh;
  c)  ((a>b) ? (a>c?a:c) : (b>c?b:c))
  /* <- meta.preprocessor.macro meta.group variable.parameter */
   /* <- meta.preprocessor.macro meta.group punctuation.section.group.end */
- /*               ^ punctuation.operator.ternary */
- /*                 ^ punctuation.operator.ternary */
+ /*               ^ keyword.operator.ternary */
+ /*                 ^ keyword.operator.ternary */
 
 #define AUTOEXEC autoexec
 /*      ^ entity.name.constant */
@@ -320,7 +320,7 @@ function foo(val, val2)
     result.kk = func(val);
 /*        ^ punctuation.accessor */
     if (result !== 0) {
-/*             ^^^ punctuation.operator.comparison */
+/*             ^^^ keyword.operator.comparison */
         return 0;
 #if CROSS_SCOPE_MACRO
  /* <- keyword.control.import */
@@ -473,11 +473,11 @@ f = 1.1+1.1e1+1.1e-1;
 /*  ^^^ meta.number.float.decimal */
 /*  ^^^ constant.numeric.value */
 /*   ^ punctuation.separator.decimal */
-/*     ^ punctuation.operator.arithmetic */
+/*     ^ keyword.operator.arithmetic */
 /*      ^^^^^ meta.number.float.decimal */
 /*      ^^^^^ constant.numeric.value */
 /*       ^ punctuation.separator.decimal */
-/*           ^ punctuation.operator.arithmetic */
+/*           ^ keyword.operator.arithmetic */
 /*            ^^^^^^ meta.number.float.decimal */
 /*            ^^^^^^ constant.numeric.value */
 /*             ^ punctuation.separator.decimal */
@@ -487,7 +487,7 @@ f = 1.+1..;
 /*  ^^ meta.number.float.decimal */
 /*  ^^ constant.numeric.value */
 /*   ^ punctuation.separator.decimal */
-/*    ^ punctuation.operator.arithmetic */
+/*    ^ keyword.operator.arithmetic */
 /*     ^ meta.number.integer.decimal */
 /*     ^ constant.numeric.value */
 /*      ^^ invalid.illegal.syntax */
