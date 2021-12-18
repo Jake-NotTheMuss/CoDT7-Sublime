@@ -1,12 +1,20 @@
 *text=auto
-*.sublime-syntax linguist-language=YAML
+*.sublime-build linguist-language=JSON
+*.sublime-commands linguist-language=JSON
 *.sublime-completions linguist-language=JSON
 *.sublime-keymap linguist-language=JSON
 *.sublime-macro linguist-language=JSON
 *.sublime-menu linguist-language=JSON
-*.sublime-commands linguist-language=JSON
+*.sublime-mousemap linguist-language=JSON
+*.sublime-settings linguist-language=JSON
 *.sublime-snippet linguist-language=XML
+*.sublime-syntax linguist-language=YAML
 *.tmLanguage linguist-language=XML
 *.tmPreferences linguist-language=XML
 
-CoDT7[[:space:]]Formats/** linguist-detectable
+"CoDT7 Formats/*" linguist-detectable
+"CoDT7 Formats/Completions/**" linguist-generated
+"CoDT7 Formats/Snippets/**" linguist-generated
+"CoDT7 Formats/test/**" -linguist-detectable
+other/** linguist-vendored
+samples/** linguist-vendored
