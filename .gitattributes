@@ -1,5 +1,6 @@
 *text=auto
 *.sublime-build linguist-language=JSON
+*.sublime-color-scheme linguist-language=JSON
 *.sublime-commands linguist-language=JSON
 *.sublime-completions linguist-language=JSON
 *.sublime-keymap linguist-language=JSON
@@ -9,6 +10,7 @@
 *.sublime-settings linguist-language=JSON
 *.sublime-snippet linguist-language=XML
 *.sublime-syntax linguist-language=YAML
+*.sublime-theme linguist-language=JSON
 *.tmLanguage linguist-language=XML
 *.tmPreferences linguist-language=XML
 
