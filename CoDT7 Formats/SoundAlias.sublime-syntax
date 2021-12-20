@@ -30,10 +30,10 @@ contexts:
 
 # All meta scope names are used for hover-triggered popups, which display the parameter
 # of the column and the value being hovered over. The parameter name is obtained from
-# the string between 'meta.' and '.sound.alias'. For example, when hovering over
-# the 0th column, the meta scope is 'meta.name.sound.alias', and the popup will display
+# the string between 'meta.' and '.codt7.table.sound.alias'. For example, when hovering over
+# the 0th column, the meta scope is 'meta.name.codt7.table.sound.alias', and the popup will display
 # 'Name' as the parameter name. Dashes are used to delimit words in the popup script.
-# When hovering over the file spec, 'meta.file-spec.sound.alias' is the meta scope, and
+# When hovering over the file spec, 'meta.file-spec.codt7.table.sound.alias' is the meta scope, and
 # the popuo will display 'File Spec' as the parameter name.
 
   name:
@@ -91,19 +91,25 @@ contexts:
       set: secondary
 
   secondary:
-    - meta_content_scope: meta.secondary.codt7.table.sound.alias entity.name.alias.codt7.table.sound.alias markup.italic
+    - meta_content_scope: meta.secondary.codt7.table.sound.alias
+    - match: \w+
+      scope: entity.name.alias.codt7.table.sound.alias markup.italic
     - match: ','
       scope: punctuation.separator.codt7.table.sound.alias
       set: sustainalias
 
   sustainalias:
-    - meta_content_scope: meta.sustain-alias.codt7.table.sound.alias entity.name.alias.codt7.table.sound.alias markup.italic
+    - meta_content_scope: meta.sustain-alias.codt7.table.sound.alias
+    - match: \w+
+      scope: entity.name.alias.codt7.table.sound.alias markup.italic
     - match: ','
       scope: punctuation.separator.codt7.table.sound.alias
       set: releasealias
 
   releasealias:
-    - meta_content_scope: meta.release-alias.codt7.table.sound.alias entity.name.alias.codt7.table.sound.alias markup.italic
+    - meta_content_scope: meta.release-alias.codt7.table.sound.alias
+    - match: \w+
+      scope: entity.name.alias.codt7.table.sound.alias markup.italic
     - match: ','
       scope: punctuation.separator.codt7.table.sound.alias
       set: bus
@@ -397,7 +403,9 @@ contexts:
     - include: numbers
 
   subtitle:
-    - meta_content_scope: meta.subtitle.codt7.table.sound.alias entity.name.subtitle.codt7.table.sound.alias markup.italic
+    - meta_content_scope: meta.subtitle.codt7.table.sound.alias
+    - match: \w+
+      scope: entity.name.subtitle.codt7.table.sound.alias markup.italic
     - match: ','
       scope: punctuation.separator.codt7.table.sound.alias
       set: doppler
@@ -639,7 +647,9 @@ contexts:
     - include: yesno
 
   stopalias:
-    - meta_content_scope: meta.stop-alias.codt7.table.sound.alias entity.name.alias.codt7.table.sound.alias markup.italic
+    - meta_content_scope: meta.stop-alias.codt7.table.sound.alias
+    - match: \w+
+      scope: entity.name.alias.codt7.table.sound.alias markup.italic
     - match: ','
       scope: punctuation.separator.codt7.table.sound.alias
       set: distancelpfmin
