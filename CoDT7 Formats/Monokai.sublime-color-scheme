@@ -1,12 +1,12 @@
 {
-    // Excluding CoDT7 scopes from the default Keyword color for operators doesn't seem to work,
-    // so a new rule is given to force non-colored operators.
-    "rules":
-    [
-        {
-            "name": "CoDT7 Operator",
-            "scope": "keyword.operator & (source.codt7 | text.codt7)",
-            "foreground": "var(white)"
-        }
-    ]
+	// Excluding CoDT7 scopes from the default Keyword color for operators doesn't seem to work,
+	// so a new rule is given to force non-colored operators.
+	"rules":
+	[
+		{
+			"name": "CoDT7 Operator",
+			"scope": "keyword.operator & (source.codt7 | text.codt7)",
+			"foreground": "var(white)"
+		}
+	]
 }
