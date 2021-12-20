@@ -1,0 +1,15 @@
+{
+  "scope": "text.codt7.table.sound & meta.sound-flux-type",
+  "completions":
+  [
+		"none",
+		"left_player",
+		"right_player",
+		"center_player",
+		"random_player",
+		"left_shot",
+		"center_shot",
+		"right_shot",
+		"random_direcion"
+  ]
+}

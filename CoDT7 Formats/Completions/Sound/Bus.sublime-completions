@@ -1,0 +1,14 @@
+{
+  "scope": "text.codt7.table.sound & meta.sound-bus",
+  "completions":
+  [
+  	"BUS_FX",
+		"BUS_VOICE",
+		"BUS_PFUTZ",
+		"BUS_HDRFX",
+		"BUS_UI",
+		"BUS_MUSIC",
+		"BUS_MOVIE",
+		"BUS_REFERENCE"
+  ]
+}

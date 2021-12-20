@@ -1,0 +1,8 @@
+{
+  "scope": "text.codt7.table.sound & meta.sound-storage-type",
+  "completions":
+  [
+    "loaded",
+    "streamed"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "scope": "text.codt7.table.sound & meta.sound-looping-type",
+  "completions":
+  [
+    "looping",
+    "nonlooping"
+  ]
+}

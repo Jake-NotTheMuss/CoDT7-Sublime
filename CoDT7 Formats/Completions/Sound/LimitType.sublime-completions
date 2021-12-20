@@ -1,0 +1,10 @@
+{
+  "scope": "text.codt7.table.sound & meta.sound-limit-type",
+  "completions":
+  [
+		"none",
+		"oldest",
+		"reject",
+		"priority"
+  ]
+}

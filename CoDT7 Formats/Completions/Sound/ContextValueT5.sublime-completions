@@ -1,0 +1,13 @@
+{
+  "scope": "text.codt7.table.sound & meta.sound-context-value-t5",
+  "completions":
+  [
+		"indoor",
+		"outdoor",
+		"explicit",
+		"safe",
+		"high",
+		"low",
+		"mask"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "scope": "text.codt7.table.sound & meta.sound-curve-type-t5",
+  "completions":
+  [
+		"name",
+		"default",
+		"defaultmin",
+		"rdefault",
+		"curve0",
+		"rcurve0",
+		"curve1",
+		"rcurve1",
+		"curve2",
+		"rcurve2",
+		"curve3",
+		"rcurve3",
+		"curve4",
+		"rcurve4",
+		"curve5",
+		"rcurve5",
+		"allon",
+		"alloff",
+		"real2",
+		"log0",
+		"log1",
+		"log2",
+		"log3",
+		"sin",
+		"cos"
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "scope": "text.codt7.table.sound & meta.sound-volume-group",
+  "completions":
+  [
+		"grp_air",
+		"grp_alerts",
+		"grp_ambience",
+		"grp_announcer",
+		"grp_bink",
+		"grp_destructible",
+		"grp_explosion",
+		"grp_foley",
+		"grp_hdrfx",
+		"grp_igc",
+		"grp_impacts",
+		"grp_lfe",
+		"grp_master",
+		"grp_menu",
+		"grp_mp_game",
+		"grp_music",
+		"grp_physics",
+		"grp_player_foley",
+		"grp_player_impacts",
+		"grp_reference",
+		"grp_scripted_moment",
+		"grp_set_piece",
+		"grp_vehicle",
+		"grp_voice",
+		"grp_weapon",
+		"grp_weapon_3p",
+		"grp_weapon_decay",
+		"grp_whizby",
+		"grp_wpn_lfe"
+  ]
+}

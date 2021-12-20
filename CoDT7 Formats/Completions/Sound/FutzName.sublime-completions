@@ -1,0 +1,37 @@
+{
+  "scope": "text.codt7.table.sound & meta.sound-futz-name",
+  "completions":
+  [
+		"bfutz",
+		"default",
+		"defaultbkp",
+		"dlc_res_1",
+		"dlc_res_2",
+		"dlc_res_3",
+		"dlc_res_4",
+		"dlc_res_5",
+		"dlc_res_6",
+		"dlc_res_7",
+		"dlc_res_8",
+		"good_1",
+		"jet_wing_helmet",
+		"jet_wing_helmet_flying",
+		"mpl_chopper_pov",
+		"mpl_quad_pov",
+		"mpl_reaper_pov",
+		"no_gfutz",
+		"spl_asd_pov",
+		"spl_bigdog_pov",
+		"spl_heli_future",
+		"spl_quad_pov",
+		"spl_spiderbot_pov",
+		"spl_spymic",
+		"spl_tow_missile",
+		"spl_turret",
+		"spl_war_command",
+		"stereo",
+		"test_1",
+		"test_2",
+		"tueyeckert"
+  ]
+}

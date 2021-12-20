@@ -1,0 +1,22 @@
+{
+  "scope": "text.codt7.table.sound & meta.sound-language",
+  "completions":
+  [
+		"all",
+		"english",
+		"french",
+		"italian",
+		"german",
+		"spanish",
+		"russian",
+		"portuguese",
+		"mexicanspanish",
+		"polish",
+		"fulljapanese",
+		"japanese",
+		"traditionalchinese",
+		"simplifiedchinese",
+		"englisharabic",
+		"arabic"
+  ]
+}

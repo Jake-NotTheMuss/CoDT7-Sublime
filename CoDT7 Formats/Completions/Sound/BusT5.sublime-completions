@@ -1,0 +1,15 @@
+{
+  "scope": "text.codt7.table.sound & meta.sound-bus-t5",
+  "completions":
+  [
+		"world",
+		"fx",
+		"voice",
+		"pfutz",
+		"hdrfx",
+		"ui",
+		"music",
+		"movie",
+		"reference"
+  ]
+}

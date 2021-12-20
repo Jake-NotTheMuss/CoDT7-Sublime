@@ -1,0 +1,25 @@
+{
+  "scope": "text.codt7.table.sound & meta.sound-context-type",
+  "completions":
+  [
+		"aquifer_cockpit",
+		"battle",
+		"boot",
+		"foley",
+		"healthstate",
+		"igc",
+		"laststand",
+		"mature",
+		"movement",
+		"perspective",
+		"plr_body",
+		"plr_gender",
+		"plr_impact",
+		"plr_stance",
+		"plr_vehicle",
+		"ringoff_plr",
+		"train",
+		"vehicle",
+		"water"
+  ]
+}

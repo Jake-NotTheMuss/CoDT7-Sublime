@@ -1,0 +1,23 @@
+{
+  "scope": "text.codt7.table.sound & meta.sound-curve-type",
+  "completions":
+  [
+		"default",
+		"defaultmin",
+		"allon",
+		"alloff",
+		"rcurve0",
+		"rcurve1",
+		"rcurve2",
+		"rcurve3",
+		"rcurve4",
+		"rcurve5",
+		"steep",
+		"sindelay",
+		"cosdelay",
+		"sin",
+		"cos",
+		"rev60",
+		"rev65"
+  ]
+}

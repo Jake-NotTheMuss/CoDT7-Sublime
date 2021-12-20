@@ -1,0 +1,9 @@
+{
+  "scope": "text.codt7.table.sound & meta.sound-platform",
+  "completions":
+  [
+		"orbis",
+		"durango",
+		"pc"
+  ]
+}
