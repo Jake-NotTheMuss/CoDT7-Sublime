@@ -136,6 +136,7 @@ contexts:
   buses:
     - match: (?!,|$)
       push:
+        - meta_include_prototype: false
         - meta_content_scope: meta.sound-bus.codt7.table.sound.common
         - match: '\b({{buses}})\b'
           scope: support.constant.codt7.table.sound.common
@@ -144,6 +145,7 @@ contexts:
   buses_t5:
     - match: (?!,|$)
       push:
+        - meta_include_prototype: false
         - meta_content_scope: meta.sound-bus-t5.codt7.table.sound.common
         - match: '\b({{buses_t5}})\b'
           scope: support.constant.codt7.table.sound.common
@@ -152,6 +154,7 @@ contexts:
   flux_type:
     - match: (?!,|$)
       push:
+        - meta_include_prototype: false
         - meta_content_scope: meta.sound-flux-type.codt7.table.sound.common
         - match: '\b({{flux_type}})\b'
           scope: support.constant.codt7.table.sound.common
@@ -160,6 +163,7 @@ contexts:
   limit_type:
     - match: (?!,|$)
       push:
+        - meta_include_prototype: false
         - meta_content_scope: meta.sound-limit-type.codt7.table.sound.common
         - match: '\b({{limit_type}})\b'
           scope: support.constant.codt7.table.sound.common
@@ -168,6 +172,7 @@ contexts:
   looping_type:
     - match: (?!,|$)
       push:
+        - meta_include_prototype: false
         - meta_content_scope: meta.sound-looping-type.codt7.table.sound.common
         - match: \b(?i:(?:non)?looping)\b
           scope: constant.language.codt7.table.sound.common
@@ -180,6 +185,7 @@ contexts:
   randomize_type:
     - match: (?!,|$)
       push:
+        - meta_include_prototype: false
         - meta_content_scope: meta.sound-randomize-type.codt7.table.sound.common
         - match: '\b({{randomize_type}})\b'
           scope: support.constant.codt7.table.sound.common
@@ -188,6 +194,7 @@ contexts:
   storage_type:
     - match: (?!,|$)
       push:
+        - meta_include_prototype: false
         - meta_content_scope: meta.sound-storage-type.codt7.table.sound.common
         - match: \b(?i:loaded|streamed)\b
           scope: constant.language.codt7.table.sound.common
@@ -207,6 +214,7 @@ contexts:
   context_type:
     - match: (?!,|$)
       push:
+        - meta_include_prototype: false
         - meta_content_scope: meta.sound-context-type.codt7.table.sound.common
         - include: generic_identifier
         - include: end-of-col-look
@@ -214,6 +222,7 @@ contexts:
   context_type_t5:
     - match: (?!,|$)
       push:
+        - meta_include_prototype: false
         - meta_content_scope: meta.sound-context-type-t5.codt7.table.sound.common
         - include: generic_identifier
         - include: end-of-col-look
@@ -221,6 +230,7 @@ contexts:
   context_value:
     - match: (?!,|$)
       push:
+        - meta_include_prototype: false
         - meta_content_scope: meta.sound-context-value.codt7.table.sound.common
         - include: generic_identifier
         - include: end-of-col-look
@@ -228,6 +238,7 @@ contexts:
   context_value_t5:
     - match: (?!,|$)
       push:
+        - meta_include_prototype: false
         - meta_content_scope: meta.sound-context-value-t5.codt7.table.sound.common
         - include: generic_identifier
         - include: end-of-col-look
@@ -235,6 +246,7 @@ contexts:
   curve_type:
     - match: (?!,|$)
       push:
+        - meta_include_prototype: false
         - meta_content_scope: meta.sound-curve-type.codt7.table.sound.common
         - include: generic_identifier
         - include: end-of-col-look
@@ -242,6 +254,7 @@ contexts:
   curve_type_t5:
     - match: (?!,|$)
       push:
+        - meta_include_prototype: false
         - meta_content_scope: meta.sound-curve-type-t5.codt7.table.sound.common
         - include: generic_identifier
         - include: end-of-col-look
@@ -249,6 +262,7 @@ contexts:
   duck_names:
     - match: (?!,|$)
       push:
+        - meta_include_prototype: false
         - meta_content_scope: meta.sound-duck-name.codt7.table.sound.common
         - include: generic_alias
         - include: end-of-col-look
@@ -256,6 +270,7 @@ contexts:
   duck_groups:
     - match: (?!,|$)
       push:
+        - meta_include_prototype: false
         - meta_content_scope: meta.sound-duck-group.codt7.table.sound.common
         - include: generic_identifier
         - include: end-of-col-look
@@ -263,6 +278,7 @@ contexts:
   futz_names:
     - match: (?!,|$)
       push:
+        - meta_include_prototype: false
         - meta_content_scope: meta.sound-futz-name.codt7.table.sound.common
         - include: generic_identifier
         - include: end-of-col-look
@@ -270,6 +286,7 @@ contexts:
   group_names_t5:
     - match: (?!,|$)
       push:
+        - meta_include_prototype: false
         - meta_content_scope: meta.sound-group-name-t5.codt7.table.sound.common
         - include: generic_identifier
         - include: end-of-col-look
@@ -277,6 +294,7 @@ contexts:
   language_names:
     - match: (?!,|$)
       push:
+        - meta_include_prototype: false
         - meta_content_scope: meta.sound-language.codt7.table.sound.common
         - include: generic_identifier
         - include: end-of-col-look
@@ -284,6 +302,7 @@ contexts:
   loadspec_names:
     - match: (?!,|$)
       push:
+        - meta_include_prototype: false
         - meta_content_scope: meta.sound-loadspec.codt7.table.sound.common
         - include: generic_identifier
         - include: end-of-col-look
@@ -291,6 +310,7 @@ contexts:
   loadspec_names_t5:
     - match: (?!,|$)
       push:
+        - meta_include_prototype: false
         - meta_content_scope: meta.sound-loadspec-t5.codt7.table.sound.common
         - include: generic_identifier
         - include: end-of-col-look
@@ -298,6 +318,7 @@ contexts:
   pan_mode:
     - match: (?!,|$)
       push:
+        - meta_include_prototype: false
         - meta_content_scope: meta.sound-pan-mode.codt7.table.sound.common
         - include: generic_identifier
         - include: end-of-col-look
@@ -305,6 +326,7 @@ contexts:
   pan_mode_t5:
     - match: (?!,|$)
       push:
+        - meta_include_prototype: false
         - meta_content_scope: meta.sound-pan-mode-t5.codt7.table.sound.common
         - include: generic_identifier
         - include: end-of-col-look
@@ -312,6 +334,7 @@ contexts:
   platform_names:
     - match: (?!,|$) 
       push:
+        - meta_include_prototype: false
         - meta_content_scope: meta.sound-platform.codt7.table.sound.common
         - include: generic_identifier
         - include: end-of-col-look
@@ -319,6 +342,7 @@ contexts:
   snapshot_groups_t5:
     - match: (?!,|$)
       push:
+        - meta_include_prototype: false
         - meta_content_scope: meta.sound-snapshot-group-t5.codt7.table.sound.common
         - include: generic_identifier
         - include: end-of-col-look
@@ -326,6 +350,7 @@ contexts:
   template_names:
     - match: (?!,|$)
       push:
+        - meta_include_prototype: false
         - meta_content_scope: meta.sound-template.codt7.table.sound.common
         - include: generic_identifier
         - include: end-of-col-look
@@ -333,6 +358,7 @@ contexts:
   template_names_t5:
     - match: (?!,|$)
       push:
+        - meta_include_prototype: false
         - meta_content_scope: meta.sound-template-t5.codt7.table.sound.common
         - include: generic_identifier
         - include: end-of-col-look
@@ -340,6 +366,7 @@ contexts:
   volume_groups:
     - match: (?!,|$)
       push:
+        - meta_include_prototype: false
         - meta_content_scope: meta.sound-volume-group.codt7.table.sound.common
         - include: generic_identifier
         - include: end-of-col-look
