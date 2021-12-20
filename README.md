@@ -9,7 +9,7 @@ The Call of Duty developers included in the Black Ops III mod tools documentatio
 The key improvements in this package compared to the developer package follow:
 1. The syntax highlighting is more detailed.
 2. More auto-completions are supported for a multitude of contexts.
-3. Data formats other than GSC are also supported.
+3. Syntaxes other than GSC are also supported.
 
 ## Supported Formats/Extensions
 
