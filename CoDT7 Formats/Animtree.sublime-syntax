@@ -1,0 +1,75 @@
+%YAML 1.2
+---
+# http://www.sublimetext.com/docs/3/syntax.html
+
+# This file is part of the T7-Sublime project.
+# T7-Sublime is an enhanced syntax-highlighting package for (almost) all Call of Duty Black Ops III developer file formats.
+# Animtree files contain lists of animation aliases in a tree structure that can be referenced in GSC scripts by entities
+# that play a particular set of animations.
+
+name: Animtree
+file_extensions:
+  - atr
+scope: source.codt7.animtree
+
+variables:
+  animtree_flags: 'client|separate|additive|complete|nonloopsync'
+
+contexts:
+  prototype:
+    - include: comments
+
+  main:
+    - include: global
+
+  comments:
+    - include: scope:source.codt7.common#comments
+
+  global:
+    - include: identifiers
+
+  identifiers:
+    - match: (?=\w)
+      branch_point: anim_alias_or_tree_definition
+      branch:
+        - anim-alias
+        - tree-definition
+
+  anim-alias:
+    - match: \w+
+      scope: string.unquoted.codt7.animtree
+    - match: ':|\{'
+      fail: anim_alias_or_tree_definition
+    - match: (?=\S)
+      pop: true
+
+  tree-definition:
+    - match: \w+
+      scope: meta.animtree.codt7.animtree entity.name.animtree.codt7.animtree
+      set: animtree-definition-begin
+
+  animtree-definition-begin:
+    - match: ':'
+      scope: punctuation.separator.codt7.animtree
+      push:
+        - meta_content_scope: meta.animtree-flags.codt7.animtree
+        - include: animtree-definition-flags
+        - match: (?=\{)
+          pop: true
+    - match: '\{'
+      scope: meta.block.codt7.animtree punctuation.section.block.begin.codt7.animtree
+      set:
+        - meta_content_scope: meta.animtree.codt7.animtree meta.block.codt7.animtree
+        - match: '\}'
+          scope: meta.animtree.codt7.animtree meta.block.codt7.animtree punctuation.section.block.end.codt7.animtree
+          pop: true
+        - include: animtree-body
+    - match: (?=\S)
+      pop: true
+
+  animtree-body:
+    - include: identifiers
+
+  animtree-definition-flags:
+    - match: \b(?i:{{animtree_flags}})\b
+      scope: keyword.other.codt7.animtree
