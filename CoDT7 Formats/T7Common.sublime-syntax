@@ -4,7 +4,7 @@
 
 # This file is part of the T7-Sublime project.
 # T7-Sublime is an enhanced syntax-highlighting package for (almost) all Call of Duty Black Ops III developer file formats.
-# T7 Source Common is an internal library containing common rules which commonly used in source-code contexts.
+# T7 Source Common is an internal library containing common rules which are used in various source-code contexts.
 
 name: T7 Common
 hidden: true
