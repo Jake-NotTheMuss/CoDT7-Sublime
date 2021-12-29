@@ -1,0 +1,102 @@
+%YAML 1.2
+---
+# http://www.sublimetext.com/docs/3/syntax.html
+
+# This file is part of the T7-Sublime project.
+# T7-Sublime is an enhanced syntax-highlighting package for (almost) all Call of Duty Black Ops III developer file formats.
+# Lensflare files contain lensflare data.
+
+name: Lensflare
+hidden: true
+first_line_match: ^\s*(?i:gradientDefVersion)\b
+file_extensions:
+  - klf
+scope: source.codt7.lensflare
+
+contexts:
+  prototype:
+    - include: comments
+
+  main:
+    - include: directive
+    - include: global
+
+############[ EXPRESSIONS ]###################################################
+
+  comments:
+    - include: scope:source.codt7.common#comments
+
+  strings:
+    - match: '"'
+      scope: punctuation.definition.string.begin.codt7.lensflare
+      push:
+        - meta_scope: string.quoted.double.codt7.lensflare
+        - match: '"'
+          scope: punctuation.definition.string.end.codt7.lensflare
+          pop: true
+
+  numbers:
+    - match: '-'
+      scope: keyword.operator.arithmetic.codt7.fx
+    - include: scope:source.codt7.common#numbers
+
+  block:
+    - match: '\{'
+      scope: punctuation.section.block.begin.codt7.lensflare
+      push:
+        - meta_scope: meta.block.codt7.lensflare
+        - match: '\}'
+          scope: punctuation.section.block.end.codt7.lensflare
+          pop: true
+        - include: statements
+
+  brackets:
+    - match: \[
+      scope: punctuation.section.brackets.begin.codt7.lensflare
+      push:
+        - meta_scope: meta.brackets.codt7.lensflare
+        - match: \]
+          scope: punctuation.section.brackets.end.codt7.lensflare
+          pop: true
+        - include: expressions
+
+  keywords:
+    - match: ''
+
+  constants:
+    - match: \bFX_\w*\b
+      scope: support.constant.codt7.lensflare
+
+############[ GLOBAL ]####################################################
+
+  directive:
+    - match: ^\s*(gradientDefVersion)[ \t]+(\d+)
+      captures:
+        1: keyword.other.directive.gradientdefversion.codt7.lensflare
+        2: constant.numeric.gradientdef-version.codt7.lensflare
+    - match: ^\s*(elemDefVersion)[ \t]+(\d+)
+      captures:
+        1: keyword.other.directive.elemdefversion.codt7.lensflare
+        2: constant.numeric.elemdef-version.codt7.lensflare
+    - match: ^\s*(defVersion)[ \t]+(\d+)
+      captures:
+        1: keyword.other.directive.defversion.codt7.lensflare
+        2: constant.numeric.def-version.codt7.lensflare
+
+  global:
+    - include: statements
+
+  expressions:
+    - include: strings
+    - include: numbers
+    - include: constants
+    - include: block
+    - include: brackets
+
+  statements:
+    - match: \w+
+      scope: variable.parameter.codt7.lensflare
+      push:
+        - match: $\n
+          pop: true
+        - include: expressions
