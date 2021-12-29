@@ -1,0 +1,163 @@
+%YAML 1.2
+---
+# http://www.sublimetext.com/docs/3/syntax.html
+
+# This file is part of the T7-Sublime project.
+# T7-Sublime is an enhanced syntax-highlighting package for (almost) all Call of Duty Black Ops III developer file formats.
+# Sound Ambient files are comma-separated tables which list ambience definitions. Ambience definitions are referenced with an
+# identifier and contain a set of particular values that parameterize a particular sound ambience in-game.
+
+name: Sound Ambient Table
+# look for names that are only in ambient tables
+first_line_match: |-
+  (?ix:
+    \s* name \s* ,
+    ( \s* \w+ \s* , )*
+    (
+      \s*
+      (
+        defaultroom | nearverb | farverb
+      )
+      \s*
+      (,|$)
+    )
+    ( \s* \w+ \s* , )*
+  )
+file_extensions:
+  - ambient.csv
+scope: text.codt7.table.sound.ambient
+version: 2
+extends: Packages/CoDT7 Formats/SoundCommon.sublime-syntax
+
+contexts:
+
+########[ PARAMETER CONTEXTS ]####################################################
+
+  name:
+    - meta_content_scope: meta.name.codt7.table.sound.ambient
+    - match: \w+
+      scope: entity.name.ambient.codt7.table.sound.ambient
+    - match: ','
+      scope: punctuation.separator.codt7.table.sound.ambient
+      set: loadspec
+
+  loadspec:
+    - meta_content_scope: meta.loadspec.codt7.table.sound.ambient
+    - include: loadspec_names
+    - match: ','
+      scope: punctuation.separator.codt7.table.sound.ambient
+      set: defaultroom
+
+  defaultroom:
+    - meta_content_scope: meta.default-room.codt7.table.sound.ambient
+    - include: yesno
+    - match: ','
+      scope: punctuation.separator.codt7.table.sound.ambient
+      set: reverb
+
+  reverb:
+    - meta_content_scope: meta.reverb.codt7.table.sound.ambient
+    - match: \w+
+      scope: entity.name.reverb.codt7.table.sound.ambient markup.italic
+    - match: ','
+      scope: punctuation.separator.codt7.table.sound.ambient
+      set: nearverb
+
+  nearverb:
+    - meta_content_scope: meta.nearVerb.codt7.table.sound.ambient
+    - match: \w+
+      scope: entity.name.reverb.codt7.table.sound.ambient markup.italic
+    - match: ','
+      scope: punctuation.separator.codt7.table.sound.ambient
+      set: farverb
+
+  farverb:
+    - meta_content_scope: meta.farVerb.codt7.table.sound.ambient
+    - match: \w+
+      scope: entity.name.reverb.codt7.table.sound.ambient markup.italic
+    - match: ','
+      scope: punctuation.separator.codt7.table.sound.ambient
+      set: reverbdrylevel
+
+  reverbdrylevel:
+    - meta_content_scope: meta.reverb-dry-level.codt7.table.sound.ambient
+    - include: numbers
+    - match: ','
+      scope: punctuation.separator.codt7.table.sound.ambient
+      set: reverbwetlevel
+
+  reverbwetlevel:
+    - meta_content_scope: meta.reverb-wet-level.codt7.table.sound.ambient
+    - include: numbers
+    - match: ','
+      scope: punctuation.separator.codt7.table.sound.ambient
+      set: entitycontexttype0
+
+  entitycontexttype0:
+    - meta_content_scope: meta.entity-context-type-0.codt7.table.sound.ambient
+    - include: context_type
+    - match: ','
+      scope: punctuation.separator.codt7.table.sound.ambient
+      set: entitycontextvalue0
+
+  entitycontextvalue0:
+    - meta_content_scope: meta.entity-context-value-0.codt7.table.sound.ambient
+    - include: context_value
+    - match: ','
+      scope: punctuation.separator.codt7.table.sound.ambient
+      set: entitycontexttype1
+
+  entitycontexttype1:
+    - meta_content_scope: meta.entity-context-type-1.codt7.table.sound.ambient
+    - include: context_type
+    - match: ','
+      scope: punctuation.separator.codt7.table.sound.ambient
+      set: entitycontextvalue1
+
+  entitycontextvalue1:
+    - meta_content_scope: meta.entity-context-value-1.codt7.table.sound.ambient
+    - include: context_value
+    - match: ','
+      scope: punctuation.separator.codt7.table.sound.ambient
+      set: entitycontexttype2
+
+  entitycontexttype2:
+    - meta_content_scope: meta.entity-context-type-2.codt7.table.sound.ambient
+    - include: context_type
+    - match: ','
+      scope: punctuation.separator.codt7.table.sound.ambient
+      set: entitycontextvalue2
+
+  entitycontextvalue2:
+    - meta_content_scope: meta.entity-context-value-2.codt7.table.sound.ambient
+    - include: context_value
+    - match: ','
+      scope: punctuation.separator.codt7.table.sound.ambient
+      set: globalcontexttype
+
+  globalcontexttype:
+    - meta_content_scope: meta.global-context-type.codt7.table.sound.ambient
+    - include: context_type
+    - match: ','
+      scope: punctuation.separator.codt7.table.sound.ambient
+      set: globalcontextvalue
+
+  globalcontextvalue:
+    - meta_content_scope: meta.global-context-value.codt7.table.sound.ambient
+    - include: context_value
+    - match: ','
+      scope: punctuation.separator.codt7.table.sound.ambient
+      set: loop
+
+  loop:
+    - meta_content_scope: meta.loop.codt7.table.sound.ambient
+    - include: yesno
+    - match: ','
+      scope: punctuation.separator.codt7.table.sound.ambient
+      set: duck
+
+  duck:
+    - meta_content_scope: meta.duck.codt7.table.sound.ambient
+    - match: \w+
+      scope: entity.name.duck.codt7.table.sound.ambient markup.italic
+    - include: eol-unexpected-characters

@@ -4,12 +4,13 @@
 
 # This file is part of the T7-Sublime project.
 # T7-Sublime is an enhanced syntax-highlighting package for (almost) all Call of Duty Black Ops III developer file formats.
-# Sound Common is an internal library containing common rules which commonly used in sound-table contexts.
+# Sound Common is an internal library containing common rules which are used in various sound-table contexts.
 
 name: Sound Common
 hidden: true
 scope: text.codt7.table.sound.common
 version: 2
+extends: Packages/CoDT7 Formats/TableCommon.sublime-syntax
 
 variables:
   # Invalid numeric suffix
@@ -31,8 +32,9 @@ contexts:
 
   main:
     - meta_include_prototype: false
+    - include: comments
     # immediately push into header context which handles the first row of the table
-    - match: ''
+    - match: (?=\S)
       push: header
 
   header:
@@ -49,7 +51,7 @@ contexts:
   body:
     - meta_include_prototype: false
     - include: comments
-    # Go through the file line by line
+    # Push into column contexts at beginning of row
     - match: (?=\S)
       # every sound syntax should override 'name' to plug in its particular column order
       push: name
@@ -57,63 +59,6 @@ contexts:
   # dummy context - should be implemented by inheriting syntaxes
   name:
     - match: ''
-
-##[ COMMON CONTEXTS ]#######################################################
-
-  # to be included by the last context for a row, when only a newline or EOF is expected
-  eol-unexpected-characters:
-    - match: (?=,)
-      set: unexpected-character
-
-  unexpected-character:
-    - match: '.'
-      scope: invalid.illegal.unexpected-character.codt7.table.sound.common
-
-  numbers:
-    - match: '-'
-      scope: keyword.operator.arithmetic.codt7.table.sound.common
-    - match: '\b(\d+)((\.)\d*)?'
-      scope: meta.number.decimal.codt7.table.sound.common
-      captures:
-        1: constant.numeric.value.codt7.table.sound.common
-        2: constant.numeric.value.codt7.table.sound.common
-        3: punctuation.separator.decimal.codt7.table.sound.common
-
-  comments:
-    - match: \#+
-      scope: punctuation.definition.comment.codt7.table.sound.common
-      push: comments-body
-
-  comments-body:
-    - meta_scope: comment.line.number-sign.codt7.table.sound.common
-    # NOTE: The reason for consuming the newline character is as follows.
-    # When triggering a snippet, its scope is tested to the *right* of the
-    # cursor. So, if you don't want your snippet to trigger in a comment,
-    # you have to use something like <scope>source.shell - comment</scope>.
-    # If the newline character is not scoped as a comment too, then that
-    # scope will never work, because the scope to the right of the cursor
-    # will never be a comment scope. That is, unless we consume the newline
-    # character (or we are editing something in the middle of an existing
-    # comment).
-    - match: \n
-      pop: 1
-
-  end-of-col-look:
-    - match: (?=,|$)
-      pop: true
-
-  # For names that are referenced beyong just the sound table,
-  # e.g. string alias, sound alias, etc.
-  generic_alias:
-    - match: \w+
-      scope: entity.name.other.codt7.table.sound.common markup.italic
-
-  # For internal sound table names, such as curve types, template ids,
-  # duck names, etc. Some names scoped under this are referenced
-  # in other areas, however, such as context types/values.
-  generic_identifier:
-    - match: \w+
-      scope: variable.language.codt7.table.sound.common
 
 # These contexts below push a new scope for any context including it. That way,
 # the auto-complete scope does not need to check for multiple different scope
@@ -344,6 +289,14 @@ contexts:
       push:
         - meta_include_prototype: false
         - meta_content_scope: meta.sound-snapshot-group-t5.codt7.table.sound.common
+        - include: generic_identifier
+        - include: end-of-col-look
+
+  source_csv_names_t5:
+    - match: (?!,|$)
+      push:
+        - meta_include_prototype: false
+        - meta_content_scope: meta.sound-source-csv-t5.codt7.table.sound.common
         - include: generic_identifier
         - include: end-of-col-look
 

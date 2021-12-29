@@ -1,0 +1,77 @@
+%YAML 1.2
+---
+# http://www.sublimetext.com/docs/3/syntax.html
+
+# This file is part of the T7-Sublime project.
+# T7-Sublime is an enhanced syntax-highlighting package for (almost) all Call of Duty Black Ops III developer file formats.
+# Sound Test is a dummy syntax for testing CSV highlighting for sound table syntaxes.
+
+name: Sound Test Table
+hidden: true
+first_line_match: |-
+  (?ix:
+    \s* name \s* ,
+    \s* test_filename \s* ,
+    \s* test_level \s* ,
+    \s* test_type \s* ,
+    \s* test_global_id \s* ,
+    \s* test_secondary_id \s*
+  )
+file_extensions:
+  - sndtest.csv
+scope: text.codt7.table.sound.test
+version: 2
+extends: Packages/CoDT7 Formats/SoundCommon.sublime-syntax
+
+# The test file has a column for each scope that a column can take:
+# name,filename,level,type,global_id,secondary_id
+# name = entity.name (e.g. name of sound alias)
+# filename = string (e.g. filespec for sound object)
+# level = constant (e.g. volume level for sound object)
+# type = support.constant (e.g. limit type of sound object)
+# global_id = variable (e.g. a name of an entry from a global sound table)
+# secondary_id = entity.name markup.italic (e.g. another alias in the table)
+
+contexts:
+  name:
+    - meta_content_scope: meta.name.codt7.table.sound.test
+    - match: \w+
+      scope: entity.name.test.codt7.table.sound.test
+    - match: ','
+      scope: punctuation.separator.codt7.table.sound.test
+      set: filename
+
+  filename:
+    - meta_content_scope: meta.file-name.codt7.table.sound.test string.unquoted.codt7.table.sound.test
+    - match: ','
+      scope: punctuation.separator.codt7.table.sound.test
+      set: level
+
+  level:
+    - meta_content_scope: meta.level.codt7.table.sound.test
+    - include: numbers
+    - match: ','
+      scope: punctuation.separator.codt7.table.sound.test
+      set: type
+
+  type:
+    - meta_content_scope: meta.type.codt7.table.sound.test
+    - match: \w+
+      scope: support.constant.codt7.table.sound.test
+    - match: ','
+      scope: punctuation.separator.codt7.table.sound.test
+      set: globalid
+
+  globalid:
+    - meta_content_scope: meta.global-id.codt7.table.sound.test
+    - match: \w+
+      scope: variable.language.codt7.table.sound.test
+    - match: ','
+      scope: punctuation.separator.codt7.table.sound.test
+      set: secondaryid
+
+  secondaryid:
+    - meta_content_scope: meta.reference-id.codt7.table.sound.test
+    - match: \w+
+      scope: entity.name.other.codt7.table.sound.test markup.italic
+    - include: eol-unexpected-characters

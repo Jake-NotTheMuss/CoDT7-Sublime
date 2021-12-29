@@ -8,8 +8,22 @@
 # set of data that completely describes a sound within the game including the path to a physical WAV file (Filespec) as well
 # as numerous fields of metadata which control playback parameters of the sound at runtime.
 
-name: T5 Sound Aliases
-first_line_match: (?i:name,file,template,loadspec,secondary,group,)
+name: T5 Sound Alias Table
+# look for names that are T5 columns but not T7
+first_line_match: |-
+  (?ix:
+    \s* name \s* ,
+    ( \s* \w+ \s* , )*
+    (
+      \s*
+      (
+        vol_min | vol_max | team_vol_mod | snapshot | spatialized
+      )
+      \s*
+      (,|$)
+    )
+    ( \s* \w+ \s* , )*
+  )
 scope: text.codt7.table.sound.t5alias
 version: 2
 extends: Packages/CoDT7 Formats/SoundCommon.sublime-syntax
@@ -481,34 +495,30 @@ contexts:
       set: fileps3
 
   fileps3:
-    - meta_content_scope: meta.file-ps-3.codt7.table.sound.t5alias string.unquoted.codt7.table.sound.t5alias
+    - meta_content_scope: meta.file-PS3.codt7.table.sound.t5alias string.unquoted.codt7.table.sound.t5alias
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: filesizeps3
 
   filesizeps3:
-    - meta_content_scope: meta.file-size-ps-3.codt7.table.sound.t5alias
+    - meta_content_scope: meta.file-size-PS3.codt7.table.sound.t5alias
     - include: numbers
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: filepc
 
   filepc:
-    - meta_content_scope: meta.file-pc.codt7.table.sound.t5alias string.unquoted.codt7.table.sound.t5alias
+    - meta_content_scope: meta.file-PC.codt7.table.sound.t5alias string.unquoted.codt7.table.sound.t5alias
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: filesizepc
 
   filesizepc:
-    - meta_content_scope: meta.file-size-pc.codt7.table.sound.t5alias
+    - meta_content_scope: meta.file-size-PC.codt7.table.sound.t5alias
     - include: numbers
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
-      set:
-        - match: (?=discdata)
-          set: filewii
-        - match: ''
-          set: sourcecsv
+      set: filewii
 
   filewii:
     - meta_content_scope: meta.file-wii.codt7.table.sound.t5alias string.unquoted.codt7.table.sound.t5alias
@@ -524,7 +534,8 @@ contexts:
       set: sourcecsv
 
   sourcecsv:
-    - meta_content_scope: meta.source-csv.codt7.table.sound.t5alias
+    - meta_content_scope: meta.source-CSV.codt7.table.sound.t5alias
+    - include: source_csv_names_t5
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: language

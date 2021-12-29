@@ -7,10 +7,24 @@
 # Sound Reverb files are comma-separated tables which list reverb definitions. Reverb definitions are referenced with an
 # identifier and contain a set of particular values that parameterize a particular reverberation pattern in-game.
 
-name: Sound Reverb
-first_line_match: (?i:name,masterreturn,earlyinputlpf,earlyfeedback,earlysmear,)
-file_extensions:
-  - reverb.csv
+name: Sound Reverb Table
+# look for names that are T7 columns but not T5
+first_line_match: |-
+  (?ix:
+    \s* name \s* ,
+    ( \s* \w+ \s* , )*
+    (
+      \s*
+      (
+        masterreturn | ( early | near | far )( predelayms | feedback | smear | inputlpf )
+      )
+      \s*
+      (,|$)
+    )
+    ( \s* \w+ \s* , )*
+  )
+# 'reverb.csv' cannot be a file extension for this syntax because the global T5 reverb
+# file is named 'reverb.csv' and would be matched for T7 reverb
 scope: text.codt7.table.sound.reverb
 version: 2
 extends: Packages/CoDT7 Formats/SoundCommon.sublime-syntax
@@ -23,6 +37,13 @@ contexts:
     - meta_content_scope: meta.name.codt7.table.sound.reverb
     - match: \w+
       scope: entity.name.reverb.codt7.table.sound.reverb
+    - match: ','
+      scope: punctuation.separator.codt7.table.sound.reverb
+      set: loadspec
+
+  loadspec:
+    - meta_content_scope: meta.loadspec.codt7.table.sound.reverb
+    - include: loadspec_names
     - match: ','
       scope: punctuation.separator.codt7.table.sound.reverb
       set: masterreturn

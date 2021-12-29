@@ -8,8 +8,22 @@
 # set of data that completely describes a sound within the game including the path to a physical WAV file (Filespec) as well
 # as numerous fields of metadata which control playback parameters of the sound at runtime.
 
-name: Sound Aliases
-first_line_match: (?i:name,behavior,storage,filespec,)
+name: Sound Alias Table
+# look for names that are T7 columns but not T5
+first_line_match: |-
+  (?ix:
+    \s* name \s* ,
+    ( \s* \w+ \s* , )*
+    (
+      \s*
+      (
+        filespec | volmin | volmax | storage | behavior
+      )
+      \s*
+      (,|$)
+    )
+    ( \s* \w+ \s* , )*
+  )
 file_extensions:
   - alias.csv
 scope: text.codt7.table.sound.alias
@@ -28,13 +42,13 @@ contexts:
 # set of words rather than a general pattern. This can make it easier to notice when you
 # are writing a value into the wrong column.
 
-# All meta scope names are used for hover-triggered popups, which display the parameter
-# of the column and the value being hovered over. The parameter name is obtained from
+# All meta scope names are used for hover-triggered popups, which display the name
+# of the column and the value being hovered over. The column name is obtained from
 # the string between 'meta.' and '.codt7.table.sound.alias'. For example, when hovering over
 # the 0th column, the meta scope is 'meta.name.codt7.table.sound.alias', and the popup will display
-# 'Name' as the parameter name. Dashes are used to delimit words in the popup script.
+# 'Name' as the column name. Dashes are used to delimit words in the popup script.
 # When hovering over the file spec, 'meta.file-spec.codt7.table.sound.alias' is the meta scope, and
-# the popuo will display 'File Spec' as the parameter name.
+# the popuo will display 'File Spec' as the column name.
 
   name:
     - meta_content_scope: meta.name.codt7.table.sound.alias
@@ -43,6 +57,11 @@ contexts:
     - match: ','
       scope: punctuation.separator.codt7.table.sound.alias
       set: behavior
+    - match: (?!,)
+      push:
+        - meta_scope: meta.first-column.codt7.table.sound.common
+        - match: (?=\S)
+          pop: true
 
   behavior:
     - meta_content_scope: meta.behavior.codt7.table.sound.alias
@@ -84,8 +103,7 @@ contexts:
 
   loadspec:
     - meta_content_scope: meta.loadspec.codt7.table.sound.alias
-    - match: \w+
-      scope: variable.language.codt7.table.sound.alias
+    - include: loadspec_names
     - match: ','
       scope: punctuation.separator.codt7.table.sound.alias
       set: secondary

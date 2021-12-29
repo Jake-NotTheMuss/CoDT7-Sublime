@@ -7,8 +7,22 @@
 # Sound Reverb files are comma-separated tables which list reverb definitions. Reverb definitions are referenced with an
 # identifier and contain a set of particular values that parameterize a particular reverberation pattern in-game.
 
-name: T5 Sound Reverb
-first_line_match: (?i:name,room,roomhf,roomrollofffactor,)
+name: T5 Sound Reverb Table
+# look for names that are T5 columns but not T7
+first_line_match: |-
+  (?ix:
+    \s* name \s* ,
+    ( \s* \w+ \s* , )*
+    (
+      \s*
+      (
+        roomhf | roomrollofffactor | decayhfratio | reflectionsdelay | hfreference
+      )
+      \s*
+      (,|$)
+    )
+    ( \s* \w+ \s* , )*
+  )
 scope: text.codt7.table.sound.t5reverb
 version: 2
 extends: Packages/CoDT7 Formats/SoundCommon.sublime-syntax
