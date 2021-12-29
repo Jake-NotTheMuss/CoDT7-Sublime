@@ -16,7 +16,6 @@
 
 CoDT7[[:space:]]Formats/* linguist-detectable
 CoDT7[[:space:]]Formats/Completions/** linguist-generated
-CoDT7[[:space:]]Formats/Snippets/** linguist-generated
 CoDT7[[:space:]]Formats/test/** -linguist-detectable
 other/** linguist-vendored
 samples/** linguist-vendored
