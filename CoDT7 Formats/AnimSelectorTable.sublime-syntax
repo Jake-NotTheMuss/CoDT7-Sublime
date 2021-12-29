@@ -4,7 +4,7 @@
 
 # This file is part of the T7-Sublime project.
 # T7-Sublime is an enhanced syntax-highlighting package for (almost) all Call of Duty Black Ops III developer file formats.
-# anim.selector Tables are comma-separated tables which contain animation state data. Animation state data parameterize an
+# Anim Selector Tables are comma-separated tables which contain animation state data. Animation state data parameterize an
 # AI animation state by assigning values to AST parameters which are defined in share\raw\animtables\ast_definitions.json.
 
 name: Animation Selector Table

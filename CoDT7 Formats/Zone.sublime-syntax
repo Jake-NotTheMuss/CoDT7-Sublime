@@ -4,8 +4,8 @@
 
 # This file is part of the T7-Sublime project.
 # T7-Sublime is an enhanced syntax-highlighting package for (almost) all Call of Duty Black Ops III developer file formats.
-# Zone files are used by the Call of Duty fastfile linker. 
-# They contain a listed set of asset type-name pairs to include in the fastfile along with some other information relevant to the build.
+# Zone files are used by the Call of Duty fastfile linker. They contain a listed set of asset type-name pairs to include 
+# in the fastfile along with some other information relevant to the build.
 
 name: Zone
 file_extensions:
