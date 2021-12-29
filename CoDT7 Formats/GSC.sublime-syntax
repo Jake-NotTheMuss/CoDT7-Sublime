@@ -147,7 +147,7 @@ contexts:
         1: meta.anim-reference.codt7.gsc string.unquoted.codt7.gsc
         2: keyword.operator.other.codt7.gsc
       push:
-        - meta_scope: meta.anim-reference.codt7.gsc string.unquoted.codt7.gsc
+        - meta_content_scope: meta.anim-reference.codt7.gsc string.unquoted.codt7.gsc
         - match: '(?=[^\w:])'
           pop: true
 
