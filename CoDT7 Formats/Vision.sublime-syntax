@@ -9,7 +9,7 @@
 name: Vision
 file_extensions:
   - vision
-scope: source.codt7.vision
+scope: text.codt7.vision
 
 variables:
   parameters: 'vk(?:TT|TS|TC|TO|RGB0|L0|M0|RGB1|L1|M1|RGB2|L2|RGB3|L3|M3|RGB4|L4|M4|RM)'

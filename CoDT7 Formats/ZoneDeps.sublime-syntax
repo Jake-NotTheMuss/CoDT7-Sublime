@@ -7,6 +7,7 @@
 # Zone Dependency files contain dependency information used for zone builds.
 
 name: Zone Dependencies
+hidden: true
 file_extensions:
   - deps
 scope: text.codt7.zonedeps
