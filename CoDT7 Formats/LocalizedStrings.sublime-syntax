@@ -9,38 +9,51 @@
 name: Localized Strings
 file_extensions:
   - str
-scope: source.codt7.localizedstrings
+scope: text.codt7.localizedstrings
 
 variables:
   identifier: \b[[:upper:][:digit:]_]+\b
-  meta_keywords: 'VERSION|CONFIG|FILENOTES|ENDMARKER'
-  languages: 'LANG_ENGLISH|LANG_ENGLISHARABIC|LANG_FRENCH|LANG_GERMAN|LANG_ITALIAN|LANG_JAPANESE|LANG_POLISH|LANG_PORTUGUESE|LANG_RUSSIAN|LANG_SIMPLIFIEDCHINESE|LANG_SPANISH|LANG_TRADITIONALCHINESE'
+  languages: LANG_(?:ENGLISH|ENGLISHARABIC|FRENCH|GERMAN|ITALIAN|JAPANESE|POLISH|PORTUGUESE|RUSSIAN|SIMPLIFIEDCHINESE|SPANISH|TRADITIONALCHINESE)
 
 contexts:
   main:
-    - include: meta
-    - include: body
+    - include: directive
+    - include: reference
+    - include: comments
+
+  comments:
     - include: scope:source.codt7.common#comments
 
-  meta:
-    - match: '(?=^\s*({{meta_keywords}})\b)'
+  directive:
+    - match: ^\s*(VERSION|CONFIG|FILENOTES)\b
+      captures:
+        1: meta.directive.codt7.localizedstrings support.constant.codt7.localizedstrings
       push:
-        - meta_content_scope: meta.meta-marker.codt7.localizedstrings
-        - match: '^\s*({{meta_keywords}})\b'
-          captures:
-            1: support.constant.codt7.localizedstrings
-        - include: literal-strings
+        - match: '"'
+          scope: punctuation.definition.string.begin.codt7.localizedstrings
+          push:
+            - meta_scope: string.quoted.double.codt7.localizedstrings
+            - match: '"'
+              scope: punctuation.definition.string.end.codt7.localizedstrings
+              pop: true
+        - include: comments
+        - match: \S
+          scope: invalid.illegal.unexpected-character.codt7.localizedstrings
         - match: $\n
           pop: true
-
-  body:
-    - match: '^\s*(REFERENCE)\b'
+    - match: ^\s*(ENDMARKER)\b
       captures:
-        1: support.constant.codt7.localizedstrings markup.italic
+        1: meta.directive.codt7.localizedstrings support.constant.codt7.localizedstrings
+
+  reference:
+    - match: ^\s*(REFERENCE)\b
+      captures:
+        1: storage.type.codt7.localizedstrings
       push:
         - meta_scope: meta.string-reference.codt7.localizedstrings
         - match: $\n
           pop: true
+        - include: comments
         - match: '{{identifier}}'
           scope: entity.name.string-reference.codt7.localizedstrings
     - match: '^\s*({{languages}})\b'
@@ -50,17 +63,9 @@ contexts:
         - meta_scope: meta.string-implementation.codt7.localizedstrings
         - match: $\n
           pop: true
+        - include: comments
         - include: strings
     - include: strings
-
-  literal-strings:
-    - match: '"'
-      scope: punctuation.definition.string.begin.codt7.localizedstrings
-      push:
-        - meta_scope: string.quoted.double.codt7.localizedstrings
-        - match: '"'
-          scope: punctuation.definition.string.end.codt7.localizedstrings
-          pop: true
 
   strings:
     - match: '"'
