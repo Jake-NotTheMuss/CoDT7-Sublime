@@ -1,0 +1,110 @@
+%YAML 1.2
+---
+# http://www.sublimetext.com/docs/3/syntax.html
+
+# This file is part of the T7-Sublime project.
+# T7-Sublime is an enhanced syntax-highlighting package for (almost) all Call of Duty Black Ops III developer file formats.
+# Map files contain which describe a 3D world in Call of Duty.
+
+name: Map File
+hidden: true
+first_line_match: ^\s*iwmap\b
+scope: source.codt7.map
+
+contexts:
+  prototype:
+    - include: comments
+
+  main:
+    - include: directive
+    - include: global
+
+############[ EXPRESSIONS ]###################################################
+
+  comments:
+    - include: scope:source.codt7.common#comments
+
+  strings:
+    - match: '"'
+      scope: punctuation.definition.string.begin.codt7.map
+      push:
+        - meta_scope: string.quoted.double.codt7.map
+        - include: numbers
+        - match: '"'
+          scope: punctuation.definition.string.end.codt7.map
+          pop: true
+
+  hex-numbers:
+    - match: '-'
+      scope: punctuation.separator.codt7.map
+    - include: scope:source.codt7.common#hex-numbers-without-prefix
+
+  numbers:
+    - match: '-'
+      scope: keyword.operator.arithmetic.codt7.sound.common
+    - match: '\b(\d+)((\.)\d*)?\b'
+      scope: meta.number.decimal.codt7.sound.common
+      captures:
+        1: constant.numeric.value.codt7.sound.common
+        2: constant.numeric.value.codt7.sound.common
+        3: punctuation.separator.decimal.codt7.sound.common
+
+  block:
+    - match: '\{'
+      scope: punctuation.section.block.begin.codt7.map
+      push:
+        - meta_scope: meta.block.codt7.map
+        - match: '\}'
+          scope: punctuation.section.block.end.codt7.map
+          pop: true
+        - include: expressions
+
+  parens:
+    - match: \(
+      scope: punctuation.section.group.begin.codt7.map
+      push:
+        - meta_scope: meta.group.codt7.map
+        - match: \)
+          scope: punctuation.section.group.end.codt7.map
+          pop: true
+        - include: numbers
+
+  keywords:
+    - match: '\b(?i:guid)\b'
+      scope: variable.language.codt7.map
+      push:
+        - match: $\n
+          pop: true
+        - match: '"'
+          scope: punctuation.definition.string.begin.codt7.map
+          push:
+            - meta_scope: string.quoted.double.codt7.map
+            - include: hex-numbers
+            - match: '"'
+              scope: punctuation.definition.string.end.codt7.map
+              pop: true
+
+  params:
+    - match: \b\w+\b
+      scope: variable.parameter.codt7.map
+
+############[ GLOBAL ]####################################################
+
+  directive:
+    - match: ^(iwmap)[ \t]+(\d+)
+      captures:
+        1: keyword.other.directive.iwmap.codt7.map
+        2: constant.numeric.map-version.codt7.map
+
+  global:
+    - include: expressions
+    - match: '\}'
+      scope: invalid.illegal.stray-bracket-end.codt7.fx
+
+  expressions:
+    - include: keywords
+    - include: strings
+    - include: numbers
+    - include: params
+    - include: block
+    - include: parens
