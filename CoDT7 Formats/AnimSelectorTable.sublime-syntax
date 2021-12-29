@@ -1,0 +1,110 @@
+%YAML 1.2
+---
+# http://www.sublimetext.com/docs/3/syntax.html
+
+# This file is part of the T7-Sublime project.
+# T7-Sublime is an enhanced syntax-highlighting package for (almost) all Call of Duty Black Ops III developer file formats.
+# anim.selector Tables are comma-separated tables which contain animation state data. Animation state data parameterize an
+# AI animation state by assigning values to AST parameters which are defined in share\raw\animtables\ast_definitions.json.
+
+name: Animation Selector Table
+file_extensions:
+  - ai_ast
+scope: text.codt7.table.anim.selector
+version: 2
+
+variables:
+  ast_definitions: '_context|_context2|_cover_concealed|_cover_direction|_previous_cover_direction|_desired_cover_direction|_cover_mode|_previous_cover_mode|_cover_type|_current_location_cover_type|_previous_cover_type|_exposed_type|_stance|_desired_stance|_arrival_stance|_locomotion_should_turn|_arrival_type|_locomotion_speed|_grapple_direction|_run_n_gun_variation|_has_legs|_idgun_damage_direction|_which_board_pull|_variant_type|_low_gravity_variant|_board_attack_spot|_weapon_class|_weapon_type|_damage_weapon|_damage_direction|_damage_location|_fatal_damage_location|_damage_taken|_damage_weapon_class|_tracking_turn_yaw_min|_tracking_turn_yaw_max|_melee_distance_min|_melee_distance_max|_throw_distance_min|_throw_distance_max|_locomotion_exit_yaw_min|_locomotion_exit_yaw_max|_locomotion_motion_angle_min|_locomotion_motion_angle_max|_lookahead_angle_min|_lookahead_angle_max|_locomotion_turn_yaw_min|_locomotion_turn_yaw_max|_locomotion_arrival_yaw_min|_locomotion_arrival_yaw_max|_tactical_arrival_facing_yaw_min|_tactical_arrival_facing_yaw_max|_locomotion_arrival_distance_min|_locomotion_arrival_distance_max|_enemy_yaw_min|_enemy_yaw_max|_perfect_enemy_yaw_min|_perfect_enemy_yaw_max|_react_yaw_min|_react_yaw_max|_speed_min|_speed_max|_locomotion_face_enemy_quadrant|_locomotion_face_enemy_quadrant_previous|_traversal_type|_locomotion_pain_type|_human_locomotion_movement_type|_animation_alias|_aim_up_alias|_aim_down_alias|_aim_left_alias|_aim_right_alias|_animation_alias_semi|_animation_alias_singleshot|_animation_alias_burst3|_animation_alias_burst4|_animation_alias_burst5|_animation_alias_burst6|_animation_alias_param_f|_animation_alias_param_b|_animation_alias_param_l|_animation_alias_param_r|_animation_alias_param_balance|_animation_alias_turn_r|_animation_alias_turn_l|_param_idle_blend_dropoff|_param_turn_blend_min_ratio|_param_turn_blend_scale|_blend_in_time|_blend_out_time|_animation_mocomp|_aim_table|_gib_location|_yaw_to_cover_min|_yaw_to_cover_max|_should_run|_should_howl|_arms_position|_mind_control|_move_mode|_fire_mode|_special_death|_juke_direction|_juke_distance|_panic|_gibbed_limbs|_human_cover_flankability|_robot_step_in|_awareness|_awareness_prev|_robot_jump_direction|_robot_wallrun_direction|_robot_locomotion_type|_robot_traversal_type|_staircase_exit_type|_staircase_type|_staircase_state|_staircase_direction|_staircase_skip_num|_melee_enemy_type|_zombie_damageweapon_type|_parasite_firing_rate|_margwa_head|_margwa_teleport|_enemy|_patrol|_knockdown_direction|_getup_direction|_push_direction|_human_locomotion_variation|_robot_mode|_low_gravity|_knockdown_type|_mechz_part|_apothicon_bamf_distance_min|_apothicon_bamf_distance_max|_keeper_protector_attack|_keeper_protector_attack_type|_whirlwind_speed|_quad_wall_crawl|_quad_phase_direction|_quad_phase_distance|_zombie_blackholebomb_pull_state'
+  ast_enums: 'CONCEALED|UNCONCEALED|COVER_BACK_DIRECTION|COVER_FRONT_DIRECTION|COVER_LEFT_DIRECTION|COVER_RIGHT_DIRECTION|COVER_ALERT|COVER_BLIND|COVER_LEAN|COVER_OVER|COVER_SCAN|COVER_VANTAGE|COVER_CROUCH|COVER_EXPOSED|COVER_LEFT|COVER_NONE|COVER_PILLAR|COVER_RIGHT|COVER_STAND|EXPOSED_YES|EXPOSED_NO|CROUCH|PRONE|PRONE_BACK|PRONE_FRONT|STAND|SWIM|SHOULD_TURN|SHOULD_NOT_TURN|DONT_ARRIVE_AT_GOAL|ARRIVE_AT_GOAL|LOCOMOTION_SPEED_WALK|LOCOMOTION_SPEED_RUN|LOCOMOTION_SPEED_SPRINT|LOCOMOTION_SPEED_SUPER_SPRINT|LOCOMOTION_SPEED_BURNED|LOCOMOTION_SPEED_JUMP_PAD_SUPER_SPRINT|LOCOMOTION_SPEED_SLIDE|FRONT|BACK|LEFT|RIGHT|VARIATION_STRAFE_1|VARIATION_STRAFE_2|VARIATION_FORWARD|HAS_LEGS_YES|HAS_LEGS_NO|RIFLE|AUTO|SEMI|unknown|gadget_servo_shortout|gadget_immolation|gadget_firefly_swarm|gadget_firefly_swarm_upgraded|gadget_system_overload|gadget_system_overload_upgraded|gadget_exo_breakdown|gadget_sensory_overload|gadget_forced_malfunction|gadget_concussive_wave|gadget_rapid_strike|gadget_rapid_strike_upgraded|gadget_es_strike|gadget_es_strike_upgraded|gadget_surge|gadget_takedown|gadget_takedown_upgraded|gadget_ravage_core|gadget_ravage_core_upgraded|gadget_proximity_det|gadget_mrpukey|hero_gravityspikes_cybercom|hero_gravityspikes_cybercom_upgraded|ravage_core_emp_grenade|CHEST|GROIN|HEAD|LEFT_ARM|LEFT_LEG|LEGS|RIGHT_ARM|RIGHT_LEG|HIPS|LIGHT|HEAVY|EXPLOSIVE|ELECTRIFIED|MELEE|PISTOL|LOCOMOTION_FACE_ENEMY_BACK|LOCOMOTION_FACE_ENEMY_FRONT|LOCOMOTION_FACE_ENEMY_LEFT|LOCOMOTION_FACE_ENEMY_NONE|LOCOMOTION_FACE_ENEMY_RIGHT|LOCOMOTION_MOVING_PAIN_SHORT|LOCOMOTION_MOVING_PAIN_MED|LOCOMOTION_MOVING_PAIN_LONG|HUMAN_LOCOMOTION_MOVEMENT_PATROL|HUMAN_LOCOMOTION_MOVEMENT_SPRINT|HUMAN_LOCOMOTION_MOVEMENT_DEFAULT||adjust_to_cover|mocomp_adjust_stance@cover|mocomp_adjust_to_cover@cover|mocomp_charge_in_melee@locomotion|mocomp_charge_melee@locomotion|mocomp_cover_exit@locomotion|mocomp_cover_pain@cover|mocomp_death@exposed|mocomp_death@locomotion|mocomp_death_gravity@exposed|mocomp_death_gravity@locomotion|mocomp_default_ignore_pain@cover|mocomp_flank@cover|mocomp_flank_stand|mocomp_force_face_enemy|mocomp_exposed_exit@locomotion|mocomp_exposed_face_current_angle@exposed|mocomp_exposed_face_enemy@locomotion|mocomp_generic_ignore_pain@cover|mocomp_generic_animation|mocomp_idle@cover|mocomp_idle@exposed|mocomp_move@locomotion|mocomp_move_arrival@locomotion|mocomp_move_pain@locomotion|mocomp_move_tactical_walk@locomotion|mocomp_move_traversal@locomotion|mocomp_move_strict_traversal@locomotion|mocomp_move_turn@locomotion|mocomp_move_turn_dog@locomotion|mocomp_pain@exposed|mocomp_turn@exposed|mocomp_melee@exposed|mocomp_tactical_turn@locomotion|mocomp_tactical_face_enemy@locomotion|mocomp_trap_attack@mechz|mocomp_board_tear@zombie|mocomp_barricade_enter@zombie|mocomp_barricade_enter_no_z@zombie|robot_charge_in@locomotion|robot_exposed_exit@locomotion|robot_rogue_charge_melee|robot_juke|robot_procedural_traversal|robot_start_traversal|robot_start_wallrun|mocomp_death_balcony@exposed|mocomp_ignore_pain_face_enemy|mocomp_recovery@special_pain|mocomp_death_idgun@zombie|mocomp_vortex_pull@zombie|mocomp_death_idgun_hole@zombie|mocomp_staircase_enter|mocomp_staircase_loop|mocomp_staircase_exit|mocomp_teleport_traversal@margwa|mocomp_teleport_traversal@zombie|mocomp_turn@zombie|mocomp_bonuszm_special_traversal|mocomp_idle_special_factory|mocomp_melee_jump@zombie|mocomp_zombie_idle@zombie|mocomp_attack_object@zombie|mocomp_teleport_traversal@mechz|mocomp_tomb_mechz_traversal@mechz|mocomp_teleport_traversal@zombie_quad|mocomp_teleport_out_traversal@keeper_companion|mocomp_teleport_in_traversal@keeper_companion|mocomp_keeper_companion_idle@keeper_companion|mocomp_keeper_tactical_walk@keeper_companion|mocomp_teleport@apothicon_fury|mocomp_juke@apothicon_fury|mocomp_bamf@apothicon_fury|quad_wall_traversal|quad_wall_jump_off|quad_move_strict_traversal|quad_phase|mocomp_face_tank@mechz|mocomp_jump_tank@mechz|mocomp_drop@faller|mocomp_ceiling_death@faller|cover|default|default_wide|locomotion|locomotion_wide|cover_concealed_over|cover_left_lean|cover_right_lean|cover_over|cover_vantage|pillar_left_lean|pillar_right_lean|robot_cover_over|robot_crawler|robot_locomotion|wallrun_l|wallrun_r|staircase|robot_wallrun_l|robot_wallrun_r|ARMS|RUN|WALK|HOWL|DONT_HOWL|ARMS_UP|ARMS_DOWN|NORMAL|MIND_CONTROLLED|MARCHING|FULLAUTO|BURST|SINGLESHOT|BALCONY|BALCONY_NORAIL|FORWARD|RIGHT_FRONT|LEFT_FRONT|LONG|MEDIUM|SHORT|PANIC|CALM|BOTH_ARMS|NONE|FLANKABLE|UNFLANKABLE|FAST|SLOW|UNAWARE|LOW_ALERT|HIGH_ALERT|COMBAT|DOWN|IN|OUT|UP|alt1|alt2|alt3|alt4|alt5|GROUND|WALL|STAIRCASE_UP_EXIT_L_3_STAIRS|STAIRCASE_UP_EXIT_L_4_STAIRS|STAIRCASE_UP_EXIT_R_3_STAIRS|STAIRCASE_UP_EXIT_R_4_STAIRS|STAIRCASE_DOWN_EXIT_L_2_STAIRS|STAIRCASE_DOWN_EXIT_R_2_STAIRS|stairs8x8|stairs8x12|stairs8x16|STAIRCASE_START|STAIRCASE_LOOP|STAIRCASE_END|STAIRCASE_UP|STAIRCASE_DOWN|STAIRCASE_SKIP_3|STAIRCASE_SKIP_4|STAIRCASE_SKIP_6|STAIRCASE_SKIP_8|FIREFLYSWARM|REGULAR|PACKED|MIDDLE|HAS_ENEMY|NO_ENEMY|PATROL_ENABLED|PATROL_DISABLED|GETUP_BACK|GETUP_BELLY|COMPANION|LOW|KNOCKDOWN_STUN|KNOCKDOWN_SHOVED|MECHZ_FACEPLATE|MECHZ_POWERCORE|MECHZ_GUN|ACTIVE|INACTIVE|COMBO|WHIRLWIND_NORMAL|WHIRLWIND_FAST|QUAD_WALL_CRAWL_START|QUAD_WALL_CRAWL_THEATER|QUAD_PHASE_LEFT|QUAD_PHASE_RIGHT|QUAD_PHASE_FORWARD|QUAD_PHASE_SHORT|QUAD_PHASE_LONG|BHB_PULL_SLOW|BHB_PULL_FAST'
+
+contexts:
+  prototype:
+    - include: comments
+
+  main:
+    - include: global
+
+  comments:
+    - include: scope:text.codt7.table.sound.common#comments
+
+  global:
+    - match: (\w+)\s*(@)\s*(\w*)(?:(>)(\w+)\s*(?:(@)\s*(\w*))?)?
+      captures:
+        1: meta.ASM-substate.codt7.table.anim.selector entity.name.substate.codt7.table.anim.selector
+        2: keyword.operator.selector.codt7.table.anim.selector
+        3: meta.ASM-state.codt7.table.anim.selector entity.name.parent-state.codt7.table.anim.selector
+        4: keyword.operator.transition.codt7.table.anim.selector
+        5: meta.ASM-substate.codt7.table.anim.selector entity.name.substate.codt7.table.anim.selector
+        6: keyword.operator.selector.codt7.table.anim.selector
+        7: meta.ASM-state.codt7.table.anim.selector entity.name.parent-state.codt7.table.anim.selector
+    - match: ','
+      scope: punctuation.separator.codt7.table.anim.selector
+      push: anim-substate-body
+
+  anim-substate-body:
+    - match: \b(?i:{{ast_definitions}})\b
+      scope: meta.AST-definition.codt7.table.anim.selector variable.parameter.codt7.table.anim.selector
+    - match: \b(?i:{{ast_enums}})\b
+      scope: meta.enum.codt7.table.anim.selector support.constant.codt7.table.anim.selector
+    - include: scope:text.codt7.table.sound.common#numbers
+    - match: \b(?i:anim_)\w+\b
+      scope: meta.AM-alias.codt7.table.anim.selector entity.name.anim-alias markup.italic
+    - match: \bvoid\b
+      scope: storage.type.codt7.table.anim.selector
+    - match: ^\s*(,)\s*$
+      captures:
+        1: punctuation.separator.codt7.table.anim.selector
+      pop: true
+    - match: ','
+      scope: punctuation.separator.codt7.table.anim.selector
+    - match: \*
+      scope: keyword.operator.other.codt7.table.anim.selector
+    # match anything else as string
+    - match: '.'
+      scope: meta.string.codt7.table.anim.selector string.unquoted.codt7.table.anim.selector
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
