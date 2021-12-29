@@ -1,5 +1,46 @@
 [
 	{
+		"id": "file",
+		"children":
+		[
+			{
+				"caption": "New File From Template",
+				"mnemonic": "N",
+				"children":
+				[
+					{
+						"caption": "Localized Strings",
+						"command": "new_codt7_localized_strings"
+					},
+					{
+						"caption": "Vision",
+						"command": "new_codt7_vision"
+					},
+					{
+						"caption": "Sound Alias",
+						"command": "new_codt7_sound_alias"
+					},
+					{
+						"caption": "Sound Reverb",
+						"command": "new_codt7_sound_reverb"
+					},
+					{
+						"caption": "Sound T5 Alias",
+						"command": "new_codt7_sound_t5_alias"
+					},
+					{
+						"caption": "Sound T5 Reverb",
+						"command": "new_codt7_sound_t5_reverb"
+					},
+					{
+						"caption": "Sound Ambient",
+						"command": "new_codt7_sound_ambient"
+					}
+				]
+			}
+		]
+	},
+	{
 		"id": "edit",
 		"children":
 		[
@@ -10,7 +51,27 @@
 					{ "command": "toggle_documentation", "caption": "Toggle Documentation Block" }
 				]
 			},
-			{ "command": "toggle_devblock", "caption": "Toggle Developer Block", "mnemonic": "D" }
+			{ "command": "toggle_devblock", "caption": "Toggle Developer Block", "mnemonic": "D" },
+			{
+				"id": "codt7",
+				"caption": "CoDT7",
+				"children":
+				[
+					{
+						"id": "codt7_sound",
+						"caption": "Sound Table",
+						"children":
+						[
+							{ "command": "new_sound_alias_entry", "caption": "New Sound Alias Entry" },
+							{ "command": "new_sound_reverb_entry", "caption": "New Sound Reverb Entry" },
+							{ "command": "new_sound_t5_alias_entry", "caption": "New Sound T5 Alias Entry" },
+							{ "command": "new_sound_t5_reverb_entry", "caption": "New Sound T5 Reverb Entry" },
+							{ "command": "new_sound_ambient_entry", "caption": "New Sound Ambient Entry" }
+						]
+					}
+				]
+					
+			}
 		]
 	}
 ]

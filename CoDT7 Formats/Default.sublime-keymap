@@ -5,11 +5,13 @@
 					{ "key": "selector", "operator": "equal", "operand": "source.codt7.gsc" }
 			]
 	},
+	// toggle devblock
 	{ "keys": ["alt+d"], "command": "toggle_devblock", "context":
 			[
 					{ "key": "selector", "operator": "equal", "operand": "source.codt7.gsc" }
 			]
 	},
+	// auto-remove devblock markers on backspace
 	{ "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/CoDT7 Formats/Delete Left Right X2.sublime-macro"}, "context":
 			[
 					{ "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
@@ -69,5 +71,67 @@
 					{ "key": "following_text", "operator": "regex_contains", "operand": "^#/", "match_all": true },
 					{ "key": "selector", "operator": "equal", "operand": "source.codt7.gsc & (meta.block)" }
 			]
+	},
+	// template command for new files with codt7 scope
+	{ "keys": ["ctrl+alt+n"], "command": "new_codt7_localized_strings", "context":
+		[
+			{ "key": "selector", "operator": "equal", "operand": "text.codt7.localizedstrings" }
+		]
+	},
+	{ "keys": ["ctrl+alt+n"], "command": "new_codt7_vision", "context":
+		[
+			{ "key": "selector", "operator": "equal", "operand": "text.codt7.vision" }
+		]
+	},
+	{ "keys": ["ctrl+alt+n"], "command": "new_codt7_sound_alias", "context":
+		[
+			{ "key": "selector", "operator": "equal", "operand": "text.codt7.table.sound.alias" }
+		]
+	},
+	{ "keys": ["ctrl+alt+n"], "command": "new_codt7_sound_reverb", "context":
+		[
+			{ "key": "selector", "operator": "equal", "operand": "text.codt7.table.sound.reverb" }
+		]
+	},
+	{ "keys": ["ctrl+alt+n"], "command": "new_codt7_sound_t5_alias", "context":
+		[
+			{ "key": "selector", "operator": "equal", "operand": "text.codt7.table.sound.t5alias" }
+		]
+	},
+	{ "keys": ["ctrl+alt+n"], "command": "new_codt7_sound_t5_reverb", "context":
+		[
+			{ "key": "selector", "operator": "equal", "operand": "text.codt7.table.sound.t5reverb" }
+		]
+	},
+	{ "keys": ["ctrl+alt+n"], "command": "new_codt7_sound_ambient", "context":
+		[
+			{ "key": "selector", "operator": "equal", "operand": "text.codt7.table.sound.ambient" }
+		]
+	},
+	// table entry templates
+	{ "keys": ["ctrl+alt+t"], "command": "new_sound_alias_entry", "context":
+		[
+			{ "key": "selector", "operator": "equal", "operand": "text.codt7.table.sound.alias" }
+		]
+	},
+	{ "keys": ["ctrl+alt+t"], "command": "new_sound_reverb_entry", "context":
+		[
+			{ "key": "selector", "operator": "equal", "operand": "text.codt7.table.sound.reverb" }
+		]
+	},
+	{ "keys": ["ctrl+alt+t"], "command": "new_sound_t5_alias_entry", "context":
+		[
+			{ "key": "selector", "operator": "equal", "operand": "text.codt7.table.sound.t5alias" }
+		]
+	},
+	{ "keys": ["ctrl+alt+t"], "command": "new_sound_t5_reverb_entry", "context":
+		[
+			{ "key": "selector", "operator": "equal", "operand": "text.codt7.table.sound.t5reverb" }
+		]
+	},
+	{ "keys": ["ctrl+alt+t"], "command": "new_sound_ambient_entry", "context":
+		[
+			{ "key": "selector", "operator": "equal", "operand": "text.codt7.table.sound.ambient" }
+		]
 	}
 ]

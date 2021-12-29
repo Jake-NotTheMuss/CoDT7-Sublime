@@ -1,4 +1,9 @@
 [
 	{ "caption": "Toggle Documentation Block", "command": "toggle_documentation" },
-	{ "caption": "Toggle Developer Block", "command": "toggle_devblock" }
+	{ "caption": "Toggle Developer Block", "command": "toggle_devblock" },
+	{ "caption": "New Sound Alias Entry", "command": "new_sound_alias_entry" },
+	{ "caption": "New Sound Reverb Entry", "command": "new_sound_reverb_entry" },
+	{ "caption": "New Sound T5 Alias Entry", "command": "new_sound_t5_alias_entry" },
+	{ "caption": "New Sound T5 Reverb Entry", "command": "new_sound_t5_reverb_entry" },
+	{ "caption": "New Sound Ambient Entry", "command": "new_sound_ambient_entry" }
 ]
