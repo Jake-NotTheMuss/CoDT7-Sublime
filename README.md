@@ -17,20 +17,20 @@ Current Support:
 
 - GSC (.csc, .gsc, .gsh)
 - Zone (.zone, .zpkg, .class)
-- Zone Dependency (.deps)
 - Localized Strings (.str)
 - FX (.efx)
-- XAsset (.xmodel_export, .xanim_export, .nt_export, .xcam_export)
 - Vision (.vision)
 - Sound Alias (.alias.csv)
 - Sound Reverb (.reverb.csv)
+- Sound Ambient (.ambient.csv)
+- Anim Tree (.atr)
+- Anim Selector Table (.ai_ast)
+- Anim Mapping Table (.ai_am)
 
 Future Support:
-
-- Lensflare (.klf)
-- Sound Ambient (.ambient.csv)
-- Animtree (.atr)
-- Animtable (.ai_am, .ai_ast)
+- Tech Set Def (.techsetdef)
+- Compute Shader Def (.csdef)
+- Player Anim Script (.script)
 
 ... to name a few.
 
