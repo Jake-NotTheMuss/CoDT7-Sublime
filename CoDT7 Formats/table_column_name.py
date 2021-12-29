@@ -12,7 +12,7 @@ def get_field_name(scope, separator):
 
 def symbol_at_point(view, pt):
     symbol = view.substr(view.expand_by_class(pt, sublime.CLASS_WORD_START | sublime.CLASS_WORD_END, ","))
-    return symbol.strip(',')
+    return symbol.strip().strip(',')
 
 def _popup_css():
     return """
