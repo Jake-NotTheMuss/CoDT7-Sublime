@@ -52,10 +52,12 @@ contexts:
         - include: expressions
 
   keywords:
-    - match: '\b(?i:new)\b'
-      scope: keyword.new.codt7.fx
+    - match: \b(?i)(new)(\d+)?\b
+      captures:
+        1: keyword.new.codt7.fx
+        2: constant.numeric.value.codt7.fx
       push:
-        - match: '(?=\{)'
+        - match: (?=\{)
           set: new-block
         - match: (?=\S)
           pop: true
