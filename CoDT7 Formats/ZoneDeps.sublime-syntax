@@ -10,11 +10,11 @@ name: Zone Dependencies
 hidden: true
 file_extensions:
   - deps
-scope: text.codt7.zonedeps
+scope: text.codt7.zone.deps
 extends: 'Packages/CoDT7 Formats/Zone.sublime-syntax'
 
 variables:
-  meta_info_keys: 'version|errorcount|assetlist'
+  build_info_types: 'version|errorcount|assetlist'
   dep_keys: 'file|spawn'
 
 contexts:
@@ -23,48 +23,56 @@ contexts:
     - include: scope:source.codt7.common#comments
 
   global:
-    - include: meta-info
-    - include: meta-directives
+    - include: build-info
+    - include: directive
     - include: assets
 
-  meta-info:
-    - match: '^\s*(?=({{meta_info_keys}})\b)'
+  build-info:
+    - match: ^\s*(version|errorcount)\b
+      captures:
+        1: support.type.codt7.zone.deps
       push:
-        - meta_content_scope: meta.info-line.codt7.zonedeps
+        - meta_scope: meta.build-info.codt7.zone.deps
         - match: $\n
           pop: true
-        - match: '(assetlist)\s*(,)\s*(\w+)$'
-          captures:
-            1: support.constant.codt7.zonedeps markup.italic
-            2: punctuation.separator.codt7.zonedeps
-            3: constant.other.codt7.zonedeps
-        - match: '\b({{meta_info_keys}})\b'
-          scope: support.constant.codt7.zonedeps markup.italic
-        - include: non-words
+        - match: ','
+          scope: punctuation.separator.codt7.zone.deps
+        - include: numbers
+    - match: ^\s*(assetlist)\b
+      captures:
+        1: support.type.codt7.zone.deps
+      push:
+        - meta_scope: meta.build-info.codt7.zone.deps
+        - match: $\n
+          pop: true
+        - match: ','
+          scope: punctuation.separator.codt7.zone.deps
+        - match: \w+
+          scope: entity.name.zone.codt7.zone.deps
 
   non-words:
     - match: ','
-      scope: punctuation.separator.codt7.zonedeps
+      scope: punctuation.separator.codt7.zone.deps
     - include: numbers
 
   assets:
     - match: '^\s*(?=({{all_types}})\b)'
       push:
-        - meta_content_scope: meta.dependency-header.codt7.zonedeps
+        - meta_content_scope: meta.dependency-header.codt7.zone.deps
         - match: $\n
           pop: true
         - include: asset-type
         - match: ','
-          scope: punctuation.separator.codt7.zonedeps
+          scope: punctuation.separator.codt7.zone.deps
           set:
-            - meta_content_scope: meta.dependency-header.codt7.zonedeps entity.name.asset.codt7.zonedeps
+            - meta_content_scope: meta.dependency-header.codt7.zone.deps entity.name.asset.codt7.zone.deps
             - match: $\n
               pop: true
             - match: ','
-              scope: invalid.illegal.unexpected-character.codt7.zonedeps
+              scope: invalid.illegal.unexpected-character.codt7.zone.deps
     - match: '^\s*(?=({{dep_keys}})\b)'
       push:
-        - meta_content_scope: meta.dependency-item.codt7.zonedeps
+        - meta_content_scope: meta.dependency-item.codt7.zone.deps
         - match: $\n
           pop: true
         - match: '(?=file\b)'
@@ -74,43 +82,43 @@ contexts:
 
   dep-type-common:
     - match: '\b{{dep_keys}}\b'
-      scope: support.constant.codt7.zonedeps markup.italic
+      scope: support.type.codt7.zone.deps
 
   dep-type-file:
-    - meta_content_scope: meta.dependency-item.file.codt7.zonedeps
+    - meta_content_scope: meta.dependency-item.file.codt7.zone.deps
     - match: $\n
       pop: true
     - include: dep-type-common
     - match: ','
-      scope: punctuation.separator.codt7.zonedeps
+      scope: punctuation.separator.codt7.zone.deps
       set: file-name
 
   file-name:
-    - meta_content_scope: meta.dependency-item.codt7.zonedeps entity.name.filename.codt7.zonedeps
+    - meta_content_scope: meta.dependency-item.codt7.zone.deps entity.name.filename.codt7.zone.deps
     - match: $\n
       pop: true
     - match: '(?=,|$)'
       set: comma-separated-numbers
 
   comma-separated-numbers:
-    - meta_content_scope: meta.dependency-item.codt7.zonedeps
+    - meta_content_scope: meta.dependency-item.codt7.zone.deps
     - match: $\n
       pop: true
     - match: ','
-      scope: punctuation.separator.codt7.zonedeps
+      scope: punctuation.separator.codt7.zone.deps
       push:
-        - meta_content_scope: constant.numeric.value.codt7.zonedeps
+        - meta_content_scope: constant.numeric.value.codt7.zone.deps
         - match: '(?=,|$)'
           pop: true
         - match: '[^\h\.]'
-          scope: invalid.illegal.unexpected-character.codt7.zonedeps
+          scope: invalid.illegal.unexpected-character.codt7.zone.deps
 
   dep-type-spawn:
-    - meta_content_scope: meta.dependency-item.spawn.codt7.zonedeps
+    - meta_content_scope: meta.dependency-item.spawn.codt7.zone.deps
     - match: $\n
       pop: true
     - include: dep-type-common
     - match: ','
-      scope: punctuation.separator.codt7.zonedeps
-    - match: '\b({{header_identifiers}})\b'
-      scope: keyword.other markup.italic
+      scope: punctuation.separator.codt7.zone.deps
+    - match: '\b({{header_directives}})\b'
+      scope: keyword.other.directive.codt7.zone.deps

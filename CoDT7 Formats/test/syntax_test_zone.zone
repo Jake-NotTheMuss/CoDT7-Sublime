@@ -1,9 +1,9 @@
 /* SYNTAX TEST "Packages/CoDT7 Formats/Zone.sublime-syntax" */
 
 >mode,core
-/*^^^^^^^^ meta.header */
-/* <- punctuation.header-directive */
-/*^ keyword */
+/*^^^^^^^^ meta.directive */
+/* <- punctuation.definition.directive.begin */
+/*^ keyword.other.directive */
 /*   ^ punctuation.separator */
 /*    ^ constant.language */
 
@@ -19,8 +19,8 @@
 /* <- punctuation.definition.comment */
 
 >level.xpak_write,ZONENAME
-/*^^^^^^^^^^^^^^^^^^^^^^^^ meta.header */
-/* <- punctuation.header-directive */
+/*^^^^^^^^^^^^^^^^^^^^^^^^ meta.directive */
+/* <- punctuation.definition.directive.begin */
 /*^ constant.language */
 /*    ^ punctuation.accessor */
 /*     ^ variable.parameter */
@@ -28,8 +28,8 @@
 /*                ^ support.constant */
 
 >level.umbra_accurate_occlusion_threshold,768
-/*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.header */
-/* <- punctuation.header-directive */
+/*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.directive */
+/* <- punctuation.definition.directive.begin */
 /*^ constant.language */
 /*    ^ punctuation.accessor */
 /*     ^ variable.parameter */
@@ -49,10 +49,11 @@ ignore_type,all|-xmodel
 /* <- keyword */
 /*         ^ punctuation.separator */
 /*          ^ variable.language */
-/*             ^^ keyword.operator */
-/*               ^ entity.name.type */
+/*             ^^ keyword.control */
+/*               ^ support.type.asset */
 xmodel,p7_lab_sector_livingroom_screen_wall
 /*     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.asset-name */
+/*^ support.type.asset */
 /*    ^ punctuation.separator */
 ignore_type,reset
 /*^^^^^^^^^^^^^^^ meta.directive */
@@ -65,5 +66,5 @@ ignore_type,reset
 
 rawfile,mod.cfg
 /*      ^^^^^^^ meta.asset-name */
-/*^ support.type */
+/*^ support.type.raw */
 /*     ^ punctuation.separator */

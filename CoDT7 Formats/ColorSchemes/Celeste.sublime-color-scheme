@@ -2,6 +2,24 @@
 	"rules":
 	[
 		{
+			"name": "CoDT7 Zone Directive",
+			"scope": "text.codt7.zone & keyword.other.directive",
+			"foreground": "var(black)",
+			"font_style": "italic"
+		},
+		{
+			"name": "CoDT7 GDT Asset Type",
+			"scope": "support.type.asset.codt7",
+			"foreground": "var(orange)",
+			"font_style": "italic"
+		},
+		{
+			"name": "CoDT7 Raw Asset Type",
+			"scope": "support.type.raw.codt7",
+			"foreground": "var(black)",
+			"font_style": "italic"
+		},
+		{
 			"name": "CoDT7 Anim Parent State",
 			"scope": "text.codt7.table.anim & entity.name.parent-state",
 			"foreground": "var(orange)",
