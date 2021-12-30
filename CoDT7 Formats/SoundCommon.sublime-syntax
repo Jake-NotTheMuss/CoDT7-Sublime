@@ -26,8 +26,7 @@ variables:
 contexts:
   # Automatically included for each column context so early newlines correctly pop.
   prototype:
-    - match: $\n
-      pop: true
+    - include: end-of-row
     - include: comments
 
   main:

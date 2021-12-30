@@ -34,7 +34,7 @@ contexts:
 ########[ PARAMETER CONTEXTS ]####################################################
 
   name:
-    - meta_content_scope: meta.name.codt7.table.sound.reverb
+    - meta_content_scope: meta.col-name.codt7.table.sound.reverb
     - match: \w+
       scope: entity.name.reverb.codt7.table.sound.reverb
     - match: ','
@@ -42,167 +42,167 @@ contexts:
       set: loadspec
 
   loadspec:
-    - meta_content_scope: meta.loadspec.codt7.table.sound.reverb
+    - meta_content_scope: meta.col-loadspec.codt7.table.sound.reverb
     - include: loadspec_names
     - match: ','
       scope: punctuation.separator.codt7.table.sound.reverb
       set: masterreturn
 
   masterreturn:
-    - meta_content_scope: meta.master-return.codt7.table.sound.reverb
+    - meta_content_scope: meta.col-master-return.codt7.table.sound.reverb
     - include: numbers
     - match: ','
       scope: punctuation.separator.codt7.table.sound.reverb
       set: earlyinputlpf
 
   earlyinputlpf:
-    - meta_content_scope: meta.early-input-LPF.codt7.table.sound.reverb
+    - meta_content_scope: meta.col-early-input-LPF.codt7.table.sound.reverb
     - include: numbers
     - match: ','
       scope: punctuation.separator.codt7.table.sound.reverb
       set: earlyfeedback
 
   earlyfeedback:
-    - meta_content_scope: meta.early-feedback.codt7.table.sound.reverb
+    - meta_content_scope: meta.col-early-feedback.codt7.table.sound.reverb
     - include: numbers
     - match: ','
       scope: punctuation.separator.codt7.table.sound.reverb
       set: earlysmear
 
   earlysmear:
-    - meta_content_scope: meta.early-smear.codt7.table.sound.reverb
+    - meta_content_scope: meta.col-early-smear.codt7.table.sound.reverb
     - include: numbers
     - match: ','
       scope: punctuation.separator.codt7.table.sound.reverb
       set: earlybasedelayms
 
   earlybasedelayms:
-    - meta_content_scope: meta.early-base-delay-MS.codt7.table.sound.reverb
+    - meta_content_scope: meta.col-early-base-delay-MS.codt7.table.sound.reverb
     - include: numbers
     - match: ','
       scope: punctuation.separator.codt7.table.sound.reverb
       set: earlypredelayms
 
   earlypredelayms:
-    - meta_content_scope: meta.early-pre-delay-MS.codt7.table.sound.reverb
+    - meta_content_scope: meta.col-early-pre-delay-MS.codt7.table.sound.reverb
     - include: numbers
     - match: ','
       scope: punctuation.separator.codt7.table.sound.reverb
       set: earlyreturn
 
   earlyreturn:
-    - meta_content_scope: meta.early-return.codt7.table.sound.reverb
+    - meta_content_scope: meta.col-early-return.codt7.table.sound.reverb
     - include: numbers
     - match: ','
       scope: punctuation.separator.codt7.table.sound.reverb
       set: nearinputlpf
 
   nearinputlpf:
-    - meta_content_scope: meta.near-input-LPF.codt7.table.sound.reverb
+    - meta_content_scope: meta.col-near-input-LPF.codt7.table.sound.reverb
     - include: numbers
     - match: ','
       scope: punctuation.separator.codt7.table.sound.reverb
       set: nearfeedback
 
   nearfeedback:
-    - meta_content_scope: meta.near-feedback.codt7.table.sound.reverb
+    - meta_content_scope: meta.col-near-feedback.codt7.table.sound.reverb
     - include: numbers
     - match: ','
       scope: punctuation.separator.codt7.table.sound.reverb
       set: nearreturn
 
   nearreturn:
-    - meta_content_scope: meta.near-return.codt7.table.sound.reverb
+    - meta_content_scope: meta.col-near-return.codt7.table.sound.reverb
     - include: numbers
     - match: ','
       scope: punctuation.separator.codt7.table.sound.reverb
       set: nearlowdamp
 
   nearlowdamp:
-    - meta_content_scope: meta.near-low-damp.codt7.table.sound.reverb
+    - meta_content_scope: meta.col-near-low-damp.codt7.table.sound.reverb
     - include: numbers
     - match: ','
       scope: punctuation.separator.codt7.table.sound.reverb
       set: nearhighdamp
 
   nearhighdamp:
-    - meta_content_scope: meta.near-high-damp.codt7.table.sound.reverb
+    - meta_content_scope: meta.col-near-high-damp.codt7.table.sound.reverb
     - include: numbers
     - match: ','
       scope: punctuation.separator.codt7.table.sound.reverb
       set: neardecaytime
 
   neardecaytime:
-    - meta_content_scope: meta.near-decay-time.codt7.table.sound.reverb
+    - meta_content_scope: meta.col-near-decay-time.codt7.table.sound.reverb
     - include: numbers
     - match: ','
       scope: punctuation.separator.codt7.table.sound.reverb
       set: nearsmear
 
   nearsmear:
-    - meta_content_scope: meta.near-smear.codt7.table.sound.reverb
+    - meta_content_scope: meta.col-near-smear.codt7.table.sound.reverb
     - include: numbers
     - match: ','
       scope: punctuation.separator.codt7.table.sound.reverb
       set: nearpredelayms
 
   nearpredelayms:
-    - meta_content_scope: meta.near-pre-delay-MS.codt7.table.sound.reverb
+    - meta_content_scope: meta.col-near-pre-delay-MS.codt7.table.sound.reverb
     - include: numbers
     - match: ','
       scope: punctuation.separator.codt7.table.sound.reverb
       set: farinputlpf
 
   farinputlpf:
-    - meta_content_scope: meta.far-input-LPF.codt7.table.sound.reverb
+    - meta_content_scope: meta.col-far-input-LPF.codt7.table.sound.reverb
     - include: numbers
     - match: ','
       scope: punctuation.separator.codt7.table.sound.reverb
       set: farfeedback
 
   farfeedback:
-    - meta_content_scope: meta.far-feedback.codt7.table.sound.reverb
+    - meta_content_scope: meta.col-far-feedback.codt7.table.sound.reverb
     - include: numbers
     - match: ','
       scope: punctuation.separator.codt7.table.sound.reverb
       set: farreturn
 
   farreturn:
-    - meta_content_scope: meta.far-return.codt7.table.sound.reverb
+    - meta_content_scope: meta.col-far-return.codt7.table.sound.reverb
     - include: numbers
     - match: ','
       scope: punctuation.separator.codt7.table.sound.reverb
       set: farlowdamp
 
   farlowdamp:
-    - meta_content_scope: meta.far-low-damp.codt7.table.sound.reverb
+    - meta_content_scope: meta.col-far-low-damp.codt7.table.sound.reverb
     - include: numbers
     - match: ','
       scope: punctuation.separator.codt7.table.sound.reverb
       set: farhighdamp
 
   farhighdamp:
-    - meta_content_scope: meta.far-high-damp.codt7.table.sound.reverb
+    - meta_content_scope: meta.col-far-high-damp.codt7.table.sound.reverb
     - include: numbers
     - match: ','
       scope: punctuation.separator.codt7.table.sound.reverb
       set: fardecaytime
 
   fardecaytime:
-    - meta_content_scope: meta.far-decay-time.codt7.table.sound.reverb
+    - meta_content_scope: meta.col-far-decay-time.codt7.table.sound.reverb
     - include: numbers
     - match: ','
       scope: punctuation.separator.codt7.table.sound.reverb
       set: farsmear
 
   farsmear:
-    - meta_content_scope: meta.far-smear.codt7.table.sound.reverb
+    - meta_content_scope: meta.col-far-smear.codt7.table.sound.reverb
     - include: numbers
     - match: ','
       scope: punctuation.separator.codt7.table.sound.reverb
       set: farpredelayms
 
   farpredelayms:
-    - meta_content_scope: meta.far-pre-delay-MS.codt7.table.sound.reverb
+    - meta_content_scope: meta.col-far-pre-delay-MS.codt7.table.sound.reverb
     - include: numbers
     - include: eol-unexpected-characters

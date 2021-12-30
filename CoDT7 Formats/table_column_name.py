@@ -10,9 +10,24 @@ def get_field_name(scope, separator):
 
     return ret
 
-def symbol_at_point(view, pt):
-    symbol = view.substr(view.expand_by_class(pt, sublime.CLASS_WORD_START | sublime.CLASS_WORD_END, ","))
-    return symbol.strip().strip(',')
+# <symbol_at_point> returns the string in the column
+# that is scoped under param <scope>
+def symbol_at_point(view, pt, scope):
+    regions = view.find_by_selector(scope)
+    correct_region = None
+
+    pt_end = pt - 1
+
+    while view.score_selector(pt_end, scope):
+        pt_end -= 1
+
+    pt_start = pt_end + 1
+    pt_end = pt + 1
+
+    while view.score_selector(pt_end, scope):
+        pt_end += 1
+
+    return view.substr(sublime.Region(pt_start, pt_end))
 
 def _popup_css():
     return """
@@ -48,6 +63,9 @@ class ShowTableColumnName(sublime_plugin.EventListener):
         if hover_zone != sublime.HOVER_TEXT:
             return
 
+        if view.substr(point).isspace():
+            return
+
         def score(scopes):
             return view.score_selector(point, scopes)
 
@@ -58,22 +76,19 @@ class ShowTableColumnName(sublime_plugin.EventListener):
         if score('meta.header') or score('comment'):
             return
 
-        c = view.substr(point)
-
         # get the sound parameter name from the meta scope
         scope = view.scope_name(point)
-        start = scope.find('meta.')
+        start = scope.find('meta.col-')
         if start == -1:
             return
-        start += 5
+        col_scope = scope[start:scope.find(' ', start)]
+
+        value = symbol_at_point(view, point, col_scope)
+
+        start += 9
         end = scope.find('.', start)
         parameter_name = scope[start:end]
         parameter_name = get_field_name(parameter_name, "-")
-
-        if c.isspace():
-            value = ''
-        else:
-            value = symbol_at_point(view, point)
 
         header = """
             <h1>%s</h1>

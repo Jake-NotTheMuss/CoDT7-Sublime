@@ -30,25 +30,25 @@ contexts:
   global:
     - match: (\w+)\s*(@)\s*(\w*)(?:(>)(\w+)\s*(?:(@)\s*(\w*))?)?
       captures:
-        1: meta.ASM-substate.codt7.table.anim.selector entity.name.substate.codt7.table.anim.selector
+        1: meta.col-ASM-substate.codt7.table.anim.selector entity.name.substate.codt7.table.anim.selector
         2: keyword.operator.selector.codt7.table.anim.selector
-        3: meta.ASM-state.codt7.table.anim.selector entity.name.parent-state.codt7.table.anim.selector
+        3: meta.col-ASM-state.codt7.table.anim.selector entity.name.parent-state.codt7.table.anim.selector
         4: keyword.operator.transition.codt7.table.anim.selector
-        5: meta.ASM-substate.codt7.table.anim.selector entity.name.substate.codt7.table.anim.selector
+        5: meta.col-ASM-substate.codt7.table.anim.selector entity.name.substate.codt7.table.anim.selector
         6: keyword.operator.selector.codt7.table.anim.selector
-        7: meta.ASM-state.codt7.table.anim.selector entity.name.parent-state.codt7.table.anim.selector
+        7: meta.col-ASM-state.codt7.table.anim.selector entity.name.parent-state.codt7.table.anim.selector
     - match: ','
       scope: punctuation.separator.codt7.table.anim.selector
       push: anim-substate-body
 
   anim-substate-body:
     - match: \b(?i:{{ast_definitions}})\b
-      scope: meta.AST-definition.codt7.table.anim.selector variable.parameter.codt7.table.anim.selector
+      scope: meta.col-AST-definition.codt7.table.anim.selector variable.parameter.codt7.table.anim.selector
     - match: \b(?i:{{ast_enums}})\b
-      scope: meta.enum.codt7.table.anim.selector support.constant.codt7.table.anim.selector
+      scope: meta.col-enum.codt7.table.anim.selector support.constant.codt7.table.anim.selector
     - include: scope:text.codt7.table.sound.common#numbers
     - match: \b(?i:anim_)\w+\b
-      scope: meta.AM-alias.codt7.table.anim.selector entity.name.anim-alias markup.italic
+      scope: meta.col-AM-alias.codt7.table.anim.selector entity.name.anim-alias markup.italic
     - match: \bvoid\b
       scope: storage.type.codt7.table.anim.selector
     - match: ^\s*(,)\s*$
@@ -61,7 +61,7 @@ contexts:
       scope: keyword.operator.other.codt7.table.anim.selector
     # match anything else as string
     - match: '.'
-      scope: meta.string.codt7.table.anim.selector string.unquoted.codt7.table.anim.selector
+      scope: meta.col-string.codt7.table.anim.selector string.unquoted.codt7.table.anim.selector
 
   
 
