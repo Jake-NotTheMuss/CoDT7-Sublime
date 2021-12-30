@@ -55,7 +55,8 @@ LANG_ENGLISH      "Press and hold ^7[{+activate}]^3 to open door. [Cost: 500]"
 //                                                                           ^ punctuation.definition.string.end
 //                                ^^ constant.other.placeholder
 //                                               ^^ constant.other.placeholder
-//                                  ^^^^^^^^^^^^^ meta.string-placeholder
+//                                  ^ keyword.other.block.begin
+//                                              ^ keyword.other.block.end
 //                                   ^^^^^^^^^^^ variable.language
 
 ENDMARKER

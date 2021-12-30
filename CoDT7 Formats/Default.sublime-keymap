@@ -72,6 +72,14 @@
 					{ "key": "selector", "operator": "equal", "operand": "source.codt7.gsc & (meta.block)" }
 			]
 	},
+	// Always auto-pair brackets in localized strings
+	{ "keys": ["["], "command": "insert_snippet", "args": {"contents": "[$0]"}, "context":
+		[
+			{ "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+			{ "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+			{ "key": "selector", "operator": "equal", "operand": "text.codt7.localizedstrings & (string)" }
+		]
+	},
 	// template command for new files with codt7 scope
 	{ "keys": ["ctrl+alt+n"], "command": "new_codt7_localized_strings", "context":
 		[
