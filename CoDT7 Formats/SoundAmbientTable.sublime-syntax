@@ -58,7 +58,7 @@ contexts:
   reverb:
     - meta_content_scope: meta.reverb.codt7.table.sound.ambient
     - match: \w+
-      scope: entity.name.reverb.codt7.table.sound.ambient markup.italic
+      scope: entity.name.alias-reference.codt7.table.sound.ambient
     - match: ','
       scope: punctuation.separator.codt7.table.sound.ambient
       set: nearverb
@@ -66,7 +66,7 @@ contexts:
   nearverb:
     - meta_content_scope: meta.nearVerb.codt7.table.sound.ambient
     - match: \w+
-      scope: entity.name.reverb.codt7.table.sound.ambient markup.italic
+      scope: entity.name.alias-reference.codt7.table.sound.ambient
     - match: ','
       scope: punctuation.separator.codt7.table.sound.ambient
       set: farverb
@@ -74,7 +74,7 @@ contexts:
   farverb:
     - meta_content_scope: meta.farVerb.codt7.table.sound.ambient
     - match: \w+
-      scope: entity.name.reverb.codt7.table.sound.ambient markup.italic
+      scope: entity.name.alias-reference.codt7.table.sound.ambient
     - match: ','
       scope: punctuation.separator.codt7.table.sound.ambient
       set: reverbdrylevel
@@ -159,5 +159,5 @@ contexts:
   duck:
     - meta_content_scope: meta.duck.codt7.table.sound.ambient
     - match: \w+
-      scope: entity.name.duck.codt7.table.sound.ambient markup.italic
+      scope: entity.name.alias-reference.codt7.table.sound.ambient
     - include: eol-unexpected-characters

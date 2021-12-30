@@ -13,6 +13,18 @@
 			"scope": "text.codt7.table.anim & entity.name.parent-state",
 			"foreground": "var(yellow2)",
 			"font_style": "italic"
+		},
+		{
+			"name": "CoDT7 Alias Reference",
+			"scope": "entity.name.alias-reference",
+			"foreground": "var(yellow2)",
+			"font_style": "italic"
+		},
+		{
+			"name": "CoDT7 Global Reference",
+			"scope": "entity.name.global-reference",
+			"foreground": "var(orange)",
+			"font_style": "italic"
 		}
 	]
 }

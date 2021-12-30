@@ -1,0 +1,25 @@
+{
+	"rules":
+	[
+		{
+			"name": "CoDT7 Anim Parent State",
+			"scope": "text.codt7.table.anim & entity.name.parent-state",
+			"foreground": "var(orange)",
+			"background": "var(light_gray)",
+			"font_style": "italic"
+		},
+		{
+			"name": "CoDT7 Alias Reference",
+			"scope": "entity.name.alias-reference",
+			"foreground": "var(orange)",
+			"background": "var(light_gray)",
+			"font_style": "italic"
+		},
+		{
+			"name": "CoDT7 Global Reference",
+			"scope": "entity.name.global-reference",
+			"foreground": "var(black)",
+			"font_style": "italic"
+		}
+	]
+}

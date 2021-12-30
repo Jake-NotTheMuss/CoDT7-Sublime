@@ -111,7 +111,7 @@ contexts:
   secondary:
     - meta_content_scope: meta.secondary.codt7.table.sound.alias
     - match: \w+
-      scope: entity.name.alias.codt7.table.sound.alias markup.italic
+      scope: entity.name.alias-reference.codt7.table.sound.alias
     - match: ','
       scope: punctuation.separator.codt7.table.sound.alias
       set: sustainalias
@@ -119,7 +119,7 @@ contexts:
   sustainalias:
     - meta_content_scope: meta.sustain-alias.codt7.table.sound.alias
     - match: \w+
-      scope: entity.name.alias.codt7.table.sound.alias markup.italic
+      scope: entity.name.alias-reference.codt7.table.sound.alias
     - match: ','
       scope: punctuation.separator.codt7.table.sound.alias
       set: releasealias
@@ -127,7 +127,7 @@ contexts:
   releasealias:
     - meta_content_scope: meta.release-alias.codt7.table.sound.alias
     - match: \w+
-      scope: entity.name.alias.codt7.table.sound.alias markup.italic
+      scope: entity.name.alias-reference.codt7.table.sound.alias
     - match: ','
       scope: punctuation.separator.codt7.table.sound.alias
       set: bus
@@ -156,7 +156,7 @@ contexts:
   duck:
     - meta_content_scope: meta.duck.codt7.table.sound.alias
     - match: \w+
-      scope: entity.name.duck.codt7.table.sound.alias markup.italic
+      scope: entity.name.alias-reference.codt7.table.sound.alias
     - match: ','
       scope: punctuation.separator.codt7.table.sound.alias
       set: reverbsend
@@ -423,7 +423,7 @@ contexts:
   subtitle:
     - meta_content_scope: meta.subtitle.codt7.table.sound.alias
     - match: \w+
-      scope: entity.name.subtitle.codt7.table.sound.alias markup.italic
+      scope: entity.name.alias-reference.codt7.table.sound.alias
     - match: ','
       scope: punctuation.separator.codt7.table.sound.alias
       set: doppler
@@ -667,7 +667,7 @@ contexts:
   stopalias:
     - meta_content_scope: meta.stop-alias.codt7.table.sound.alias
     - match: \w+
-      scope: entity.name.alias.codt7.table.sound.alias markup.italic
+      scope: entity.name.alias-reference.codt7.table.sound.alias
     - match: ','
       scope: punctuation.separator.codt7.table.sound.alias
       set: distancelpfmin

@@ -29,8 +29,8 @@ extends: Packages/CoDT7 Formats/SoundCommon.sublime-syntax
 # filename = string (e.g. filespec for sound object)
 # level = constant (e.g. volume level for sound object)
 # type = support.constant (e.g. limit type of sound object)
-# global_id = variable (e.g. a name of an entry from a global sound table)
-# secondary_id = entity.name markup.italic (e.g. another alias in the table)
+# global_id = entity.name.global-reference (e.g. a name of an entry from a global sound table)
+# secondary_id = entity.name.alias-reference (e.g. another alias in the table)
 
 contexts:
   name:
@@ -65,7 +65,7 @@ contexts:
   globalid:
     - meta_content_scope: meta.global-id.codt7.table.sound.test
     - match: \w+
-      scope: variable.language.codt7.table.sound.test
+      scope: entity.name.global-reference.codt7.table.sound.test
     - match: ','
       scope: punctuation.separator.codt7.table.sound.test
       set: secondaryid
@@ -73,5 +73,5 @@ contexts:
   secondaryid:
     - meta_content_scope: meta.reference-id.codt7.table.sound.test
     - match: \w+
-      scope: entity.name.other.codt7.table.sound.test markup.italic
+      scope: entity.name.alias-reference.codt7.table.sound.test
     - include: eol-unexpected-characters
