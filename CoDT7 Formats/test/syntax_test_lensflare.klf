@@ -1,0 +1,57 @@
+/* SYNTAX TEST "Packages/CoDT7 Formats/Lensflare.sublime-syntax" */
+
+gradientDefVersion 1
+/* <- keyword.other.directive.gradientdefversion */
+/*                 ^ constant.numeric.gradientdef-version */
+elemDefVersion 11
+/* <- keyword.other.directive.elemdefversion */
+/*             ^^ constant.numeric.elemdef-version */
+defVersion 6
+/* <- keyword.other.directive.defversion */
+/*         ^ constant.numeric.def-version */
+{
+/* <- meta.block punctuation.section.block.begin */
+    name "lf_chest_glow_corvus"
+/*  ^ variable.parameter */
+/*       ^^^^^^^^^^^^^^^^^^^^^^ string.quoted.double */
+/*       ^ punctuation.definition.string.begin */
+/*                            ^ punctuation.definition.string.end */
+    type FX_LENSFLARE_RADIAL
+/*  ^ variable.parameter */
+    elems [
+/*  ^ variable.parameter */
+/*        ^ meta.brackets punctuation.section.brackets.begin */
+        {
+/*      ^ meta.block punctuation.section.block.begin */
+            name "grime"
+/*          ^ variable.parameter */
+/*               ^^^^^^^ string.quoted.double */
+/*               ^ punctuation.definition.string.begin */
+/*                     ^ punctuation.definition.string.end */
+            count 1
+/*          ^ variable.parameter */
+/*                ^ constant.numeric.value */
+            textureName "fxt_lf_artifact_15a"
+/*          ^ variable.parameter */
+/*                      ^^^^^^^^^^^^^^^^^^^^^ string.quoted.double */
+/*                      ^ punctuation.definition.string.begin */
+/*                                          ^ punctuation.definition.string.end */
+            seed [
+/*          ^ variable.parameter */
+/*               ^ meta.brackets punctuation.section.brackets.begin */
+                10
+/*              ^^ constant.numeric.value */
+                20
+/*              ^^ constant.numeric.value */
+                30
+/*              ^^ constant.numeric.value */
+                40
+/*              ^^ constant.numeric.value */
+            ]
+/*          ^ meta.brackets punctuation.section.brackets.end */
+        }
+/*      ^ meta.block punctuation.section.block.end */
+    ]
+/*  ^ meta.brackets punctuation.section.brackets.end */
+}
+/* <- meta.block punctuation.section.block.end */

@@ -85,6 +85,7 @@ contexts:
 
   global:
     - include: statements
+    - include: block
 
   expressions:
     - include: strings
