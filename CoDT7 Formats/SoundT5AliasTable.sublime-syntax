@@ -41,7 +41,7 @@ contexts:
       set: file
 
   file:
-    - meta_content_scope: meta.col-file.codt7.table.sound.t5alias string.unquoted.codt7.table.sound.t5alias
+    - meta_content_scope: meta.col-file.codt7.table.sound.t5alias entity.name.filename.codt7.table.sound.t5alias
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: template
@@ -482,7 +482,7 @@ contexts:
       set: filexenon
 
   filexenon:
-    - meta_content_scope: meta.col-file-xenon.codt7.table.sound.t5alias string.unquoted.codt7.table.sound.t5alias
+    - meta_content_scope: meta.col-file-xenon.codt7.table.sound.t5alias entity.name.filename.codt7.table.sound.t5alias
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: filesizexenon
@@ -495,7 +495,7 @@ contexts:
       set: fileps3
 
   fileps3:
-    - meta_content_scope: meta.col-file-PS3.codt7.table.sound.t5alias string.unquoted.codt7.table.sound.t5alias
+    - meta_content_scope: meta.col-file-PS3.codt7.table.sound.t5alias entity.name.filename.codt7.table.sound.t5alias
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: filesizeps3
@@ -508,7 +508,7 @@ contexts:
       set: filepc
 
   filepc:
-    - meta_content_scope: meta.col-file-PC.codt7.table.sound.t5alias string.unquoted.codt7.table.sound.t5alias
+    - meta_content_scope: meta.col-file-PC.codt7.table.sound.t5alias entity.name.filename.codt7.table.sound.t5alias
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: filesizepc
@@ -521,7 +521,7 @@ contexts:
       set: filewii
 
   filewii:
-    - meta_content_scope: meta.col-file-wii.codt7.table.sound.t5alias string.unquoted.codt7.table.sound.t5alias
+    - meta_content_scope: meta.col-file-wii.codt7.table.sound.t5alias entity.name.filename.codt7.table.sound.t5alias
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: filesizewii

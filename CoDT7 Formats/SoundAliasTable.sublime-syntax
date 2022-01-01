@@ -77,19 +77,19 @@ contexts:
     - include: storage_type
 
   filespec:
-    - meta_content_scope: meta.col-file-spec.codt7.table.sound.alias string.unquoted.codt7.table.sound.alias
+    - meta_content_scope: meta.col-file-spec.codt7.table.sound.alias entity.name.filename.codt7.table.sound.alias
     - match: ','
       scope: punctuation.separator.codt7.table.sound.alias
       set: filespecsustain
 
   filespecsustain:
-    - meta_content_scope: meta.col-file-spec-sustain.codt7.table.sound.alias string.unquoted.codt7.table.sound.alias
+    - meta_content_scope: meta.col-file-spec-sustain.codt7.table.sound.alias entity.name.filename.codt7.table.sound.alias
     - match: ','
       scope: punctuation.separator.codt7.table.sound.alias
       set: filespecrelease
 
   filespecrelease:
-    - meta_content_scope: meta.col-file-spec-release.codt7.table.sound.alias string.unquoted.codt7.table.sound.alias
+    - meta_content_scope: meta.col-file-spec-release.codt7.table.sound.alias entity.name.filename.codt7.table.sound.alias
     - match: ','
       scope: punctuation.separator.codt7.table.sound.alias
       set: template
@@ -596,37 +596,37 @@ contexts:
     - include: yesno
 
   filesource:
-    - meta_content_scope: meta.col-file-source.codt7.table.sound.alias string.unquoted.codt7.table.sound.alias
+    - meta_content_scope: meta.col-file-source.codt7.table.sound.alias entity.name.filename.codt7.table.sound.alias
     - match: ','
       scope: punctuation.separator.codt7.table.sound.alias
       set: filesourcesustain
 
   filesourcesustain:
-    - meta_content_scope: meta.col-file-source-sustain.codt7.table.sound.alias string.unquoted.codt7.table.sound.alias
+    - meta_content_scope: meta.col-file-source-sustain.codt7.table.sound.alias entity.name.filename.codt7.table.sound.alias
     - match: ','
       scope: punctuation.separator.codt7.table.sound.alias
       set: filesourcerelease
 
   filesourcerelease:
-    - meta_content_scope: meta.col-file-source-release.codt7.table.sound.alias string.unquoted.codt7.table.sound.alias
+    - meta_content_scope: meta.col-file-source-release.codt7.table.sound.alias entity.name.filename.codt7.table.sound.alias
     - match: ','
       scope: punctuation.separator.codt7.table.sound.alias
       set: filetarget
 
   filetarget:
-    - meta_content_scope: meta.col-file-target.codt7.table.sound.alias string.unquoted.codt7.table.sound.alias
+    - meta_content_scope: meta.col-file-target.codt7.table.sound.alias entity.name.filename.codt7.table.sound.alias
     - match: ','
       scope: punctuation.separator.codt7.table.sound.alias
       set: filetargetsustain
 
   filetargetsustain:
-    - meta_content_scope: meta.col-file-target-sustain.codt7.table.sound.alias string.unquoted.codt7.table.sound.alias
+    - meta_content_scope: meta.col-file-target-sustain.codt7.table.sound.alias entity.name.filename.codt7.table.sound.alias
     - match: ','
       scope: punctuation.separator.codt7.table.sound.alias
       set: filetargetrelease
 
   filetargetrelease:
-    - meta_content_scope: meta.col-file-target-release.codt7.table.sound.alias string.unquoted.codt7.table.sound.alias
+    - meta_content_scope: meta.col-file-target-release.codt7.table.sound.alias entity.name.filename.codt7.table.sound.alias
     - match: ','
       scope: punctuation.separator.codt7.table.sound.alias
       set: platform
@@ -742,7 +742,7 @@ contexts:
     - include: yesno
 
   rowsourcefilename:
-    - meta_content_scope: meta.col-row-source-file-name.codt7.table.sound.alias string.unquoted.codt7.table.sound.alias
+    - meta_content_scope: meta.col-row-source-file-name.codt7.table.sound.alias entity.name.filename.codt7.table.sound.alias
     - match: ','
       scope: punctuation.separator.codt7.table.sound.alias
       set: rowsourceshortname

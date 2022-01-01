@@ -42,7 +42,7 @@ contexts:
       set: filename
 
   filename:
-    - meta_content_scope: meta.col-file-name.codt7.table.sound.test string.unquoted.codt7.table.sound.test
+    - meta_content_scope: meta.col-file-name.codt7.table.sound.test entity.name.filename.codt7.table.sound.test
     - match: ','
       scope: punctuation.separator.codt7.table.sound.test
       set: level

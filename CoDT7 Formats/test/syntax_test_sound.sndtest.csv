@@ -1,4 +1,4 @@
-# SYNTAX TEST "Packages/CoDT7 Formats/SoundTest.sublime-syntax"
+# SYNTAX TEST "Packages/CoDT7 Formats/SoundTestTable.sublime-syntax"
 
 # This is a comment.
 # <- punctuation.definition.comment
@@ -8,17 +8,17 @@ name,test_filename,test_level,test_type,test_global_id,test_secondary_id
 # <- meta.header
 
 some_alias,some_file_name,-10298.2398,SOME_ENUM,some_global_id,some_other_alias,unexpected_column
-# <- meta.name entity.name
+# <- meta.col-name entity.name
 #         ^ punctuation.separator
-#          ^ meta.filename string
+#          ^ meta.col-file-name entity.name.filename
 #                        ^ punctuation.separator
-#                         ^ meta.level keyword.operator.arithmetic
+#                         ^ meta.col-level keyword.operator.arithmetic
 #                          ^ meta.number constant.numeric.value
 #                               ^ punctuation.separator.decimal
 #                                    ^ punctuation.separator
-#                                     ^ meta.type support.constant
+#                                     ^ meta.col-type support.constant
 #                                              ^ punctuation.separator
-#                                               ^ meta.global-id variable
+#                                               ^ meta.col-global-id entity.name.global-reference
 #                                                             ^ punctuation.separator
-#                                                              ^ meta.reference-id entity.name
+#                                                              ^ meta.col-reference-id entity.name.alias-reference
 #                                                                              ^ invalid.illegal.unexpected-character
