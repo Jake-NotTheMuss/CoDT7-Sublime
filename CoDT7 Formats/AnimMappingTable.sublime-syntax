@@ -4,7 +4,7 @@
 
 # This file is part of the T7-Sublime project.
 # T7-Sublime is an enhanced syntax-highlighting package for (almost) all Call of Duty Black Ops III developer file formats.
-# Anim Mapping Tables are comma-separated tables which contain animation data.
+# Anim Mapping Tables are comma-separated tables which map developer-defined aliases to sets of XAnim names.
 
 name: Animation Mapping Table
 file_extensions:

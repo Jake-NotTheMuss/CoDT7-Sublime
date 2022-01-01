@@ -4,7 +4,9 @@
 
 # This file is part of the T7-Sublime project.
 # T7-Sublime is an enhanced syntax-highlighting package for (almost) all Call of Duty Black Ops III developer file formats.
-# Player Anim Scripts are files.
+# Player Anim Scripts contain various code which control how and when player-specific animations are played, such as context
+# trees which describe contexts that are parameterized by a set of condition type-value pairs, and a set of animations, each
+# with their own parameters, that are yielded by that context match.
 
 name: Player Animation Script
 file_extensions:

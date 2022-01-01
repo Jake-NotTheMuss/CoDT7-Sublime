@@ -4,7 +4,7 @@
 
 # This file is part of the T7-Sublime project.
 # T7-Sublime is an enhanced syntax-highlighting package for (almost) all Call of Duty Black Ops III developer file formats.
-# Map files contain which describe a 3D world in Call of Duty.
+# Map files contain data which describe entities in a 3D world in Call of Duty.
 
 name: Map File
 hidden: true
