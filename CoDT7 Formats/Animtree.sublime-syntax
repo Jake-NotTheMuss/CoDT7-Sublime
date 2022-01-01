@@ -13,7 +13,8 @@ file_extensions:
 scope: source.codt7.animtree
 
 variables:
-  animtree_flags: 'client|separate|additive|complete|nonloopsync'
+  identifier: \b[[:alpha:]_][[:alnum:]_]*\b
+  animtree_flags: 'client|separate|additive|complete|nonloopsync|loopsync'
 
 contexts:
   prototype:
@@ -28,24 +29,45 @@ contexts:
   global:
     - include: identifiers
 
+  # This syntax is ambiguous from the highlighter's perspective
+  # because it can not look ahead beyond the line it is currently
+  # processing, so any identifier could be an anim name or a tree
+  # name if the highlighter cannot see a following ':' or '{' on
+  # the same line. Therefore, a branch is required. The common
+  # case is tried first, anim name, and if a ':' or '{' is
+  # encountered the branch fails and the tree context is pushed
+  # restarting back at the branch point.
+  # The match pattern itself is processed differently by each
+  # branch, but the anim name branch needs to pop
+  # if it encounters anything other than ':' or '{' before
+  # those tokens, so the match pattern needs to be advanced
+  # over so that the anim name context can be simple. The
+  # advanced match pattern can still be handled differently
+  # by each branch's meta_scope. Then to avoid unintended
+  # assignments of that meta_scope, the branch can immediately
+  # 'set' to a new context which contains the branch's actual
+  # rules without the meta_scope.
   identifiers:
-    - match: (?=\w)
+    - match: \w+
       branch_point: anim_alias_or_tree_definition
       branch:
         - anim-alias
         - tree-definition
 
   anim-alias:
-    - match: \w+
-      scope: string.unquoted.codt7.animtree
+    - meta_scope: entity.name.alias-reference.codt7.animtree
+    - match: ''
+      set: anim-alias-finish
+
+  anim-alias-finish:
     - match: ':|\{'
       fail: anim_alias_or_tree_definition
     - match: (?=\S)
       pop: true
 
   tree-definition:
-    - match: \w+
-      scope: meta.animtree.codt7.animtree entity.name.animtree.codt7.animtree
+    - meta_scope: meta.animtree.codt7.animtree entity.name.animtree.codt7.animtree
+    - match: ''
       set: animtree-definition-begin
 
   animtree-definition-begin:
@@ -57,7 +79,7 @@ contexts:
         - match: (?=\{)
           pop: true
     - match: '\{'
-      scope: meta.block.codt7.animtree punctuation.section.block.begin.codt7.animtree
+      scope: meta.animtree.codt7.animtree meta.block.codt7.animtree punctuation.section.block.begin.codt7.animtree
       set:
         - meta_content_scope: meta.animtree.codt7.animtree meta.block.codt7.animtree
         - match: '\}'
@@ -72,4 +94,4 @@ contexts:
 
   animtree-definition-flags:
     - match: \b(?i:{{animtree_flags}})\b
-      scope: keyword.other.codt7.animtree
+      scope: keyword.control.codt7.animtree

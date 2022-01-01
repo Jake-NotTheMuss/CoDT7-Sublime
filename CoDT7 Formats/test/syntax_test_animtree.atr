@@ -1,0 +1,58 @@
+/* SYNTAX TEST "Packages/CoDT7 Formats/Animtree.sublime-syntax" */
+
+  head : client separate
+/*^^^^ meta.animtree */
+/*^ meta.animtree entity.name.animtree */
+/*     ^ punctuation.separator */
+/*       ^^^^^^^^^^^^^^^ meta.animtree-flags */
+/*       ^ keyword.control */
+/*              ^ keyword.control */
+{
+/* <- meta.animtree meta.block punctuation.section.block.begin */
+  pf_casual_idle
+/*^ entity.name.alias-reference */
+  pf_alert_idle
+/*^ entity.name.alias-reference */
+}
+/* <- meta.animtree meta.block punctuation.section.block.end */
+
+  main
+/*^^^^ meta.animtree */
+/*^ entity.name.animtree */
+{
+/* <- meta.animtree meta.block punctuation.section.block.begin */
+  legs
+/*^^^^ meta.animtree */
+/*^ entity.name.animtree */
+  {
+/*^ meta.animtree meta.block punctuation.section.block.begin */
+    pb_chicken_dance
+/*  ^ entity.name.alias-reference */
+    pb_chicken_dance_crouch
+/*  ^ entity.name.alias-reference */
+    standSAWgunner_aim : complete nonloopsync
+/*  ^^^^^^^^^^^^^^^^^^ meta.animtree */
+/*  ^ entity.name.animtree */
+/*                     ^ punctuation.separator */
+/*                       ^^^^^^^^^^^^^^^^^^^^ meta.animtree-flags */
+/*                       ^ keyword.control */
+/*                                ^ keyword.control */
+    {
+/*  ^ meta.animtree meta.block punctuation.section.block.begin */
+      standSAWgunner_aim_15down
+/*    ^^^^^^^^^^^^^^^^^^^^^^^^^ meta.animtree */
+/*    ^ entity.name.animtree */
+      {
+/*    ^ meta.animtree meta.block punctuation.section.block.begin */
+        pb_saw_gunner_aim_down_right45
+/*      ^ entity.name.alias-reference */
+        pb_saw_gunner_aim_down_right30
+/*      ^ entity.name.alias-reference */
+      }
+/*    ^ meta.animtree meta.block punctuation.section.block.end */
+    }
+/*  ^ meta.animtree meta.block punctuation.section.block.end */
+  }
+/*^ meta.animtree meta.block punctuation.section.block.end */
+}
+/* <- meta.animtree meta.block punctuation.section.block.end */
