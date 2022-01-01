@@ -1,3 +1,3 @@
 {
-	"auto_complete_selector": "meta.tag, source - comment - string.quoted.double.block - string.quoted.single.block - string.unquoted.heredoc, text.codt7 - meta.name - text.codt7.table.zone.deps - text.codt7.xasset",
+	"auto_complete_selector": "meta.tag, source - comment - string.quoted.double.block - string.quoted.single.block - string.unquoted.heredoc, text.codt7.table.sound - meta.col-name, text.codt7 - text.codt7.table.sound",
 }
