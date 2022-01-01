@@ -30,6 +30,8 @@ variables:
   dec_suffix: '[a-zA-Z_][[:alnum:]_]*'
   hex_suffix: '[g-zG-Z_][[:alnum:]_]*'
 
+  identifier: \b[[:alpha:]_][[:alnum:]_]*\b
+
 contexts:
   main:
     - match: ''
@@ -42,8 +44,23 @@ contexts:
       set: unexpected-character
 
   unexpected-character:
+    - meta_include_prototype: false
+    - match: \#+
+      scope: punctuation.definition.comment.codt7.table.common
+      set:
+        - meta_scope: comment.line.number-sign.codt7.table.common
+        - match: \n
+          pop: true
+    - match: $\n
+      pop: true
     - match: '.'
       scope: invalid.illegal.unexpected-character.codt7.table.common
+
+  end-of-row:
+    - meta_include_prototype: false
+    - include: comments
+    - match: $\n
+      pop: true
 
   end-of-col-look:
     - match: (?=,|$)
@@ -83,7 +100,7 @@ contexts:
 
   numbers:
     # minus sign
-    - match: '-'
+    - match: '\+|-'
       scope: keyword.operator.arithmetic.codt7.table.common
     # decimal float
     - match: |-
@@ -117,35 +134,12 @@ contexts:
         1: constant.numeric.value.codt7.table.common
         2: invalid.illegal.numeric.suffix.codt7.table.common
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  numbers_hex:
+    - match: '\+|-'
+      scope: keyword.operator.arithmetic.codt7.table.common
+    # hexadecimal integer
+    - match: \b({{hex_digit}}*)({{hex_suffix}})?
+      scope: meta.number.integer.hexadecimal.codt7.table.common
+      captures:
+        1: constant.numeric.value.codt7.table.common
+        2: invalid.illegal.numeric.suffix.codt7.table.common

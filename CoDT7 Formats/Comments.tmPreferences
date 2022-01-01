@@ -2,7 +2,7 @@
 <plist version="1.0">
 <dict>
 	<key>scope</key>
-	<string>source.codt7, text.codt7 - text.codt7.table</string>
+	<string>source.codt7, text.codt7.table.zone, text.codt7 - text.codt7.table</string>
 	<key>settings</key>
 	<dict>
 		<key>shellVariables</key>

@@ -10,115 +10,173 @@ name: Zone Dependencies
 hidden: true
 file_extensions:
   - deps
-scope: text.codt7.zone.deps
-extends: 'Packages/CoDT7 Formats/Zone.sublime-syntax'
-
-variables:
-  build_info_types: 'version|errorcount|assetlist'
-  dep_keys: 'file|spawn'
+scope: text.codt7.table.zone.deps
+version: 2
+extends: Packages/CoDT7 Formats/ZoneCommon.sublime-syntax
 
 contexts:
   main:
+    - meta_include_prototype: false
     - include: global
-    - include: scope:source.codt7.common#comments
 
   global:
+    - include: comments
     - include: build-info
     - include: directive
-    - include: assets
+    - include: asset
+    - include: dependency
 
   build-info:
-    - match: ^\s*(version|errorcount)\b
+    - match: (?i)^\s*(version)\b
       captures:
-        1: support.type.codt7.zone.deps
+        1: meta.build-info.codt7.table.zone.deps support.type.codt7.table.zone.deps
       push:
-        - meta_scope: meta.build-info.codt7.zone.deps
-        - match: $\n
-          pop: true
+        - meta_content_scope: meta.build-info.codt7.table.zone.deps
+        - include: end-of-row
         - match: ','
-          scope: punctuation.separator.codt7.zone.deps
-        - include: numbers
-    - match: ^\s*(assetlist)\b
-      captures:
-        1: support.type.codt7.zone.deps
-      push:
-        - meta_scope: meta.build-info.codt7.zone.deps
-        - match: $\n
-          pop: true
-        - match: ','
-          scope: punctuation.separator.codt7.zone.deps
-        - match: \w+
-          scope: entity.name.zone.codt7.zone.deps
-
-  non-words:
-    - match: ','
-      scope: punctuation.separator.codt7.zone.deps
-    - include: numbers
-
-  assets:
-    - match: '^\s*(?=({{all_types}})\b)'
-      push:
-        - meta_content_scope: meta.dependency-header.codt7.zone.deps
-        - match: $\n
-          pop: true
-        - include: asset-type
-        - match: ','
-          scope: punctuation.separator.codt7.zone.deps
+          scope: punctuation.separator.codt7.table.zone.deps
           set:
-            - meta_content_scope: meta.dependency-header.codt7.zone.deps entity.name.asset.codt7.zone.deps
-            - match: $\n
-              pop: true
+            - meta_scope: meta.build-info.codt7.table.zone.deps
+            - meta_content_scope: meta.col-version-value-1.codt7.table.zone.deps
+            - include: end-of-row
+            - include: numbers
             - match: ','
-              scope: invalid.illegal.unexpected-character.codt7.zone.deps
-    - match: '^\s*(?=({{dep_keys}})\b)'
+              scope: punctuation.separator.codt7.table.zone.deps
+              set:
+                - meta_scope: meta.build-info.codt7.table.zone.deps
+                - meta_content_scope: meta.col-version-value-2.codt7.table.zone.deps
+                - include: end-of-row
+                - include: numbers
+                - include: eol-unexpected-characters
+    - match: (?i)^\s*(assetlist)\b
+      captures:
+        1: meta.build-info.codt7.table.zone.deps support.type.codt7.table.zone.deps
       push:
-        - meta_content_scope: meta.dependency-item.codt7.zone.deps
-        - match: $\n
-          pop: true
-        - match: '(?=file\b)'
-          set: dep-type-file
-        - match: '(?=spawn\b)'
-          set: dep-type-spawn
-
-  dep-type-common:
-    - match: '\b{{dep_keys}}\b'
-      scope: support.type.codt7.zone.deps
-
-  dep-type-file:
-    - meta_content_scope: meta.dependency-item.file.codt7.zone.deps
-    - match: $\n
-      pop: true
-    - include: dep-type-common
-    - match: ','
-      scope: punctuation.separator.codt7.zone.deps
-      set: file-name
-
-  file-name:
-    - meta_content_scope: meta.dependency-item.codt7.zone.deps entity.name.filename.codt7.zone.deps
-    - match: $\n
-      pop: true
-    - match: '(?=,|$)'
-      set: comma-separated-numbers
-
-  comma-separated-numbers:
-    - meta_content_scope: meta.dependency-item.codt7.zone.deps
-    - match: $\n
-      pop: true
-    - match: ','
-      scope: punctuation.separator.codt7.zone.deps
+        - meta_content_scope: meta.build-info.codt7.table.zone.deps
+        - include: end-of-row
+        - match: ','
+          scope: punctuation.separator.codt7.table.zone.deps
+          set:
+            - meta_scope: meta.build-info.codt7.table.zone.deps
+            - meta_content_scope: meta.col-zone-name.codt7.table.zone.deps
+            - include: end-of-row
+            - match: \w+
+              scope: constant.other.zonename.codt7.table.zone.deps
+            - include: eol-unexpected-characters
+    - match: (?i)^\s*(errorcount)\b
+      captures:
+        1: meta.build-info.codt7.table.zone.deps support.type.codt7.table.zone.deps
       push:
-        - meta_content_scope: constant.numeric.value.codt7.zone.deps
-        - match: '(?=,|$)'
-          pop: true
-        - match: '[^\h\.]'
-          scope: invalid.illegal.unexpected-character.codt7.zone.deps
+        - meta_content_scope: meta.build-info.codt7.table.zone.deps
+        - include: end-of-row
+        - match: ','
+          scope: punctuation.separator.codt7.table.zone.deps
+          set:
+            - meta_scope: meta.build-info.codt7.table.zone.deps
+            - meta_content_scope: meta.col-error-count.codt7.table.zone.deps
+            - include: end-of-row
+            - include: numbers
+            - include: eol-unexpected-characters
 
-  dep-type-spawn:
-    - meta_content_scope: meta.dependency-item.spawn.codt7.zone.deps
-    - match: $\n
-      pop: true
-    - include: dep-type-common
-    - match: ','
-      scope: punctuation.separator.codt7.zone.deps
-    - match: '\b({{header_directives}})\b'
-      scope: keyword.other.directive.codt7.zone.deps
+  directive:
+    - match: (?i)^\s*({{linker_directives}})\b
+      captures:
+        1: meta.directive.codt7.table.zone.deps meta.col-directive.codt7.table.zone.deps keyword.other.directive.codt7.table.zone.deps
+      push:
+        - meta_content_scope: meta.directive.codt7.table.zone.deps
+        - include: end-of-row
+        - match: ','
+          scope: punctuation.separator.codt7.table.zone.deps
+          set:
+            - meta_scope: meta.directive.codt7.table.zone.deps
+            - include: end-of-row
+            - include: keywords
+            - include: asset-type
+
+  asset:
+    - match: (?i)^\s*(({{asset_types}})|({{raw_types}}))\b
+      captures:
+        1: meta.target.codt7.table.zone.deps meta.col-target-type.codt7.table.zone.deps
+        2: support.type.asset.codt7.table.zone.deps
+        3: support.type.raw.codt7.table.zone.deps
+      push:
+        - meta_content_scope: meta.target.codt7.table.zone.deps
+        - include: end-of-row
+        - match: ','
+          scope: punctuation.separator.codt7.table.zone.deps
+          set:
+            - meta_scope: meta.target.codt7.table.zone.deps
+            - meta_content_scope: meta.col-target-name.codt7.table.zone.deps entity.name.target.codt7.table.zone.deps
+            - include: end-of-row
+            - include: eol-unexpected-characters
+
+  dependency:
+    - match: (?i)^\s*(file)\b
+      captures:
+        1: meta.dependency.codt7.table.zone.deps support.type.codt7.table.zone.deps
+      push:
+        - meta_content_scope: meta.dependency.codt7.table.zone.deps
+        - include: end-of-row
+        - match: ','
+          scope: punctuation.separator.codt7.table.zone.deps
+          set:
+            - meta_scope: meta.dependency.codt7.table.zone.deps
+            - meta_content_scope: meta.col-file-name.codt7.table.zone.deps entity.name.filename
+            - include: end-of-row
+            - match: ','
+              scope: punctuation.separator.codt7.table.zone.deps
+              set:
+                - meta_scope: meta.dependency.codt7.table.zone.deps
+                - meta_content_scope: meta.col-file-value-1.codt7.table.zone.deps
+                - include: end-of-row
+                - include: numbers
+                - match: ','
+                  scope: punctuation.separator.codt7.table.zone.deps
+                  set:
+                    - meta_scope: meta.dependency.codt7.table.zone.deps
+                    - meta_content_scope: meta.col-file-value-2.codt7.table.zone.deps
+                    - include: end-of-row
+                    - include: numbers_hex
+                    - match: ','
+                      scope: punctuation.separator.codt7.table.zone.deps
+                      set:
+                        - meta_scope: meta.dependency.codt7.table.zone.deps
+                        - meta_content_scope: meta.col-file-value-3.codt7.table.zone.deps
+                        - include: end-of-row
+                        - include: numbers_hex
+                        - match: ','
+                          scope: punctuation.separator.codt7.table.zone.deps
+                          set:
+                            - meta_scope: meta.dependency.codt7.table.zone.deps
+                            - meta_content_scope: meta.col-file-value-4.codt7.table.zone.deps
+                            - include: end-of-row
+                            - include: numbers_hex
+                            - match: ','
+                              scope: punctuation.separator.codt7.table.zone.deps
+                              set:
+                                - meta_scope: meta.dependency.codt7.table.zone.deps
+                                - meta_content_scope: meta.col-file-value-5.codt7.table.zone.deps
+                                - include: end-of-row
+                                - include: numbers_hex
+                                - include: eol-unexpected-characters
+    - match: (?i)^\s*(spawn)\b
+      captures:
+        1: meta.dependency.codt7.table.zone.deps support.type.codt7.table.zone.deps
+      push:
+        - meta_content_scope: meta.dependency.codt7.table.zone.deps
+        - include: end-of-row
+        - match: ','
+          scope: punctuation.separator.codt7.table.zone.deps
+          set:
+            - meta_scope: meta.dependency.codt7.table.zone.deps
+            - meta_content_scope: meta.col-attribute-name.codt7.table.zone.deps
+            - include: end-of-row
+            - match: \b(?i:{{attribute_names}})\b
+              scope: keyword.other.directive.codt7.table.zone.deps
+            - match: ','
+              scope: punctuation.separator.codt7.table.zone.deps
+              set:
+                - meta_scope: meta.dependency.codt7.table.zone.deps
+                - meta_content_scope: meta.col-attribute-value.codt7.table.zone.deps
+                - include: end-of-row
+                - include: eol-unexpected-characters

@@ -1,4 +1,4 @@
-/* SYNTAX TEST "Packages/CoDT7 Formats/Zone.sublime-syntax" */
+/* SYNTAX TEST "Packages/CoDT7 Formats/ZoneSource.sublime-syntax" */
 
 >mode,core
 /*^^^^^^^^ meta.directive */
@@ -52,7 +52,7 @@ ignore_type,all|-xmodel
 /*             ^^ keyword.control */
 /*               ^ support.type.asset */
 xmodel,p7_lab_sector_livingroom_screen_wall
-/*     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.asset-name */
+/*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.asset */
 /*^ support.type.asset */
 /*    ^ punctuation.separator */
 ignore_type,reset
@@ -65,6 +65,6 @@ ignore_type,reset
 /* <- keyword.control.import */
 
 rawfile,mod.cfg
-/*      ^^^^^^^ meta.asset-name */
+/*^^^^^^^^^^^^^ meta.asset */
 /*^ support.type.raw */
 /*     ^ punctuation.separator */

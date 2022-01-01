@@ -1,5 +1,5 @@
 {
-	"scope": "text.codt7.zone - (meta.header, meta.asset-name)",
+	"scope": "text.codt7.table.zone - (meta.directive, meta.asset, meta.preprocessor)",
 	"completions":
 	[
 		"physpreset",

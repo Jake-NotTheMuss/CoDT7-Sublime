@@ -3,7 +3,7 @@
 	[
 		{
 			"name": "CoDT7 Zone Directive",
-			"scope": "text.codt7.zone & keyword.other.directive",
+			"scope": "text.codt7.table.zone & keyword.other.directive",
 			"foreground": "var(black)",
 			"font_style": "italic"
 		},

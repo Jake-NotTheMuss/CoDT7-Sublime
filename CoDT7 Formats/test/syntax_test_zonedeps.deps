@@ -2,7 +2,7 @@
 
 version,123456789,123
 /*^^^^^^^^^^^^^^^^^^^ meta.build-info */
-/* <- support */
+/* <- support.type */
 /*     ^ punctuation.separator */
 /*      ^^^^^^^^^ meta.number constant.numeric.value */
 /*               ^ punctuation.separator */
@@ -10,17 +10,17 @@ version,123456789,123
 
 ignore_missing_shipped,core_pre_gfx
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.directive */
-/* <- keyword */
+/* <- keyword.other.directive */
 /*                    ^ punctuation.separator */
 
 scriptparsetree,scripts/zm/_load.gsc
-/*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.dependency-header */
+/*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.target */
 /* <- support.type */
 /*             ^ punctuation.separator */
-/*              ^ entity.name.asset */
+/*              ^ entity.name.target */
 
 file,C:\Program Files\steam\steamapps\common\Call of Duty Black Ops III\mods\shadows_egg_classics\scripts\zm\_load.gsc,1627841505,
-/*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.dependency-item */
+/*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.dependency */
 /*^ support.type */
 /*  ^ punctuation.separator */
 /*   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ entity.name.filename */
@@ -29,19 +29,19 @@ file,C:\Program Files\steam\steamapps\common\Call of Duty Black Ops III\mods\sha
 /*                                                                                                                               ^ punctuation.separator */
 
 texturecombo,zm_mod
-/*^^^^^^^^^^^^^^^^^ meta.dependency-header */
+/*^^^^^^^^^^^^^^^^^ meta.target */
 /* <- support.type */
 /*          ^ punctuation.separator */
-/*           ^ entity.name.asset */
+/*           ^ entity.name.target */
 
 assetlist,zm_mod
 /*^^^^^^^^^^^^^^ meta.build-info */
 /* <- support.type */
 /*       ^ punctuation.separator */
-/*        ^ entity.name.zone */
+/*        ^ constant.other.zonename */
 
 spawn,expect,core_all
-/*^^^^^^^^^^^^^^^^^^^ meta.dependency-item */
+/*^^^^^^^^^^^^^^^^^^^ meta.dependency */
 /* <- support.type */
 /*   ^ punctuation.separator */
 /*    ^ keyword */

@@ -1,0 +1,275 @@
+%YAML 1.2
+---
+# http://www.sublimetext.com/docs/3/syntax.html
+
+# This file is part of the T7-Sublime project.
+# T7-Sublime is an enhanced syntax-highlighting package for (almost) all Call of Duty Black Ops III developer file formats.
+# Zone files are used by the Call of Duty fastfile linker. They contain a listed set of asset type-name pairs to include 
+# in the fastfile along with some other information relevant to the build.
+
+name: Zone Source
+file_extensions:
+  - zone
+  - zpkg
+  - class
+scope: text.codt7.table.zone.source
+version: 2
+extends: Packages/CoDT7 Formats/ZoneCommon.sublime-syntax
+
+contexts:
+  main:
+    - include: preprocessor-global
+    - include: global
+
+  constants:
+    - match: \b(ZONENAME)\b
+      scope: support.constant.codt7.table.zone.source
+
+####[ PREPROCESSOR ]#############################################
+
+  preprocessor-disabled:
+    - include: scope:source.codt7.common#preprocessor-disabled
+
+  preprocessor-line-continuation:
+    - include: scope:source.codt7.common#preprocessor-line-continuation
+
+  preprocessor-line-ending:
+    - include: scope:source.codt7.common#preprocessor-line-ending
+
+  preprocessor-comments:
+    - include: scope:source.codt7.common#preprocessor-comments
+
+  preprocessor-global:
+    - include: preprocessor-rule-enabled-global
+    - include: preprocessor-rule-disabled-global
+    - include: preprocessor-rule-other-global
+
+  preprocessor-rule-enabled-global:
+    - match: ^\s*((#\s*if)\s+(?i:(1)|(true)))\b
+      captures:
+        1: meta.preprocessor.codt7.table.zone.source
+        2: keyword.control.import.codt7.table.zone.source
+        3: meta.number.integer.decimal.codt7.table.zone.source constant.numeric.value.codt7.table.zone.source
+        4: constant.language.codt7.zone.source
+      push:
+        - match: ^\s*(#\s*endif)\b
+          captures:
+            1: meta.preprocessor.codt7.table.zone.source keyword.control.import.codt7.table.zone.source
+          pop: true
+        - match: ^\s*(#\s*else)\b
+          captures:
+            1: meta.preprocessor.codt7.table.zone.source keyword.control.import.else.codt7.table.zone.source
+          push:
+            - meta_content_scope: comment.block.preprocessor.else-branch.codt7.table.zone.source
+            - match: (?=^\s*#\s*endif\b)
+              pop: true
+            - include: preprocessor-disabled
+        - match: ''
+          push:
+            - match: (?=^\s*#\s*(else|endif)\b)
+              pop: true
+            - include: preprocessor-global
+            - include: global
+
+  preprocessor-rule-disabled-global:
+    - match: ^\s*((#\s*if)\s+(?i:(0)|(false)))\b
+      captures:
+        1: meta.preprocessor.codt7.table.zone.source
+        2: keyword.control.import.codt7.table.zone.source
+        3: meta.number.integer.decimal.codt7.table.zone.source constant.numeric.value.codt7.table.zone.source
+        4: constant.language.codt7.table.zone.source
+      push:
+        - match: ^\s*(#\s*endif)\b
+          captures:
+            1: meta.preprocessor.codt7.table.zone.source keyword.control.import.codt7.table.zone.source
+          pop: true
+        - match: ^\s*(#\s*else)\b
+          captures:
+            1: meta.preprocessor.codt7.table.zone.source keyword.control.import.else.codt7.table.zone.source
+          push:
+            - match: (?=^\s*#\s*endif\b)
+              pop: true
+            - include: preprocessor-global
+            - include: global
+        - match: ''
+          push:
+            - meta_scope: comment.block.preprocessor.if-branch.codt7.table.zone.source
+            - match: (?=^\s*#\s*(else|endif)\b)
+              pop: true
+            - include: preprocessor-disabled
+
+  preprocessor-rule-other-global:
+    - match: ^\s*(#\s*(?:if|ifdef|ifndef))\b
+      captures:
+        1: keyword.control.import.codt7.table.zone.source
+      push:
+        - meta_scope: meta.preprocessor.codt7.table.zone.source
+        - include: preprocessor-line-continuation
+        - include: preprocessor-comments
+        - match: $\n
+          set: preprocessor-if-branch-global
+
+  preprocessor-if-branch-global:
+    - match: ^\s*(#\s*endif)\b
+      captures:
+        1: meta.preprocessor.codt7.table.zone.source keyword.control.import.codt7.table.zone.source
+      pop: true
+    - match: (?=^\s*#\s*(elif|else)\b)
+      push: preprocessor-elif-else-branch-global
+    - include: preprocessor-global
+    - include: global
+
+  preprocessor-elif-else-branch-global:
+    - match: (?=^\s*(#\s*endif)\b)
+      pop: true
+    - include: preprocessor-global
+    - include: global
+
+####[ PREPROCESSOR EXPRESSIONS ]#############################
+
+  preprocessor-expressions:
+    - include: preprocessor-macro-define
+    - include: preprocessor-other
+
+# DEFINE
+
+  preprocessor-macro-define:
+    - match: ^\s*(#\s*define)\b
+      captures:
+        1: meta.preprocessor.macro.codt7.table.zone.source keyword.control.import.define.codt7.table.zone.source
+      push:
+        - meta_content_scope: meta.preprocessor.macro.codt7.table.zone.source
+        - include: preprocessor-line-continuation
+        - include: preprocessor-line-ending
+        - include: preprocessor-comments
+        - match: '{{identifier}}'
+          scope: entity.name.constant.preprocessor.codt7.table.zone.source
+          set: preprocessor-macro-definition
+
+  preprocessor-macro-definition:
+    - meta_content_scope: meta.preprocessor.macro.codt7.table.zone.source
+    - include: preprocessor-line-continuation
+    - include: preprocessor-line-ending
+    - include: preprocessor-comments
+    - include: define-expressions
+
+  define-expressions:
+    - match: (?i)\b(true|false)\b
+      scope: constant.language.codt7.table.zone.source
+    - include: numbers
+    - match: '"'
+      scope: punctuation.definition.string.begin.codt7.table.zone.source
+      push:
+        - meta_scope: string.quoted.double.codt7.table.zone.source
+        - match: '"'
+          scope: punctuation.definition.string.end.codt7.table.zone.source
+          pop: true
+    - include: asset-type
+
+# OTHER
+
+  preprocessor-other:
+    - match: ^\s*(#\s*(?:if|ifdef|ifndef|elif|else|undef))\b
+      captures:
+        1: keyword.control.import.codt7.table.zone.source
+      push:
+        - meta_scope: meta.preprocessor.codt7.table.zone.source
+        - include: preprocessor-line-continuation
+        - include: preprocessor-line-ending
+        - include: preprocessor-comments
+    - match: ^\s*(#\s*endif)\b
+      captures:
+        1: meta.preprocessor.codt7.table.zone.source keyword.control.import.codt7.table.zone.source
+    - match: ^\s*(#\s*include)\b
+      captures:
+        1: keyword.control.import.include.codt7.table.zone.source
+      push:
+        - meta_scope: meta.preprocessor.include.codt7.table.zone.source
+        - include: preprocessor-line-continuation
+        - include: preprocessor-line-ending
+        - include: preprocessor-comments
+        - match: '"'
+          scope: punctuation.definition.string.begin.codt7.table.zone.source
+          push:
+            - meta_scope: string.quoted.double.include.codt7.table.zone.source
+            - match: '"'
+              scope: punctuation.definition.string.end.codt7.table.zone.source
+              pop: true
+
+###[ GLOBAL ]################################################
+
+  global:
+    - include: comments
+    - include: preprocessor-expressions
+    - include: attribute
+    - include: directive
+    - include: asset
+
+  attribute:
+    - match: ^>
+      scope: punctuation.definition.directive.begin.codt7.table.zone.source
+      push:
+        - meta_scope: meta.directive.codt7.table.zone.source
+        - include: end-of-row
+        - match: \b({{language_constant}})\b
+          scope: constant.language.codt7.table.zone.source
+          set:
+            - meta_content_scope: meta.directive.codt7.table.zone.source
+            - include: end-of-row
+            - match: \.
+              scope: punctuation.accessor.codt7.table.zone.source
+            - match: '{{identifier}}'
+              scope: variable.parameter.codt7.table.zone.source
+            - match: ','
+              scope: punctuation.separator.codt7.table.zone.source
+              set:
+                - meta_scope: meta.directive.codt7.table.zone.source
+                - include: end-of-row
+                - include: numbers
+                - include: constants
+                - include: eol-unexpected-characters
+        - match: \b(?i:{{attribute_names}})\b
+          scope: keyword.other.directive.codt7.table.zone.source
+          set:
+            - meta_content_scope: meta.directive.codt7.table.zone.source
+            - include: end-of-row
+            - match: ','
+              scope: punctuation.separator.codt7.table.zone.source
+              set:
+                - meta_scope: meta.directive.codt7.table.zone.source
+                - include: end-of-row
+                - match: \b(?i:{{attribute_values}})\b
+                  scope: constant.language.codt7.table.zone.source
+                - include: eol-unexpected-characters
+
+  directive:
+    - match: (?i)^\s*({{linker_directives}})\b
+      captures:
+        1: meta.directive.codt7.table.zone.source keyword.other.directive.codt7.table.zone.source
+      push:
+        - meta_content_scope: meta.directive.codt7.table.zone.source
+        - include: end-of-row
+        - match: ','
+          scope: punctuation.separator.codt7.table.zone.source
+          set:
+            - meta_scope: meta.directive.codt7.table.zone.source
+            - include: end-of-row
+            - include: eol-unexpected-characters
+            - include: keywords
+            - include: asset-type
+
+  asset:
+    - match: (?i)^\s*(({{asset_types}})|({{raw_types}}))\b
+      captures:
+        1: meta.asset.codt7.table.zone.source
+        2: support.type.asset.codt7.table.zone.source
+        3: support.type.raw.codt7.table.zone.source
+      push:
+        - meta_content_scope: meta.asset.codt7.table.zone.source
+        - include: end-of-row
+        - match: ','
+          scope: punctuation.separator.codt7.table.zone.source
+          set:
+            - meta_scope: meta.asset.codt7.table.zone.source
+            - include: end-of-row
+            - include: eol-unexpected-characters
