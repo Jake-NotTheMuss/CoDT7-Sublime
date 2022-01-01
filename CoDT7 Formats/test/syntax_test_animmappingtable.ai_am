@@ -1,0 +1,18 @@
+# SYNTAX TEST "Packages/CoDT7 Formats/AnimMappingTable.sublime-syntax"
+
+anim_zombie_barricade_ad_l,ai_zombie_base_walk_ad_win_trav_l_v1
+# <- entity.name.alias
+#                         ^ punctuation.separator
+#                          ^ entity.name.alias-reference
+anim_zombie_barricade_ad_m,ai_zombie_base_walk_ad_win_trav_m_v1,ai_zombie_base_walk_ad_win_trav_m_v2,ai_zombie_base_walk_ad_win_trav_m_v3
+# <- entity.name.alias
+#                         ^ punctuation.separator
+#                          ^ entity.name.alias-reference
+#                                                              ^ punctuation.separator
+#                                                               ^ entity.name.alias-reference
+#                                                                                                   ^ punctuation.separator
+#                                                                                                    ^ entity.name.alias-reference
+void,void
+# <- entity.name.alias
+#   ^ punctuation.separator
+#    ^ storage.type
