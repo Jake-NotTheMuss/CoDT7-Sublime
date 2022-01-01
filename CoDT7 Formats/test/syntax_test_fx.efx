@@ -1,5 +1,9 @@
 /* SYNTAX TEST "Packages/CoDT7 Formats/FX.sublime-syntax" */
 
+iwfx 3
+/* <- keyword.other.directive.iwfx */
+/*   ^ constant.numeric.fx-version */
+
 flags spawnRelative;
 /* <- variable.parameter */
 /*    ^ - variable.parameter */
