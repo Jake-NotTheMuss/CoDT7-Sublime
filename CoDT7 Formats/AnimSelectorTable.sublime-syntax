@@ -12,6 +12,7 @@ file_extensions:
   - ai_ast
 scope: text.codt7.table.anim.selector
 version: 2
+extends: Packages/CoDT7 Formats/TableCommon.sublime-syntax
 
 variables:
   ast_definitions: '_context|_context2|_cover_concealed|_cover_direction|_previous_cover_direction|_desired_cover_direction|_cover_mode|_previous_cover_mode|_cover_type|_current_location_cover_type|_previous_cover_type|_exposed_type|_stance|_desired_stance|_arrival_stance|_locomotion_should_turn|_arrival_type|_locomotion_speed|_grapple_direction|_run_n_gun_variation|_has_legs|_idgun_damage_direction|_which_board_pull|_variant_type|_low_gravity_variant|_board_attack_spot|_weapon_class|_weapon_type|_damage_weapon|_damage_direction|_damage_location|_fatal_damage_location|_damage_taken|_damage_weapon_class|_tracking_turn_yaw_min|_tracking_turn_yaw_max|_melee_distance_min|_melee_distance_max|_throw_distance_min|_throw_distance_max|_locomotion_exit_yaw_min|_locomotion_exit_yaw_max|_locomotion_motion_angle_min|_locomotion_motion_angle_max|_lookahead_angle_min|_lookahead_angle_max|_locomotion_turn_yaw_min|_locomotion_turn_yaw_max|_locomotion_arrival_yaw_min|_locomotion_arrival_yaw_max|_tactical_arrival_facing_yaw_min|_tactical_arrival_facing_yaw_max|_locomotion_arrival_distance_min|_locomotion_arrival_distance_max|_enemy_yaw_min|_enemy_yaw_max|_perfect_enemy_yaw_min|_perfect_enemy_yaw_max|_react_yaw_min|_react_yaw_max|_speed_min|_speed_max|_locomotion_face_enemy_quadrant|_locomotion_face_enemy_quadrant_previous|_traversal_type|_locomotion_pain_type|_human_locomotion_movement_type|_animation_alias|_aim_up_alias|_aim_down_alias|_aim_left_alias|_aim_right_alias|_animation_alias_semi|_animation_alias_singleshot|_animation_alias_burst3|_animation_alias_burst4|_animation_alias_burst5|_animation_alias_burst6|_animation_alias_param_f|_animation_alias_param_b|_animation_alias_param_l|_animation_alias_param_r|_animation_alias_param_balance|_animation_alias_turn_r|_animation_alias_turn_l|_param_idle_blend_dropoff|_param_turn_blend_min_ratio|_param_turn_blend_scale|_blend_in_time|_blend_out_time|_animation_mocomp|_aim_table|_gib_location|_yaw_to_cover_min|_yaw_to_cover_max|_should_run|_should_howl|_arms_position|_mind_control|_move_mode|_fire_mode|_special_death|_juke_direction|_juke_distance|_panic|_gibbed_limbs|_human_cover_flankability|_robot_step_in|_awareness|_awareness_prev|_robot_jump_direction|_robot_wallrun_direction|_robot_locomotion_type|_robot_traversal_type|_staircase_exit_type|_staircase_type|_staircase_state|_staircase_direction|_staircase_skip_num|_melee_enemy_type|_zombie_damageweapon_type|_parasite_firing_rate|_margwa_head|_margwa_teleport|_enemy|_patrol|_knockdown_direction|_getup_direction|_push_direction|_human_locomotion_variation|_robot_mode|_low_gravity|_knockdown_type|_mechz_part|_apothicon_bamf_distance_min|_apothicon_bamf_distance_max|_keeper_protector_attack|_keeper_protector_attack_type|_whirlwind_speed|_quad_wall_crawl|_quad_phase_direction|_quad_phase_distance|_zombie_blackholebomb_pull_state'
@@ -23,9 +24,6 @@ contexts:
 
   main:
     - include: global
-
-  comments:
-    - include: scope:text.codt7.table.sound.common#comments
 
   global:
     - match: (\w+)\s*(@)\s*(\w*)(?:(>)(\w+)\s*(?:(@)\s*(\w*))?)?
@@ -46,9 +44,9 @@ contexts:
       scope: meta.col-AST-definition.codt7.table.anim.selector variable.parameter.codt7.table.anim.selector
     - match: \b(?i:{{ast_enums}})\b
       scope: meta.col-enum.codt7.table.anim.selector support.constant.codt7.table.anim.selector
-    - include: scope:text.codt7.table.sound.common#numbers
+    - include: numbers
     - match: \b(?i:anim_)\w+\b
-      scope: meta.col-AM-alias.codt7.table.anim.selector entity.name.anim-alias markup.italic
+      scope: meta.col-AM-alias.codt7.table.anim.selector entity.name.alias-reference
     - match: \bvoid\b
       scope: storage.type.codt7.table.anim.selector
     - match: ^\s*(,)\s*$
@@ -62,49 +60,3 @@ contexts:
     # match anything else as string
     - match: '.'
       scope: meta.col-string.codt7.table.anim.selector string.unquoted.codt7.table.anim.selector
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
