@@ -41,13 +41,13 @@ contexts:
 
   numbers:
     - match: '-'
-      scope: keyword.operator.arithmetic.codt7.sound.common
+      scope: keyword.operator.arithmetic.codt7.map
     - match: '\b(\d+)((\.)\d*)?\b'
-      scope: meta.number.decimal.codt7.sound.common
+      scope: meta.number.decimal.codt7.map
       captures:
-        1: constant.numeric.value.codt7.sound.common
-        2: constant.numeric.value.codt7.sound.common
-        3: punctuation.separator.decimal.codt7.sound.common
+        1: constant.numeric.value.codt7.map
+        2: constant.numeric.value.codt7.map
+        3: punctuation.separator.decimal.codt7.map
 
   block:
     - match: '\{'

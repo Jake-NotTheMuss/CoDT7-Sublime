@@ -1,0 +1,56 @@
+/* SYNTAX TEST "Packages/CoDT7 Formats/MapFile.sublime-syntax" */
+
+iwmap 4
+/* <- keyword.other.directive.iwmap */
+/*    ^ constant.numeric.map-version */
+"script_startingnumber" 0
+/*^^^^^^^^^^^^^^^^^^^^^ string.quoted.double */
+/* <- punctuation.definition.string.begin */
+/*                    ^ punctuation.definition.string.end */
+/*                      ^ constant.numeric.value */
+"000_Global" flags  active
+/*^^^^^^^^^^ string.quoted.double */
+/* <- punctuation.definition.string.begin */
+/*         ^ punctuation.definition.string.end */
+/*           ^ variable.parameter */
+/*                  ^ variable.parameter */
+"The Map" flags expanded
+/*^^^^^^^ string.quoted.double */
+/* <- punctuation.definition.string.begin */
+/*      ^ punctuation.definition.string.end */
+/*        ^ variable.parameter */
+/*              ^ variable.parameter */
+// entity 0
+/* <- comment.line */
+{
+/* <- meta.block punctuation.section.block.begin */
+guid "{E20D7E23-839D-11EB-9B0A-1CBFCEBC8EAF}"
+/* <- variable.language */
+/*   ^ punctuation.definition.string.begin */
+/*     ^^^^^^^^ meta.number constant.numeric.value */
+/*             ^ punctuation.separator */
+/*              ^^^^ meta.number constant.numeric.value */
+/*                  ^ punctuation.separator */
+/*                   ^^^^ meta.number constant.numeric.value */
+/*                       ^ punctuation.separator */
+/*                        ^^^^ meta.number constant.numeric.value */
+/*                            ^ punctuation.separator */
+/*                             ^^^^^^^^^^^^ meta.number constant.numeric.value */
+/*                                          ^ punctuation.definition.string.end */
+"sky_intensity_factor1" "1"
+/*^^^^^^^^^^^^^^^^^^^^^ string.quoted.double */
+/* <- punctuation.definition.string.begin */
+/*                    ^ punctuation.definition.string.end */
+/*                      ^^^ string.quoted.double */
+/*                      ^ punctuation.definition.string.begin */
+/*                       ^ meta.number constant.numeric.value */
+/*                        ^ punctuation.definition.string.end */
+"state_alias_1" "State 1"
+/*^^^^^^^^^^^^^ string.quoted.double */
+/* <- punctuation.definition.string.begin */
+/*            ^ punctuation.definition.string.end */
+/*              ^^^^^^^^^ string.quoted.double */
+/*              ^ punctuation.definition.string.begin */
+/*                     ^ meta.number constant.numeric.value */
+}
+/* <- meta.block punctuation.section.block.end */
