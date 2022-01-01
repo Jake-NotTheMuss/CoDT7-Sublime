@@ -27,7 +27,7 @@
 		},
 		{
 			"name": "CoDT7 Alias Reference",
-			"scope": "entity.name.alias-reference",
+			"scope": "entity.name.alias-reference - source.codt7.animtree",
 			"foreground": "var(orange)",
 			"font_style": "italic"
 		},
@@ -35,6 +35,12 @@
 			"name": "CoDT7 Global Reference",
 			"scope": "entity.name.global-reference",
 			"foreground": "var(red)",
+			"font_style": "italic"
+		},
+		{
+			"name": "CoDT7 Animtree Animation Alias",
+			"scope": "source.codt7.animtree & entity.name.alias-reference",
+			"foreground": "var(green)",
 			"font_style": "italic"
 		}
 	]
