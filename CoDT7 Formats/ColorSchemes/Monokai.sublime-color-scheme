@@ -5,7 +5,7 @@
 	[
 		{
 			"name": "CoDT7 Operator",
-			"scope": "keyword.operator & (source.codt7 | text.codt7 - text.codt7.table)",
+			"scope": "keyword.operator & (source.codt7 | text.codt7 - text.codt7.table) - keyword.operator.logical - keyword.operator.word",
 			"foreground": "var(white)"
 		},
 		{
