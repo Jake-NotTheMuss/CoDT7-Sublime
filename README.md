@@ -26,11 +26,11 @@ Current Support:
 - Anim Tree (.atr)
 - Anim Selector Table (.ai_ast)
 - Anim Mapping Table (.ai_am)
+- Player Anim Script (.script)
 
 Future Support:
 - Tech Set Def (.techsetdef)
 - Compute Shader Def (.csdef)
-- Player Anim Script (.script)
 
 ... to name a few.
 

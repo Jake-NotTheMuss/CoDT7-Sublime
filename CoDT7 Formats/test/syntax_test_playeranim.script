@@ -1,0 +1,154 @@
+/* SYNTAX TEST "Packages/CoDT7 Formats/PlayerAnimScript.sublime-syntax" */
+
+DEFINES
+/* <- support.type */
+
+  set movestatus moving = walk AND run AND sprint
+/*^ keyword.operator.word */
+/*    ^ variable.parameter */
+/*               ^ entity.name */
+/*                             ^ keyword.operator.logical */
+/*                                     ^ keyword.operator.logical */
+
+  #ADD_VEHICLE huey default drivers 1 gunners 2
+/*^ keyword.other */
+/*             ^ entity.name.vehicle */
+/*                  ^ keyword.control */
+/*                          ^ variable.parameter */
+/*                                  ^ constant.numeric.value */
+/*                                    ^ variable.parameter */
+/*                                            ^ constant.numeric.value */
+
+EVENTS
+/* <- support.type */
+
+#gametype MP AND ZM
+/*^^^^^^^^^^^^^^^^^ meta.compiler */
+/* <- keyword.control */
+/*        ^^ constant.language */
+/*           ^ keyword.operator.logical */
+/*               ^^ constant.language */
+  land
+/*^ meta.event entity.name.event */
+{
+/* <- meta.event meta.block punctuation.section.block.begin */
+  // TURNED
+/*^ comment.line */
+  direction right
+/*^ variable.parameter */
+  {
+/*^ meta.condition-yield meta.block punctuation.section.block.begin */
+    legs pb_standjump_land legrig pb_standjump_land sound evt_player_land duration 5
+/*  ^ keyword.other */
+/*       ^ entity.name.alias-reference */
+/*                         ^ variable.language */
+/*                                ^ entity.name.alias-reference */
+/*                                                  ^ support.type */
+/*                                                        ^ entity.name.alias-reference */
+/*                                                                        ^ variable.language */
+/*                                                                                 ^ constant.numeric.value */
+    both pb_standjump_land duration 200
+/*  ^ keyword.other */
+/*       ^ entity.name.alias-reference */
+/*                         ^ variable.language */
+/*                                  ^^^ constant.numeric.value */
+  }
+/*^ meta.condition-yield meta.block punctuation.section.block.end */
+  /* BOW */
+/*^ comment.block */
+  playerAnimType bow, wallrun_side right
+/*^ variable.parameter */
+/*                  ^ punctuation.separator */
+/*                    ^ variable.parameter */
+  {
+/*^ meta.condition-yield meta.block punctuation.section.block.begin */
+    torso pt_bow_wall_run_fire_enter_r blendtime 100
+/*  ^ keyword.other */
+/*        ^ entity.name.alias-reference */
+/*                                     ^ variable.language */
+/*                                               ^^^ constant.numeric.value */
+  }
+/*^ meta.condition-yield meta.block punctuation.section.block.end */
+  default
+/*^ keyword.control */
+  {
+/*^ meta.condition-yield meta.block punctuation.section.block.begin */
+    legs pb_standjump_land legrig pb_standjump_land duration 100 blendtime 50
+/*  ^ keyword.other */
+/*       ^ entity.name.alias-reference */
+/*                         ^ variable.language */
+/*                                ^ entity.name.alias-reference */
+/*                                                  ^ variable.language */
+/*                                                           ^^^ constant.numeric.value */
+/*                                                               ^ variable.language */
+/*                                                                         ^^ constant.numeric.value */
+  }
+/*^ meta.condition-yield meta.block punctuation.section.block.end */
+}
+/* <- meta.event meta.block punctuation.section.block.end */
+
+  #end_gametype
+/*^^^^^^^^^^^^^ meta.compiler keyword.control */
+
+ANIMATIONS
+/* <- support.type */
+
+STATE COMBAT
+/* <- support.type */
+{
+/* <- meta.state meta.block punctuation.section.block.begin */
+  idle
+/*^ entity.name.state */
+  {
+/*^ meta.sub-state meta.block punctuation.section.block.begin */
+#gametype ZM
+/*^^^^^^^^^^ meta.compiler */
+/* <- keyword.control */
+    // BEAST MODE
+/*  ^^ punctuation.definition.comment */
+/*  ^^^^^^^^^^^^^ comment.line */
+    perk turned
+/*  ^ variable.parameter */
+    {
+/*  ^ meta.condition-yield meta.block punctuation.section.block.begin */
+      both pb_zom_beast_idle
+/*    ^ keyword.other */
+/*         ^ entity.name.alias-reference */
+    }
+/*  ^ meta.condition-yield meta.block punctuation.section.block.end */
+#end_gametype
+/*^^^^^^^^^^^ meta.compiler keyword.control */
+  }
+/*^ meta.sub-state meta.block punctuation.section.block.end */
+}
+/* <- meta.state meta.block punctuation.section.block.end */
+
+LOCOMOTIVE_BLENDS
+/* <- support.type */
+
+dir_blend crouch_run_360_default
+/* <- keyword.declaration */
+/*        ^^^^^^^^^^^^^^^^^^^^^^ meta.locomotive-blend */
+/*        ^ entity.name.locomotive-dir-blend */
+{
+/* <- meta.locomotive-blend meta.block punctuation.section.block.begin */
+    1   pb_crouch_run_forward       0       pb_rifle_crouch_shoot_run_fr      45
+/*  ^ constant.numeric.value */
+/*      ^ entity.name.alias-reference */
+/*                                  ^ constant.numeric.value */
+/*                                          ^ entity.name.alias-reference */
+/*                                                                            ^^ constant.numeric.value */
+}
+/* <- meta.locomotive-blend meta.block punctuation.section.block.end */
+
+speed_blend locomotion_blend_crouch_default crouch_run_360_default
+/* <- keyword.declaration */
+/*          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.locomotive-blend */
+/*          ^ entity.name.locomotive-speed-blend */
+/*                                          ^ entity.name.alias-reference */
+
+LOADSCRIPTS
+/* <- support.type */
+
+playeranim_defines
+/* <- entity.name.script */

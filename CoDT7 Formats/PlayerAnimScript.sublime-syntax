@@ -1,0 +1,608 @@
+%YAML 1.2
+---
+# http://www.sublimetext.com/docs/3/syntax.html
+
+# This file is part of the T7-Sublime project.
+# T7-Sublime is an enhanced syntax-highlighting package for (almost) all Call of Duty Black Ops III developer file formats.
+# Player Anim Scripts are files.
+
+name: Player Animation Script
+file_extensions:
+  - script
+scope: source.codt7.playeranimscript
+
+variables:
+  identifier: \b[[:alpha:]_][[:alnum:]_]*\b
+  types: EVENTS|DEFINES|LOADSCRIPTS|LOCOMOTIVE_BLENDS|ANIMATIONS
+
+  anim_flags: (?i:allowmovementinterrupt|synchronized|grenadeanim|duration|blendtime|blendouttime|blendintime|female|male|legrig|turretanim|animrate|weapontimescale)
+
+  enum_direction: (?i:left|right|backward|forward)
+  enum_dmgdirection: (?i:left|right|back|front|above_left|above_right|above_back|above_front|below_left|below_right|below_back|below_front)
+  enum_dmgtype: (?i:suicide|fireflies|burned|falling|gas|explosive|energy_weapon|normal_shotgun|meleebat|meleebash|melee|meleeassassinate|meleearmblade|meleecharge|electrified|annihilator|bowpartialcharge|bowfullcharge|blowback)
+  enum_hitlocation: (?i:hit_head)
+  enum_leaning: (?i:left|right)
+  enum_movestatus: (?i:slide|wallrun|climb|climb_side|climb_enter_above|climb_enter_ground|climb_enter_air|turnright|turnleft|trm_step_f|trm_step_b|trm_step_l|trm_step_r|trm_over_low_vault|trm_over_low_f_36|trm_over_low_b_36|trm_over_low_l_36|trm_over_low_r_36|trm_over_high_75|trm_over_high_100|trm_over_high_140|trm_on_low_f_32|trm_on_low_b_32|trm_on_low_l_32|trm_on_low_r_32|trm_on_med_f_60|trm_on_med_l_50|trm_on_med_r_50|trm_on_high_100|trm_on_high_140|mantle_up_57|mantle_up_51|mantle_up_45|mantle_up_39|mantle_up_33|mantle_up_27|mantle_up_21|mantle_over_high|mantle_over_mid|mantle_over_low|slide_move|juke_move|juke_move_short|falling|doublejump|doublejump_in_air|walk|run|sprint|stationary|idle|stumble|stumble_walk|stumble_sprint|shuffle)
+  enum_mounted: (?i:mg42)
+  enum_perk: (?i:laststand|grenadedeath|turned|fastmantle)
+  enum_playeranimtype: (?i:none|default|other|sniper|club|hold|briefcase|reviver|radio|dualwield|remotecontrol|minigun|beltfed|rearclip|handleclip|rearclipsniper|ballisticknife|singleknife|nopump|hatchet|brawler|zipline|riotshield|tablet|turned|sword|groundslam|armblade|armminigun|spikelauncher|bow|onehanded)
+  enum_stance: (?i:prone|crouch|stand)
+  enum_swimtype: (?i:none|surface|underwater)
+  enum_wallrun_side: (?i:left|right)
+  enum_weapon_position: (?i:ads|hip|raised|rest)
+  enum_weaponclass: (?i:rifle|sniper|smg|mg|pistol|pistol_spread|grenade|rocketlauncher|flamethrower|turret|non-player)
+  enum_weapontype: (?i:grenade)
+
+  supported_constants: '{{enum_direction}}|{{enum_dmgdirection}}|{{enum_dmgtype}}|{{enum_hitlocation}}|{{enum_leaning}}|{{enum_movestatus}}|{{enum_mounted}}|{{enum_perk}}|{{enum_playeranimtype}}|{{enum_stance}}|{{enum_swimtype}}|{{enum_wallrun_side}}|{{enum_weapon_position}}|{{enum_weaponclass}}|{{enum_weapontype}}'
+
+contexts:
+  main:
+    - include: global
+
+#####[ COMMON CONTEXTS ]#################################
+
+  comments:
+    - include: scope:source.codt7.common#comments
+
+  numbers:
+    - include: scope:source.codt7.common#numbers
+
+  logical-keywords:
+    - match: \b(?i:and|not)\b
+      scope: keyword.operator.logical.codt7.playeranimscript
+
+  preprocessor-line-ending:
+    - include: scope:source.codt7.common#preprocessor-line-ending
+
+  preprocessor-comments:
+    - include: scope:source.codt7.common#preprocessor-comments
+
+  compiler-options:
+    - match: (?i)^\s*(#\s*gametype)\b
+      captures:
+        1: meta.compiler.codt7.playeranimscript keyword.control.codt7.playeranimscript
+      push:
+        - meta_content_scope: meta.compiler.codt7.playeranimscript
+        - include: preprocessor-line-ending
+        - include: preprocessor-comments
+        - include: logical-keywords
+        - include: gametypes
+    - match: (?i)^\s*(#\s*demo_version_at_least)\b
+      captures:
+        1: meta.compiler.codt7.playeranimscript keyword.control.codt7.playeranimscript
+      push:
+        - meta_content_scope: meta.compiler.codt7.playeranimscript
+        - include: preprocessor-line-ending
+        - include: preprocessor-comments
+        - include: numbers
+    - match: (?i)^\s*(#\s*(?:end_gametype|end_demo_version_at_least))\b
+      captures:
+        1: meta.compiler.codt7.playeranimscript keyword.control.codt7.playeranimscript
+
+  gametypes:
+    - match: (?i)\b(cp|mp|zm)\b
+      scope: constant.language.codt7.playeranimscript
+
+  special-condition-values:
+    - match: (?i)\ball\b
+      scope: variable.language.codt7.playeranimscript
+
+  # common rules for condition definitions in event bodies
+  conditions-values-common:
+    - include: comments
+    - include: logical-keywords
+    - include: special-condition-values
+    - match: (?=\s*,)
+      pop: true
+    - match: (?=\{)
+      set: conditions-yield
+
+  conditions:
+    - include: comments
+    - include: compiler-options
+    - match: ','
+      scope: punctuation.separator.codt7.playeranimscript
+    # DIRECTION
+    - match: \b(?i:direction)\b
+      scope: variable.parameter.codt7.playeranimscript
+      push:
+        - meta_scope: meta.condition-type-direction.codt7.playeranimscript
+        - match: \b({{enum_direction}})\b
+          scope: support.constant.codt7.playeranimscript
+        - include: conditions-values-common
+    # DMGDIRECTION
+    - match: \b(?i:dmgdirection)\b
+      scope: variable.parameter.codt7.playeranimscript
+      push:
+        - meta_scope: meta.condition-type-dmg-direction.codt7.playeranimscript
+        - match: \b({{enum_dmgdirection}})\b
+          scope: support.constant.codt7.playeranimscript
+        - include: conditions-values-common
+    # DMGTYPE
+    - match: \b(?i:dmgtype)\b
+      scope: variable.parameter.codt7.playeranimscript
+      push:
+        - meta_scope: meta.condition-type-dmg-type.codt7.playeranimscript
+        - match: \b({{enum_dmgtype}})\b
+          scope: support.constant.codt7.playeranimscript
+        - include: conditions-values-common
+    # HITLOCATION
+    - match: \b(?i:hitlocation)\b
+      scope: variable.parameter.codt7.playeranimscript
+      push:
+        - meta_scope: meta.condition-type-hit-location.codt7.playeranimscript
+        - match: \b({{enum_hitlocation}})\b
+          scope: support.constant.codt7.playeranimscript
+        - include: conditions-values-common
+    # INAIR
+    - match: \b(?i:inair)\b
+      scope: variable.parameter.codt7.playeranimscript
+    # LOWREADY
+    - match: \b(?i:lowready)\b
+      scope: variable.parameter.codt7.playeranimscript
+    # MOUNTED
+    - match: \b(?i:mounted)\b
+      scope: variable.parameter.codt7.playeranimscript
+      push:
+        - meta_scope: meta.condition-type-mounted.codt7.playeranimscript
+        - match: \b({{enum_mounted}})\b
+          scope: support.constant.codt7.playeranimscript
+        - include: conditions-values-common
+    # MOVESTATUS
+    - match: \b(?i:movestatus)\b
+      scope: variable.parameter.codt7.playeranimscript
+      push:
+        - meta_scope: meta.condition-type-move-status.codt7.playeranimscript
+        - match: \b({{enum_movestatus}})\b
+          scope: support.constant.codt7.playeranimscript
+        - include: conditions-values-common
+    # NEXTPLAYERANIMTYPE
+    - match: \b(?i:nextplayeranimtype)\b
+      scope: variable.parameter.codt7.playeranimscript
+      push:
+        - meta_scope: meta.condition-type-next-player-anim-type.codt7.playeranimscript
+        - match: \b({{enum_playeranimtype}})\b
+          scope: support.constant.codt7.playeranimscript
+        - include: conditions-values-common
+    # NEXTWEAPONCLASS
+    - match: \b(?i:nextweaponclass)\b
+      scope: variable.parameter.codt7.playeranimscript
+      push:
+        - meta_scope: meta.condition-type-next-weapon-class.codt7.playeranimscript
+        - match: \b({{enum_weaponclass}})\b
+          scope: support.constant.codt7.playeranimscript
+        - include: conditions-values-common
+    # PERK
+    - match: \b(?i:perk)\b
+      scope: variable.parameter.codt7.playeranimscript
+      push:
+        - meta_scope: meta.condition-type-perk.codt7.playeranimscript
+        - match: \b({{enum_perk}})\b
+          scope: support.constant.codt7.playeranimscript
+        - include: conditions-values-common
+    # PLAYERANIMTYPE
+    - match: \b(?i:playeranimtype)\b
+      scope: variable.parameter.codt7.playeranimscript
+      push:
+        - meta_scope: meta.condition-type-player-anim-type.codt7.playeranimscript
+        - match: \b({{enum_playeranimtype}})\b
+          scope: support.constant.codt7.playeranimscript
+        - include: conditions-values-common
+    # STANCE
+    - match: \b(?i:stance)\b
+      scope: variable.parameter.codt7.playeranimscript
+      push:
+        - meta_scope: meta.condition-type-stance.codt7.playeranimscript
+        - match: \b({{enum_stance}})\b
+          scope: support.constant.codt7.playeranimscript
+        - include: conditions-values-common
+    # SWIMTYPE
+    - match: \b(?i:swimtype)\b
+      scope: variable.parameter.codt7.playeranimscript
+      push:
+        - meta_scope: meta.condition-type-swim-type.codt7.playeranimscript
+        - match: \b({{enum_swimtype}})\b
+          scope: support.constant.codt7.playeranimscript
+        - include: conditions-values-common
+    # WALLRUN_SIDE
+    - match: \b(?i:wallrun_side)\b
+      scope: variable.parameter.codt7.playeranimscript
+      push:
+        - meta_scope: meta.condition-type-wallrun-side.codt7.playeranimscript
+        - match: \b({{enum_wallrun_side}})\b
+          scope: support.constant.codt7.playeranimscript
+        - include: conditions-values-common
+    # WEAPON
+    - match: \b(?i:weapon)\b
+      scope: variable.parameter.codt7.playeranimscript
+      push:
+        - meta_scope: meta.condition-type-weapon.codt7.playeranimscript
+        - match: \w+
+          scope: string.unquoted.codt7.playeranimscript
+        - include: conditions-values-common
+    # WEAPON_POSITION
+    - match: \b(?i:weapon_position)\b
+      scope: variable.parameter.codt7.playeranimscript
+      push:
+        - meta_scope: meta.condition-type-weapon-position.codt7.playeranimscript
+        - match: \b({{enum_weapon_position}})\b
+          scope: support.constant.codt7.playeranimscript
+        - include: conditions-values-common
+    # WEAPONCLASS
+    - match: \b(?i:weaponclass)\b
+      scope: variable.parameter.codt7.playeranimscript
+      push:
+        - meta_scope: meta.condition-type-weapon-class.codt7.playeranimscript
+        - match: \b({{enum_weaponclass}})\b
+          scope: support.constant.codt7.playeranimscript
+        - include: conditions-values-common
+    # WEAPONPOWERLEVEL
+    - match: \b(?i:weaponpowerlevel)\b
+      scope: variable.parameter.codt7.playeranimscript
+      push:
+        - meta_scope: meta.condition-type-weapon-power-level.codt7.playeranimscript
+        - include: numbers
+        - include: conditions-values-common
+    # WEAPONCLASS
+    - match: \b(?i:weapontype)\b
+      scope: variable.parameter.codt7.playeranimscript
+      push:
+        - meta_scope: meta.condition-type-weapon-type.codt7.playeranimscript
+        - match: \b({{enum_weapontype}})\b
+          scope: support.constant.codt7.playeranimscript
+        - include: conditions-values-common
+    # DEFAULT
+    - match: \b(?i:default)\b
+      scope: keyword.control.codt7.playeranimscript
+      push:
+        - meta_scope: meta.condition-type-default.codt7.playeranimscript
+        - include: conditions-values-common
+
+    - match: (?=\{)
+      set: conditions-yield
+    - match: (?=\S)
+      pop: true
+
+  conditions-yield:
+    - meta_content_scope: meta.condition-yield.codt7.playeranimscript
+    - match: \{
+      scope: meta.block.codt7.playeranimscript punctuation.section.block.begin.codt7.playeranimscript
+      set:
+        - meta_content_scope: meta.condition-yield.codt7.playeranimscript meta.block.codt7.playeranimscript
+        - match: \}
+          scope: meta.condition-yield.codt7.playeranimscript meta.block.codt7.playeranimscript punctuation.section.block.end.codt7.playeranimscript
+          pop: true
+        - include: comments
+        - include: compiler-options
+        - match: \b(?i:both|legs|torso|turret)\b
+          scope: keyword.other.codt7.playeranimscript
+          push:
+            - match: $\n
+              pop: true
+            - match: \w+
+              scope: entity.name.alias-reference.codt7.playeranimscript
+              set:
+                - match: $\n
+                  pop: true
+                - include: anim-flags
+                - match: \b(?i:sound)\b
+                  scope: storage.type.codt7.playeranimscript
+                  set:
+                    - match: $\n
+                      pop: true
+                    - match: \w+
+                      scope: entity.name.alias-reference.codt7.playeranimscript
+
+  anim-alias:
+    - match: $\n
+      pop: true
+    - match: \b(?i:sound)\b
+      scope: support.type.codt7.playeranimscript
+      set: sound-alias
+    - match: \w+
+      scope: entity.name.alias-reference.codt7.playeranimscript
+      set: anim-flags
+
+  anim-flags:
+    - match: $\n
+      pop: true
+    - match: \b(?i:legrig)\b
+      scope: variable.language.codt7.playeranimscript
+      push:
+        - match: (?=$)
+          pop: true
+        - match: \w+
+          scope: entity.name.alias-reference.codt7.playeranimscript
+          pop: true
+    - match: \b({{anim_flags}})\b
+      scope: variable.language.codt7.playeranimscript
+    - include: numbers
+    - match: (?=\S)
+      set: anim-alias
+
+  sound-alias:
+    - match: $\n
+      pop: true
+    - match: \w+
+      scope: entity.name.alias-reference.codt7.playeranimscript
+      set: anim-flags
+
+  section-end:
+    - match: (?=\b(?i:{{types}})\b)
+      pop: true
+
+######[ GLOBAL ]#########################################
+
+  global:
+    - include: comments
+    - include: compiler-options
+    - include: types
+
+  types:
+    - match: (?i)\bANIMATIONS\b
+      scope: support.type.codt7.playeranimscript
+      push: states-global
+    - match: (?i)\bEVENTS\b
+      scope: support.type.codt7.playeranimscript
+      push: events-global
+    - match: (?i)\bDEFINES\b
+      scope: support.type.codt7.playeranimscript
+      push: defines-global
+    - match: (?i)\bLOADSCRIPTS\b
+      scope: support.type.codt7.playeranimscript
+      push: loadscripts-global
+    - match: (?i)\bLOCOMOTIVE_BLENDS\b
+      scope: support.type.codt7.playeranimscript
+      push: locomotive-blends-global
+
+#####[ ANIMATIONS ]######################################
+
+  states-global:
+    - include: comments
+    - include: compiler-options
+    - include: section-end
+    - match: (?i)(?=\bstate\b)
+      push: global-state
+
+  global-state:
+    - match: (?i)\bstate\b
+      scope: support.type.codt7.playeranimscript
+    - include: comments
+    - match: \b(?i:relaxed|alert|combat)\b
+      scope: meta.state.codt7.playeranimscript support.constant.codt7.playeranimscript
+      set: state-definition-continue
+    - match: '{{identifier}}'
+      scope: meta.state.codt7.playeranimscript
+      set: state-definition-continue
+    - match: (?=\S)
+      pop: true
+
+  state-definition-continue:
+    - meta_content_scope: meta.state.codt7.playeranimscript
+    - include: comments
+    - match: (?=\{)
+      set: state-definition-body
+    - match: (?=\S)
+      pop: true
+
+  state-definition-body:
+    - meta_content_scope: meta.state.codt7.playeranimscript
+    - match: \{
+      scope: meta.block.codt7.playeranimscript punctuation.section.block.begin.codt7.playeranimscript
+      set:
+        - meta_content_scope: meta.state.codt7.playeranimscript meta.block.codt7.playeranimscript
+        - match: \}
+          scope: meta.state.codt7.playeranimscript meta.block.codt7.playeranimscript punctuation.section.block.end.codt7.playeranimscript
+          pop: true
+        - include: state-body
+
+  state-body:
+    - include: comments
+    - include: compiler-options
+    - match: '{{identifier}}'
+      scope: meta.sub-state.codt7.playeranimscript entity.name.state.codt7.playeranimscript
+      push: sub-state-definition-continue
+
+  sub-state-definition-continue:
+    - meta_content_scope: meta.sub-state.codt7.playeranimscript
+    - include: comments
+    - match: (?=\{)
+      set: sub-state-definition-body
+    - match: (?=\S)
+      pop: true
+
+  sub-state-definition-body:
+    - meta_content_scope: meta.sub-state.codt7.playeranimscript
+    - match: \{
+      scope: meta.block.codt7.playeranimscript punctuation.section.block.begin.codt7.playeranimscript
+      set:
+        - meta_content_scope: meta.sub-state.codt7.playeranimscript meta.block.codt7.playeranimscript
+        - match: \}
+          scope: meta.sub-state.codt7.playeranimscript meta.block.codt7.playeranimscript punctuation.section.block.end.codt7.playeranimscript
+          pop: true
+        - include: sub-state-body
+
+  sub-state-body:
+    - include: comments
+    - include: compiler-options
+    - match: ''
+      push: conditions
+
+######[ EVENTS ]#########################################
+
+  events-global:
+    - include: comments
+    - include: compiler-options
+    - include: section-end
+    - match: '{{identifier}}'
+      scope: meta.event.codt7.playeranimscript entity.name.event.codt7.playeranimscript
+      push: event-definition-continue
+
+  event-definition-continue:
+    - meta_content_scope: meta.event.codt7.playeranimscript
+    - include: comments
+    - match: (?=\{)
+      set: event-definition-body
+    - match: (?=\S)
+      pop: true
+
+  event-definition-body:
+    - meta_content_scope: meta.event.codt7.playeranimscript
+    - match: \{
+      scope: meta.block.codt7.playeranimscript punctuation.section.block.begin.codt7.playeranimscript
+      set:
+        - meta_content_scope: meta.event.codt7.playeranimscript meta.block.codt7.playeranimscript
+        - match: \}
+          scope: meta.event.codt7.playeranimscript meta.block.codt7.playeranimscript punctuation.section.block.end.codt7.playeranimscript
+          pop: true
+        - include: event-body
+
+  event-body:
+    - include: comments
+    - include: compiler-options
+    - match: ''
+      push: conditions
+
+######[ DEFINES ]########################################
+
+  defines-global:
+    - include: comments
+    - include: compiler-options
+    - include: section-end
+    - match: (?i)\bset\b
+      scope: keyword.operator.word.codt7.playeranimscript
+      push: global-define
+    - match: (?i)^\s*(#\s*ADD_VEHICLE)\b
+      captures:
+        1: keyword.other.codt7.playeranimscript
+      push: add-vehicle
+
+  global-define:
+    - include: comments
+    - match: '{{identifier}}'
+      scope: variable.parameter.codt7.playeranimscript
+      set: global-define-continue
+
+  global-define-continue:
+    - include: comments
+    - match: '{{identifier}}'
+      scope: entity.name.condition-value.codt7.playeranimscript
+    - match: '='
+      scope: keyword.operator.assignment.codt7.playeranimscript
+      set: global-define-finish
+
+  global-define-finish:
+    - include: logical-keywords
+    - include: special-condition-values
+    - match: '{{supported_constants}}'
+      scope: support.constant.codt7.playeranimscript
+    - match: $\n
+      pop: true
+
+  add-vehicle:
+    - include: comments
+    - match: '{{identifier}}'
+      scope: entity.name.vehicle.codt7.playeranimscript
+      set: add-vehicle-continue
+
+  add-vehicle-continue:
+    - include: comments
+    - match: \b(?i:(default)|({{identifier}}))\b
+      captures:
+        1: keyword.control.codt7.playeranimscript
+      set: add-vehicle-finish
+
+  add-vehicle-finish:
+    - include: comments
+    - match: '{{identifier}}'
+      scope: variable.parameter.codt7.playeranimscript
+    - include: numbers
+    - match: $\n
+      pop: true
+
+######[ LOADSCRIPTS ]####################################
+
+  loadscripts-global:
+    - include: comments
+    - include: compiler-options
+    - include: section-end
+    - match: \w+
+      scope: entity.name.script.codt7.playeranimscript
+
+######[ LOCOMOTIVE_BLENDS ]##############################
+
+  locomotive-blends-global:
+    - include: comments
+    - include: compiler-options
+    - include: section-end
+    - match: (?i)(?=\bdir_blend\b)
+      push: global-locomotive-dir-blend
+    - match: (?i)(?=\bspeed_blend\b)
+      push: global-locomotive-speed-blend
+    - match: (?i)(?=\bturn_blend\b)
+      push: global-locomotive-turn-blend
+
+  global-locomotive-dir-blend:
+    - match: (?i)\bdir_blend\b
+      scope: keyword.declaration.locomotive-blend.codt7.playeranimscript
+    - include: comments
+    - match: '{{identifier}}'
+      scope: meta.locomotive-blend.codt7.playeranimscript entity.name.locomotive-dir-blend.codt7.playeranimscript
+      set: locomotive-dir-blend-definition-continue
+    - match: (?=\S)
+      pop: true
+
+  global-locomotive-speed-blend:
+    - match: (?i)\bspeed_blend\b
+      scope: keyword.declaration.locomotive-blend.codt7.playeranimscript
+    - include: comments
+    - match: '{{identifier}}'
+      scope: meta.locomotive-blend.codt7.playeranimscript entity.name.locomotive-speed-blend.codt7.playeranimscript
+      set: locomotive-speed-blend-definition-body
+    - match: (?=\S)
+      pop: true
+
+  global-locomotive-turn-blend:
+    - match: (?i)\bturn_blend\b
+      scope: keyword.declaration.locomotive-blend.codt7.playeranimscript
+    - include: comments
+    - match: '{{identifier}}'
+      scope: meta.locomotive-blend.codt7.playeranimscript entity.name.locomotive-turn-blend.codt7.playeranimscript
+      set: locomotive-speed-blend-definition-body
+    - match: (?=\S)
+      pop: true
+
+  locomotive-dir-blend-definition-continue:
+    - meta_content_scope: meta.locomotive-blend.codt7.playeranimscript
+    - include: comments
+    - match: (?=\{)
+      set: locomotive-dir-blend-definition-body
+    - match: (?=\S)
+      pop: true
+
+  locomotive-dir-blend-definition-body:
+    - meta_content_scope: meta.locomotive-blend.codt7.playeranimscript
+    - include: comments
+    - match: '\{'
+      scope: meta.block.codt7.playeranimscript punctuation.section.block.begin.codt7.playeranimscript
+      set:
+        - meta_content_scope: meta.locomotive-blend.codt7.playeranimscript meta.block.codt7.playeranimscript
+        - match: '\}'
+          scope: meta.locomotive-blend.codt7.playeranimscript meta.block.codt7.playeranimscript punctuation.section.block.end.codt7.playeranimscript
+          pop: true
+        - include: locomotive-dir-blend-body
+
+  locomotive-dir-blend-body:
+    - include: comments
+    - include: compiler-options
+    - include: numbers
+    - match: '{{identifier}}'
+      scope: entity.name.alias-reference.codt7.playeranimscript
+
+  locomotive-speed-blend-definition-body:
+    - meta_content_scope: meta.locomotive-blend.codt7.playeranimscript
+    - include: comments
+    - match: $\n
+      pop: true
+    - match: '{{identifier}}'
+      scope: entity.name.alias-reference.codt7.playeranimscript
