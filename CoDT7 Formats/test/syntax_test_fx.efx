@@ -1,11 +1,11 @@
 /* SYNTAX TEST "Packages/CoDT7 Formats/FX.sublime-syntax" */
 
 flags spawnRelative;
-/* <- variable */
-/*    ^ - variable */
+/* <- variable.parameter */
+/*    ^ - variable.parameter */
 /*                 ^ punctuation.terminator */
 number -0;
-/* <- variable */
+/* <- variable.parameter */
 /*     ^ keyword.operator */
 /*      ^ constant.numeric.value */
 /*       ^ punctuation.terminator */
@@ -13,22 +13,22 @@ number -0;
 {
 /* <- meta.block punctuation.section.block.begin */
   flags looping;
-/*^ variable */
-/*      ^ - variable */
+/*^ variable.parameter */
+/*      ^ - variable.parameter */
 /*             ^ punctuation.terminator */
   dynamicLight2
-/*^ variable */
+/*^ variable.parameter */
   {
 /*^ meta.block punctuation.section.block.begin */
     new
-/*  ^ keyword */
+/*  ^ keyword.control */
     {
 /*  ^ meta.block punctuation.section.block.begin */
       radius 1
-/*    ^ variable */
+/*    ^ variable.parameter */
 /*           ^ constant.numeric.value */
       _color 1.0 1.0 1.0 1.0
-/*    ^ variable */
+/*    ^ variable.parameter */
 /*           ^^^ constant.numeric.value */
 /*            ^ punctuation.separator.decimal */
 /*               ^^^ constant.numeric.value */

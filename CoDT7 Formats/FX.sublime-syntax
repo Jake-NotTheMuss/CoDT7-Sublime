@@ -54,7 +54,7 @@ contexts:
   keywords:
     - match: \b(?i)(new)(\d+)?\b
       captures:
-        1: keyword.new.codt7.fx
+        1: keyword.control.codt7.fx
         2: constant.numeric.value.codt7.fx
       push:
         - match: (?=\{)
@@ -93,7 +93,7 @@ contexts:
 
   statements:
     - match: '{{identifier}}'
-      scope: variable.language.codt7.fx
+      scope: variable.parameter.codt7.fx
       push:
         - match: ';'
           scope: punctuation.terminator.codt7.fx
@@ -117,7 +117,7 @@ contexts:
 
   new-block-statements:
     - match: '{{identifier}}'
-      scope: variable.language.codt7.fx
+      scope: variable.parameter.codt7.fx
       push:
         - match: $\n
           pop: true
