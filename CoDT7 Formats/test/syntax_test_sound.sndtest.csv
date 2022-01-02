@@ -8,17 +8,17 @@ name,test_filename,test_level,test_type,test_global_id,test_secondary_id
 # <- meta.header
 
 some_alias,some_file_name,-10298.2398,SOME_ENUM,some_global_id,some_other_alias,unexpected_column
-# <- meta.col-name entity.name
+# <- meta.column.name entity.name
 #         ^ punctuation.separator
-#          ^ meta.col-file-name entity.name.filename
+#          ^ meta.column.file-name entity.name.filename
 #                        ^ punctuation.separator
-#                         ^ meta.col-level keyword.operator.arithmetic
+#                         ^ meta.column.level keyword.operator.arithmetic
 #                          ^ meta.number constant.numeric.value
 #                               ^ punctuation.separator.decimal
 #                                    ^ punctuation.separator
-#                                     ^ meta.col-type support.constant
+#                                     ^ meta.column.type support.constant
 #                                              ^ punctuation.separator
-#                                               ^ meta.col-global-id entity.name.global-reference
+#                                               ^ meta.column.global-id entity.name.global-reference
 #                                                             ^ punctuation.separator
-#                                                              ^ meta.col-reference-id entity.name.alias-reference
+#                                                              ^ meta.column.reference-id entity.name.alias-reference
 #                                                                              ^ invalid.illegal.unexpected-character

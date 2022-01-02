@@ -12,7 +12,7 @@ name: T5 Sound Alias Table
 # look for names that are T5 columns but not T7
 first_line_match: |-
   (?ix:
-    \s* name \s* ,
+    ^ \s* name \s* ,
     ( \s* \w+ \s* , )*
     (
       \s*
@@ -33,7 +33,7 @@ contexts:
 ########[ PARAMETER CONTEXTS ]####################################################
 
   name:
-    - meta_content_scope: meta.col-name.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.name.codt7.table.sound.t5alias
     - match: \w+
       scope: entity.name.alias.codt7.table.sound.t5alias
     - match: ','
@@ -41,27 +41,27 @@ contexts:
       set: file
 
   file:
-    - meta_content_scope: meta.col-file.codt7.table.sound.t5alias entity.name.filename.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.file.codt7.table.sound.t5alias entity.name.filename.codt7.table.sound.t5alias
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: template
 
   template:
-    - meta_content_scope: meta.col-template.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.template.codt7.table.sound.t5alias
     - include: template_names_t5
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: loadspec
 
   loadspec:
-    - meta_content_scope: meta.col-loadspec.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.loadspec.codt7.table.sound.t5alias
     - include: loadspec_names_t5
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: secondary
 
   secondary:
-    - meta_content_scope: meta.col-secondary.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.secondary.codt7.table.sound.t5alias
     - match: \w+
       scope: entity.name.alias-reference.codt7.table.sound.t5alias
     - match: ','
@@ -69,210 +69,210 @@ contexts:
       set: group
 
   group:
-    - meta_content_scope: meta.col-group.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.group.codt7.table.sound.t5alias
     - include: group_names_t5
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: volmin
 
   volmin:
-    - meta_content_scope: meta.col-vol-min.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.vol-min.codt7.table.sound.t5alias
     - include: numbers
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: volmax
 
   volmax:
-    - meta_content_scope: meta.col-vol-max.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.vol-max.codt7.table.sound.t5alias
     - include: numbers
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: teamvolmod
 
   teamvolmod:
-    - meta_content_scope: meta.col-team-vol-mod.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.team-vol-mod.codt7.table.sound.t5alias
     - include: numbers
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: distmin
 
   distmin:
-    - meta_content_scope: meta.col-dist-min.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.dist-min.codt7.table.sound.t5alias
     - include: numbers
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: distmax
 
   distmax:
-    - meta_content_scope: meta.col-dist-max.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.dist-max.codt7.table.sound.t5alias
     - include: numbers
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: distreverbmax
 
   distreverbmax:
-    - meta_content_scope: meta.col-dist-reverb-max.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.dist-reverb-max.codt7.table.sound.t5alias
     - include: numbers
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: volumefalloffcurve
 
   volumefalloffcurve:
-    - meta_content_scope: meta.col-volume-falloff-curve.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.volume-falloff-curve.codt7.table.sound.t5alias
     - include: curve_type_t5
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: reverbfalloffcurve
 
   reverbfalloffcurve:
-    - meta_content_scope: meta.col-reverb-falloff-curve.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.reverb-falloff-curve.codt7.table.sound.t5alias
     - include: curve_type_t5
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: volumeminfalloffcurve
 
   volumeminfalloffcurve:
-    - meta_content_scope: meta.col-volume-min-falloff-curve.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.volume-min-falloff-curve.codt7.table.sound.t5alias
     - include: curve_type_t5
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: reverbminfalloffcurve
 
   reverbminfalloffcurve:
-    - meta_content_scope: meta.col-reverb-min-falloff-curve.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.reverb-min-falloff-curve.codt7.table.sound.t5alias
     - include: curve_type_t5
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: limitcount
 
   limitcount:
-    - meta_content_scope: meta.col-limit-count.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.limit-count.codt7.table.sound.t5alias
     - include: numbers
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: limittype
 
   limittype:
-    - meta_content_scope: meta.col-limit-type.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.limit-type.codt7.table.sound.t5alias
     - include: limit_type
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: entitylimitcount
 
   entitylimitcount:
-    - meta_content_scope: meta.col-entity-limit-count.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.entity-limit-count.codt7.table.sound.t5alias
     - include: numbers
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: entitylimittype
 
   entitylimittype:
-    - meta_content_scope: meta.col-entity-limit-type.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.entity-limit-type.codt7.table.sound.t5alias
     - include: limit_type
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: pitchmin
 
   pitchmin:
-    - meta_content_scope: meta.col-pitch-min.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.pitch-min.codt7.table.sound.t5alias
     - include: numbers
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: pitchmax
 
   pitchmax:
-    - meta_content_scope: meta.col-pitch-max.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.pitch-max.codt7.table.sound.t5alias
     - include: numbers
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: teampitchmod
 
   teampitchmod:
-    - meta_content_scope: meta.col-team-pitch-mod.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.team-pitch-mod.codt7.table.sound.t5alias
     - include: numbers
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: minpriority
 
   minpriority:
-    - meta_content_scope: meta.col-min-priority.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.min-priority.codt7.table.sound.t5alias
     - include: numbers
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: maxpriority
 
   maxpriority:
-    - meta_content_scope: meta.col-max-priority.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.max-priority.codt7.table.sound.t5alias
     - include: numbers
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: minprioritythreshold
 
   minprioritythreshold:
-    - meta_content_scope: meta.col-min-priority-threshold.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.min-priority-threshold.codt7.table.sound.t5alias
     - include: numbers
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: maxprioritythreshold
 
   maxprioritythreshold:
-    - meta_content_scope: meta.col-max-priority-threshold.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.max-priority-threshold.codt7.table.sound.t5alias
     - include: numbers
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: spatialized
 
   spatialized:
-    - meta_content_scope: meta.col-spatialized.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.spatialized.codt7.table.sound.t5alias
     - include: pan_type
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: type
 
   type:
-    - meta_content_scope: meta.col-type.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.type.codt7.table.sound.t5alias
     - include: storage_type
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: loop
 
   loop:
-    - meta_content_scope: meta.col-loop.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.loop.codt7.table.sound.t5alias
     - include: looping_type
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: randomizetype
 
   randomizetype:
-    - meta_content_scope: meta.col-randomize-type.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.randomize-type.codt7.table.sound.t5alias
     - include: randomize_type
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: probability
 
   probability:
-    - meta_content_scope: meta.col-probability.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.probability.codt7.table.sound.t5alias
     - include: numbers
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: startdelay
 
   startdelay:
-    - meta_content_scope: meta.col-start-delay.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.start-delay.codt7.table.sound.t5alias
     - include: numbers
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: reverbsend
 
   reverbsend:
-    - meta_content_scope: meta.col-reverb-send.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.reverb-send.codt7.table.sound.t5alias
     - include: numbers
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: duck
 
   duck:
-    - meta_content_scope: meta.col-duck.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.duck.codt7.table.sound.t5alias
     - match: \w+
       scope: entity.name.alias-reference.codt7.table.sound.t5alias
     - match: ','
@@ -280,91 +280,91 @@ contexts:
       set: pan
 
   pan:
-    - meta_content_scope: meta.col-pan.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.pan.codt7.table.sound.t5alias
     - include: pan_mode_t5
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: centersend
 
   centersend:
-    - meta_content_scope: meta.col-center-send.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.center-send.codt7.table.sound.t5alias
     - include: numbers
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: envelopmin
 
   envelopmin:
-    - meta_content_scope: meta.col-envelop-min.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.envelop-min.codt7.table.sound.t5alias
     - include: numbers
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: envelopmax
 
   envelopmax:
-    - meta_content_scope: meta.col-envelop-max.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.envelop-max.codt7.table.sound.t5alias
     - include: numbers
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: enveloppercentage
 
   enveloppercentage:
-    - meta_content_scope: meta.col-envelop-percentage.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.envelop-percentage.codt7.table.sound.t5alias
     - include: numbers
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: occlusionlevel
 
   occlusionlevel:
-    - meta_content_scope: meta.col-occlusion-level.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.occlusion-level.codt7.table.sound.t5alias
     - include: numbers
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: occlusionwetdry
 
   occlusionwetdry:
-    - meta_content_scope: meta.col-occlusion-wet-dry.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.occlusion-wet-dry.codt7.table.sound.t5alias
     - include: numbers
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: isbig
 
   isbig:
-    - meta_content_scope: meta.col-is-big.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.is-big.codt7.table.sound.t5alias
     - include: yesno
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: distancelpf
 
   distancelpf:
-    - meta_content_scope: meta.col-distance-lpf.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.distance-lpf.codt7.table.sound.t5alias
     - include: yesno
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: movetype
 
   movetype:
-    - meta_content_scope: meta.col-move-type.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.move-type.codt7.table.sound.t5alias
     - include: flux_type
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: movetime
 
   movetime:
-    - meta_content_scope: meta.col-move-time.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.move-time.codt7.table.sound.t5alias
     - include: numbers
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: realdelay
 
   realdelay:
-    - meta_content_scope: meta.col-real-delay.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.real-delay.codt7.table.sound.t5alias
     - include: yesno
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: subtitle
 
   subtitle:
-    - meta_content_scope: meta.col-subtitle.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.subtitle.codt7.table.sound.t5alias
     - match: \w+
       scope: entity.name.alias-reference.codt7.table.sound.t5alias
     - match: ','
@@ -372,175 +372,175 @@ contexts:
       set: mature
 
   mature:
-    - meta_content_scope: meta.col-mature.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.mature.codt7.table.sound.t5alias
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: doppler
 
   doppler:
-    - meta_content_scope: meta.col-doppler.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.doppler.codt7.table.sound.t5alias
     - include: yesno
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: futz
 
   futz:
-    - meta_content_scope: meta.col-futz.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.futz.codt7.table.sound.t5alias
     - include: yesno
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: contexttype
 
   contexttype:
-    - meta_content_scope: meta.col-context-type.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.context-type.codt7.table.sound.t5alias
     - include: context_type_t5
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: contextvalue
 
   contextvalue:
-    - meta_content_scope: meta.col-context-value.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.context-value.codt7.table.sound.t5alias
     - include: context_value_t5
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: compression
 
   compression:
-    - meta_content_scope: meta.col-compression.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.compression.codt7.table.sound.t5alias
     - include: numbers
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: timescale
 
   timescale:
-    - meta_content_scope: meta.col-timescale.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.timescale.codt7.table.sound.t5alias
     - include: yesno
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: music
 
   music:
-    - meta_content_scope: meta.col-music.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.music.codt7.table.sound.t5alias
     - include: yesno
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: fadein
 
   fadein:
-    - meta_content_scope: meta.col-fade-in.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.fade-in.codt7.table.sound.t5alias
     - include: numbers
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: fadeout
 
   fadeout:
-    - meta_content_scope: meta.col-fade-out.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.fade-out.codt7.table.sound.t5alias
     - include: numbers
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: pcformat
 
   pcformat:
-    - meta_content_scope: meta.col-pc-format.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.pc-format.codt7.table.sound.t5alias
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: pause
 
   pause:
-    - meta_content_scope: meta.col-pause.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.pause.codt7.table.sound.t5alias
     - include: yesno
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: stopondeath
 
   stopondeath:
-    - meta_content_scope: meta.col-stop-on-death.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.stop-on-death.codt7.table.sound.t5alias
     - include: yesno
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: bus
 
   bus:
-    - meta_content_scope: meta.col-bus.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.bus.codt7.table.sound.t5alias
     - include: buses_t5
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: snapshot
 
   snapshot:
-    - meta_content_scope: meta.col-snapshot.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.snapshot.codt7.table.sound.t5alias
     - include: snapshot_groups_t5
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: voicelimit
 
   voicelimit:
-    - meta_content_scope: meta.col-voice-limit.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.voice-limit.codt7.table.sound.t5alias
     - include: yesno
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: filexenon
 
   filexenon:
-    - meta_content_scope: meta.col-file-xenon.codt7.table.sound.t5alias entity.name.filename.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.file-xenon.codt7.table.sound.t5alias entity.name.filename.codt7.table.sound.t5alias
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: filesizexenon
 
   filesizexenon:
-    - meta_content_scope: meta.col-file-size-xenon.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.file-size-xenon.codt7.table.sound.t5alias
     - include: numbers
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: fileps3
 
   fileps3:
-    - meta_content_scope: meta.col-file-PS3.codt7.table.sound.t5alias entity.name.filename.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.file-PS3.codt7.table.sound.t5alias entity.name.filename.codt7.table.sound.t5alias
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: filesizeps3
 
   filesizeps3:
-    - meta_content_scope: meta.col-file-size-PS3.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.file-size-PS3.codt7.table.sound.t5alias
     - include: numbers
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: filepc
 
   filepc:
-    - meta_content_scope: meta.col-file-PC.codt7.table.sound.t5alias entity.name.filename.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.file-PC.codt7.table.sound.t5alias entity.name.filename.codt7.table.sound.t5alias
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: filesizepc
 
   filesizepc:
-    - meta_content_scope: meta.col-file-size-PC.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.file-size-PC.codt7.table.sound.t5alias
     - include: numbers
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: filewii
 
   filewii:
-    - meta_content_scope: meta.col-file-wii.codt7.table.sound.t5alias entity.name.filename.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.file-wii.codt7.table.sound.t5alias entity.name.filename.codt7.table.sound.t5alias
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: filesizewii
 
   filesizewii:
-    - meta_content_scope: meta.col-file-size-wii.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.file-size-wii.codt7.table.sound.t5alias
     - include: numbers
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: sourcecsv
 
   sourcecsv:
-    - meta_content_scope: meta.col-source-CSV.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.source-CSV.codt7.table.sound.t5alias
     - include: source_csv_names_t5
     - match: ','
       scope: punctuation.separator.codt7.table.sound.t5alias
       set: language
 
   language:
-    - meta_content_scope: meta.col-language.codt7.table.sound.t5alias
+    - meta_content_scope: meta.column.language.codt7.table.sound.t5alias
     - include: language_names
     - include: eol-unexpected-characters

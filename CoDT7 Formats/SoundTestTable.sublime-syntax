@@ -10,7 +10,7 @@ name: Sound Test Table
 hidden: true
 first_line_match: |-
   (?ix:
-    \s* name \s* ,
+    ^ \s* name \s* ,
     \s* test_filename \s* ,
     \s* test_level \s* ,
     \s* test_type \s* ,
@@ -34,7 +34,7 @@ extends: Packages/CoDT7 Formats/SoundCommon.sublime-syntax
 
 contexts:
   name:
-    - meta_content_scope: meta.col-name.codt7.table.sound.test
+    - meta_content_scope: meta.column.name.codt7.table.sound.test
     - match: \w+
       scope: entity.name.test.codt7.table.sound.test
     - match: ','
@@ -42,20 +42,20 @@ contexts:
       set: filename
 
   filename:
-    - meta_content_scope: meta.col-file-name.codt7.table.sound.test entity.name.filename.codt7.table.sound.test
+    - meta_content_scope: meta.column.file-name.codt7.table.sound.test entity.name.filename.codt7.table.sound.test
     - match: ','
       scope: punctuation.separator.codt7.table.sound.test
       set: level
 
   level:
-    - meta_content_scope: meta.col-level.codt7.table.sound.test
+    - meta_content_scope: meta.column.level.codt7.table.sound.test
     - include: numbers
     - match: ','
       scope: punctuation.separator.codt7.table.sound.test
       set: type
 
   type:
-    - meta_content_scope: meta.col-type.codt7.table.sound.test
+    - meta_content_scope: meta.column.type.codt7.table.sound.test
     - match: \w+
       scope: support.constant.codt7.table.sound.test
     - match: ','
@@ -63,7 +63,7 @@ contexts:
       set: globalid
 
   globalid:
-    - meta_content_scope: meta.col-global-id.codt7.table.sound.test
+    - meta_content_scope: meta.column.global-id.codt7.table.sound.test
     - match: \w+
       scope: entity.name.global-reference.codt7.table.sound.test
     - match: ','
@@ -71,7 +71,7 @@ contexts:
       set: secondaryid
 
   secondaryid:
-    - meta_content_scope: meta.col-reference-id.codt7.table.sound.test
+    - meta_content_scope: meta.column.reference-id.codt7.table.sound.test
     - match: \w+
       scope: entity.name.alias-reference.codt7.table.sound.test
     - include: eol-unexpected-characters

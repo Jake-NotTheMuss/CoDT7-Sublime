@@ -13,9 +13,6 @@ def get_field_name(scope, separator):
 # <symbol_at_point> returns the string in the column
 # that is scoped under param <scope>
 def symbol_at_point(view, pt, scope):
-    regions = view.find_by_selector(scope)
-    correct_region = None
-
     pt_end = pt - 1
 
     while view.score_selector(pt_end, scope):
@@ -71,21 +68,19 @@ class ShowTableColumnName(sublime_plugin.EventListener):
 
         if not score('text.codt7.table'):
             return
-        if not score('meta'):
-            return
-        if score('meta.header') or score('comment'):
+        # look for 'meta.column.<something>.codt7'
+        # but not 'meta.column.codt7'
+        if not score('meta.column') or score('meta.column.codt7'):
             return
 
         # get the sound parameter name from the meta scope
         scope = view.scope_name(point)
-        start = scope.find('meta.col-')
-        if start == -1:
-            return
+        start = scope.find('meta.column.')
         col_scope = scope[start:scope.find(' ', start)]
 
         value = symbol_at_point(view, point, col_scope)
 
-        start += 9
+        start += 12
         end = scope.find('.', start)
         parameter_name = scope[start:end]
         parameter_name = get_field_name(parameter_name, "-")

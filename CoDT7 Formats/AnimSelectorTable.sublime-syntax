@@ -28,25 +28,25 @@ contexts:
   global:
     - match: (\w+)\s*(@)\s*(\w*)(?:(>)(\w+)\s*(?:(@)\s*(\w*))?)?
       captures:
-        1: meta.col-ASM-substate.codt7.table.anim.selector entity.name.substate.codt7.table.anim.selector
+        1: meta.column.ASM-substate.codt7.table.anim.selector entity.name.substate.codt7.table.anim.selector
         2: keyword.operator.selector.codt7.table.anim.selector
-        3: meta.col-ASM-state.codt7.table.anim.selector entity.name.parent-state.codt7.table.anim.selector
+        3: meta.column.ASM-state.codt7.table.anim.selector entity.name.parent-state.codt7.table.anim.selector
         4: keyword.operator.transition.codt7.table.anim.selector
-        5: meta.col-ASM-substate.codt7.table.anim.selector entity.name.substate.codt7.table.anim.selector
+        5: meta.column.ASM-substate.codt7.table.anim.selector entity.name.substate.codt7.table.anim.selector
         6: keyword.operator.selector.codt7.table.anim.selector
-        7: meta.col-ASM-state.codt7.table.anim.selector entity.name.parent-state.codt7.table.anim.selector
+        7: meta.column.ASM-state.codt7.table.anim.selector entity.name.parent-state.codt7.table.anim.selector
     - match: ','
       scope: punctuation.separator.codt7.table.anim.selector
       push: anim-substate-body
 
   anim-substate-body:
     - match: \b(?i:{{ast_definitions}})\b
-      scope: meta.col-AST-definition.codt7.table.anim.selector variable.parameter.codt7.table.anim.selector
+      scope: meta.column.AST-definition.codt7.table.anim.selector variable.parameter.codt7.table.anim.selector
     - match: \b(?i:{{ast_enums}})\b
-      scope: meta.col-enum.codt7.table.anim.selector support.constant.codt7.table.anim.selector
+      scope: meta.column.enum.codt7.table.anim.selector support.constant.codt7.table.anim.selector
     - include: numbers
     - match: \b(?i:anim_)\w+\b
-      scope: meta.col-AM-alias.codt7.table.anim.selector entity.name.alias-reference
+      scope: meta.column.AM-alias.codt7.table.anim.selector entity.name.alias-reference
     - match: \bvoid\b
       scope: storage.type.codt7.table.anim.selector
     - match: ^\s*(,)\s*$
@@ -59,4 +59,4 @@ contexts:
       scope: keyword.operator.other.codt7.table.anim.selector
     # match anything else as string
     - match: '.'
-      scope: meta.col-string.codt7.table.anim.selector string.unquoted.codt7.table.anim.selector
+      scope: meta.column.string.codt7.table.anim.selector string.unquoted.codt7.table.anim.selector

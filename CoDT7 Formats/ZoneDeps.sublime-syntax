@@ -37,14 +37,14 @@ contexts:
           scope: punctuation.separator.codt7.table.zone.deps
           set:
             - meta_scope: meta.build-info.codt7.table.zone.deps
-            - meta_content_scope: meta.col-version-value-1.codt7.table.zone.deps
+            - meta_content_scope: meta.column.version-value-1.codt7.table.zone.deps
             - include: end-of-row
             - include: numbers
             - match: ','
               scope: punctuation.separator.codt7.table.zone.deps
               set:
                 - meta_scope: meta.build-info.codt7.table.zone.deps
-                - meta_content_scope: meta.col-version-value-2.codt7.table.zone.deps
+                - meta_content_scope: meta.column.version-value-2.codt7.table.zone.deps
                 - include: end-of-row
                 - include: numbers
                 - include: eol-unexpected-characters
@@ -58,7 +58,7 @@ contexts:
           scope: punctuation.separator.codt7.table.zone.deps
           set:
             - meta_scope: meta.build-info.codt7.table.zone.deps
-            - meta_content_scope: meta.col-zone-name.codt7.table.zone.deps
+            - meta_content_scope: meta.column.zone-name.codt7.table.zone.deps
             - include: end-of-row
             - match: \w+
               scope: constant.other.zonename.codt7.table.zone.deps
@@ -73,7 +73,7 @@ contexts:
           scope: punctuation.separator.codt7.table.zone.deps
           set:
             - meta_scope: meta.build-info.codt7.table.zone.deps
-            - meta_content_scope: meta.col-error-count.codt7.table.zone.deps
+            - meta_content_scope: meta.column.error-count.codt7.table.zone.deps
             - include: end-of-row
             - include: numbers
             - include: eol-unexpected-characters
@@ -81,7 +81,7 @@ contexts:
   directive:
     - match: (?i)^\s*({{linker_directives}})\b
       captures:
-        1: meta.directive.codt7.table.zone.deps meta.col-directive.codt7.table.zone.deps keyword.other.directive.codt7.table.zone.deps
+        1: meta.directive.codt7.table.zone.deps meta.column.directive.codt7.table.zone.deps keyword.other.directive.codt7.table.zone.deps
       push:
         - meta_content_scope: meta.directive.codt7.table.zone.deps
         - include: end-of-row
@@ -96,7 +96,7 @@ contexts:
   asset:
     - match: (?i)^\s*(({{asset_types}})|({{raw_types}}))\b
       captures:
-        1: meta.target.codt7.table.zone.deps meta.col-target-type.codt7.table.zone.deps
+        1: meta.target.codt7.table.zone.deps meta.column.target-type.codt7.table.zone.deps
         2: support.type.asset.codt7.table.zone.deps
         3: support.type.raw.codt7.table.zone.deps
       push:
@@ -106,7 +106,7 @@ contexts:
           scope: punctuation.separator.codt7.table.zone.deps
           set:
             - meta_scope: meta.target.codt7.table.zone.deps
-            - meta_content_scope: meta.col-target-name.codt7.table.zone.deps entity.name.target.codt7.table.zone.deps
+            - meta_content_scope: meta.column.target-name.codt7.table.zone.deps entity.name.target.codt7.table.zone.deps
             - include: end-of-row
             - include: eol-unexpected-characters
 
@@ -121,41 +121,41 @@ contexts:
           scope: punctuation.separator.codt7.table.zone.deps
           set:
             - meta_scope: meta.dependency.codt7.table.zone.deps
-            - meta_content_scope: meta.col-file-name.codt7.table.zone.deps entity.name.filename
+            - meta_content_scope: meta.column.file-name.codt7.table.zone.deps entity.name.filename
             - include: end-of-row
             - match: ','
               scope: punctuation.separator.codt7.table.zone.deps
               set:
                 - meta_scope: meta.dependency.codt7.table.zone.deps
-                - meta_content_scope: meta.col-file-value-1.codt7.table.zone.deps
+                - meta_content_scope: meta.column.file-value-1.codt7.table.zone.deps
                 - include: end-of-row
                 - include: numbers
                 - match: ','
                   scope: punctuation.separator.codt7.table.zone.deps
                   set:
                     - meta_scope: meta.dependency.codt7.table.zone.deps
-                    - meta_content_scope: meta.col-file-value-2.codt7.table.zone.deps
+                    - meta_content_scope: meta.column.file-value-2.codt7.table.zone.deps
                     - include: end-of-row
                     - include: numbers_hex
                     - match: ','
                       scope: punctuation.separator.codt7.table.zone.deps
                       set:
                         - meta_scope: meta.dependency.codt7.table.zone.deps
-                        - meta_content_scope: meta.col-file-value-3.codt7.table.zone.deps
+                        - meta_content_scope: meta.column.file-value-3.codt7.table.zone.deps
                         - include: end-of-row
                         - include: numbers_hex
                         - match: ','
                           scope: punctuation.separator.codt7.table.zone.deps
                           set:
                             - meta_scope: meta.dependency.codt7.table.zone.deps
-                            - meta_content_scope: meta.col-file-value-4.codt7.table.zone.deps
+                            - meta_content_scope: meta.column.file-value-4.codt7.table.zone.deps
                             - include: end-of-row
                             - include: numbers_hex
                             - match: ','
                               scope: punctuation.separator.codt7.table.zone.deps
                               set:
                                 - meta_scope: meta.dependency.codt7.table.zone.deps
-                                - meta_content_scope: meta.col-file-value-5.codt7.table.zone.deps
+                                - meta_content_scope: meta.column.file-value-5.codt7.table.zone.deps
                                 - include: end-of-row
                                 - include: numbers_hex
                                 - include: eol-unexpected-characters
@@ -169,7 +169,7 @@ contexts:
           scope: punctuation.separator.codt7.table.zone.deps
           set:
             - meta_scope: meta.dependency.codt7.table.zone.deps
-            - meta_content_scope: meta.col-attribute-name.codt7.table.zone.deps
+            - meta_content_scope: meta.column.attribute-name.codt7.table.zone.deps
             - include: end-of-row
             - match: \b(?i:{{attribute_names}})\b
               scope: keyword.other.directive.codt7.table.zone.deps
@@ -177,6 +177,6 @@ contexts:
               scope: punctuation.separator.codt7.table.zone.deps
               set:
                 - meta_scope: meta.dependency.codt7.table.zone.deps
-                - meta_content_scope: meta.col-attribute-value.codt7.table.zone.deps
+                - meta_content_scope: meta.column.attribute-value.codt7.table.zone.deps
                 - include: end-of-row
                 - include: eol-unexpected-characters

@@ -23,7 +23,7 @@ contexts:
   global:
     - match: ^\s*(\w+)
       captures:
-        1: meta.col-name.codt7.table.anim.mapping entity.name.alias.codt7.table.anim.mapping
+        1: meta.column.name.codt7.table.anim.mapping entity.name.alias.codt7.table.anim.mapping
       push: anim-entry
 
   anim-entry:
@@ -35,4 +35,4 @@ contexts:
     - match: $\n
       pop: true
     - match: '.'
-      scope: meta.col-XAnim-name.codt7.table.anim.mapping entity.name.alias-reference
+      scope: meta.column.XAnim-name.codt7.table.anim.mapping entity.name.alias-reference
