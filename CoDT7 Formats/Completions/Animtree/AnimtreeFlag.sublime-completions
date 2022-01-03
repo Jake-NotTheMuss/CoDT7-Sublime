@@ -1,0 +1,12 @@
+{
+	"scope": "meta.animtree-flags.codt7",
+	"completions":
+	[
+		"client",
+		"separate",
+		"additive",
+		"complete",
+		"nonloopsync",
+		"loopsync"
+	]
+}
