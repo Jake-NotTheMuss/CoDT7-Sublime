@@ -4,7 +4,7 @@
 
 # This file is part of the T7-Sublime project.
 # T7-Sublime is an enhanced syntax-highlighting package for (almost) all Call of Duty Black Ops III developer file formats.
-# Vision files contain audio-visual filtering information used for modifying the character of color and sound in-game.
+# Vision files contain audio-visual filtering information used for modifying the characteristics of color and sound in-game.
 
 name: Vision
 file_extensions:
@@ -19,7 +19,7 @@ contexts:
     - include: scope:source.codt7.common#comments
 
   main:
-    - match: '\b{{parameters}}\b'
+    - match: \b({{parameters}})\b
       scope: variable.language.codt7.vision
     - match: \w+
       scope: support.constant.codt7.vision
