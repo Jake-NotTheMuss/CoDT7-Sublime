@@ -39,7 +39,7 @@ variables:
   # for operators that do different things depending on the number of operands
   variable_or_constant_border: '[[:alpha:]\h\.]'
   
-  control_keywords: 'break|case|continue|default|do|else|for|foreach|if|return|switch|while|thread|wait|waitrealtime|waittillframeend'
+  control_keywords: 'break|case|continue|default|do|else|for|foreach|in|if|return|switch|while|thread|wait|waitrealtime|waittillframeend'
   basic_types: 'var'
   type_qualifier: 'const'
   compiler_directive: 'private|autoexec'
@@ -95,7 +95,7 @@ contexts:
     - match: '/@'
       scope: punctuation.definition.comment.codt7.gsc
       push:
-        - meta_scope: comment.block.decumentation.codt7.gsc
+        - meta_scope: comment.block.documentation.codt7.gsc
         - match: '@/'
           scope: punctuation.definition.comment.codt7.gsc
           pop: true
@@ -538,10 +538,10 @@ contexts:
         - include: preprocessor-line-continuation
         - include: preprocessor-line-ending
         - include: preprocessor-comments
-        - match: '({{identifier}})(?=\()'
+        - match: ({{identifier}})(?=\()
           scope: entity.name.function.preprocessor.codt7.gsc
           set:
-            - match: '\('
+            - match: \(
               scope: punctuation.section.group.begin.codt7.gsc
               set: preprocessor-macro-params
         - match: '{{identifier}}'
@@ -563,14 +563,14 @@ contexts:
           pop: true
         - include: preprocessor-line-continuation
         - include: preprocessor-comments
-        - match: '(?=\))'
+        - match: (?=\))
           pop: true
         - match: (/\*).*(\*/)
           scope: comment.block.codt7.gsc
           captures:
             1: punctuation.definition.comment.codt7.gsc
             2: punctuation.definition.comment.codt7.gsc
-        - match: '\S+?'
+        - match: \S+?
           scope: invalid.illegal.unexpected-character.codt7.gsc
     - include: preprocessor-line-continuation
     - include: preprocessor-comments
@@ -578,7 +578,7 @@ contexts:
       captures:
         1: punctuation.definition.comment.codt7.gsc
         2: punctuation.definition.comment.codt7.gsc
-    - match: '\S+?'
+    - match: \S+?
       scope: invalid.illegal.unexpected-character.codt7.gsc
     - match: $\n
       scope: invalid.illegal.unexpected-end-of-line.codt7.gsc
@@ -916,7 +916,7 @@ contexts:
       scope: punctuation.terminator.codt7.gsc
 
   case-default:
-    - match: '\b(default|case)\b'
+    - match: \b(default|case)\b
       scope: keyword.control.codt7.gsc
       push:
         - match: ':'
@@ -929,25 +929,25 @@ contexts:
   # namely waittill, waittillmatch, notify, and endon
   # Adds an additional meta scope for auto-completions
   keywords-parens:
-    - match: '\b(?i:(waittillmatch|waittill|notify|endon))\b\s*(\()'
+    - match: \b(?i:(waittillmatch|waittill|notify|endon))\b\s*(\()
       captures:
         1: keyword.operator.word.codt7.gsc
         2: meta.group.codt7.gsc punctuation.section.group.begin.codt7.gsc
       push:
         - meta_content_scope: meta.group.codt7.gsc
-        - match: '\)'
+        - match: \)
           scope: meta.group.c punctuation.section.group.end.c
           pop: true
-        - match: '(?=")'
+        - match: (?=")
           push: string-thread-signal
         - include: expressions
-    - match: '\b(?i:({{keyword_operators}}))\b\s*(\()'
+    - match: \b(?i:({{keyword_operators}}))\b\s*(\()
       captures:
         1: keyword.operator.word.codt7.gsc
         2: meta.group.codt7.gsc punctuation.section.group.begin.codt7.gsc
       push:
         - meta_content_scope: meta.group.codt7.gsc
-        - match: '\)'
+        - match: \)
           scope: meta.group.c punctuation.section.group.end.c
           pop: true
         - include: expressions
@@ -980,11 +980,11 @@ contexts:
     - include: array-variable-name
 
   access-illegal:
-    - match: '\.(\s*\.)+'
+    - match: \.(\s*\.)+
       scope: invalid.illegal.syntax.codt7.gsc
 
   access:
-    - match: '(\.)\s*(?!\.)'
+    - match: (\.)\s*(?!\.)
       scope: meta.member-access.codt7.gsc
       captures:
         1: punctuation.accessor.codt7.gsc
@@ -995,7 +995,7 @@ contexts:
         - match: '{{identifier}}'
           scope: variable.other.member.codt7.gsc
         - include: access
-        - match: '(?=\W)'
+        - match: (?=\W)
           pop: true
     - include: access-illegal
 
@@ -1004,19 +1004,19 @@ contexts:
       scope: storage.modifier.codt7.gsc
 
   types:
-    - match: '\b({{basic_types}})\b'
+    - match: \b({{basic_types}})\b
       scope: storage.type.codt7.gsc
 
   # due to the large amount of builtins, we should check for a possible builtin call
   # and then push a new context to capture, otherwise input starts to lag
   builtin-functions:
     # sys namespace - builtin call
-    - match: '\b(?i:sys)\s*(::)'
+    - match: \b(?i:sys)\s*(::)
       captures:
         1: punctuation.accessor.codt7.gsc
       push: builtin-function-call-maybe
     # call without a namespace specifier - possibly a builtin call
-    - match: '(?<!::)(?=\s*{{identifier}}\s*\()'
+    - match: (?<!::)(?=\s*{{identifier}}\s*\()
       push: builtin-function-call-maybe
 
   builtin-function-call-maybe:
@@ -1033,7 +1033,7 @@ contexts:
   # like with builtin calls, we check for the possibilty and push to a new
   # context and capture everything there
   script-function-call-maybe:
-    - match: '\b(?i:{{namespace}})\s*(::)\s*\w*'
+    - match: \b(?i:{{namespace}})\s*(::)\s*\w*
       scope: meta.developer-function-name.codt7.gsc
       captures:
         1: punctuation.accessor.codt7.gsc
@@ -1046,7 +1046,7 @@ contexts:
 
   # Eat "array" as variable name
   array-variable-name:
-    - match: '\b(?i:array)\b(?!\s*(\(|:|$))'
+    - match: \b(?i:array)\b(?!\s*(\(|:|$))
 
   function-call-before-paren:
     - include: builtin-functions
@@ -1250,15 +1250,15 @@ contexts:
   global-modifier:
     - include: comments
     - include: modifiers
-    - match: '(?=\S)'
+    - match: (?=\S)
       set: global-type
 
   # GSC is convenient for this context because code can only appear in fuction or class bodies
   global-type:
     - include: comments
-    - match: '(?=\bclass\b)'
+    - match: (?=\bclass\b)
       set: data-structures
-    - match: '(?=\bfunction\b)'
+    - match: (?=\bfunction\b)
       set: global-function
     - match: '{{macro_identifier}}\s*(\()(?=[^\)]+\))'
       captures:
@@ -1270,7 +1270,7 @@ contexts:
           scope: meta.group.codt7.gsc punctuation.section.group.end.codt7.gsc
           pop: true
         - include: expressions
-    - match: '(?={{identifier}}\s*\()'
+    - match: (?={{identifier}}\s*\()
       set: global-function-t5
 
 
@@ -1303,7 +1303,7 @@ contexts:
   data-structures-class-definition:
     - meta_scope: meta.class.codt7.gsc
     - include: data-structures-definition-common-begin
-    - match: '(?={{identifier}})'
+    - match: (?={{identifier}})
       set:
         - meta_scope: meta.class.codt7.gsc
         - match: '{{identifier}}'
@@ -1337,7 +1337,7 @@ contexts:
         - include: comments
         - include: preprocessor-other
         - include: modifiers
-        - match: '(?={{identifier}})'
+        - match: (?={{identifier}})
           push:
             - meta_scope: entity.other.inherited-class.codt7.gsc
             - match: '{{identifier}}'
@@ -1348,15 +1348,15 @@ contexts:
 
   preprocessor-workaround-eat-macro-before-identifier:
     # Handle macros so they aren't matched as the class name
-    - match: '({{macro_identifier}})(?=\s+{{identifier}})'
+    - match: ({{macro_identifier}})(?=\s+{{identifier}})
       captures:
         1: meta.assumed-macro.codt7.gsc
 
   data-structures-body:
     - include: preprocessor-data-structures
-    - match: '^\s*(?=(constructor|destructor)\b)'
+    - match: ^\s*(?=(constructor|destructor)\b)
       push: data-structures-modifier
-    - match: '(?=\bfunction\b)'
+    - match: (?=\bfunction\b)
       push: global-function
     - include: expressions
 
@@ -1369,7 +1369,7 @@ contexts:
     - match: \bconstructor(?=\s*(\(|$))
       scope: meta.method.constructor.codt7.gsc keyword.declaration.constructor.codt7.gsc
       set: method-definition-params
-    - match: '(?=\S)'
+    - match: (?=\S)
       set: data-structures-type
 
   data-structures-type:
@@ -1383,7 +1383,7 @@ contexts:
   method-definition-params:
     - meta_content_scope: meta.method.codt7.gsc
     - include: comments
-    - match: '(?=\()'
+    - match: (?=\()
       set:
         - match: \(
           scope: meta.method.parameters.codt7.gsc meta.group.codt7.gsc punctuation.section.group.begin.codt7.gsc
@@ -1399,7 +1399,7 @@ contexts:
             - match: '='
               scope: keyword.operator.assignment.codt7.gsc
               push:
-                - match: '(?=,|\))'
+                - match: (?=,|\))
                   pop: true
                 - include: expressions
                 - include: preprocessor-line-continuation
@@ -1407,15 +1407,15 @@ contexts:
             - match: ','
               scope: punctuation.separator.codt7.gsc
             - include: preprocessor-line-continuation
-    - match: '(?=\S)'
+    - match: (?=\S)
       pop: true
 
   method-definition-continue:
     - meta_content_scope: meta.method.codt7.gsc
     - include: comments
-    - match: '(?=\{)'
+    - match: (?=\{)
       set: method-definition-body
-    - match: '(?=\S)'
+    - match: (?=\S)
       pop: true
 
   method-definition-body:
@@ -1460,7 +1460,7 @@ contexts:
     - include: modifiers
     - include: comments
     # All uppercase identifier just before a newlin is most likely a macro
-    - match: '([[:upper:][:digit:]_]+)\s*(\bfunction\b)?\s*$'
+    - match: ([[:upper:][:digit:]_]+)\s*(\bfunction\b)?\s*$
       captures:
         1: meta.assumed-macro.codt7.gsc
         2: keyword.declaration.codt7.gsc
@@ -1471,35 +1471,35 @@ contexts:
     - match: '{{identifier}}(?=\s*(\(|$))'
       scope: meta.function.codt7.gsc entity.name.function.codt7.gsc
       set: function-definition-params
-    - match: '(?=\S)'
+    - match: (?=\S)
       pop: true
 
   function-definition-params:
     - meta_content_scope: meta.function.codt7.gsc
     - include: comments
-    - match: '(?=\()'
+    - match: (?=\()
       set:
-        - match: '\('
+        - match: \(
           scope: meta.function.parameters.codt7.gsc meta.group.codt7.gsc punctuation.section.group.begin.codt7.gsc
           set:
             - meta_content_scope: meta.function.parameters.codt7.gsc meta.group.codt7.gsc
-            - match: '\)'
+            - match: \)
               scope: punctuation.section.group.end.codt7.gsc
               set: function-definition-continue
-            - match: '\.{3}(\s*\.)+'
+            - match: \.{3}(\s*\.)+
               scope: invalid.illegal.unexpected-character.codt7.gsc
-            - match: '\.{3}'
+            - match: \.{3}
               scope: variable.parameter.variadic.codt7.gsc
             # Eat 1 or 2 dots to prevent premature warning
-            - match: '\.*'
+            - match: \.*
             - match: '&'
               scope: keyword.operator.address-of.codt7.gsc
-            - match: '{{identifier}}(?=\s*(,|\)|=))'
+            - match: '{{identifier}}'
               scope: variable.parameter.codt7.gsc
             - match: '='
               scope: keyword.operator.assignment.codt7.gsc
               push:
-                - match: '(?=,|\))'
+                - match: (?=,|\))
                   pop: true
                 - include: expressions
                 - include: preprocessor-line-continuation
@@ -1513,9 +1513,9 @@ contexts:
   function-definition-continue:
     - meta_content_scope: meta.function.codt7.gsc
     - include: comments
-    - match: '(?=\{)'
+    - match: (?=\{)
       set: function-definition-body
-    - match: '(?=\S)'
+    - match: (?=\S)
       pop: true
 
   function-definition-body:
@@ -1527,6 +1527,6 @@ contexts:
         - match: '\}'
           scope: meta.function.codt7.gsc meta.block.codt7.gsc punctuation.section.block.end.codt7.gsc
           pop: true
-        - match: '(?=^\s*#\s*(elif|else|endif)\b)'
+        - match: (?=^\s*#\s*(elif|else|endif)\b)
           pop: true
         - include: statements
