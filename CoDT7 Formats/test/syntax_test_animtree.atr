@@ -2,7 +2,7 @@
 
   head : client separate
 /*^^^^ meta.animtree */
-/*^ meta.animtree entity.name.animtree */
+/*^ entity.name.animtree */
 /*     ^ punctuation.separator */
 /*       ^^^^^^^^^^^^^^^ meta.animtree-flags */
 /*       ^ keyword.control */
