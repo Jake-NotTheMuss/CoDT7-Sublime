@@ -1,15 +1,19 @@
 import sublime, sublime_plugin
 
-DEBUG_ON = False
+from . import codt7_table
 
-def debug(*args):
-    if not DEBUG_ON:
+DEBUG = False
+
+if DEBUG:
+    def debug(*args):
+        print(*args)
+else:
+    def debug(*args):
         return
-    print(*args)
 
 # these match the order of their corresponding syntax files
 # From Packages/CoDT7 Formats/SoundAliasTable.sublime-syntax
-sound_alias_order = {
+sound_alias_fields = {
     'name': 0,
     'behavior': 1,
     'storage': 2,
@@ -114,7 +118,7 @@ sound_alias_order = {
     'rowsourcelinenumber': 101
 }
 # From Packages/CoDT7 Formats/SoundReverbTable.sublime-syntax
-sound_reverb_order = {
+sound_reverb_fields = {
     'name': 0,
     'loadspec': 1,
     'masterreturn': 2,
@@ -142,7 +146,7 @@ sound_reverb_order = {
     'farpredelayms': 24
 }
 # From Packages/CoDT7 Formats/SoundT5AliasTable.sublime-syntax
-sound_t5alias_order = {
+sound_t5alias_fields = {
     'name': 0,
     'file': 1,
     'template': 2,
@@ -219,7 +223,7 @@ sound_t5alias_order = {
     'language': 73
 }
 # From Packages/CoDT7 Formats/SoundT5ReverbTable.sublime-syntax
-sound_t5reverb_order = {
+sound_t5reverb_fields = {
     'name': 0,
     'room': 1,
     'roomhf': 2,
@@ -235,7 +239,7 @@ sound_t5reverb_order = {
     'hfreference': 12
 }
 # From Packages/CoDT7 Formats/SoundAmbientTable.sublime-syntax
-sound_ambient_order = {
+sound_ambient_fields = {
     'name': 0,
     'loadspec': 1,
     'defaultroom': 2,
@@ -256,7 +260,7 @@ sound_ambient_order = {
     'duck': 17
 }
 # From Packages/CoDT7 Formats/SoundTestTable.sublime-syntax
-sound_test_order = {
+sound_test_fields = {
     'name': 0,
     'test_filename': 1,
     'test_level': 2,
@@ -266,18 +270,17 @@ sound_test_order = {
 }
 
 def is_commented(line):
-    line = line.strip()
-    if len(line) == 0:
+    line = line.lstrip()
+    if not line:
         return False
     return line[0] == '#'
 
 def is_empty(line):
-    line = line.strip()
-    return len(line) == 0
+    return not line.strip()
 
-# <get_column_names> gets a list of column names for the table and
+# <get_field_names> gets a list of column names for the table and
 # also returns the index of the line from which the names were read
-def get_column_names(view):
+def get_field_names(view):
     line = view.line(0)
     pos = line.size() + 1
     line_index = 0
@@ -287,124 +290,124 @@ def get_column_names(view):
         pos += line.size() + 1
         line_index += 1
 
-    return view.substr(line).strip(',').split(','), line_index
+    return view.substr(line).split(','), line_index
 
-# <get_new_order_mapping> creates a map between the current position
+# returns information about missing/unexpected fields in a file
+# param <field_names>        - the list of field names from the file
+# param <expected_fields> - a dict of expected field names to their
+#                              expected column position
+# return <missing_fields>    - list of indices of fields which are
+#                              expected but missing
+# return <unexpected_fields> - list of indices of unexpected fields
+def get_field_information(field_names, expected_fields):
+    # get a dictionary from field_names
+    # and look for any unexpected fields
+    dict_field_names = {}
+    unexpected_fields = {}
+    for i in range(len(field_names)):
+        name = field_names[i].strip().lower()
+        dict_field_names[name] = i
+        expected_index = expected_fields.get(name)
+        if expected_index is None:
+            unexpected_fields[i] = True
+
+    missing_fields = {}
+
+    for name in expected_fields:
+        exists = dict_field_names.get(name) is not None
+        if not exists:
+            missing_fields[expected_fields[name]] = True
+
+    return missing_fields, unexpected_fields
+
+# <get_sort_order> creates a map between the current position
 # of a table's columns and the position they should be moved to
 # the key is the current position, the value is the new position
-# param <list_order> - the file's column order
-# param <dict_correct_order> - the expected column order
-def get_new_order_mapping(list_order, dict_correct_order):
-    order_mapping = {}
-    for i in range(len(list_order)):
-        name = list_order[i].lower().strip()
-        # get correct position for column
-        index = dict_correct_order.get(name)
+# param <field_names> - the file's column order
+# param <expected_fields> - the expected column order
+def get_sort_order(field_names, expected_fields, missing_fields, unexpected_fields):
+    num_missing_fields = len(missing_fields)
+    num_unexpected_fields = len(unexpected_fields)
+    num_fields = len(field_names)
+    num_expected_fields = len(expected_fields)
+
+    expected_len = num_expected_fields + num_unexpected_fields
+    padding_amount = expected_len - num_fields
+
+    sort_order = [None] * expected_len
+
+    missing_counter = 0
+    unexpected_counter = 1
+
+    for i in range(expected_len):
+        if missing_fields.get(i) == True:
+            sort_order[i] = num_fields + missing_counter
+            missing_counter += 1
+
+        if i >= num_fields:
+            continue
+
+        if unexpected_fields.get(i) == True:
+            sort_order[expected_len - unexpected_counter] = i
+            unexpected_counter += 1
+            continue
+
+        name = field_names[i].strip().lower()
+        index = expected_fields.get(name)
         if index is not None:
-            # column is in correct position
-            if i == index:
-                continue
-            # mismatch is already recorded and adding a
-            # reciprocal mapping would do the swap twice
-            # resulting in no change
-
-            # if the correct column index is already a
-            # key in the mapping table, it need not be
-            # a value in the table, as there would be
-            # a double swap resulting in no change.
-            # for example, c1 -> c2, c2 -> c1. c1 is
-            # searched in the table keys and because
-            # there is already c1 -> c2, c1 will not
-            # be added as a value for c2.
-            if index in order_mapping:
-                # in the special case where index is already
-                # a key in the table, but it maps to the
-                # reserved value -1, indicating column
-                # <index> is currently an unknown column,
-                # e.g. column 2 in the alias table, which
-                # should be 'storage', is currently an
-                # unknown column in this example index = 2,
-                # and i would be the column position where
-                # 'storage' was in this file, say position 5.
-                # Then i would be 5 and column 5 would be the
-                # 'storage' column. Then, column 2 (index)
-                # would be remapped to column 5 (i) and
-                # column 5 would be given the value reserved
-                # for unknowns -1. This way, columns 2 and 5
-                # would swap, putting 'storage' in column 2
-                # as required, and column 5 is now marked as
-                # the unknown column. Then, if the true column
-                # 5 is encountered later in this loop, for
-                # example at i = 10, meaning column 10 is the
-                # 'filespecrelease' column which should be at
-                # column 5, then in that event, index = 5, and
-                # i = 10, and so 5 will be remapped from -1 to
-                # 10, thus moving column 10 to column 5, and
-                # putting the unknown column in 10. This will
-                # continue until the unknown column is finally
-                # at a column that is completely missing from
-                # the file, and it will be left as -1, which is
-                # handled later where the column is moved to the
-                # end of the file, and the old position is made
-                # empty.
-                if order_mapping[index] == -1:
-                    order_mapping[index] = i
-                    order_mapping[i] = -1
-                continue
-            # record mismatch, mapping the current position to the
-            # correct position
-            order_mapping[i] = index
-        # unknown column name, give a reserved value of -1
+            sort_order[index] = i
         else:
-            order_mapping[i] = -1
+            print("Error generating sort order for table in table_column_order.py")
+            return []
 
-    return order_mapping
+
+    return sort_order
 
 # <compare_column_order> checks that the two column orders given match each other
-# param <list_order>         - list of column names of the actual file
-# param <dict_correct_order> - table of column names to positions describing the correct order
-# <list_order> only needs to match <dict_correct_order> for its own length; it does not need
-# to have every column that <dict_correct_order> has
-def compare_column_order(list_order, dict_correct_order):
+# param <field_names>         - list of column names of the actual file
+# param <expected_fields> - table of column names to positions describing the correct order
+# <field_names> only needs to match <expected_fields> for its own length; it does not need
+# to have every column that <expected_fields> has
+def compare_column_order(field_names, expected_fields):
     # loop through the file's column names
-    for i in range(min(len(list_order), len(dict_correct_order))):
-        name = list_order[i].strip().lower()
-        index = dict_correct_order.get(name)
+    for i in range(min(len(field_names), len(expected_fields))):
+        name = field_names[i].strip().lower()
+        index = expected_fields.get(name)
         if index is not None:
             # the columns names are not at matching positions
             if index != i:
                 debug('column mismatch:',
-                      list_order[i].strip(),
-                      list_order[index]
-                        if index < len(list_order)
+                      field_names[i].strip(),
+                      field_names[index]
+                        if index < len(field_names)
                         else '<missing column>')
-                return False
+                return True
         # the column name is not recognized
         else:
             # No mismatch but there is a column with an unknown name
             debug('unknown column name:',
-                  list_order[i].strip())
-            return False
+                  field_names[i].strip())
+            return True
 
-    return True
+    return False
 
-def compare_alias_column_order(list_order):
-    return compare_column_order(list_order, sound_alias_order)
+def compare_alias_column_order(field_names):
+    return compare_column_order(field_names, sound_alias_fields)
 
-def compare_reverb_column_order(list_order):
-    return compare_column_order(list_order, sound_reverb_order)
+def compare_reverb_column_order(field_names):
+    return compare_column_order(field_names, sound_reverb_fields)
 
-def compare_t5alias_column_order(list_order):
-    return compare_column_order(list_order, sound_t5alias_order)
+def compare_t5alias_column_order(field_names):
+    return compare_column_order(field_names, sound_t5alias_fields)
 
-def compare_t5reverb_column_order(list_order):
-    return compare_column_order(list_order, sound_t5reverb_order)
+def compare_t5reverb_column_order(field_names):
+    return compare_column_order(field_names, sound_t5reverb_fields)
 
-def compare_ambient_column_order(list_order):
-    return compare_column_order(list_order, sound_ambient_order)
+def compare_ambient_column_order(field_names):
+    return compare_column_order(field_names, sound_ambient_fields)
 
-def compare_test_column_order(list_order):
-    return compare_column_order(list_order, sound_test_order)
+def compare_test_column_order(field_names):
+    return compare_column_order(field_names, sound_test_fields)
 
 column_order_compare_funcs = {
     'text.codt7.table.sound.alias': compare_alias_column_order,
@@ -422,22 +425,23 @@ column_order_compare_funcs = {
 # param <line>        - region covering the line
 # param <is_header>   - whether the line is the header row of the table
 # param <dict_order_map>   - table mapping current column positions to their new positions
-# param <list_order>  - list of column name strings from file's header row
-# param <dict_correct_order> - table mapping column names to their expected positions
+# param <field_names>  - list of column name strings from file's header row
+# param <expected_fields> - table mapping column names to their expected positions
 def reorder_columns_for_line(view,
                              edit,
                              line,
                              is_header,
-                             dict_order_map,
-                             list_order,
-                             dict_correct_order):
+                             n_unexpected_fields,
+                             sort_order,
+                             field_names,
+                             expected_fields):
     # get string from the region covering the line
     str_line = view.substr(line)
 
     # line is empty, return 1 to advance the newline
-    if len(str_line) == 0:
+    if not str_line.strip():
         debug('Nothing to be done for empty row')
-        return 1
+        return (len(str_line) + 1)
 
     # line is commented with a '#'
     if is_commented(str_line):
@@ -448,67 +452,52 @@ def reorder_columns_for_line(view,
     debug('Row length before reordering:', len(str_line))
 
     # get array of the comma-separated values in the row
-    column_values = str_line.split(',')
+    field_values = str_line.split(',')
 
     # get number of columns
-    n_cols = len(column_values)
+    n_fields = len(field_values)
 
     # columns might be missing, get the required padding amount
-    padding = len(dict_correct_order) - n_cols
+    padding = len(expected_fields) + n_unexpected_fields - n_fields
 
     # pad the list if needed
     if padding > 0:
         debug('Padding row with', padding, 'columns')
-        column_values += [''] * padding
+        field_values += [''] * padding
+ 
+    new_field_values = [None] * len(field_values)
 
-    # keep track of columns which are not recognized by the syntax
-    # as they are handled differently
-    unknown_columns = []
+    for i in range(len(sort_order)):
+        old_index = sort_order[i]
+        new_field_values[i] = field_values[old_index]
 
-    # get the expected column names as a list in the expected order
-    column_names = sorted(list(dict_correct_order.keys()),
-                          key=lambda x:dict_correct_order[x])
+    field_values = new_field_values
 
-    # loop through the old-new map for the column positions
-    for old_index, new_index in sorted(list(dict_order_map.items()),
-                                       key=lambda x:x, reverse=True):
-        # new positional value of -1 means it's an unknown column
-        if new_index == -1:
-            unknown_columns.append(old_index)
-            continue
-
-        # swap the columns in the list
-        debug('Swapping columns', old_index, 'and', new_index)
-        column_values[old_index], column_values[new_index] = \
-        column_values[new_index], column_values[old_index]
-
-    # handle the unknown columns
-    for index in unknown_columns:
-        # get the string in this column
-        val = column_values[index]
-        # no other column to swap with so replace with an
-        # empty column
-        column_values[index] = ''
-        # append the unknown column to the end of the row
-        debug('Appending unexpected column value \'',
-              column_values[index],
-              '\' to end of row')
-        column_values.append(val)
-
-    # fill in missing column names in header
+    #fill in missing column names in header
     if is_header:
-        debug('Adding missing column names in header')
-        is_capitalized = column_values[0][0].isupper()
-        for i in range(min(len(column_names), len(column_values))):
-            if column_values[i].strip() == '':
-                if is_capitalized:
-                    column_values[i] = column_names[i][0].upper() \
-                                       + column_names[i][1:]
-                else:
-                    column_values[i] = column_names[i]
+        debug('Adding missing field names in header')
+        casing_type = codt7_table.get_casing_type(field_values)
+        if codt7_table.cased_field_names_supported():
+            for i in range(min(len(expected_fields), len(field_values))):
+                if not field_values[i].strip():
+                    new_value = codt7_table.get_field_name_with_casing_type(i, casing_type)
+                    field_values[i] = new_value
+        else:
+            # get the field names as a list in the expected order
+            field_names = sorted(list(expected_fields.keys()),
+                                 key=lambda x:expected_fields[x])
+            is_capitalized = casing_type == codt7_table.CASE_CAPITALIZED \
+                             or casing_type == codt7_table.CASE_CAMEL_UPPER
+            for i in range(min(len(expected_fields), len(field_values))):
+                if not field_values[i].strip():
+                    if is_capitalized:
+                        field_values[i] = field_names[i][0].upper() \
+                                           + field_names[i][1:]
+                    else:
+                        field_values[i] = field_names[i]
 
     # get new string from column list
-    str_reordered_line = ','.join(column_values)
+    str_reordered_line = ','.join(field_values)
 
     debug('Row after reordering:', str_reordered_line)
     debug('Row length after reordering:', len(str_reordered_line))
@@ -521,23 +510,30 @@ def reorder_columns_for_line(view,
 
 # <reorder_columns> will edit the current file to match the column order
 # of its syntax definition
-# param <dict_correct_order> is a table of column names to indices
+# param <expected_fields> is a table of column names to indices
 # which describes the column order that the table should be in
-def reorder_columns(view, edit, dict_correct_order):
+def reorder_columns(view, edit, expected_fields):
     # get the comma-separated values in the header row where the column names
     # are given
-    # <list_order> is a list of the column name strings
+    # <field_names> is a list of the column name strings
     # <header_line_index> is the line index of the header row (first line = index 0)
-    list_order, header_line_index = get_column_names(view)
-    # <get_new_order_mapping> finds the columns that are in the wrong place
+    field_names, header_line_index = get_field_names(view)
+    # <get_sort_order> finds the columns that are in the wrong place
     # and creates a map between the current index of a column and the index
     # it should be at when it is reordered
     # <dict_order_map> is a table of column indices; the keys of the table
     # are the old column indices and their corresponding value is the column
     # index they should be moved to; for exaample, for dict_order_map[0] = 1,
     # column 0 should be swapped with column 1
-    dict_order_map = get_new_order_mapping(list_order, dict_correct_order)
-    debug(dict_order_map)
+    #debug(dict_order)
+    missing_fields, unexpected_fields = get_field_information(field_names, expected_fields)
+    sort_order = get_sort_order(field_names, expected_fields, missing_fields, unexpected_fields)
+    n_unexpected_fields = len(unexpected_fields)
+    if sort_order is None or len(sort_order) != len(expected_fields) + n_unexpected_fields:
+        debug('ERROR: Bad sort order')
+        return
+
+    debug('Sorting list:', sort_order)
 
     # the columns are reordered line by line; <pos> gives the position
     # of the next line to be edited, as line lengths can change if some
@@ -549,43 +545,57 @@ def reorder_columns(view, edit, dict_correct_order):
     # the comparison line_inedx == i is passed as tha <is_header> param
     i = 0
 
+    # previous line used to compare with current line for
+    prev_line = sublime.Region(-1)
+
     # view.size() is called every time as the file length can change as each
     # line is edited
     while pos < view.size():
         line = view.line(pos)
+
+        # ensure position was advanced to the next line
+        if line.begin() == prev_line.begin():
+            debug('Error calculating line advance amount on line',
+                  i + 1)
+            break
+
+        debug('calling reorder_columns_for_line() at position',
+              pos,
+              'on line',
+              i + 1)
         # <reorder_columns_for_line> will move columns in the line to the index
         # the syntax expects them to be at.
         # <advance> gives the length of the line after it is changed
-        debug('calling reorder_columns_for_line() at position',
-              pos, 'on line', i)
         advance = reorder_columns_for_line(view,
                                            edit,
                                            line,
                                            header_line_index == i,
-                                           dict_order_map,
-                                           list_order,
-                                           dict_correct_order)
+                                           n_unexpected_fields,
+                                           sort_order,
+                                           field_names,
+                                           expected_fields)
         # advance position to start of next line
         pos += advance
         i += 1
+        prev_line = line
 
 def reorder_alias_columns(view, edit):
-    reorder_columns(view, edit, sound_alias_order)
+    reorder_columns(view, edit, sound_alias_fields)
 
 def reorder_reverb_columns(view, edit):
-    reorder_columns(view, edit, sound_reverb_order)
+    reorder_columns(view, edit, sound_reverb_fields)
 
 def reorder_t5alias_columns(view, edit):
-    reorder_columns(view, edit, sound_t5alias_order)
+    reorder_columns(view, edit, sound_t5alias_fields)
 
 def reorder_t5reverb_columns(view, edit):
-    reorder_columns(view, edit, sound_t5reverb_order)
+    reorder_columns(view, edit, sound_t5reverb_fields)
 
 def reorder_ambient_columns(view, edit):
-    reorder_columns(view, edit, sound_ambient_order)
+    reorder_columns(view, edit, sound_ambient_fields)
 
 def reorder_test_columns(view, edit):
-    reorder_columns(view, edit, sound_test_order)
+    reorder_columns(view, edit, sound_test_fields)
 
 # table of syntax-specific callbacks to reorder the columns of a table
 # key is the base scope of the syntax, i.e. text.codt7.table.sound.<type>
@@ -606,12 +616,14 @@ class OrderCodt7TableColumnsToSyntaxCommand(sublime_plugin.TextCommand):
     # param <scope> indexes the appropriate callback for the type of
     # sound table that is loaded, e.g. alias, reverb, ambient, etc.
     def run(self, edit, scope):
-        if not scope in column_reorder_funcs:
+        reorder_func = column_reorder_funcs.get(scope)
+        if reorder_func is None:
             return
+        codt7_table.set_field_name_list_for_scope(scope)
         # run the appropriate cb
-        column_reorder_funcs[scope](self.view, edit)
+        reorder_func(self.view, edit)
 
-COLUMN_CHECK_SETTINGS_KEY = 'check_syntax_column_order'
+COLUMN_CHECK_SETTINGS_KEY =           'check_syntax_column_order'
 COLUMN_CHECK_BLACKLIST_SETTINGS_KEY = 'disable_syntax_column_order_check_files'
 
 def column_checking_disabled_in_settings(settings_base_name,
@@ -652,7 +664,8 @@ def disable_file_column_checking_in_settings(file_name_list,
 # param <scope> is the base scope of the syntax of the table being checked
 def check_column_order(view, scope):
     # check that there is a sanity check cb for this syntax
-    if not scope in column_order_compare_funcs:
+    compare_func = column_order_compare_funcs.get(scope)
+    if compare_func is None:
         return
 
     # settings can suppress these checks
@@ -665,13 +678,13 @@ def check_column_order(view, scope):
 
     # get the comma-separated values in the header row where the column names
     # are given
-    # <column_names> is a list of the column name strings
+    # <field_names> is a list of the column name strings
     # <line_index> is the line index of the header row (first line = index 0)
-    column_names, line_index = get_column_names(view)
+    field_names, line_index = get_field_names(view)
 
     # run sanity cb
     # if returns True, columns are in same order as syntax expects, nothing to do
-    if column_order_compare_funcs[scope](column_names):
+    if not compare_func(field_names):
         return
 
     # give option to reformat table or unassign the syntax
