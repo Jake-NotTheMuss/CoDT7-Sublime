@@ -13,6 +13,7 @@
 		"zbarrier",
 		"playercorpse",
 		"helicopter",
-		"plane"
+		"plane",
+		"item"
 	]
 }

@@ -4,6 +4,7 @@
 	[
 		"vehicle",
 		"model",
+		"xmodel",
 		"playercharacter",
 		"aitype",
 		"character",
