@@ -49,7 +49,7 @@ sound_ambient_fields = [ 'Name', 'Loadspec', 'DefaultRoom', 'Reverb', 'NearVerb'
 table_field_names = {
     'text.codt7.table.sound.alias': sound_alias_fields,
     'text.codt7.table.sound.reverb': sound_reverb_fields,
-    # 'text.codt7.table.sound.ambient': sound_ambient_fields
+    'text.codt7.table.sound.ambient': sound_ambient_fields
 }
 
 table_field_name_list = None
