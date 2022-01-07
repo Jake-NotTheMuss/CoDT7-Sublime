@@ -31,7 +31,7 @@ contexts:
     - match: ','
       scope: punctuation.separator.codt7.table.anim.mapping
     - match: \bvoid\b
-      scope: storage.type.codt7.table.anim.mapping
+      scope: support.type.codt7.table.anim.mapping
     - match: $\n
       pop: true
     - match: '.'

@@ -15,4 +15,4 @@ anim_zombie_barricade_ad_m,ai_zombie_base_walk_ad_win_trav_m_v1,ai_zombie_base_w
 void,void
 # <- entity.name.alias
 #   ^ punctuation.separator
-#    ^ storage.type
+#    ^ support.type
