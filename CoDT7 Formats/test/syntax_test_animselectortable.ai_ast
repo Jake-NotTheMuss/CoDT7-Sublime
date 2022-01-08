@@ -1,0 +1,58 @@
+# SYNTAX TEST "Packages/CoDT7 Formats/AnimSelectorTable.sublime-syntax"
+
+death@zombie_dog,
+# <- entity.name.substate
+#    ^ keyword.operator.selector
+#     ^ entity.name.parent-state
+#               ^ punctuation.separator
+_damage_direction,_blend_in_time,_blend_out_time,_animation_alias,_animation_mocomp,
+# <- variable.parameter
+#                ^ punctuation.separator
+#                 ^ variable.parameter
+#                               ^ punctuation.separator
+#                                ^ variable.parameter
+#                                               ^ punctuation.separator
+#                                                ^ variable.parameter
+#                                                                ^ punctuation.separator
+#                                                                 ^ variable.parameter
+#                                                                                  ^ punctuation.separator
+FRONT,0.1,0,anim_death_front,mocomp_death@exposed,
+# <- support.constant
+#    ^ punctuation.separator
+#     ^^^ constant.numeric.value
+#        ^ punctuation.separator
+#         ^ constant.numeric.value
+#          ^ punctuation.separator
+#           ^ entity.name.alias-reference
+#                           ^ punctuation.separator
+#                            ^ support.constant
+#                                                ^ punctuation.separator
+,
+# <- punctuation.separator
+
+idle@zombie_dog,
+# <- entity.name.substate
+#   ^ keyword.operator.selector
+#    ^ entity.name.parent-state
+#              ^ punctuation.separator
+_blend_in_time,_blend_out_time,_animation_alias,_animation_mocomp,
+# <- variable.parameter
+#             ^ punctuation.separator
+#              ^ variable.parameter
+#                             ^ punctuation.separator
+#                              ^ variable.parameter
+#                                              ^ punctuation.separator
+#                                               ^ variable.parameter
+#                                                                ^ punctuation.separator
+0.2,0.2,anim_idle,mocomp_idle@exposed,
+# <- constant.numeric.value
+#^^ constant.numeric.value
+#  ^ punctuation.separator
+#   ^^^ constant.numeric.value
+#      ^ punctuation.separator
+#       ^ entity.name.alias-reference
+#                ^ punctuation.separator
+#                 ^ support.constant
+#                                    ^ punctuation.separator
+,
+# <- punctuation.separator
