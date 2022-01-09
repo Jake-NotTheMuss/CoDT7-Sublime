@@ -1,0 +1,239 @@
+/* SYNTAX TEST "Packages/CoDT7 Formats/TechSetDef.sublime-syntax" */
+
+#include "state.techsetdef"
+/*^^^^^^^^^^^^^^^^^^^^^^^^^ meta.preprocessor.include */
+/* <- keyword.control.import.include */
+/*       ^^^^^^^^^^^^^^^^^^ string.quoted.double */
+/*       ^ punctuation.definition.string.begin */
+/*                        ^ punctuation.definition.string.end */
+
+Globals()
+/*^^^^^^^ meta.shader-component */
+/* <- storage.type */
+/*     ^^ meta.group */
+/*     ^ punctuation.section.group.begin */
+/*      ^ punctuation.section.group.end */
+{
+/* <- meta.shader-component meta.block punctuation.section.block.begin */
+  renderFlags = RenderFlags()
+/*^ - storage.type */
+/*            ^ keyword.operator.assignment */
+/*              ^^^^^^^^^^^^^ meta.shader-component */
+/*              ^ storage.type */
+/*                         ^^ meta.group */
+/*                         ^ punctuation.section.group.begin */
+/*                          ^ punctuation.section.group.end */
+  {
+/*^ meta.shader-component meta.block punctuation.section.block.begin */
+    is2D                = true
+/*                      ^ keyword.operator.assignment */
+/*                        ^ constant.language */
+  }
+/*^ meta.shader-component meta.block punctuation.section.block.end */
+  category          = "ShaderWorks 2D"
+/*                  ^ keyword.operator.assignment */
+/*                    ^^^^^^^^^^^^^^^^ string.quoted.double */
+/*                    ^ punctuation.definition.string.begin */
+/*                                   ^ punctuation.definition.string.end */
+}
+/* <- meta.shader-component meta.block punctuation.section.block.end */
+
+State( "state" )
+/*^^^^^^^^^^^^^^ meta.shader-component */
+/* <- storage.type */
+/*   ^^^^^^^^^^^ meta.group */
+/*   ^ punctuation.section.group.begin */
+/*     ^^^^^^^ string.quoted.double */
+/*     ^ punctuation.definition.string.begin */
+/*           ^ punctuation.definition.string.end */
+/*             ^ punctuation.section.group.end. */
+{
+/* <- meta.shader-component meta.block punctuation.section.block.begin */
+  blendState = BlendState()
+/*^ - storage.type */
+/*           ^ keyword.operator.assignment */
+/*             ^^^^^^^^^^^^ meta.shader-component */
+/*             ^ storage.type */
+/*                       ^^ meta.group */
+/*                       ^ punctuation.section.group.begin */
+/*                        ^ punctuation.section.group.end */
+  {
+/*^ meta.shader-component meta.block punctuation.section.block.begin */
+    // Blend
+/*  ^ comment.line */
+    writeChannels  = "rgba"
+/*                 ^ keyword.operator.assignment */
+/*                   ^^^^^^ string.quoted.double */
+/*                   ^ punctuation.definition.string.begin */
+/*                        ^ punctuation.definition.string.end */
+  }
+/*^ meta.shader-component meta.block punctuation.section.block.end */
+  cull = "None"
+/*     ^ keyword.operator.assignment */
+/*       ^^^^^^ string.quoted.double */
+/*       ^ punctuation.definition.string.begin */
+/*            ^ punctuation.definition.string.end */
+}
+/* <- meta.shader-component meta.block punctuation.section.block.end */
+
+Texture( "specColorMap" ).tweak = Tweak()
+/*^^^^^^^^^^^^^^^^^^^^^^^ meta.shader-component */
+/* <- storage.type */
+/*     ^^^^^^^^^^^^^^^^^^ meta.group */
+/*     ^ punctuation.section.group.begin */
+/*       ^^^^^^^^^^^^^^ string.quoted.double */
+/*       ^ punctuation.definition.string.begin */
+/*                    ^ punctuation.definition.string.end */
+/*                      ^ punctuation.section.group.end */
+/*                       ^ punctuation.accessor */
+/*                        ^ variable.other.member */
+/*                              ^ keyword.operator.assignment */
+/*                                ^^^^^^^^ meta.shader-component */
+/*                                     ^^ meta.group */
+/*                                     ^ punctuation.section.group.begin */
+/*                                      ^ punctuation.section.group.end */
+{
+/* <- meta.shader-component meta.block punctuation.section.block.begin */
+  sortindex = "40"
+/*          ^ keyword.operator.assignment.codt7.techsetdef */
+/*            ^^^^ string.quoted.double */
+/*            ^ punctuation.definition.string.begin */
+/*             ^^ constant.numeric.value */
+/*               ^ punctuation.definition.string.end */
+}
+/* <- meta.shader-component meta.block punctuation.section.block.end */
+
+Texture( "specularMapDetail2" )
+/*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.shader-component */
+/* <- storage.type */
+/*     ^^^^^^^^^^^^^^^^^^^^^^^^ meta.group */
+/*     ^ punctuation.section.group.begin */
+/*       ^^^^^^^^^^^^^^^^^^^^ string.quoted.double */
+/*       ^ punctuation.definition.string.begin */
+/*                          ^ punctuation.definition.string.end */
+/*                            ^ punctuation.section.group.end */
+{
+/* <- meta.shader-component meta.block punctuation.section.block.begin */
+  image = Image( <colorMap03, $white_specular> )
+/*^ - storage.type */
+/*      ^ keyword.operator.assignment */
+/*        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.shader-component */
+/*        ^ storage.type */
+/*             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.group */
+/*             ^ punctuation.section.group.begin */
+/*               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.lt-gt */
+/*               ^ punctuation.section.lt-gt.begin */
+/*                ^ variable.parameter */
+/*                          ^ punctuation.separator */
+/*                            ^ variable.parameter */
+/*                                           ^ punctuation.section.lt-gt.end */
+/*                                             ^ punctuation.section.group.end */
+  tweak = Tweak()
+/*^ - storage.type */
+/*      ^ keyword.operator.assignment */
+/*        ^^^^^^^ meta.shader-component */
+/*        ^ storage.type */
+/*             ^^ meta.group */
+/*             ^ punctuation.section.group.begin */
+/*              ^ punctuation.section.group.end */
+  {
+/*^ meta.shader-component meta.block punctuation.section.block.begin */
+    category  = "Detail Maps2"
+/*            ^ keyword.operator.assignment */
+/*              ^^^^^^^^^^^^^^ string.quoted.double */
+/*              ^ punctuation.definition.string.begin */
+/*                           ^ punctuation.definition.string.end */
+  }
+/*^ meta.shader-component meta.block punctuation.section.block.end */
+}
+/* <- meta.shader-component meta.block punctuation.section.block.end */
+
+
+BlendState( "gbuffer reflectance occlusion blend" )
+/*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.shader-component */
+/* <- storage.type */
+/*        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.group */
+/*        ^ punctuation.section.group.begin */
+/*          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ string.quoted.double */
+/*          ^ punctuation.definition.string.begin */
+/*                                              ^ punctuation.definition.string.end */
+/*                                                ^ punctuation.section.group.end */
+{
+/* <- meta.shader-component meta.block punctuation.section.block.begin */
+#if PLAT_ORBIS == "1" || PLAT_DURANGO == "1"
+/*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.preprocessor */
+/* <- keyword.control.import */
+/*             ^^ keyword.operator.comparison */
+/*                ^^^ string.quoted,double */
+/*                ^ punctuation.definition.string.begin */
+/*                 ^ constant.numeric.value */
+/*                  ^ punctuation.definition.string.end */
+/*                    ^^ keyword.operator.arithmetic */
+/*                                    ^^ keyword.operator.comparison */
+/*                                       ^^^ string.quoted,double */
+/*                                       ^ punctuation.definition.string.begin */
+/*                                        ^ constant.numeric.value */
+/*                                         ^ punctuation.definition.string.end */
+  // dual source blend mrt - GFX_USE_DUAL_SOURCE_BLEND_GBUFFER
+/*^ comment.line */
+  colorBlendFunc = add
+/*               ^ keyword.operator.assignment */
+#else
+/*^^^ meta.preprocessor */
+/* <- keyword.control.import */
+  // YCoCg encoding - GFX_USE_GBUFFER_COMPACT_SPECULAR_COLOR
+/*^ comment.line */
+  alphaBlendFunc = disable
+/*               ^ keyword.operator.assignment */
+#endif
+/*^^^^ meta.preprocessor */
+/* <- keyword.control.import */
+}
+/* <- meta.shader-component meta.block punctuation.section.block.end */
+
+#if TOOLSGFX == "1"
+/*^^^^^^^^^^^^^^^^^ meta.preprocessor */
+/* <- keyword.control.import */
+/*           ^^ keyword.operator.comparison */
+/*              ^^^ string.quoted.double */
+/*              ^ punctuation.definition.string.begin */
+/*               ^ constant.numeric.value */
+/*                ^ punctuation.definition.string.end */
+StencilState( "vol decal stencil" )
+/*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.shader-component */
+/* <- storage.type */
+/*          ^^^^^^^^^^^^^^^^^^^^^^^ meta.group */
+/*          ^ punctuation.section.group.begin */
+/*            ^^^^^^^^^^^^^^^^^^^ string.quoted.double */
+/*            ^ punctuation.definition.string.begin */
+/*                              ^ punctuation.definition.string.end */
+/*                                ^ punctuation.section.group.end */
+{
+/* <- meta.shader-component meta.block punctuation.section.block.begin */
+  enable  = false
+/*        ^ keyword.operator.assignment */
+/*          ^ constant.language */
+}
+/* <- meta.shader-component meta.block punctuation.section.block.end */
+#else
+/*^^^ meta.preprocessor */
+/* <- keyword.control.import */
+StencilState( "vol decal stencil" )
+/*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.shader-component */
+/* <- storage.type */
+/*          ^^^^^^^^^^^^^^^^^^^^^^^ meta.group */
+/*          ^ punctuation.section.group.begin */
+/*            ^^^^^^^^^^^^^^^^^^^ string.quoted.double */
+/*            ^ punctuation.definition.string.begin */
+/*                              ^ punctuation.definition.string.end */
+/*                                ^ punctuation.section.group.end */
+{
+/* <- meta.shader-component meta.block punctuation.section.block.begin */
+  enable  = true
+/*        ^ keyword.operator.assignment */
+/*          ^ constant.language */
+}
+/* <- meta.shader-component meta.block punctuation.section.block.end */
+#endif
+/*^^^^ meta.preprocessor */
+/* <- keyword.control.import */

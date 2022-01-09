@@ -1,0 +1,584 @@
+%YAML 1.2
+---
+# http://www.sublimetext.com/docs/3/syntax.html
+
+# This file is part of the T7-Sublime project.
+# T7-Sublime is an enhanced syntax-highlighting package for (almost) all Call of Duty Black Ops III developer file formats.
+# Tech Set Def files contain definitions for various shader components with customizable parameters.
+
+name: Tech Set Def
+file_extensions:
+  - techsetdef
+  - csdef
+scope: source.codt7.techsetdef
+
+variables:
+  identifier: \b[[:alpha:]_][[:alnum:]_]*\b
+
+  types: (?i:primitivetype|globals|technique|vertexshader|pixelshader|computeshader|codebuffer|state|renderflags|usage|blendstate|stencilstate|sampler|codetexture|texture|image|tweak|color|float1|float2|float3|bool)
+
+contexts:
+  main:
+    - include: preprocessor-global
+    - include: global
+
+  comments:
+    - include: scope:source.codt7.common#comments
+
+  numbers:
+    - include: scope:source.codt7.common#numbers
+
+  strings:
+    - match: '(")(\d+(?:(\.)\d*)?)(")'
+      scope: string.quoted.double.codt7.techsetdef
+      captures:
+        1: punctuation.definition.string.begin.codt7.techsetdef
+        2: meta.number.integer.decimal.codt7.techsetdef constant.numeric.value.codt7.techsetdef
+        3: punctuation.separator.decimal.codt7.techsetdef
+        4: punctuation.definition.string.end.codt7.techsetdef
+    - match: '"'
+      scope: punctuation.definition.string.begin.codt7.techsetdef
+      push:
+        - meta_scope: string.quoted.double.codt7.techsetdef
+        - match: '"'
+          scope: punctuation.definition.string.end.codt7.techsetdef
+          pop: true
+
+  operators:
+    - match: \+\=|\-\=
+      scope: keyword.operator.assignment.augmented.codt7.techsetdef
+    - match: \=\=|\!\=
+      scope: keyword.operator.comparison.codt7.techsetdef
+    - match: \&\&|\|\|
+      scope: keyword.operator.arithmetic.codt7.techsetdef
+    - match: \=
+      scope: keyword.operator.assignment.codt7.techsetdef
+
+  preprocessor-disabled:
+    - include: scope:source.codt7.common#preprocessor-disabled
+
+  preprocessor-line-continuation:
+    - include: scope:source.codt7.common#preprocessor-line-continuation
+
+  preprocessor-line-ending:
+    - include: scope:source.codt7.common#preprocessor-line-ending
+
+  preprocessor-line-ending-lookahead:
+    - include: scope:source.codt7.common#preprocessor-line-ending-lookahead
+
+  preprocessor-comments:
+    - include: scope:source.codt7.common#preprocessor-comments
+
+
+# PREPROCESSOR GLOBAL
+
+  preprocessor-global:
+    - include: preprocessor-rule-enabled-global
+    - include: preprocessor-rule-disabled-global
+    - include: preprocessor-rule-other-global
+
+  preprocessor-rule-enabled-global:
+    - match: ^\s*((#\s*if)\s+(?i:(1)|(true)))\b
+      captures:
+        1: meta.preprocessor.codt7.techsetdef
+        2: keyword.control.import.codt7.techsetdef
+        3: meta.number.integer.decimal.codt7.techsetdef constant.numeric.value.codt7.techsetdef
+        4: constant.language.codt7.techsetdef
+      push:
+        - match: ^\s*(#\s*endif)\b
+          captures:
+            1: meta.preprocessor.codt7.techsetdef keyword.control.import.codt7.techsetdef
+          pop: true
+        - match: ^\s*(#\s*else)\b
+          captures:
+            1: meta.preprocessor.codt7.techsetdef keyword.control.import.else.codt7.techsetdef
+          push:
+            - meta_content_scope: comment.block.preprocessor.else-branch.codt7.techsetdef
+            - match: (?=^\s*endif\b)
+              pop: true
+            - include: preprocessor-disabled
+        - match: ''
+          push:
+            - match: (?=^\s*#\s*(else|endif)\b)
+              pop: true
+            - include: preprocessor-global
+            - include: negated-block
+            - include: global
+
+  preprocessor-rule-disabled-global:
+    - match: ^\s*((#\s*if)\s+(?i:(0)|(false)))\b
+      captures:
+        1: meta.preprocessor.codt7.techsetdef
+        2: keyword.control.import.codt7.techsetdef
+        3: meta.number.integer.decimal.codt7.techsetdef constant.numeric.value.codt7.techsetdef
+        4: constant.language.codt7.techsetdef
+      push:
+        - match: ^\s*(#\s*endif)\b
+          captures:
+            1: meta.preprocessor.codt7.techsetdef keyword.control.import.codt7.techsetdef
+          pop: true
+        - match: ^\s*(#\s*else)\b
+          captures:
+            1: meta.preprocessor.codt7.techsetdef keyword.control.import.else.codt7.techsetdef
+          push:
+            - match: (?=^\s*#\s*endif\b)
+              pop: true
+            - include: preprocessor-global
+            - include: negated-block
+            - include: global
+        - match: ''
+          push:
+            - meta_scope: comment.block.preprocessor.if-branch.codt7.techsetdef
+            - match: (?=^\s*#\s*(else|endif)\b)
+              pop: true
+            - include: preprocessor-disabled
+
+  preprocessor-rule-other-global:
+    - match: ^\s*(#\s*(?i:if|ifdef|ifndef))\b
+      captures:
+        1: keyword.control.import.codt7.techsetdef
+      push:
+        - meta_scope: meta.preprocessor.codt7.techsetdef
+        - include: preprocessor-line-continuation
+        - include: preprocessor-comments
+        - match: $\n
+          set: preprocessor-if-branch-global
+        - include: expressions
+
+  preprocessor-if-branch-global:
+    - match: ^\s*(#\s*endif)\b
+      captures:
+        1: meta.preprocessor.codt7.techsetdef keyword.control.import.codt7.techsetdef
+      pop: true
+    - match: (?=^\s*#\s*(elif|else)\b)
+      push: preprocessor-elif-else-branch-global
+    - match: '\{'
+      scope: punctuation.section.block.begin.codt7.techsetdef
+      set: preprocessor-block-if-branch-global
+    - include: preprocessor-global
+    - include: negated-block
+    - include: global
+
+  preprocessor-block-if-branch-global:
+    - meta_scope: meta.block.codt7.techsetdef
+    - match: ^\s*(#\s*endif)\b
+      captures:
+        1: meta.preprocessor.codt7.techsetdef keyword.control.import.codt7.techsetdef
+      set: preprocessor-block-finish-global
+    - match: (?=^\s*#\s*(elif|else)\b)
+      push: preprocessor-elif-else-branch-global
+    - match: '\}'
+      scope: punctuation.section.block.end.codt7.techsetdef
+      set: preprocessor-if-branch-global
+    - include: statements
+
+  preprocessor-block-finish-global:
+    - meta_scope: meta.block.codt7.techsetdef
+    - match: ^\s*(#\s*(?:if|ifdef|ifndef))\b
+      captures:
+        1: meta.preprocessor.codt7.techsetdef keyword.control.import.codt7.techsetdef
+      set: preprocessor-block-finish-if-branch-global
+    - match: '\}'
+      scope: punctuation.section.block.end.codt7.techsetdef
+      pop: true
+    - include: statements
+
+  preprocessor-block-finish-if-branch-global:
+    - match: ^\s*(#\s*endif)\b
+      captures:
+        1: meta.preprocessor.codt7.techsetdef keyword.control.import.codt7.techsetdef
+      pop: true
+    - match: '\}'
+      scope: punctuation.section.block.end.codt7.techsetdef
+      set: preprocessor-if-branch-global
+    - include: statements
+
+  preprocessor-elif-else-branch-global:
+    - match: (?=^\s*#\s*endif\b)
+      pop: true
+    - include: negated-block
+    - include: preprocessor-global
+    - include: global
+
+# PREPROCESSOR STATEMENTS
+
+  preprocessor-statements:
+    - include: preprocessor-rule-enabled-statements
+    - include: preprocessor-rule-disabled-statements
+    - include: preprocessor-rule-other-statements
+
+  preprocessor-rule-enabled-statements:
+    - match: ^\s*((#\s*if)\s+(?i:(1)|(true)))\b
+      captures:
+        1: meta.preprocessor.codt7.techsetdef
+        2: keyword.control.import.codt7.techsetdef
+        3: meta.number.integer.decimal.codt7.techsetdef constant.numeric.value.codt7.techsetdef
+        4: constant.language.codt7.techsetdef
+      push:
+        - match: ^\s*(#\s*endif)\b
+          captures:
+            1: meta.preprocessor.codt7.techsetdef keyword.control.import.codt7.techsetdef
+          pop: true
+        - match: ^\s*(#\s*else)\b
+          captures:
+            1: meta.preprocessor.codt7.techsetdef keyword.control.import.else.codt7.techsetdef
+          push:
+            - meta_content_scope: comment.block.preprocessor.else-branch.codt7.techsetdef
+            - match: (?=^\s*#\s*endif\b)
+              pop: true
+            - include: preprocessor-disabled
+        - match: ''
+          push:
+            - match: (?=^\s*#\s*(else|endif)\b)
+              pop: true
+            - include: negated-block
+            - include: statements
+
+  preprocessor-rule-disabled-statements:
+    - match: ^\s*((#\s*if)\s+(?i:(0)|(false)))\b
+      captures:
+        1: meta.preprocessor.codt7.techsetdef
+        2: keyword.control.codt7.techsetdef
+        3: meta.number.integer.decimal.codt7.techsetdef constant.numeric.value.codt7.techsetdef
+        4: constant.language.codt7.techsetdef
+      push:
+        - match: ^\s*(#\s*endif)\b
+          captures:
+            1: meta.preprocessor.codt7.techsetdef keyword.control.import.codt7.techsetdef
+          pop: true
+        - match: ^\s*(#\s*else)\b
+          captures:
+            1: meta.preprocessor.codt7.techsetdef keyword.control.import.else.codt7.techsetdef
+          push:
+            - match: (?=^\s*#\s*endif\b)
+              pop: true
+            - include: negated-block
+            - include: statements
+        - match: ''
+          push:
+            - meta_scope: comment.block.preprocessor.if-branch.codt7.techsetdef
+            - match: (?=^\s*#\s*(else|endif)\b)
+              pop: true
+            - include: preprocessor-disabled
+
+  preprocessor-rule-other-statements:
+    - match: ^\s*(#\s*(?:if|ifdef|ifndef))\b
+      captures:
+        1: keyword.control.import.codt7.techsetdef
+      push:
+        - meta_scope: meta.preprocessor.codt7.techsetdef
+        - include: preprocessor-line-continuation
+        - include: preprocessor-comments
+        - match: $\n
+          set: preprocessor-if-branch-statements
+        - include: expressions
+
+  preprocessor-if-branch-statements:
+    - match: ^\s*(#\s*endif)\b
+      captures:
+        1: meta.preprocessor.codt7.techsetdef keyword.control.import.codt7.techsetdef
+      pop: true
+    - match: (?=^\s*#\s*(elif|else)\b)
+      push: preprocessor-elif-else-branch-statements
+    - match: '\{'
+      scope: punctuation.section.block.begin.codt7.techsetdef
+      set: preprocessor-block-if-branch-statements
+    - include: negated-block
+    - include: statements
+
+  preprocessor-block-if-branch-statements:
+    - meta_scope: meta.block.codt7.techsetdef
+    - match: ^\s*(#\s*endif)\b
+      captures:
+        1: meta.preprocessor.codt7.techsetdef keyword.control.import.codt7.techsetdef
+      set: preprocessor-block-finish-statements
+    - match: (?=^\s*#\s*(elif|else)\b)
+      push: preprocessor-elif-else-branch-statements
+    - match: '\}'
+      scope: punctuation.section.block.end.codt7.techsetdef
+      set: preprocessor-if-branch-statements
+    - include: statements
+
+  preprocessor-block-finish-statements:
+    - meta_scope: meta.block.codt7.techsetdef
+    - match: ^\s*(#\s*(?:if|ifdef|ifndef))\b
+      captures:
+        1: meta.preprocessor.codt7.techsetdef keyword.control.import.codt7.techsetdef
+      set: preprocessor-block-finish-if-branch-statements
+    - match: '\}'
+      scope: punctuation.section.block.end.codt7.techsetdef
+      pop: true
+    - include: statements
+
+  preprocessor-block-finish-if-branch-statements:
+    - match: ^\s*(#\s*endif)\b
+      captures:
+        1: meta.preprocessor.codt7.techsetdef keyword.control.import.codt7.techsetdef
+      pop: true
+    - match: '\}'
+      scope: punctuation.section.block.end.codt7.techsetdef
+      set: preprocessor-if-branch-statements
+    - include: statements
+
+  preprocessor-elif-else-branch-statements:
+    - match: (?=^\s*#\s*endif\b)
+      pop: true
+    - include: negated-block
+    - include: statements
+
+# PREPROCESSOR OTHER
+
+  negated-block:
+    - match: '\}'
+      scope: punctuation.section.block.end.codt7.techsetdef
+      push:
+        - match: '\{'
+          scope: punctuation.section.block.begin.codt7.techsetdef
+          pop: true
+        - match: (?=^\s*#\s*(elif|else|endif)\b)
+          pop: true
+        - include: statements
+
+  preprocessor-macro-define:
+    - match: ^\s*(#\s*define)\b
+      captures:
+        1: meta.preprocessor.macro.codt7.techsetdef keyword.control.import.define.codt7.techsetdef
+      push:
+        - meta_content_scope: meta.preprocessor.macro.codt7.techsetdef
+        - include: preprocessor-line-continuation
+        - include: preprocessor-line-ending
+        - include: preprocessor-comments
+        - match: '{{identifier}}'
+          scope: entity.name.constant.preprocessor.codt7.techsetdef
+          set: preprocessor-macro-definition
+
+  preprocessor-macro-definition:
+    - meta_content_scope: meta.preprocessor.macro.codt7.techsetdef
+    - include: preprocessor-line-continuation
+    - include: preprocessor-line-ending
+    - include: preprocessor-comments
+    # Don't define blocks in define statements
+    - match: '\{'
+      scope: punctuation.section.block.begin.codt7.techsetdef
+    - match: '\}'
+      scope: punctuation.section.block.end.codt7.techsetdef
+    - include: expressions
+
+  preprocessor-other:
+    - match: ^\s*(#\s*(?:if|ifdef|ifndef|elif|else|undef))\b
+      captures:
+        1: meta.preprocessor keyword.control.import.codt7.techsetdef
+    - match: ^\s*(#\s*endif)\b
+      captures:
+        1: meta.preprocessor.codt7.techsetdef keyword.control.import.codt7.techsetdef
+    - match: ^\s*(#\s*include)\b
+      captures:
+        1: keyword.control.import.include.codt7.techsetdef
+      push:
+        - meta_scope: meta.preprocessor.include.codt7.techsetdef
+        - include: preprocessor-line-continuation
+        - include: preprocessor-line-ending
+        - include: preprocessor-comments
+        - match: '"'
+          scope: punctuation.definition.string.begin.codt7.techsetdef
+          push:
+            - meta_scope: string.quoted.double.include.codt7.techsetdef
+            - match: '"'
+              scope: punctuation.definition.string.end.codt7.techsetdef
+              pop: true
+
+  preprocessor-expressions:
+    - include: preprocessor-macro-define
+    - include: preprocessor-other
+
+# EXPRESSIONS
+
+  global:
+    - include: comments
+    - include: preprocessor-expressions
+    - match: ^\s*(?=\w+)
+      push: global-type
+
+  statements:
+    - include: preprocessor-statements
+    - include: expressions
+
+  block:
+    - match: '\{'
+      scope: punctuation.section.block.begin.codt7.techsetdef
+      push:
+        - meta_scope: meta.block.codt7.techsetdef
+        - match: (?=^\s*#\s*(elif|else|endif)\b)
+          pop: true
+        - match: '\}'
+          scope: punctuation.section.block.end.codt7.techsetdef
+          pop: true
+        - include: statements
+
+  parens:
+    - match: \(
+      scope: punctuation.section.group.begin.codt7.techsetdef
+      push:
+        - meta_scope: meta.group.codt7.techsetdef
+        - match: \)
+          scope: punctuation.section.group.end.codt7.techsetdef
+          pop: true
+        - include: expressions
+
+  brackets:
+    - match: \[
+      scope: punctuation.section.brackets.begin.codt7.techsetdef
+      push:
+        - meta_scope: meta.brackets.codt7.techsetdef
+        - match: \]
+          scope: punctuation.section.brackets.codt7.techsetdef
+          pop: true
+        - include: expressions
+
+  lt-gt:
+    - match: <
+      scope: punctuation.section.lt-gt.begin.codt7.techsetdef
+      push:
+        - meta_scope: meta.lt-gt.codt7.techsetdef
+        - match: '>'
+          scope: punctuation.section.lt-gt.end.codt7.techsetdef
+          pop: true
+        - match: '[^,\s]'
+          scope: variable.parameter.codt7.techsetdef
+        - match: ','
+          scope: punctuation.separator.codt7.techsetdef
+
+  expressions:
+    - include: preprocessor-expressions
+    - include: comments
+    - include: numbers
+    - include: operators
+    - include: strings
+    - include: parens
+    - include: brackets
+    - include: lt-gt
+    - include: block
+    - include: constants
+    - include: types
+    - match: ','
+      scope: punctuation.separator.codt7.techsetdef
+    - match: '\)|\}'
+      scope: invalid.illegal.stray-bracket-end.codt7.techsetdef
+
+  constants:
+    - match: \b(true|false)\b
+      scope: constant.language.codt7.techsetdef
+    - match: \bNone\b
+      scope: constant.language.codt7.techsetdef
+
+  access-illegal:
+    - match: \.(\s*\.)+
+      scope: invalid.illegal.syntax.codt7.techsetdef
+      pop: true
+
+  # Redirect here from 'component-definition-continue'
+  access:
+    - include: access-illegal
+    - match: \.
+      scope: punctuation.accessor.codt7.techsetdef
+      set:
+        - include: preprocessor-line-continuation
+        - include: preprocessor-line-ending
+        - match: '{{identifier}}'
+          scope: variable.other.member.codt7.techsetdef
+          set:
+            - include: preprocessor-line-continuation
+            - include: preprocessor-line-ending
+            - include: expressions
+
+  global-type:
+    - include: comments
+    - match: \b({{types}})\b
+      scope: storage.type.codt7.techsetdef
+      set: global-component
+    - match: (?=\S)
+      pop: true
+
+  global-component:
+    - meta_scope: meta.shader-component.codt7.techsetdef
+    - include: comments
+    - match: \(
+      scope: meta.shader-component.codt7.techsetdef meta.group.codt7.techsetdef punctuation.section.group.begin.codt7.techsetdef
+      set:
+        - meta_content_scope: meta.shader-component.codt7.techsetdef meta.group.codt7.techsetdef
+        - match: \)
+          scope: meta.shader-component.codt7.techsetdef meta.group.codt7.techsetdef punctuation.section.group.end.codt7.techsetdef
+          set: component-definition-continue
+        - include: expressions
+    - match: (?=\S)
+      pop: true
+
+  component-definition-continue:
+    - meta_content_scope: meta.shader-component.codt7.techsetdef
+    - include: comments
+    - match: (?=\.)
+      set: access
+    - include: component-inheritance
+    - match: (?=\{)
+      set: component-definition-body
+    - match: (?=\S)
+      pop: true
+
+  component-inheritance:
+    - match: ':'
+      scope: punctuation.separator.codt7.techsetdef
+    - include: strings
+
+  component-definition-body:
+    - meta_content_scope: meta.shader-component.codt7.techsetdef
+    - match: '\{'
+      scope: meta.block.codt7.techsetdef punctuation.section.block.begin.codt7.techsetdef
+      set:
+        - meta_content_scope: meta.shader-component.codt7.techsetdef meta.block.codt7.techsetdef
+        - match: '\}'
+          scope: meta.shader-component.codt7.techsetdef meta.block.codt7.techsetdef punctuation.section.block.end.codt7.techsetdef
+          pop: true
+        - match: (?=^\s*#\s*(elif|else|endif)\b)
+          pop: true
+        - include: statements
+
+  types:
+    - match: \b({{types}})(?=\s*\()
+      scope: storage.type.codt7.techsetdef
+      push:
+        - meta_scope: meta.shader-component.codt7.techsetdef
+        - match: (?=\(\s*\)) # expect inline definition
+          set: inline-component
+        - match: \(
+          scope: meta.group.codt7.techsetdef punctuation.section.group.begin.codt7.techsetdef
+          set:
+            - meta_content_scope: meta.shader-component.codt7.techsetdef meta.group.codt7.techsetdef
+            - match: \)
+              scope: meta.shader-component.codt7.techsetdef meta.group.codt7.techsetdef punctuation.section.group.end.codt7.techsetdef
+              pop: true
+            - include: expressions
+
+  inline-component:
+    - meta_scope: meta.shader-component.codt7.techsetdef
+    - include: comments
+    - match: \(
+      scope: meta.shader-component.codt7.techsetdef meta.group.codt7.techsetdef punctuation.section.group.begin.codt7.techsetdef
+      set:
+        - meta_content_scope: meta.shader-component.codt7.techsetdef meta.group.codt7.techsetdef
+        - match: \)
+          scope: meta.shader-component.codt7.techsetdef meta.group.codt7.techsetdef punctuation.section.group.end.codt7.techsetdef
+          set: inline-component-definition-continue
+        - include: expressions
+    - match: (?=\S)
+      pop: true
+
+  inline-component-definition-continue:
+    - meta_content_scope: meta.shader-component.codt7.techsetdef
+    - include: comments
+    - match: \.+
+      scope: invalid.illegal.unexpected-character.codt7.techsetdef
+    - include: component-inheritance
+    - match: (?=\{)
+      set: component-definition-body
+    - match: (?=\S)
+      pop: true

@@ -11,28 +11,21 @@ The key improvements in this package compared to the developer package follow:
 2. More auto-completions are supported for a multitude of contexts.
 3. Syntaxes other than GSC are also supported.
 
-## Supported Formats/Extensions
+## Supported Grammars
 
-Current Support:
-
-- GSC (.csc, .gsc, .gsh)
-- Zone (.zone, .zpkg, .class)
-- Localized Strings (.str)
-- FX (.efx)
-- Vision (.vision)
-- Sound Alias (.alias.csv)
-- Sound Reverb (.reverb.csv)
-- Sound Ambient (.ambient.csv)
-- Anim Tree (.atr)
-- Anim Selector Table (.ai_ast)
-- Anim Mapping Table (.ai_am)
-- Player Anim Script (.script)
-
-Future Support:
-- Tech Set Def (.techsetdef)
-- Compute Shader Def (.csdef)
-
-... to name a few.
+- GSC
+- Zone Source
+- Localized Strings
+- FX
+- Vision
+- Sound Alias Table
+- Sound Reverb Table
+- Sound Ambient Table
+- Animtree
+- Anim Selector Table
+- Anim Mapping Table
+- Player Anim Script
+- Tech Set Def
 
 ## Installation
 
