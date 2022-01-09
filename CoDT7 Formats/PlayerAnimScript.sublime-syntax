@@ -267,11 +267,11 @@ contexts:
 
   conditions-yield:
     - meta_content_scope: meta.condition-yield.codt7.playeranimscript
-    - match: \{
+    - match: '\{'
       scope: meta.block.codt7.playeranimscript punctuation.section.block.begin.codt7.playeranimscript
       set:
         - meta_content_scope: meta.condition-yield.codt7.playeranimscript meta.block.codt7.playeranimscript
-        - match: \}
+        - match: '\}'
           scope: meta.condition-yield.codt7.playeranimscript meta.block.codt7.playeranimscript punctuation.section.block.end.codt7.playeranimscript
           pop: true
         - include: comments
@@ -389,11 +389,11 @@ contexts:
 
   state-definition-body:
     - meta_content_scope: meta.state.codt7.playeranimscript
-    - match: \{
+    - match: '\{'
       scope: meta.block.codt7.playeranimscript punctuation.section.block.begin.codt7.playeranimscript
       set:
         - meta_content_scope: meta.state.codt7.playeranimscript meta.block.codt7.playeranimscript
-        - match: \}
+        - match: '\}'
           scope: meta.state.codt7.playeranimscript meta.block.codt7.playeranimscript punctuation.section.block.end.codt7.playeranimscript
           pop: true
         - include: state-body
@@ -415,11 +415,11 @@ contexts:
 
   sub-state-definition-body:
     - meta_content_scope: meta.sub-state.codt7.playeranimscript
-    - match: \{
+    - match: '\{'
       scope: meta.block.codt7.playeranimscript punctuation.section.block.begin.codt7.playeranimscript
       set:
         - meta_content_scope: meta.sub-state.codt7.playeranimscript meta.block.codt7.playeranimscript
-        - match: \}
+        - match: '\}'
           scope: meta.sub-state.codt7.playeranimscript meta.block.codt7.playeranimscript punctuation.section.block.end.codt7.playeranimscript
           pop: true
         - include: sub-state-body
@@ -450,11 +450,11 @@ contexts:
 
   event-definition-body:
     - meta_content_scope: meta.event.codt7.playeranimscript
-    - match: \{
+    - match: '\{'
       scope: meta.block.codt7.playeranimscript punctuation.section.block.begin.codt7.playeranimscript
       set:
         - meta_content_scope: meta.event.codt7.playeranimscript meta.block.codt7.playeranimscript
-        - match: \}
+        - match: '\}'
           scope: meta.event.codt7.playeranimscript meta.block.codt7.playeranimscript punctuation.section.block.end.codt7.playeranimscript
           pop: true
         - include: event-body
