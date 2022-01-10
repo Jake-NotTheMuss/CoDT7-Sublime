@@ -623,41 +623,35 @@ class OrderCodt7TableColumnsToSyntaxCommand(sublime_plugin.TextCommand):
         # run the appropriate cb
         reorder_func(self.view, edit)
 
-COLUMN_CHECK_SETTINGS_KEY =           'check_syntax_column_order'
-COLUMN_CHECK_BLACKLIST_SETTINGS_KEY = 'disable_syntax_column_order_check_files'
-
-def column_checking_disabled_in_settings(settings_base_name,
-                                         loaded_file_name,
-                                         settings_key):
+def check_syntax_column_order_disabled(settings_base_name,
+                                       loaded_file_name):
     settings_name = settings_base_name + '.sublime-settings'
     settings = sublime.load_settings(settings_name)
-    skip_check = settings.get(settings_key) == False
+    skip_check = settings.get('check_syntax_column_order') == False
     if skip_check:
         return True
 
-    file_list = settings.get(COLUMN_CHECK_BLACKLIST_SETTINGS_KEY)
+    file_list = settings.get('check_syntax_column_order_ignored_files')
     if file_list is not None:
         return loaded_file_name in file_list
     else:
         return False
 
-def disable_column_checking_in_settings(settings_base_name,
-                                        settings_key):
+def disable_check_syntax_column_order(settings_base_name):
     settings_name = settings_base_name + '.sublime-settings'
     settings = sublime.load_settings(settings_name)
-    settings.set(settings_key, False)
+    settings.set('check_syntax_column_order', False)
     sublime.save_settings(settings_name)
 
-def disable_file_column_checking_in_settings(file_name_list,
-                                       settings_base_name,
-                                       settings_key):
+def add_check_syntax_column_order_ignore_files(file_name_list,
+                                               settings_base_name):
     settings_name = settings_base_name + '.sublime-settings'
     settings = sublime.load_settings(settings_name)
-    file_list = settings.get(settings_key)
+    file_list = settings.get('check_syntax_column_order_ignored_files')
     if file_list is None:
         file_list = []
     file_list += file_name_list
-    settings.set(settings_key, file_list)
+    settings.set('check_syntax_column_order_ignored_files', file_list)
     sublime.save_settings(settings_name)
 
 # check_column_order performs a sanity check on the table column order
@@ -670,9 +664,8 @@ def check_column_order(view, scope):
 
     # settings can suppress these checks
     syntax_settings_base_name = view.syntax().name.replace(' ', '')
-    if column_checking_disabled_in_settings(syntax_settings_base_name,
-                                            view.file_name(),
-                                            COLUMN_CHECK_SETTINGS_KEY):
+    if check_syntax_column_order_disabled(syntax_settings_base_name,
+                                   view.file_name()):
         view.settings().set('syntax', 'Packages/Text/Plain text.tmLanguage')
         return
 
@@ -712,15 +705,12 @@ def check_column_order(view, scope):
             if response_2 == sublime.DIALOG_CANCEL:
                 return
             elif response_2 == sublime.DIALOG_YES:
-                disable_column_checking_in_settings(
-                                        syntax_settings_base_name,
-                                        COLUMN_CHECK_SETTINGS_KEY)
+                disable_check_syntax_column_order(syntax_settings_base_name)
             elif response_2 == sublime.DIALOG_NO:
                 file_name = view.file_name()
                 if file_name is not None:
-                    disable_file_column_checking_in_settings([file_name],
-                                        syntax_settings_base_name,
-                                        COLUMN_CHECK_BLACKLIST_SETTINGS_KEY)
+                    add_check_syntax_column_order_ignore_files([file_name],
+                                                 syntax_settings_base_name)
 
 # Event listeners for checking table sanity when the sound table syntax
 # is assigned
