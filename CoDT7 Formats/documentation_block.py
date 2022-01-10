@@ -1,3 +1,6 @@
+# This file is part of the T7-Sublime project.
+# T7-Sublime is an enhanced syntax-highlighting package for (almost) all Call of Duty Black Ops III developer file formats.
+
 import sublime, sublime_plugin
 
 def build_documentation_block_data(view, pt):

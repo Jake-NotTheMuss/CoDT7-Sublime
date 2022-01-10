@@ -1,3 +1,5 @@
+# This file is part of the T7-Sublime project.
+# T7-Sublime is an enhanced syntax-highlighting package for (almost) all Call of Duty Black Ops III developer file formats.
 
 # This is a helper module for table_column_order.py
 # It helps with matching the casing convention in
