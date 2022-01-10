@@ -4,37 +4,47 @@
 		"children":
 		[
 			{
-				"caption": "New File From Template",
-				"mnemonic": "N",
+				"caption": "CoDT7",
 				"children":
 				[
 					{
-						"caption": "Localized Strings",
-						"command": "new_codt7_localized_strings"
+						"caption": "New File From Template",
+						"mnemonic": "N",
+						"children":
+						[
+							{
+								"caption": "Localized Strings",
+								"command": "new_codt7_localized_strings"
+							},
+							{
+								"caption": "Vision",
+								"command": "new_codt7_vision"
+							},
+							{
+								"caption": "Sound Alias",
+								"command": "new_codt7_sound_alias"
+							},
+							{
+								"caption": "Sound Reverb",
+								"command": "new_codt7_sound_reverb"
+							},
+							{
+								"caption": "Sound T5 Alias",
+								"command": "new_codt7_sound_t5_alias"
+							},
+							{
+								"caption": "Sound T5 Reverb",
+								"command": "new_codt7_sound_t5_reverb"
+							},
+							{
+								"caption": "Sound Ambient",
+								"command": "new_codt7_sound_ambient"
+							}
+						]
 					},
 					{
-						"caption": "Vision",
-						"command": "new_codt7_vision"
-					},
-					{
-						"caption": "Sound Alias",
-						"command": "new_codt7_sound_alias"
-					},
-					{
-						"caption": "Sound Reverb",
-						"command": "new_codt7_sound_reverb"
-					},
-					{
-						"caption": "Sound T5 Alias",
-						"command": "new_codt7_sound_t5_alias"
-					},
-					{
-						"caption": "Sound T5 Reverb",
-						"command": "new_codt7_sound_t5_reverb"
-					},
-					{
-						"caption": "Sound Ambient",
-						"command": "new_codt7_sound_ambient"
+						"caption": "Initialize Settings",
+						"command": "initialize_codt7_syntax_settings"
 					}
 				]
 			}
