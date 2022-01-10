@@ -55,4 +55,8 @@ PS> git clone https://github.com/Jake-NotTheMuss/CoDT7-Sublime.git
 PS> cmd /c mklink /J "$env:APPDATA/Sublime Text 3/Packages/CoDT7 Formats" (convert-path "./CoDT7 Formats")
 ```
 
+## Initialization
+
+Once the package is installed, the user can initialize some default syntax settings that will be used by various modules in the package. This can be done by selecting File > CoDT7 > Initialize Settings in the menu bar. This will invoke a command defined in the module initialize_settings.py and as a result, various syntax-specific settings files will be generated in the User directory of the application's data folder.
+
 ---
