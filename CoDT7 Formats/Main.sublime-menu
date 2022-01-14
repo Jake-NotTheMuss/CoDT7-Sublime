@@ -61,12 +61,22 @@
 					{ "command": "toggle_documentation", "caption": "Toggle Documentation Block" }
 				]
 			},
-			{ "command": "toggle_devblock", "caption": "Toggle Developer Block", "mnemonic": "D" },
+			{ "command": "toggle_devblock", "caption": "Toggle Developer Block", "mnemonic": "D" }
+		]
+	},
+	{
+		"id": "tools",
+		"children":
+		[
 			{
 				"id": "codt7",
 				"caption": "CoDT7",
 				"children":
 				[
+					{
+						"caption": "Insert Documentation Template",
+						"command": "insert_gsc_documentation_template"
+					},
 					{
 						"id": "codt7_sound",
 						"caption": "Sound Table",
@@ -80,7 +90,6 @@
 						]
 					}
 				]
-					
 			}
 		]
 	}
