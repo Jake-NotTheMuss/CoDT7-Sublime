@@ -449,8 +449,9 @@ contexts:
 
   preprocessor-if-branch-function-call:
     - meta_content_scope: meta.function-call.codt7.gsc
-    - match: '{{identifier}}'
-    - match: '\{'
+    # - match: '{{identifier}}'
+    - include: function-call-before-paren
+    - match: \(
       scope: meta.group.codt7.gsc punctuation.section.group.begin.codt7.gsc
       set: preprocessor-if-branch-function-call-arguments
 
@@ -636,6 +637,17 @@ contexts:
         - include: preprocessor-line-ending
         - match: ';'
           scope: punctuation.terminator.codt7.gsc
+    - match: ^\s*(#\s*include)\b
+      captures:
+        1: keyword.control.import.include.codt7.gsc
+      push:
+        - meta_scope: meta.preprocessor.include.codt7.gsc
+        - include: preprocessor-line-continuation
+        - include: preprocessor-line-ending
+        - include: preprocessor-comments
+        - match: ';'
+          scope: punctuation.terminator.codt7.gsc
+          pop: true
     - include: preprocessor-practical-workarounds
 
   preprocessor-expressions:
@@ -648,17 +660,6 @@ contexts:
         1: keyword.control.import.using.codt7.gsc
       push:
         - meta_scope: meta.compiler.using.codt7.gsc
-        - include: preprocessor-line-continuation
-        - include: preprocessor-line-ending
-        - include: preprocessor-comments
-        - match: ';'
-          scope: punctuation.terminator.codt7.gsc
-          pop: true
-    - match: ^\s*(#\s*include)\b
-      captures:
-        1: keyword.control.import.include.codt7.gsc
-      push:
-        - meta_scope: meta.compiler.include.codt7.gsc
         - include: preprocessor-line-continuation
         - include: preprocessor-line-ending
         - include: preprocessor-comments
