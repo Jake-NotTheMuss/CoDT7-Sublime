@@ -24,6 +24,9 @@
 
 		<key>unIndentedLinePattern</key>
 		<string><![CDATA[^\s*((/\*|.*\*/|//|\#\s*\w+).*)?$]]></string>
+
+		<key>indentSquareBrackets</key>
+		<true/>
 	</dict>
 </dict>
 </plist>
