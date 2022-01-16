@@ -939,6 +939,7 @@
 		"PrintLn",
 		"ProcessClientFieldsAsIfNew",
 		"PropagateCurrentEvent",
+		"PushActors",
 		"QSortScoredSpawnPointsAscending",
 		"queuemeleeactionstate",
 		"RadioActive_FX",
