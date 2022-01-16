@@ -2,6 +2,12 @@
 	"scope": "(source.codt7.gsc) & (meta.developer-function-name)",
 	"completions":
 	[
+		"bb::logdamage",
+		"bb::logaispawn",
+		"bb::logplayerevent",
+		"bb::logroundevent",
+		"bb::logpurchaseevent",
+		"bb::logpowerupevent",
 		"zm_shadow_zombie::init_fx",
 		"zm_shadow_zombie::register_clientfields",
 		"zm_shadow_zombie::shadow_zombie_cursetrap_fx",
