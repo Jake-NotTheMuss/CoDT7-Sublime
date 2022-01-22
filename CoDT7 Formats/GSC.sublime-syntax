@@ -64,7 +64,7 @@ variables:
   thread_signal_function_lookahead: 'flag\s*::\s*[sg]et\w*|\w*\s*::\s*\w*(wait_?till|notify|endon)\w*'
   # other lookaheads
   weapon_name_function_lookahead: '{{sys_namespace_maybe}}getweapon'
-  clientfield_function_lookahead: 'clientfield\s*::\s*\w+'
+  clientfield_function_lookahead: 'clientfield\s*::\s*\w+|registerclientfield'
   sound_function_lookahead: '{{sys_namespace_maybe}}(playsound|playlocalsound|playloopsound)'
 
 contexts:
