@@ -164,10 +164,8 @@ contexts:
   operators:
     - match: (?:\+\+|\-\-)
       scope: keyword.operator.arithmetic.codt7.gsc
-    # TODO Put these in their applicable places as punctuation
-    # '::' is for namespace access, '->' is for class access
-    # - match: '->|::'
-    #   scope: keyword.operator.accessor.codt7.gsc
+    # match arrow access token before arithmetic
+    - include: reference-access
     - match: \+\=|\-\=|\*\=|/\=|%\=|&\=|\|\=|\^\=|>>\=|<<\=
       scope: keyword.operator.assignment.augmented.codt7.gsc
     - match: <<|>>|&&|\|\|
@@ -998,13 +996,39 @@ contexts:
       captures:
         1: punctuation.accessor.codt7.gsc
       push:
-        - meta_scope: meta.member-access.codt7.gsc
+        - meta_scope: meta.field-access.codt7.gsc
         - match: (?i)\bsize\b
           scope: keyword.other.codt7.gsc
+        - match: '{{identifier}}'
+          scope: variable.other.field.codt7.gsc
+        - match: (?=\W)
+          pop: true
+
+  reference-access:
+    - match: (->)\s*
+      captures:
+        1: punctuation.accessor.codt7.gsc
+      push:
+        - meta_scope: meta.member-access.codt7.gsc
+        - include: access-method-call
         - match: '{{identifier}}'
           scope: variable.other.member.codt7.gsc
         - match: (?=\W)
           pop: true
+
+  access-method-call:
+    - match: (?={{identifier}}\s*\()
+      set:
+        - meta_content_scope: meta.member-access.codt7.gsc meta.method-call.codt7.gsc
+        - match: '{{identifier}}'
+        - match: \(
+          scope: meta.group.codt7.gsc punctuation.section.group.begin.codt7.gsc
+          set:
+            - meta_content_scope: meta.method-call.codt7.gsc meta.group.codt7.gsc
+            - match: \)
+              scope: meta.method-call.codt7.gsc meta.group.codt7.gsc punctuation.section.group.end.codt7.gsc
+              pop: true
+            - include: expressions
 
   modifiers:
     - match: \b({{modifiers}})\b

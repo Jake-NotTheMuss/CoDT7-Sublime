@@ -1,0 +1,7 @@
+{
+	"scope": "(source.codt7.gsc) & (meta.member-access)",
+	"completions":
+	[
+		"test_member"
+	]
+}
