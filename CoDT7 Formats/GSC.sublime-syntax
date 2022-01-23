@@ -164,8 +164,10 @@ contexts:
   operators:
     - match: (?:\+\+|\-\-)
       scope: keyword.operator.arithmetic.codt7.gsc
-    - match: '->|::'
-      scope: punctuation.accessor.codt7.gsc
+    # TODO Put these in their applicable places as punctuation
+    # '::' is for namespace access, '->' is for class access
+    # - match: '->|::'
+    #   scope: keyword.operator.accessor.codt7.gsc
     - match: \+\=|\-\=|\*\=|/\=|%\=|&\=|\|\=|\^\=|>>\=|<<\=
       scope: keyword.operator.assignment.augmented.codt7.gsc
     - match: <<|>>|&&|\|\|
@@ -176,6 +178,12 @@ contexts:
       scope: keyword.operator.arithmetic.codt7.gsc
     - match: '\='
       scope: keyword.operator.assignment.codt7.gsc
+    # T5 function address-of begins with '::', match here before
+    # ternary operators
+    - include: t5-function-reference
+    # non-ternary uses of ':' are dealt with in #function-calls.
+    # This also helps with making auto-completions work in function
+    # calls enclosed in brackets. See #script-functions
     - match: '\?|:'
       scope: keyword.operator.ternary.codt7.gsc
     - include: operator-ampersand
@@ -692,7 +700,7 @@ contexts:
           push:
             - meta_scope: meta.group.codt7.gsc
             - include: preprocessor-line-continuation
-            - include: preprocessor-line-ending
+            - include: preprocessor-line-ending-lookahead
             - include: preprocessor-comments
             - match: \)
               scope: punctuation.section.group.end.codt7.gsc
@@ -724,7 +732,7 @@ contexts:
           push:
             - meta_scope: meta.group.codt7.gsc
             - include: preprocessor-line-continuation
-            - include: preprocessor-line-ending
+            - include: preprocessor-line-ending-lookahead
             - include: preprocessor-comments
             - match: \)
               scope: punctuation.section.group.end.codt7.gsc
@@ -991,11 +999,10 @@ contexts:
         1: punctuation.accessor.codt7.gsc
       push:
         - meta_content_scope: meta.member-access.codt7.gsc
-        - match: \bsize\b
+        - match: (?i)\bsize\b
           scope: keyword.other.codt7.gsc
         - match: '{{identifier}}'
           scope: variable.other.member.codt7.gsc
-        - include: access
         - match: (?=\W)
           pop: true
     - include: access-illegal
@@ -1027,21 +1034,53 @@ contexts:
     - match: (?=\S)
       pop: true
 
+  # This is odd but the auto-completions don't show up
+  # when calling a function within enclosed brackets,
+  # e.g. (zm::register_sidequest), when the user types
+  # (zm::), only regular auto-completions show, so
+  # the -enclosed version of the context is different
+  # in a way that suppresses auto-completions from 
+  # showing up until a character is entered, (zm::r).
+  # When the call is not enclosed in brackets,
+  # the auto-completions work fine.
   script-functions:
-    - match: (?={{identifier}}\s*::\s*\w*)
+    - match: (?={{identifier}}\s*::[^\w\s])
+      push: script-function-call-maybe-enclosed
+    - match: (?={{identifier}}\s*::)
       push: script-function-call-maybe
 
-  # like with builtin calls, we check for the possibilty and push to a new
+  # like with builtin calls, check for the possibility and push to a new
   # context and capture everything there
   script-function-call-maybe:
     - match: \b(?i:{{namespace}})\s*(::)\s*\w*
       scope: meta.developer-function-name.codt7.gsc
       captures:
         1: punctuation.accessor.codt7.gsc
-    - match: '{{identifier}}\s*(::)\s*\w*'
+      pop: true
+    - match: '{{identifier}}\s*(::)\s*\w+'
       scope: meta.function-name.codt7.gsc
       captures:
         1: punctuation.accessor.codt7.gsc
+      pop: true
+    - match: (?=\S)
+      pop: true
+
+  # Cloned context, except 1 or more word characters
+  # are required to match as 'developer-function-name'
+  # this makes auto-completions show up correctly
+  # in enclosed brackets.
+  script-function-call-maybe-enclosed:
+    - meta_scope: meta.other-context.codt7.gsc
+    - match: \b(?i:{{namespace}})\s*(::)\s*\w+
+      scope: meta.developer-function-name.codt7.gsc
+      captures:
+        1: punctuation.accessor.codt7.gsc
+      pop: true
+    - match: '{{identifier}}\s*(::)\s*\w+'
+      scope: meta.function-name.codt7.gsc
+      captures:
+        1: punctuation.accessor.codt7.gsc
+      pop: true
     - match: (?=\S)
       pop: true
 
@@ -1055,6 +1094,16 @@ contexts:
     - match: '::'
       scope: punctuation.accessor.codt7.gsc
     - match: '{{identifier}}'
+
+  t5-function-reference:
+    - match: (?=::\s*{{identifier}})
+      push:
+        - meta_scope: meta.t5-function-reference.codt7.gsc
+        - match: '::'
+          scope: punctuation.accessor.codt7.gsc
+        - match: '{{identifier}}'
+        - match: (?=[^\w\s])
+          pop: true
 
   function-call:
     - match: (?=({{identifier}}\s*::\s*)?{{identifier}}\s*\()
@@ -1081,6 +1130,7 @@ contexts:
               pop: true
             - include: expressions
     - include: script-functions
+    - include: t5-function-reference
 
   # For functions which are wrappers for thread-signal operators
   # or otherwise involve the passing of thread-signal strings as arguments,
@@ -1273,6 +1323,8 @@ contexts:
         - include: expressions
     - match: (?={{identifier}}\s*\()
       set: global-function-t5
+    - match: (?=\S)
+      pop: true
 
 
                    ###  #      ###  ###     #   #
