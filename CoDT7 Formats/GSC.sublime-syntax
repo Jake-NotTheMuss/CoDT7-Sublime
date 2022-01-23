@@ -1128,7 +1128,6 @@ contexts:
               pop: true
             - include: expressions
     - include: script-functions
-    - include: t5-function-reference
 
   # For functions which are wrappers for thread-signal operators
   # or otherwise involve the passing of thread-signal strings as arguments,
