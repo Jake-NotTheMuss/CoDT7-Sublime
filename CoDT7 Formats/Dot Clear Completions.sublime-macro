@@ -1,0 +1,5 @@
+[
+	/* Global devblocks shouldn't indent, so we just add 2 newlines */
+	{"command": "hide_auto_complete"},
+	{"command": "insert_snippet", "args": {"contents": "."}}
+]

@@ -280,12 +280,26 @@
 		]
 	},
 	{ "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/Default/Delete Left Right.sublime-macro"}, "context":
-			[
-					{ "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
-					{ "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
-					{ "key": "preceding_text", "operator": "regex_contains", "operand": "\\( $", "match_all": true },
-					{ "key": "following_text", "operator": "regex_contains", "operand": "^ \\)", "match_all": true },
-					{ "key": "selector", "operator": "equal", "operand": "source.codt7.gsc" }
-			]
+		[
+			{ "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+			{ "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+			{ "key": "preceding_text", "operator": "regex_contains", "operand": "\\( $", "match_all": true },
+			{ "key": "following_text", "operator": "regex_contains", "operand": "^ \\)", "match_all": true },
+			{ "key": "selector", "operator": "equal", "operand": "source.codt7.gsc" }
+		]
 	},
+	// clear completions on dot character insertion. This makes sure the correct auto completions show up.
+	{ "keys": ["."], "command": "run_macro_file", "args": {"file": "res://Packages/CoDT7 Formats/Dot Clear Completions.sublime-macro"}, "context":
+		[
+			{ "key": "following_text", "operator": "regex_contains", "operand": "^[^\\w\\s]", "match_all": true },
+			{ "key": "selector", "operator": "equal", "operand": "source.codt7.gsc" }
+		]
+	},
+	{ "keys": [">"], "command": "run_macro_file", "args": {"file": "res://Packages/CoDT7 Formats/Arrow Clear Completions.sublime-macro"}, "context":
+		[
+			{ "key": "preceding_text", "operator": "regex_contains", "operand": "-$", "match_all": true },
+			{ "key": "following_text", "operator": "regex_contains", "operand": "^[^\\w\\s]", "match_all": true },
+			{ "key": "selector", "operator": "equal", "operand": "source.codt7.gsc" }
+		]
+	}
 ]

@@ -6,7 +6,7 @@
 	<key>settings</key>
 	<dict>
 		<key>cancelCompletion</key>
-		<string>(^.*\b(const|private|autoexec)\s*$)|^\s*(\}?\s*(else|do|#\s*else|#\s*endif)|(class|function)\b)$</string>
+		<string>(^.*\b(const|private|autoexec)\s*$)|^\s*(\}?\s*(else|do|#\s*else|#\s*endif)\b)|\b(class|function)\b</string>
 	</dict>
 </dict>
 </plist>

@@ -993,19 +993,18 @@ contexts:
       scope: invalid.illegal.syntax.codt7.gsc
 
   access:
-    - match: (\.)\s*(?!\.)
-      scope: meta.member-access.codt7.gsc
+    - include: access-illegal
+    - match: (\.)\s*
       captures:
         1: punctuation.accessor.codt7.gsc
       push:
-        - meta_content_scope: meta.member-access.codt7.gsc
+        - meta_scope: meta.member-access.codt7.gsc
         - match: (?i)\bsize\b
           scope: keyword.other.codt7.gsc
         - match: '{{identifier}}'
           scope: variable.other.member.codt7.gsc
         - match: (?=\W)
           pop: true
-    - include: access-illegal
 
   modifiers:
     - match: \b({{modifiers}})\b
@@ -1070,7 +1069,6 @@ contexts:
   # this makes auto-completions show up correctly
   # in enclosed brackets.
   script-function-call-maybe-enclosed:
-    - meta_scope: meta.other-context.codt7.gsc
     - match: \b(?i:{{namespace}})\s*(::)\s*\w+
       scope: meta.developer-function-name.codt7.gsc
       captures:
