@@ -76,7 +76,7 @@ contexts:
 
   global:
     - include: early-expressions
-    - match: ^\s*(?=\w+)
+    - match: (?=\w)
       push: global-modifier
     - include: late-expressions
 

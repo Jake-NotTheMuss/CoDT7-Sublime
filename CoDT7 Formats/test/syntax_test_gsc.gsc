@@ -98,7 +98,7 @@ function main(){
   level.foo = 0;
   /* <- constant.language */
   /*   ^ punctuation.accessor */
-  /*    ^ variable.other.member */
+  /*    ^ variable.other.field */
   /*          ^ meta.number.integer.decimal constant.numeric.value */
   /*           ^ punctuation.terminator */
 }
