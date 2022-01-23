@@ -1,5 +1,5 @@
 {
-	"scope": "source.codt7.gsc - (meta.compiler, entity.name, meta.member-access, string)",
+	"scope": "source.codt7.gsc - (meta.compiler, meta.developer-function-name, meta.anim-reference, entity.name, meta.member-access, string)",
 	"completions":
 	[
 		"DOUBLETAP2_PERK_COST",
