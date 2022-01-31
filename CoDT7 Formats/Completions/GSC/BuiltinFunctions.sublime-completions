@@ -74,6 +74,7 @@
 		"ClearAlternateAimParams",
 		"ClearAnim",
 		"ClearAnimLimited",
+		"ClearGroundEnt",
 		"ClearLastUpdatedCollectibles",
 		"ClearMaterialOverride",
 		"ClearNearestEnemyScrambler",
