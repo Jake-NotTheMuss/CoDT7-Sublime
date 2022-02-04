@@ -494,7 +494,7 @@
 		"GetPlayers",
 		"GetPlayerSelectedGestureName",
 		"GetPlayerSelectedTauntName",
-		"GetPlayerSpawnId",
+		"getplayerspawnid",
 		"GetPlayerSpeed",
 		"GetPlayerVehicle",
 		"GetPointInBounds",

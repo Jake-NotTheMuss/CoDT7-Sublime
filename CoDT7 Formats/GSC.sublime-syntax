@@ -864,7 +864,7 @@ contexts:
         - match: '#/'
           scope: punctuation.section.devblock.end.codt7.gsc
           pop: true
-        - include: global
+        - include: main
 
   parens:
     - match: \(
