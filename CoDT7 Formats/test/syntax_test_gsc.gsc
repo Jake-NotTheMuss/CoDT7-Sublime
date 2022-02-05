@@ -129,9 +129,8 @@ class foo {
 /*                                                                            ^ keyword */
 /*                                                                                  ^ comment.line */
 
-#insert \
-scripts\shared\shared.gsh;
-/*^^^^^^^^^^^^^^^^^^^^^^^^ meta.preprocessor */
+#insert scripts\shared\shared.gsh;
+/*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.preprocessor */
 
 #define MY_MACRO(a, b)
 /*^^^^^^^^^^^^^^^^^^^^ meta.preprocessor.macro */
