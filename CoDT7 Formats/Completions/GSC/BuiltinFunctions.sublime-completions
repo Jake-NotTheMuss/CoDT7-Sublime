@@ -758,6 +758,7 @@
 		"IsTurretFiring",
 		"IsTurretLockedOn",
 		"IsUnderwater",
+		"IsUsingMods",
 		"IsUsingNavVolume",
 		"isUsingT7Melee",
 		"IsValidGametype",
