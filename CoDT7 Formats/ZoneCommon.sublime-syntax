@@ -53,7 +53,7 @@ contexts:
     - match: //
       scope: punctuation.definition.comment.codt7.common
       set:
-        - meta_scope: meta.yes.codt7.table.zone.common comment.line.double-slash.codt7.common
+        - meta_scope: comment.line.double-slash.codt7.common
         - match: '(\\)$\n'
           captures:
             1: punctuation.separator.continuation.codt7.common
