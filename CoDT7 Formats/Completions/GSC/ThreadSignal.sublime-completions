@@ -1409,6 +1409,10 @@
 		"end_draw_map_bounds",
 		"time_check",
 		"emp_deployed",
-		"emp_destroyed_missile_swarm"
+		"emp_destroyed_missile_swarm",
+		// new hashes here
+		"user_grabbed_bgb",
+		"bgb_machine_accessed",
+		"bgb_machine_host_migration"
 	]
 }
