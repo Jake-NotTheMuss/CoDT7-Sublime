@@ -111,7 +111,12 @@ contexts:
         - match: '"'
           scope: punctuation.definition.string.end.codt7.gsc
           pop: true
+        - include: t6-no-escape
         - include: string_escaped_char
+
+  # Strings where the backslash is not meant to escape
+  t6-no-escape:
+    - match: \w*(\\[^\Wabefnrtv]\w+)+
 
   string_escaped_char:
     - match: (\\)$\n
