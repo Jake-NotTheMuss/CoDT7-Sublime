@@ -19,7 +19,7 @@ variables:
   # Listed alphabetically
   buses: BUS_FX|BUS_VOICE|BUS_PFUTZ|BUS_HDRFX|BUS_UI|BUS_MUSIC|BUS_MOVIE|BUS_REFERENCE
   buses_t5: world|fx|voice|pfutz|hdrfx|ui|music|movie|reference
-  flux_type: none|left_player|right_player|center_player|random_player|left_shot|center_shot|right_shot|random_direcion
+  flux_type: none|left_player|right_player|center_player|random_player|left_shot|center_shot|right_shot|random_direction
   limit_type: none|oldest|reject|priority
   randomize_type: volume|pitch|variant
 
