@@ -37,7 +37,7 @@ variables:
 
   # pattern used to identify a binary operation on 2 constants/variables
   # for operators that do different things depending on the number of operands
-  variable_or_constant_border: '[[:alpha:]\h\.]'
+  variable_or_constant_border: '[\w\.)+-/*%]'
   
   control_keywords: 'break|case|continue|default|do|else|for|foreach|in|if|return|switch|while|thread|wait|waitrealtime|waittillframeend'
   basic_types: 'var'
