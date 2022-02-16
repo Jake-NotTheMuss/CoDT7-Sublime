@@ -1,5 +1,5 @@
 {
-	"scope": "(source.codt7.gsc) - (meta.compiler, entity.name, meta.developer-function-name, meta.anim-reference, string.quoted.double, meta.member-access)",
+	"scope": "(source.codt7.gsc) - (meta.compiler, (meta.function.parameters - meta.function.parameters.assignment), entity.name, meta.developer-function-name, meta.anim-reference, string.quoted.double, meta.member-access)",
 	"completions":
 	[
 		"ActivateClientExploder",

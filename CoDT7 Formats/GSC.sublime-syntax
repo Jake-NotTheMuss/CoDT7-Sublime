@@ -1564,6 +1564,36 @@ contexts:
     - match: (?=\S)
       pop: true
 
+  function-parameters:
+    - meta_content_scope: meta.function.parameters.codt7.gsc meta.group.codt7.gsc
+    - match: \)
+      scope: punctuation.section.group.end.codt7.gsc
+      set: function-definition-continue
+    - match: \.{3}(\s*\.)+
+      scope: invalid.illegal.unexpected-character.codt7.gsc
+    - match: \.{3}
+      scope: variable.parameter.variadic.codt7.gsc
+    # Eat 1 or 2 dots to prevent premature warning
+    - match: \.*
+    - match: '&'
+      scope: keyword.operator.address-of.codt7.gsc
+    - match: '{{identifier}}'
+      scope: variable.parameter.codt7.gsc
+    - match: '='
+      scope: keyword.operator.assignment.codt7.gsc
+      set: function-parameter-assignment
+    - include: comments
+    - match: ','
+      scope: punctuation.separator.codt7.gsc
+    - include: preprocessor-line-continuation
+
+  function-parameter-assignment:
+    - meta_scope: meta.function.parameters.assignment.codt7.gsc meta.group.codt7.gsc
+    - match: (?=,|\))
+      set: function-parameters
+    - include: expressions
+    - include: preprocessor-line-continuation
+
   function-definition-params:
     - meta_content_scope: meta.function.codt7.gsc
     - include: comments
@@ -1571,32 +1601,7 @@ contexts:
       set:
         - match: \(
           scope: meta.function.parameters.codt7.gsc meta.group.codt7.gsc punctuation.section.group.begin.codt7.gsc
-          set:
-            - meta_content_scope: meta.function.parameters.codt7.gsc meta.group.codt7.gsc
-            - match: \)
-              scope: punctuation.section.group.end.codt7.gsc
-              set: function-definition-continue
-            - match: \.{3}(\s*\.)+
-              scope: invalid.illegal.unexpected-character.codt7.gsc
-            - match: \.{3}
-              scope: variable.parameter.variadic.codt7.gsc
-            # Eat 1 or 2 dots to prevent premature warning
-            - match: \.*
-            - match: '&'
-              scope: keyword.operator.address-of.codt7.gsc
-            - match: '{{identifier}}'
-              scope: variable.parameter.codt7.gsc
-            - match: '='
-              scope: keyword.operator.assignment.codt7.gsc
-              push:
-                - match: (?=,|\))
-                  pop: true
-                - include: expressions
-                - include: preprocessor-line-continuation
-            - include: comments
-            - match: ','
-              scope: punctuation.separator.codt7.gsc
-            - include: preprocessor-line-continuation
+          set: function-parameters
     - match: (?=\S)
       pop: true
 
