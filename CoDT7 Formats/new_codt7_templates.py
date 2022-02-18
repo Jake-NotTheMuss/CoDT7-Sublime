@@ -5,7 +5,7 @@ import sublime, sublime_plugin
 
 def insert_template(view, prepend, append = ''):
     cursor_pos = len(prepend)
-    view.run_command('append', {'characters': prepend + append})
+    view.run_command('append', {'characters': prepend + append + '\n'})
     view.sel().clear()
     view.sel().add(sublime.Region(cursor_pos))
 
@@ -15,12 +15,26 @@ class NewCodt7LocalizedStringsCommand(sublime_plugin.WindowCommand):
 
         v.assign_syntax('Packages/CoDT7 Formats/LocalizedStrings.sublime-syntax')
 
-        prepend = 'VERSION              "1"\n' \
-                  'CONFIG               "C:\\projects\\cod\\t7\\bin\\StringEd.cfg"\n' \
-                  'FILENOTES            ""\n\n'
+        prepend = \
+        '// Note to translators:\n' \
+        '// If a sentence is the same in your language then please change it to "#same"\n' \
+        '//\n' \
+        '// eg:\n' \
+        '// LANG_ENGLISH  "HALT"\n' \
+        '// LANG_GERMAN   "#same"\n' \
+        '//\n' \
+        '// (This is so we can tell which strings have been signed-off as ok to be the same words for QA\n' \
+        '//  and because we do not store duplicate strings, which will then get exported again next time\n' \
+        '//  as being untranslated.)\n' \
+        '//\n' \
+        'VERSION             "1"\n' \
+        'CONFIG              "C:\\projects\\cod\\t7\\bin\\StringEd.cfg"\n' \
+        'FILENOTES           ""\n\n'
         append  = '\n\nENDMARKER'
 
         insert_template(v, prepend, append)
+
+        #v.run_command('new_string_definition')
 
 class NewCodt7VisionCommand(sublime_plugin.WindowCommand):
     def run(self):
