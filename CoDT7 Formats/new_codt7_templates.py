@@ -34,7 +34,7 @@ class NewCodt7LocalizedStringsCommand(sublime_plugin.WindowCommand):
 
         insert_template(v, prepend, append)
 
-        #v.run_command('new_string_definition')
+        v.run_command('new_string_definition')
 
 class NewCodt7VisionCommand(sublime_plugin.WindowCommand):
     def run(self):

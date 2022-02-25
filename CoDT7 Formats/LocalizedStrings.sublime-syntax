@@ -58,7 +58,7 @@ contexts:
           scope: entity.name.string-reference.codt7.localizedstrings
     - match: ^\s*({{languages}})\b
       captures:
-        1: constant.language.codt7.localizedstrings
+        1: constant.language.language-identifier.codt7.localizedstrings
       push:
         - meta_scope: meta.string-implementation.codt7.localizedstrings
         - match: $\n

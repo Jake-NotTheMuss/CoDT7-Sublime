@@ -142,6 +142,11 @@
 			{ "key": "selector", "operator": "equal", "operand": "text.codt7.table.sound.ambient" }
 		]
 	},
+	{ "keys": ["ctrl+alt+t"], "command": "new_string_definition", "context":
+		[
+			{ "key": "selector", "operator": "equal", "operand": "text.codt7.localizedstrings" },
+		]
+	},
 	// Auto-pair less-than and greater-than symbols in techsetdef's
 	{ "keys": ["<"], "command": "insert_snippet", "args": {"contents": "<$0>"}, "context":
 			[
