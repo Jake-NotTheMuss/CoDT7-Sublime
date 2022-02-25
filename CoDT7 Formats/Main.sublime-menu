@@ -13,6 +13,10 @@
 						"children":
 						[
 							{
+								"caption": "GSC",
+								"command": "new_codt7_gsc",
+							},
+							{
 								"caption": "Localized Strings",
 								"command": "new_codt7_localized_strings"
 							},

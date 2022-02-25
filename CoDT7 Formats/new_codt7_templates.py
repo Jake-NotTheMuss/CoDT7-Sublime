@@ -9,6 +9,28 @@ def insert_template(view, prepend, append = ''):
     view.sel().clear()
     view.sel().add(sublime.Region(cursor_pos))
 
+class NewCodt7GscCommand(sublime_plugin.WindowCommand):
+    def run(self):
+        v = self.window.new_file()
+
+        v.assign_syntax('Packages/CoDT7 Formats/GSC.sublime-syntax')
+
+        template = \
+        '#using scripts\\codescripts\\struct;\n' \
+        '\n' \
+        '#using scripts\\shared\\array_shared;\n' \
+        '#using scripts\\shared\\callbacks_shared;\n' \
+        '#using scripts\\shared\\clientfield_shared;\n' \
+        '#using scripts\\shared\\flag_shared;\n' \
+        '#using scripts\\shared\\system_shared;\n' \
+        '#using scripts\\shared\\util_shared;\n' \
+        '\n' \
+        '#insert scripts\\shared\\shared.gsh;\n' \
+        '#insert scripts\\shared\\version.gsh;\n' \
+        '\n'
+
+        insert_template(v, template)
+
 class NewCodt7LocalizedStringsCommand(sublime_plugin.WindowCommand):
     def run(self):
         v = self.window.new_file()
