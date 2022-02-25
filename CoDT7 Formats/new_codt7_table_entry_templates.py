@@ -13,6 +13,8 @@ else:
         return
 
 def replace_rows_with_template(view, edit, template):
+    if not view.score_selector(view.sel()[0].begin(), 'text.codt7.table'):
+        return
     # list of cols from template string
     template_cols = template.split(',')
     # number of columns in template string
