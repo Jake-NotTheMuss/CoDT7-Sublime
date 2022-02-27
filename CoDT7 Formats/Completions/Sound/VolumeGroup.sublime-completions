@@ -1,7 +1,8 @@
 {
-  "scope": "text.codt7.table.sound & meta.sound-volume-group",
-  "completions":
-  [
+	// Generated on: 02/26/2022 16:36
+	"scope": "text.codt7.table.sound & meta.sound-volume-group",
+	"completions":
+	[
 		"grp_air",
 		"grp_alerts",
 		"grp_ambience",
@@ -28,8 +29,8 @@
 		"grp_voice",
 		"grp_weapon",
 		"grp_weapon_3p",
-		"grp_weapon_decay",
+		"grp_weapon_decay_3p",
 		"grp_whizby",
 		"grp_wpn_lfe"
-  ]
+	]
 }

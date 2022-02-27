@@ -1,11 +1,12 @@
 {
-  "scope": "text.codt7.table.sound & meta.sound-duck-group",
-  "completions":
-  [
+	"scope": "text.codt7.table.sound & meta.sound-duck-group",
+	"completions":
+	[
 		"snp_alerts_gameplay",
 		"snp_ambience",
 		"snp_claw",
 		"snp_destructible",
+		"snp_distant_explosions",
 		"snp_dying",
 		"snp_dying_ice",
 		"snp_evt_2d",
@@ -39,6 +40,5 @@
 		"snp_wpn_turret",
 		"snp_x2",
 		"snp_x3",
-		"snp_distant_explosions"
-  ]
+	]
 }

@@ -1,22 +1,23 @@
 {
-  "scope": "text.codt7.table.sound & meta.sound-language",
-  "completions":
-  [
+	// Generated on: 02/26/2022 16:36
+	"scope": "text.codt7.table.sound & meta.sound-language",
+	"completions":
+	[
 		"all",
+		"arabic",
 		"english",
+		"englisharabic",
 		"french",
-		"italian",
+		"fulljapanese",
 		"german",
-		"spanish",
-		"russian",
-		"portuguese",
+		"italian",
+		"japanese",
 		"mexicanspanish",
 		"polish",
-		"fulljapanese",
-		"japanese",
-		"traditionalchinese",
+		"portuguese",
+		"russian",
 		"simplifiedchinese",
-		"englisharabic",
-		"arabic"
-  ]
+		"spanish",
+		"traditionalchinese"
+	]
 }

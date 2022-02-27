@@ -1,24 +1,26 @@
 {
+	// Generated on: 02/26/2022 16:36
 	"scope": "(source.codt7.gsc) & (meta.animtree.codt7.gsc) & (string.quoted.double)",
 	"completions":
 	[
 		"all_player",
 		"bouncing_betty",
+		"chicken_mech",
+		"critter",
 		"fxanim_props",
-		"generic_human",
 		"generic",
+		"generic_human",
 		"mechz_claw",
 		"mp_autoturret",
 		"mp_emp_power_core",
 		"mp_microwaveturret",
-		"mp_missile_drone",
 		"mp_riotshield",
 		"mp_trophy_system",
 		"mp_vehicles",
 		"zm_ally",
+		"zm_castle",
+		"zm_genesis",
 		"zombie_beacon",
-		"zombie_cymbal_monkey",
-		"zombie_meat",
-		"zombie_turbine"
+		"zombie_cymbal_monkey"
 	]
 }

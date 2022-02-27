@@ -1,19 +1,20 @@
 {
+	// Generated on: 02/26/2022 16:36
 	"scope": "(source.codt7.gsc) & (meta.clientfield-pool.codt7.gsc) & (string.quoted.double)",
 	"completions":
 	[
-		"missile",
-		"scriptmover",
 		"actor",
-		"toplayer",
-		"world",
-		"clientuimodel",
 		"allplayers",
-		"vehicle",
-		"zbarrier",
-		"playercorpse",
+		"clientuimodel",
 		"helicopter",
+		"item",
+		"missile",
 		"plane",
-		"item"
+		"playercorpse",
+		"scriptmover",
+		"toplayer",
+		"vehicle",
+		"world",
+		"zbarrier"
 	]
 }

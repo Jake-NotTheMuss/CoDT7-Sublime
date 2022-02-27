@@ -1,13 +1,14 @@
 {
-  "scope": "text.codt7.table.sound & meta.sound-context-value-t5",
-  "completions":
-  [
-		"indoor",
-		"outdoor",
+	// Generated on: 02/26/2022 16:36
+	"scope": "text.codt7.table.sound & meta.sound-context-value-t5",
+	"completions":
+	[
 		"explicit",
-		"safe",
 		"high",
+		"indoor",
 		"low",
-		"mask"
-  ]
+		"mask",
+		"outdoor",
+		"safe"
+	]
 }

@@ -1,12 +1,13 @@
 {
+	// Generated on: 02/26/2022 16:36
 	"scope": "meta.animtree-flags.codt7",
 	"completions":
 	[
-		"client",
-		"separate",
 		"additive",
+		"client",
 		"complete",
+		"loopsync",
 		"nonloopsync",
-		"loopsync"
+		"separate"
 	]
 }

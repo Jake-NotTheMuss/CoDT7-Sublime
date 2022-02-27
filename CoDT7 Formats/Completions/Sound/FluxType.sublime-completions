@@ -1,15 +1,15 @@
 {
-  "scope": "text.codt7.table.sound & meta.sound-flux-type",
-  "completions":
-  [
-		"none",
-		"left_player",
-		"right_player",
+	// Generated on: 02/26/2022 16:36
+	"scope": "text.codt7.table.sound & meta.sound-flux-type",
+	"completions":
+	[
 		"center_player",
-		"random_player",
-		"left_shot",
 		"center_shot",
-		"right_shot",
-		"random_direction"
-  ]
+		"left_player",
+		"left_shot",
+		"none",
+		"random_direction",
+		"random_player",
+		"right_player"
+	]
 }

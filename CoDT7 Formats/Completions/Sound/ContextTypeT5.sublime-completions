@@ -1,10 +1,11 @@
 {
-  "scope": "text.codt7.table.sound & meta.sound-context-type-t5",
-  "completions":
-  [
-		"ringoff_plr",
+	// Generated on: 02/26/2022 16:36
+	"scope": "text.codt7.table.sound & meta.sound-context-type-t5",
+	"completions":
+	[
+		"hazmat",
 		"mature",
-		"test",
-		"hazmat"
-  ]
+		"ringoff_plr",
+		"test"
+	]
 }

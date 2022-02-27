@@ -1,10 +1,11 @@
 {
-  "scope": "text.codt7.table.sound & meta.sound-limit-type",
-  "completions":
-  [
+	// Generated on: 02/26/2022 16:36
+	"scope": "text.codt7.table.sound & meta.sound-limit-type",
+	"completions":
+	[
 		"none",
 		"oldest",
-		"reject",
-		"priority"
-  ]
+		"priority",
+		"reject"
+	]
 }

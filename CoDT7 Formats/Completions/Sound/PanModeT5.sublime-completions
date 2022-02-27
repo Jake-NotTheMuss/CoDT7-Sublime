@@ -1,31 +1,32 @@
 {
-  "scope": "text.codt7.table.sound & meta.sound-pan-mode-t5",
-  "completions":
-  [
+	// Generated on: 02/26/2022 16:36
+	"scope": "text.codt7.table.sound & meta.sound-pan-mode-t5",
+	"completions":
+	[
+		"all",
+		"back",
+		"back_mostly",
+		"center",
 		"default",
-		"music",
-		"wpn_all",
-		"wpn_fnt",
-		"wpn_rear",
-		"wpn_left",
-		"wpn_right",
-		"music_all",
+		"fly_foot_all",
 		"fly_gear_front_73",
 		"fly_gear_rear_73",
-		"fly_foot_all",
 		"fly_gear_wpn_cnt",
 		"front",
-		"back",
-		"front_mostly",
-		"back_mostly",
-		"all",
-		"center",
 		"front_and_center",
-		"lfe",
-		"quad",
-		"front_mostly_some_center",
 		"front_halfback",
+		"front_mostly",
+		"front_mostly_some_center",
 		"halffront_back",
-		"test"
-  ]
+		"lfe",
+		"music",
+		"music_all",
+		"quad",
+		"test",
+		"wpn_all",
+		"wpn_fnt",
+		"wpn_left",
+		"wpn_rear",
+		"wpn_right"
+	]
 }

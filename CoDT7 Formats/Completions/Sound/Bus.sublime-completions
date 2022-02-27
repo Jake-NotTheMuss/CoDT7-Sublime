@@ -1,14 +1,15 @@
 {
-  "scope": "text.codt7.table.sound & meta.sound-bus",
-  "completions":
-  [
+	// Generated on: 02/26/2022 16:36
+	"scope": "text.codt7.table.sound & meta.sound-bus",
+	"completions":
+	[
 		"BUS_FX",
-		"BUS_VOICE",
-		"BUS_PFUTZ",
 		"BUS_HDRFX",
-		"BUS_UI",
-		"BUS_MUSIC",
 		"BUS_MOVIE",
-		"BUS_REFERENCE"
-  ]
+		"BUS_MUSIC",
+		"BUS_PFUTZ",
+		"BUS_REFERENCE",
+		"BUS_UI",
+		"BUS_VOICE"
+	]
 }

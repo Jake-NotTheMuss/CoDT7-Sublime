@@ -1,7 +1,8 @@
 {
-  "scope": "text.codt7.table.sound & meta.sound-futz-name",
-  "completions":
-  [
+	// Generated on: 02/26/2022 16:36
+	"scope": "text.codt7.table.sound & meta.sound-futz-name",
+	"completions":
+	[
 		"bfutz",
 		"default",
 		"defaultbkp",
@@ -16,6 +17,7 @@
 		"good_1",
 		"jet_wing_helmet",
 		"jet_wing_helmet_flying",
+		"mpl_agr_pov",
 		"mpl_chopper_pov",
 		"mpl_quad_pov",
 		"mpl_reaper_pov",
@@ -33,5 +35,5 @@
 		"test_1",
 		"test_2",
 		"tueyeckert"
-  ]
+	]
 }

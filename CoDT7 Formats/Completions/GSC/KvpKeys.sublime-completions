@@ -1,16 +1,17 @@
 {
+	// Generated on: 02/26/2022 16:36
 	"scope": "(source.codt7.gsc) & (meta.kvp-argument-key.codt7.gsc) & (string.quoted.double)",
 	"completions":
 	[
-		"targetname",
-		"target",
-		"script_noteworthy",
-		"script_linkname",
-		"script_label",
-		"script_string",
 		"classname",
-		"script_unitrigger_type",
+		"prefabname",
 		"scriptbundlename",
-		"prefabname"
+		"script_label",
+		"script_linkname",
+		"script_noteworthy",
+		"script_string",
+		"script_unitrigger_type",
+		"target",
+		"targetname"
 	]
 }

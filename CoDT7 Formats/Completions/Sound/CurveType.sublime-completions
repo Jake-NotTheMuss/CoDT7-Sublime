@@ -1,23 +1,24 @@
 {
-  "scope": "text.codt7.table.sound & meta.sound-curve-type",
-  "completions":
-  [
+	// Generated on: 02/26/2022 16:36
+	"scope": "text.codt7.table.sound & meta.sound-curve-type",
+	"completions":
+	[
+		"alloff",
+		"allon",
+		"cos",
+		"cosdelay",
 		"default",
 		"defaultmin",
-		"allon",
-		"alloff",
 		"rcurve0",
 		"rcurve1",
 		"rcurve2",
 		"rcurve3",
 		"rcurve4",
 		"rcurve5",
-		"steep",
-		"sindelay",
-		"cosdelay",
-		"sin",
-		"cos",
 		"rev60",
-		"rev65"
-  ]
+		"rev65",
+		"sin",
+		"sindelay",
+		"steep"
+	]
 }
