@@ -13,11 +13,119 @@ version: 2
 extends: Packages/CoDT7 Formats/TableCommon.sublime-syntax
 
 variables:
-  asset_types: (?i:physpreset|physconstraints|destructibledef|xanim|xmodel|xmodelmesh|material|computeshaderset|techset|image|sound|sound_patch|col_map|com_map|game_map|map_ents|gfx_map|lightdef|lensflaredef|ui_map|font|fonticon|weapon|weapondef|weaponvariant|weaponfull|cgmediatable|playersoundstable|playerfxtable|sharedweaponsounds|attachment|attachmentunique|weaponcamo|customizationtable|customizationtable_feimages|customizationtablecolor|snddriverglobals|tagfx|impactsfxtable|impactsoundstable|player_character|aitype|character|xmodelalias|structuredtable|leaderboarddef|ddl|glasses|texturelist|vehicle|addon_map_ents|tracer|slug|surfacefxtable|surfacesounddef|footsteptable|entityfximpacts|entitysoundimpacts|zbarrier|vehiclefxdef|vehiclesounddef|typeinfo|scriptbundle|scriptbundlelist|rumble|bulletpenetration|locdmgtable|aimtable|animselectortable|animmappingtable|animstatemachine|behaviortree|behaviorstatemachine|sanim|lightdescription|shellshock|xcam|bgcache|texturecombo|flametable|attachmentcosmeticvariant|maptable|maptableloadingimages|medal|medaltable|objective|objectivelist|umbra_tome|navmesh|navvolume|binaryhtml|laser|beam)
-  raw_types: (?i:localize|rawfile|stringtable|scriptparsetree|keyvaluepairs|ttf|fx|klf|bitfield|streamerhint)
+  asset_types: |-
+    \b(?ix:
+      addon_map_ents
+    | aimtable
+    | aitype
+    | animmappingtable
+    | animselectortable
+    | animstatemachine
+    | attachment
+    | attachmentcosmeticvariant
+    | attachmentunique
+    | beam
+    | behaviorstatemachine
+    | behaviortree
+    | bgcache
+    | binaryhtml
+    | bulletpenetration
+    | cgmediatable
+    | character
+    | col_map
+    | computeshaderset
+    | com_map
+    | customizationtable
+    | customizationtablecolor
+    | customizationtable_feimages
+    | ddl
+    | destructibledef
+    | entityfximpacts
+    | entitysoundimpacts
+    | flametable
+    | font
+    | fonticon
+    | footsteptable
+    | game_map
+    | gfx_map
+    | glasses
+    | image
+    | impactsfxtable
+    | impactsoundstable
+    | laser
+    | leaderboarddef
+    | lensflaredef
+    | lightdef
+    | lightdescription
+    | locdmgtable
+    | maptable
+    | maptableloadingimages
+    | map_ents
+    | material
+    | medal
+    | medaltable
+    | navmesh
+    | navvolume
+    | objective
+    | objectivelist
+    | physconstraints
+    | physpreset
+    | playerfxtable
+    | playersoundstable
+    | player_character
+    | rumble
+    | sanim
+    | scriptbundle
+    | scriptbundlelist
+    | sharedweaponsounds
+    | shellshock
+    | slug
+    | snddriverglobals
+    | sound
+    | sound_patch
+    | structuredtable
+    | surfacefxtable
+    | surfacesounddef
+    | tagfx
+    | techset
+    | texturecombo
+    | texturelist
+    | tracer
+    | typeinfo
+    | ui_map
+    | umbra_tome
+    | vehicle
+    | vehiclefxdef
+    | vehiclesounddef
+    | weapon
+    | weaponcamo
+    | weapondef
+    | weaponfull
+    | weaponvariant
+    | xanim
+    | xcam
+    | xmodel
+    | xmodelalias
+    | xmodelmesh
+    | zbarrier
+    )\b
+
+  raw_types: |-
+    \b(?ix:
+      bitfield
+    | fx
+    | keyvaluepairs
+    | klf
+    | localize
+    | rawfile
+    | scriptparsetree
+    | streamerhint
+    | stringtable
+    | ttf
+    )\b
 
   attribute_names: mode|type|expect|scriptbundle|class|group|title|delta
-  attribute_values: true|false|core|cp|mp|zm|common|level|cp_common|mp_common|zm_common|cp_level|cp_mod_level|mp_level|mp_mod_level|zm_level|zm_mod_level|ship|modtools
+  attribute_values: true|false|core|cp|mp|zm|common|level|(?:cp|mp|zm)_common|(?:cp|mp|zm)(?:_mod)?_level|ship|modtools
 
   language_constant: level|linker|scriptbundlelist
 
@@ -65,7 +173,7 @@ contexts:
       scope: invalid.illegal.unexpected-character.codt7.table.zone.common
 
   asset-type:
-    - match: \b(?i:({{asset_types}})|({{raw_types}}))\b
+    - match: ({{asset_types}})|({{raw_types}})
       captures:
         1: support.type.asset.codt7.table.zone.common
         2: support.type.raw.codt7.table.zone.common

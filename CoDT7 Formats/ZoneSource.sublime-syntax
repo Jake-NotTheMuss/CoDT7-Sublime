@@ -8,7 +8,112 @@
 # in the fastfile along with some other information relevant to the build.
 
 name: Zone Source
-first_line_match: ^\s*(?i:localize|rawfile|stringtable|scriptparsetree|keyvaluepairs|ttf|fx|klf|bitfield|streamerhint|physpreset|physconstraints|destructibledef|xanim|xmodel|xmodelmesh|material|computeshaderset|techset|image|sound|sound_patch|col_map|com_map|game_map|map_ents|gfx_map|lightdef|lensflaredef|ui_map|font|fonticon|weapon|weapondef|weaponvariant|weaponfull|cgmediatable|playersoundstable|playerfxtable|sharedweaponsounds|attachment|attachmentunique|weaponcamo|customizationtable|customizationtable_feimages|customizationtablecolor|snddriverglobals|tagfx|impactsfxtable|impactsoundstable|player_character|aitype|character|xmodelalias|structuredtable|leaderboarddef|ddl|glasses|texturelist|vehicle|addon_map_ents|tracer|slug|surfacefxtable|surfacesounddef|footsteptable|entityfximpacts|entitysoundimpacts|zbarrier|vehiclefxdef|vehiclesounddef|typeinfo|scriptbundle|scriptbundlelist|rumble|bulletpenetration|locdmgtable|aimtable|animselectortable|animmappingtable|animstatemachine|behaviortree|behaviorstatemachine|sanim|lightdescription|shellshock|xcam|bgcache|texturecombo|flametable|attachmentcosmeticvariant|maptable|maptableloadingimages|medal|medaltable|objective|objectivelist|umbra_tome|navmesh|navvolume|binaryhtml|laser|beam)\b\s*,[^,]*$
+first_line_match: |-
+  ^\s*(?xi:
+    addon_map_ents
+  | aimtable
+  | aitype
+  | animmappingtable
+  | animselectortable
+  | animstatemachine
+  | attachment
+  | attachmentcosmeticvariant
+  | attachmentunique
+  | beam
+  | behaviorstatemachine
+  | behaviortree
+  | bgcache
+  | binaryhtml
+  | bitfield
+  | bulletpenetration
+  | cgmediatable
+  | character
+  | col_map
+  | computeshaderset
+  | com_map
+  | customizationtable
+  | customizationtablecolor
+  | customizationtable_feimages
+  | ddl
+  | destructibledef
+  | entityfximpacts
+  | entitysoundimpacts
+  | flametable
+  | font
+  | fonticon
+  | footsteptable
+  | fx
+  | game_map
+  | gfx_map
+  | glasses
+  | image
+  | impactsfxtable
+  | impactsoundstable
+  | keyvaluepairs
+  | klf
+  | laser
+  | leaderboarddef
+  | lensflaredef
+  | lightdef
+  | lightdescription
+  | localize
+  | locdmgtable
+  | maptable
+  | maptableloadingimages
+  | map_ents
+  | material
+  | medal
+  | medaltable
+  | navmesh
+  | navvolume
+  | objective
+  | objectivelist
+  | physconstraints
+  | physpreset
+  | playerfxtable
+  | playersoundstable
+  | player_character
+  | rawfile
+  | rumble
+  | sanim
+  | scriptbundle
+  | scriptbundlelist
+  | scriptparsetree
+  | sharedweaponsounds
+  | shellshock
+  | slug
+  | snddriverglobals
+  | sound
+  | sound_patch
+  | streamerhint
+  | stringtable
+  | structuredtable
+  | surfacefxtable
+  | surfacesounddef
+  | tagfx
+  | techset
+  | texturecombo
+  | texturelist
+  | tracer
+  | ttf
+  | typeinfo
+  | ui_map
+  | umbra_tome
+  | vehicle
+  | vehiclefxdef
+  | vehiclesounddef
+  | weapon
+  | weaponcamo
+  | weapondef
+  | weaponfull
+  | weaponvariant
+  | xanim
+  | xcam
+  | xmodel
+  | xmodelalias
+  | xmodelmesh
+  | zbarrier
+  )\s*,.*$
 file_extensions:
   - zone
   - zpkg
@@ -260,7 +365,7 @@ contexts:
             - include: asset-type
 
   asset:
-    - match: (?i)^\s*(({{asset_types}})|({{raw_types}}))\b
+    - match: ^\s*(({{asset_types}})|({{raw_types}}))
       captures:
         1: meta.asset.codt7.table.zone.source
         2: support.type.asset.codt7.table.zone.source

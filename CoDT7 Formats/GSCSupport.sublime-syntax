@@ -5,14 +5,13 @@
 # This file is part of the T7-Sublime project.
 # T7-Sublime is an enhanced syntax-highlighting package for (almost) all Call of Duty Black Ops III developer file formats.
 
-# Generated on: 02/26/2022 16:36
+# Generated on: 02/28/2022 19:12
 
-name: GSC Internal
+name: GSC Support
 hidden: true
-scope: source.codt7.gscsupport
+scope: source.codt7.gsc
 
 variables:
-
   function_builtin: |-
     \b(?ix:
       Abs

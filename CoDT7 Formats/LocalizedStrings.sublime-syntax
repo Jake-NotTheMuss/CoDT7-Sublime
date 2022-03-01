@@ -13,7 +13,21 @@ scope: text.codt7.localizedstrings
 
 variables:
   identifier: \b[[:upper:][:digit:]_]+\b
-  languages: (?i:LANG_(?:ENGLISH|ENGLISHARABIC|FRENCH|GERMAN|ITALIAN|JAPANESE|POLISH|PORTUGUESE|RUSSIAN|SIMPLIFIEDCHINESE|SPANISH|TRADITIONALCHINESE))
+  languages: |-
+    \b(?ix:
+      LANG_ENGLISH
+    | LANG_ENGLISHARABIC
+    | LANG_FRENCH
+    | LANG_GERMAN
+    | LANG_ITALIAN
+    | LANG_JAPANESE
+    | LANG_POLISH
+    | LANG_PORTUGUESE
+    | LANG_RUSSIAN
+    | LANG_SIMPLIFIEDCHINESE
+    | LANG_SPANISH
+    | LANG_TRADITIONALCHINESE
+    )\b
 
 contexts:
   main:
@@ -56,7 +70,7 @@ contexts:
         - include: comments
         - match: '{{identifier}}'
           scope: entity.name.string-reference.codt7.localizedstrings
-    - match: ^\s*({{languages}})\b
+    - match: ^\s*({{languages}})
       captures:
         1: constant.language.language-identifier.codt7.localizedstrings
       push:

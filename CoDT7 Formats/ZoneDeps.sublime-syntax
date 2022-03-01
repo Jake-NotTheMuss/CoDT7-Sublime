@@ -94,7 +94,7 @@ contexts:
             - include: asset-type
 
   asset:
-    - match: (?i)^\s*(({{asset_types}})|({{raw_types}}))\b
+    - match: ^\s*(({{asset_types}})|({{raw_types}}))
       captures:
         1: meta.target.codt7.table.zone.deps meta.column.target-type.codt7.table.zone.deps
         2: support.type.asset.codt7.table.zone.deps

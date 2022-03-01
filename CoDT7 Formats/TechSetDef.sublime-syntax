@@ -15,7 +15,31 @@ scope: source.codt7.techsetdef
 variables:
   identifier: \b[[:alpha:]_][[:alnum:]_]*\b
 
-  types: (?i:primitivetype|globals|technique|vertexshader|pixelshader|computeshader|codebuffer|state|renderflags|usage|blendstate|stencilstate|sampler|codetexture|texture|image|tweak|color|float1|float2|float3|bool)
+  types: |-
+    \b(?ix:
+      blendstate
+    | bool
+    | codebuffer
+    | codetexture
+    | color
+    | computeshader
+    | float1
+    | float2
+    | float3
+    | globals
+    | image
+    | pixelshader
+    | primitivetype
+    | renderflags
+    | sampler
+    | state
+    | stencilstate
+    | technique
+    | texture
+    | tweak
+    | usage
+    | vertexshader
+    )\b
 
 contexts:
   main:
