@@ -12,30 +12,28 @@ name: Player Animation Script
 file_extensions:
   - script
 scope: source.codt7.playeranimscript
+extends: Packages/CoDT7 Formats/PlayerAnimScriptEnums.sublime-syntax
 
 variables:
   identifier: \b[[:alpha:]_][[:alnum:]_]*\b
   types: EVENTS|DEFINES|LOADSCRIPTS|LOCOMOTIVE_BLENDS|ANIMATIONS
 
-  anim_flags: (?i:allowmovementinterrupt|synchronized|grenadeanim|duration|blendtime|blendouttime|blendintime|female|male|legrig|turretanim|animrate|weapontimescale)
-
-  enum_direction: (?i:left|right|backward|forward)
-  enum_dmgdirection: (?i:left|right|back|front|above_left|above_right|above_back|above_front|below_left|below_right|below_back|below_front)
-  enum_dmgtype: (?i:suicide|fireflies|burned|falling|gas|explosive|energy_weapon|normal_shotgun|meleebat|meleebash|melee|meleeassassinate|meleearmblade|meleecharge|electrified|annihilator|bowpartialcharge|bowfullcharge|blowback)
-  enum_hitlocation: (?i:hit_head)
-  enum_leaning: (?i:left|right)
-  enum_movestatus: (?i:slide|wallrun|climb|climb_side|climb_enter_above|climb_enter_ground|climb_enter_air|turnright|turnleft|trm_step_f|trm_step_b|trm_step_l|trm_step_r|trm_over_low_vault|trm_over_low_f_36|trm_over_low_b_36|trm_over_low_l_36|trm_over_low_r_36|trm_over_high_75|trm_over_high_100|trm_over_high_140|trm_on_low_f_32|trm_on_low_b_32|trm_on_low_l_32|trm_on_low_r_32|trm_on_med_f_60|trm_on_med_l_50|trm_on_med_r_50|trm_on_high_100|trm_on_high_140|mantle_up_57|mantle_up_51|mantle_up_45|mantle_up_39|mantle_up_33|mantle_up_27|mantle_up_21|mantle_over_high|mantle_over_mid|mantle_over_low|slide_move|juke_move|juke_move_short|falling|doublejump|doublejump_in_air|walk|run|sprint|stationary|idle|stumble|stumble_walk|stumble_sprint|shuffle)
-  enum_mounted: (?i:mg42)
-  enum_perk: (?i:laststand|grenadedeath|turned|fastmantle)
-  enum_playeranimtype: (?i:none|default|other|sniper|club|hold|briefcase|reviver|radio|dualwield|remotecontrol|minigun|beltfed|rearclip|handleclip|rearclipsniper|ballisticknife|singleknife|nopump|hatchet|brawler|zipline|riotshield|tablet|turned|sword|groundslam|armblade|armminigun|spikelauncher|bow|onehanded)
-  enum_stance: (?i:prone|crouch|stand)
-  enum_swimtype: (?i:none|surface|underwater)
-  enum_wallrun_side: (?i:left|right)
-  enum_weapon_position: (?i:ads|hip|raised|rest)
-  enum_weaponclass: (?i:rifle|sniper|smg|mg|pistol|pistol_spread|grenade|rocketlauncher|flamethrower|turret|non-player)
-  enum_weapontype: (?i:grenade)
-
-  supported_constants: '{{enum_direction}}|{{enum_dmgdirection}}|{{enum_dmgtype}}|{{enum_hitlocation}}|{{enum_leaning}}|{{enum_movestatus}}|{{enum_mounted}}|{{enum_perk}}|{{enum_playeranimtype}}|{{enum_stance}}|{{enum_swimtype}}|{{enum_wallrun_side}}|{{enum_weapon_position}}|{{enum_weaponclass}}|{{enum_weapontype}}'
+  anim_flags: |-
+    \b(?ix:
+      allowmovementinterrupt
+    | animrate
+    | blendintime
+    | blendouttime
+    | blendtime
+    | duration
+    | female
+    | grenadeanim
+    | legrig
+    | male
+    | synchronized
+    | turretanim
+    | weapontimescale
+    )\b
 
 contexts:
   main:
@@ -109,7 +107,7 @@ contexts:
       scope: variable.parameter.codt7.playeranimscript
       push:
         - meta_scope: meta.condition-type-direction.codt7.playeranimscript
-        - match: \b({{enum_direction}})\b
+        - match: '{{enum_direction}}'
           scope: support.constant.codt7.playeranimscript
         - include: conditions-values-common
     # DMGDIRECTION
@@ -117,7 +115,7 @@ contexts:
       scope: variable.parameter.codt7.playeranimscript
       push:
         - meta_scope: meta.condition-type-dmg-direction.codt7.playeranimscript
-        - match: \b({{enum_dmgdirection}})\b
+        - match: '{{enum_dmgdirection}}'
           scope: support.constant.codt7.playeranimscript
         - include: conditions-values-common
     # DMGTYPE
@@ -125,7 +123,7 @@ contexts:
       scope: variable.parameter.codt7.playeranimscript
       push:
         - meta_scope: meta.condition-type-dmg-type.codt7.playeranimscript
-        - match: \b({{enum_dmgtype}})\b
+        - match: '{{enum_dmgtype}}'
           scope: support.constant.codt7.playeranimscript
         - include: conditions-values-common
     # HITLOCATION
@@ -133,7 +131,7 @@ contexts:
       scope: variable.parameter.codt7.playeranimscript
       push:
         - meta_scope: meta.condition-type-hit-location.codt7.playeranimscript
-        - match: \b({{enum_hitlocation}})\b
+        - match: '{{enum_hitlocation}}'
           scope: support.constant.codt7.playeranimscript
         - include: conditions-values-common
     # INAIR
@@ -147,7 +145,7 @@ contexts:
       scope: variable.parameter.codt7.playeranimscript
       push:
         - meta_scope: meta.condition-type-mounted.codt7.playeranimscript
-        - match: \b({{enum_mounted}})\b
+        - match: '{{enum_mounted}}'
           scope: support.constant.codt7.playeranimscript
         - include: conditions-values-common
     # MOVESTATUS
@@ -155,7 +153,7 @@ contexts:
       scope: variable.parameter.codt7.playeranimscript
       push:
         - meta_scope: meta.condition-type-move-status.codt7.playeranimscript
-        - match: \b({{enum_movestatus}})\b
+        - match: '{{enum_movestatus}}'
           scope: support.constant.codt7.playeranimscript
         - include: conditions-values-common
     # NEXTPLAYERANIMTYPE
@@ -163,7 +161,7 @@ contexts:
       scope: variable.parameter.codt7.playeranimscript
       push:
         - meta_scope: meta.condition-type-next-player-anim-type.codt7.playeranimscript
-        - match: \b({{enum_playeranimtype}})\b
+        - match: '{{enum_playeranimtype}}'
           scope: support.constant.codt7.playeranimscript
         - include: conditions-values-common
     # NEXTWEAPONCLASS
@@ -171,7 +169,7 @@ contexts:
       scope: variable.parameter.codt7.playeranimscript
       push:
         - meta_scope: meta.condition-type-next-weapon-class.codt7.playeranimscript
-        - match: \b({{enum_weaponclass}})\b
+        - match: '{{enum_weaponclass}}'
           scope: support.constant.codt7.playeranimscript
         - include: conditions-values-common
     # PERK
@@ -179,7 +177,7 @@ contexts:
       scope: variable.parameter.codt7.playeranimscript
       push:
         - meta_scope: meta.condition-type-perk.codt7.playeranimscript
-        - match: \b({{enum_perk}})\b
+        - match: '{{enum_perk}}'
           scope: support.constant.codt7.playeranimscript
         - include: conditions-values-common
     # PLAYERANIMTYPE
@@ -187,7 +185,7 @@ contexts:
       scope: variable.parameter.codt7.playeranimscript
       push:
         - meta_scope: meta.condition-type-player-anim-type.codt7.playeranimscript
-        - match: \b({{enum_playeranimtype}})\b
+        - match: '{{enum_playeranimtype}}'
           scope: support.constant.codt7.playeranimscript
         - include: conditions-values-common
     # STANCE
@@ -195,7 +193,7 @@ contexts:
       scope: variable.parameter.codt7.playeranimscript
       push:
         - meta_scope: meta.condition-type-stance.codt7.playeranimscript
-        - match: \b({{enum_stance}})\b
+        - match: '{{enum_stance}}'
           scope: support.constant.codt7.playeranimscript
         - include: conditions-values-common
     # SWIMTYPE
@@ -203,7 +201,7 @@ contexts:
       scope: variable.parameter.codt7.playeranimscript
       push:
         - meta_scope: meta.condition-type-swim-type.codt7.playeranimscript
-        - match: \b({{enum_swimtype}})\b
+        - match: '{{enum_swimtype}}'
           scope: support.constant.codt7.playeranimscript
         - include: conditions-values-common
     # WALLRUN_SIDE
@@ -211,7 +209,7 @@ contexts:
       scope: variable.parameter.codt7.playeranimscript
       push:
         - meta_scope: meta.condition-type-wallrun-side.codt7.playeranimscript
-        - match: \b({{enum_wallrun_side}})\b
+        - match: '{{enum_wallrun_side}}'
           scope: support.constant.codt7.playeranimscript
         - include: conditions-values-common
     # WEAPON
@@ -227,7 +225,7 @@ contexts:
       scope: variable.parameter.codt7.playeranimscript
       push:
         - meta_scope: meta.condition-type-weapon-position.codt7.playeranimscript
-        - match: \b({{enum_weapon_position}})\b
+        - match: '{{enum_weapon_position}}'
           scope: support.constant.codt7.playeranimscript
         - include: conditions-values-common
     # WEAPONCLASS
@@ -235,7 +233,7 @@ contexts:
       scope: variable.parameter.codt7.playeranimscript
       push:
         - meta_scope: meta.condition-type-weapon-class.codt7.playeranimscript
-        - match: \b({{enum_weaponclass}})\b
+        - match: '{{enum_weaponclass}}'
           scope: support.constant.codt7.playeranimscript
         - include: conditions-values-common
     # WEAPONPOWERLEVEL
@@ -250,7 +248,7 @@ contexts:
       scope: variable.parameter.codt7.playeranimscript
       push:
         - meta_scope: meta.condition-type-weapon-type.codt7.playeranimscript
-        - match: \b({{enum_weapontype}})\b
+        - match: '{{enum_weapontype}}'
           scope: support.constant.codt7.playeranimscript
         - include: conditions-values-common
     # DEFAULT
@@ -316,7 +314,7 @@ contexts:
         - match: \w+
           scope: entity.name.alias-reference.codt7.playeranimscript
           pop: true
-    - match: \b({{anim_flags}})\b
+    - match: '{{anim_flags}}'
       scope: variable.language.codt7.playeranimscript
     - include: numbers
     - match: (?=\S)

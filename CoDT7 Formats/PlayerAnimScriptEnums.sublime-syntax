@@ -1,0 +1,250 @@
+%YAML 1.2
+---
+# http://www.sublimetext.com/docs/3/syntax.html
+
+# This file is part of the T7-Sublime project.
+# T7-Sublime is an enhanced syntax-highlighting package for (almost) all Call of Duty Black Ops III developer file formats.
+
+# Generated on: 03/02/2022 18:20
+
+name: Player Animation Script Enums
+hidden: true
+scope: source.codt7.playeranimscript
+
+variables:
+  enum_direction: |-
+    \b(?ix:
+      backward
+    | forward
+    | left
+    | right
+    )\b
+
+  enum_dmgdirection: |-
+    \b(?ix:
+      above_back
+    | above_front
+    | above_left
+    | above_right
+    | back
+    | below_back
+    | below_front
+    | below_left
+    | below_right
+    | front
+    | left
+    | right
+    )\b
+
+  enum_dmgtype: |-
+    \b(?ix:
+      annihilator
+    | blowback
+    | bowfullcharge
+    | bowpartialcharge
+    | burned
+    | electrified
+    | energy_weapon
+    | explosive
+    | falling
+    | fireflies
+    | gas
+    | melee
+    | meleearmblade
+    | meleeassassinate
+    | meleebash
+    | meleebat
+    | meleecharge
+    | normal_shotgun
+    | suicide
+    )\b
+
+  enum_hitlocation: |-
+    \b(?ix:
+      hit_head
+    )\b
+
+  enum_leaning: |-
+    \b(?ix:
+      left
+    | right
+    )\b
+
+  enum_mounted: |-
+    \b(?ix:
+      mg42
+    )\b
+
+  enum_movestatus: |-
+    \b(?ix:
+      climb
+    | climb_enter_above
+    | climb_enter_air
+    | climb_enter_ground
+    | climb_side
+    | doublejump
+    | doublejump_in_air
+    | falling
+    | idle
+    | juke_move
+    | juke_move_short
+    | mantle_over_high
+    | mantle_over_low
+    | mantle_over_mid
+    | mantle_up_21
+    | mantle_up_27
+    | mantle_up_33
+    | mantle_up_39
+    | mantle_up_45
+    | mantle_up_51
+    | mantle_up_57
+    | run
+    | shuffle
+    | slide
+    | slide_move
+    | sprint
+    | stationary
+    | stumble
+    | stumble_sprint
+    | stumble_walk
+    | trm_on_high_100
+    | trm_on_high_140
+    | trm_on_low_b_32
+    | trm_on_low_f_32
+    | trm_on_low_l_32
+    | trm_on_low_r_32
+    | trm_on_med_f_60
+    | trm_on_med_l_50
+    | trm_on_med_r_50
+    | trm_over_high_100
+    | trm_over_high_140
+    | trm_over_high_75
+    | trm_over_low_b_36
+    | trm_over_low_f_36
+    | trm_over_low_l_36
+    | trm_over_low_r_36
+    | trm_over_low_vault
+    | trm_step_b
+    | trm_step_f
+    | trm_step_l
+    | trm_step_r
+    | turnleft
+    | turnright
+    | walk
+    | wallrun
+    )\b
+
+  enum_perk: |-
+    \b(?ix:
+      fastmantle
+    | grenadedeath
+    | laststand
+    | turned
+    )\b
+
+  enum_playeranimtype: |-
+    \b(?ix:
+      armblade
+    | armminigun
+    | ballisticknife
+    | beltfed
+    | bow
+    | brawler
+    | briefcase
+    | club
+    | default
+    | dualwield
+    | groundslam
+    | handleclip
+    | hatchet
+    | hold
+    | minigun
+    | none
+    | nopump
+    | onehanded
+    | other
+    | radio
+    | rearclip
+    | rearclipsniper
+    | remotecontrol
+    | reviver
+    | riotshield
+    | singleknife
+    | sniper
+    | spikelauncher
+    | sword
+    | tablet
+    | turned
+    | zipline
+    )\b
+
+  enum_stance: |-
+    \b(?ix:
+      crouch
+    | prone
+    | stand
+    )\b
+
+  enum_swimtype: |-
+    \b(?ix:
+      none
+    | surface
+    | underwater
+    )\b
+
+  enum_wallrun_side: |-
+    \b(?ix:
+      left
+    | right
+    )\b
+
+  enum_weaponclass: |-
+    \b(?ix:
+      flamethrower
+    | grenade
+    | mg
+    | non-player
+    | pistol
+    | pistol_spread
+    | rifle
+    | rocketlauncher
+    | smg
+    | sniper
+    | turret
+    )\b
+
+  enum_weapontype: |-
+    \b(?ix:
+      grenade
+    )\b
+
+  enum_weapon_position: |-
+    \b(?ix:
+      ads
+    | hip
+    | raised
+    | rest
+    )\b
+
+  supported_constants: |-
+    (?x:
+      {{enum_direction}}
+    | {{enum_dmgdirection}}
+    | {{enum_dmgtype}}
+    | {{enum_hitlocation}}
+    | {{enum_leaning}}
+    | {{enum_mounted}}
+    | {{enum_movestatus}}
+    | {{enum_perk}}
+    | {{enum_playeranimtype}}
+    | {{enum_stance}}
+    | {{enum_swimtype}}
+    | {{enum_wallrun_side}}
+    | {{enum_weaponclass}}
+    | {{enum_weapontype}}
+    | {{enum_weapon_position}}
+    )
+
+contexts:
+  main:
+    - match: ''
