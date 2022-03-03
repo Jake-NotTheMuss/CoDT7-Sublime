@@ -1333,7 +1333,6 @@ contexts:
     - match: (?=\S)
       set: global-type
 
-  # GSC is convenient for this context because code can only appear in fuction or class bodies
   global-type:
     - include: comments
     - match: (?=\bclass\b)
@@ -1545,7 +1544,7 @@ contexts:
     - match: ([[:upper:][:digit:]_]+)\s*(\bfunction\b)?\s*$
       captures:
         1: meta.assumed-macro.codt7.gsc
-        2: keyword.declaration.codt7.gsc
+        2: keyword.declaration.function.codt7.gsc
     # Identifier that is not the function name - likely a macro
     - match: '{{identifier}}(?!\s*(\(|:|$))'
       scope: meta.assumed-macro.codt7.gsc

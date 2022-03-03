@@ -517,7 +517,7 @@ contexts:
 
   global-type:
     - include: comments
-    - match: \b({{types}})\b
+    - match: ({{types}})
       scope: storage.type.codt7.techsetdef
       set: global-component
     - match: (?=\S)
@@ -567,7 +567,7 @@ contexts:
         - include: statements
 
   types:
-    - match: \b({{types}})(?=\s*\()
+    - match: ({{types}})(?=\s*\()
       scope: storage.type.codt7.techsetdef
       push:
         - meta_scope: meta.shader-component.codt7.techsetdef
