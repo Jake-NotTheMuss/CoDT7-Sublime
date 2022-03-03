@@ -3,6 +3,7 @@
 CoDT7[[:space:]]Formats/* linguist-detectable
 CoDT7[[:space:]]Formats/Completions/** linguist-generated
 CoDT7[[:space:]]Formats/GSCSupport.sublime-syntax linguist-generated
+CoDT7[[:space:]]Formats/PlayerAnimScriptEnums.sublime-syntax linguist-generated
 CoDT7[[:space:]]Formats/test/** -linguist-detectable
 other/** linguist-vendored
 samples/** linguist-vendored
