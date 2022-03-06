@@ -65,6 +65,17 @@ function array_test( &array, array )
 /*      ^ meta.number.integer.decimal constant.numeric.value */
 /*        ^ keyword.operator.arithmetic */
 /*         ^ - support */
+
+  a = (a + b) &delete;
+/*            ^ keyword.operator.arithmetic */
+/*             ^ - support */
+
+  a = &delete;
+/*    ^ keyword.operator.address-of */
+/*     ^ support.function.builtin */
+  a = &sys::delete;
+/*        ^^ punctuation.accessor */
+/*          ^ support.function.builtin */
 }
 
 
@@ -76,6 +87,12 @@ function operators_test()
   a = 4 &init;
 /*    ^ meta.number.integer.decimal constant.numeric.value */
 /*      ^ keyword.operator.arithmetic */
+
+
+  a = isdefined( array[i].n_challenge_id ) && array[i].n_challenge_id == n_challenge_to_give;
+/*                                         ^^ keyword.operator.arithmetic */
+/**/
+
 
   root = %generic::root;
 /*       ^ - keyword.operator.arithmetic */

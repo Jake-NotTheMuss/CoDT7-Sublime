@@ -35,10 +35,6 @@ variables:
 
   identifier: \b[[:alpha:]_][[:alnum:]_]*\b # upper and lowercase
   macro_identifier: \b[[:upper:]_][[:upper:][:digit:]_]{2,}\b # only uppercase, at least 3 chars
-
-  # pattern used to identify a binary operation on 2 constants/variables
-  # for operators that do different things depending on the number of operands
-  variable_or_constant_border: '[\w\.)+-/*%]'
   
   control_keywords: 'break|case|continue|default|do|else|for|foreach|in|if|return|switch|while|thread|wait|waitrealtime|waittillframeend'
   basic_types: 'var'
@@ -124,31 +120,28 @@ contexts:
 
   operator-ampersand:
     # bitwise-and
-    - match: '(?<={{variable_or_constant_border}})\s*(&)\s*(?!(?i:array)\b)(?={{variable_or_constant_border}})'
-      captures:
-        1: keyword.operator.arithmetic.codt7.gsc
-    - match: '(?<={{variable_or_constant_border}})\s*(&)\s*(?i:array)'
+    - match: (?<=[[:alnum:]_)])\s*(&)(?!&)
       captures:
         1: keyword.operator.arithmetic.codt7.gsc
     # address-of
-    - match: (?<!{{variable_or_constant_border}})\s*(&)(?=\s*{{identifier}})
+    - match: '(?<!&)(&)(?=\s*[[:alpha:]_])'
       captures:
         1: keyword.operator.address-of.codt7.gsc
-      push: builtin-function-call-maybe
+      push: builtin-function-call-maybe-with-namespace
 
   operator-percent-sign:
     # modulus
-    - match: '(?<={{variable_or_constant_border}})\s*(%)\s*(?={{variable_or_constant_border}})'
+    - match: (?<=[[:alnum:]_]|\))\s*(%)
       captures:
         1: keyword.operator.arithmetic.codt7.gsc
     # anim reference
-    - match: '(?<!{{variable_or_constant_border}})\s*((%)\s*)(?=\w)'
+    - match: '(%)\s*(?=[[:alpha:]_])'
       captures:
-        1: meta.anim-reference.codt7.gsc string.unquoted.codt7.gsc
-        2: keyword.operator.other.codt7.gsc
+        1: keyword.operator.other.codt7.gsc
       push:
-        - meta_content_scope: meta.anim-reference.codt7.gsc string.unquoted.codt7.gsc
-        - match: '(?=[^\w:])'
+        - meta_scope: meta.anim-reference.codt7.gsc string.unquoted.codt7.gsc
+        - match: ':+'
+        - match: '(?=[^[:alnum:]_])'
           pop: true
 
   operator-expression-evaluation:
@@ -1046,8 +1039,10 @@ contexts:
     - match: \b({{basic_types}})\b
       scope: storage.type.codt7.gsc
 
-  # due to the large amount of builtins, we should check for a possible builtin call
-  # and then push a new context to capture, otherwise input starts to lag
+  # due to the large number of builtins, the searching is done in an
+  # isolated scope which is pushed only under certain contexts:
+  # - a sys namespace is encountered (expected builtin)
+  # - an unqualified identifier is used in a call (possibly builtin)
   builtin-functions:
     # sys namespace - builtin call
     - match: \b(?i:sys)\s*(::)
@@ -1064,6 +1059,12 @@ contexts:
       pop: true
     - match: (?=\S)
       pop: true
+
+  builtin-function-call-maybe-with-namespace:
+    - match: \b(?i:sys)\s*(::)
+      captures:
+        1: punctuation.accessor.codt7.gsc
+    - include: builtin-function-call-maybe
 
   # This is odd but the auto-completions don't show up
   # when calling a function within enclosed brackets,
