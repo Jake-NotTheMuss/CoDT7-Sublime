@@ -101,7 +101,7 @@ class InsertGscDocumentationTemplateCommand(sublime_plugin.TextCommand):
         module_name = get_module_name(view)
 
         # get the string containing the param list (...)
-        scope = 'meta.function.parameters.codt7.gsc'
+        scope = 'meta.function.parameters'
 
         # Note that a simple string.find(')') will not always work
         # since a param list can contain additional parens in the
