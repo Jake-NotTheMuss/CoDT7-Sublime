@@ -46,6 +46,8 @@ variables:
 
   language_constant: 'undefined|self|world|classes|level|game|anim|vararg|false|true'
 
+  t6_function_decl: '{{identifier}}(?=\s*(\(|$))'
+
   sys_namespace_maybe: '(sys\s*::\s*)?'
   # functions where kvp's are inputs
   kvp_function_lookahead: 'struct\s*::\s*get(_array)?|{{sys_namespace_maybe}}(getent|getentarray|getnode|getnodearray|getvehiclenode|getvehiclenodearray)'
@@ -303,12 +305,82 @@ contexts:
       pop: true
     - match: (?=^\s*#\s*(elif|else)\b)
       push: preprocessor-elif-else-branch-global
+    # Advance over function definitions here so the extra leading open brace
+    # gets eaten properly (scripts/shared/callbacks_shared.csc, line 675)
+    - include: preprocessor-if-branch-global-function
     - match: '\{'
       scope: punctuation.section.block.begin.codt7.gsc
       set: preprocessor-block-if-branch-global
     - include: preprocessor-global
     - include: negated-block
     - include: global
+
+  preprocessor-if-branch-global-function:
+    # T6 function defs
+    - match: '{{t6_function_decl}}'
+      scope: meta.function.codt7.gsc entity.name.function.codt7.gsc
+      push: preprocessor-if-branch-global-function-definition-parameters
+    # T7 function defs
+    - match: \bfunction\b
+      scope: keyword.declaration.function.codt7.gsc
+    - include: modifiers
+    - include: comments
+    # All uppercase identifier just before a newlin is most likely a macro
+    - match: ([[:upper:][:digit:]_]+)\s*(\bfunction\b)?\s*$
+      captures:
+        1: meta.assumed-macro.codt7.gsc
+        2: keyword.declaration.function.codt7.gsc
+    # Identifier that is not the function name - likely a macro
+    - match: '{{identifier}}(?!\s*(\(|:|$))'
+      scope: meta.assumed-macro.codt7.gsc
+    # Real function definition
+    - match: '(?:{{identifier}}(::))?({{identifier}})(?=\s*(\(|$))'
+      scope: meta.function.codt7.gsc
+      captures:
+        1: punctuation.accessor.codt7.gsc
+        2: entity.name.function.codt7.gsc
+      push: preprocessor-if-branch-global-function-definition-parameters
+
+  preprocessor-if-branch-global-function-definition-parameters:
+    - meta_content_scope: meta.function.codt7.gsc
+    - include: comments
+    - match: (?=\()
+      set:
+        - match: \(
+          scope: meta.function.parameters.codt7.gsc meta.group.codt7.gsc punctuation.section.group.begin.codt7.gsc
+          set: preprocessor-if-branch-global-function-parameters
+    - match: (?=\S)
+      pop: true
+
+  preprocessor-if-branch-global-function-parameters:
+    - meta_content_scope: meta.function.parameters.codt7.gsc meta.group.codt7.gsc
+    - match: \)
+      scope: punctuation.section.group.end.codt7.gsc
+      pop: true
+    - match: \.{3}(\s*\.)+
+      scope: invalid.illegal.unexpected-character.codt7.gsc
+    - match: \.{3}
+      scope: variable.parameter.variadic.codt7.gsc
+    # Eat 1 or 2 dots to prevent premature warning
+    - match: \.*
+    - match: '&'
+      scope: keyword.operator.address-of.codt7.gsc
+    - match: '{{identifier}}'
+      scope: variable.parameter.codt7.gsc
+    - match: '='
+      scope: keyword.operator.assignment.codt7.gsc
+      set: preprocessor-if-branch-global-function-parameter-assignment
+    - include: comments
+    - match: ','
+      scope: punctuation.separator.codt7.gsc
+    - include: preprocessor-line-continuation
+
+  preprocessor-if-branch-global-function-parameter-assignment:
+    - meta_scope: meta.function.parameters.assignment.codt7.gsc meta.group.codt7.gsc
+    - match: (?=,|\))
+      set: preprocessor-if-branch-global-function-parameters
+    - include: expressions
+    - include: preprocessor-line-continuation
 
   preprocessor-block-if-branch-global:
     - meta_scope: meta.block.codt7.gsc
@@ -933,7 +1005,7 @@ contexts:
         - include: expressions
 
 
-  # For operators that take thread-signal strings as operands,
+  # For operators that take notify strings as operands,
   # namely waittill, waittillmatch, notify, and endon
   # Adds an additional meta scope for auto-completions
   keywords-parens:
@@ -947,7 +1019,7 @@ contexts:
           scope: meta.group.c punctuation.section.group.end.c
           pop: true
         - match: (?=")
-          push: string-thread-signal
+          push: string-notify
         - include: expressions
     - match: \b(?i:({{keyword_operators}}))\b\s*(\()
       captures:
@@ -1141,7 +1213,7 @@ contexts:
       push:
         - meta_content_scope: meta.function-call.codt7.gsc
         - match: \b(?=(?i:{{thread_signal_function_lookahead}})\s*\()
-          set: function-call-thread-signal
+          set: function-call-notify
         - match: \b(?=(?i:{{kvp_function_lookahead}})\s*\()
           set: function-call-kvp
         - match: \b(?=(?i:{{weapon_name_function_lookahead}})\s*\()
@@ -1162,11 +1234,11 @@ contexts:
             - include: expressions
     - include: script-functions
 
-  # For functions which are wrappers for thread-signal operators
-  # or otherwise involve the passing of thread-signal strings as arguments,
+  # For functions which are wrappers for notify operators
+  # or otherwise involve the passing of notify strings as arguments,
   # such as util::waittill_any(), flag::get(), etc.
   # Adds an additional meta scope for auto-completions
-  function-call-thread-signal:
+  function-call-notify:
     - meta_content_scope: meta.function-call.codt7.gsc
     - include: function-call-before-paren
     - match: \(
@@ -1177,10 +1249,10 @@ contexts:
           scope: meta.function-call.codt7.gsc meta.group.codt7.gsc punctuation.section.group.end.codt7.gsc
           pop: true
         - match: (?=")
-          push: string-thread-signal
+          push: string-notify
         - include: expressions
 
-  string-thread-signal:
+  string-notify:
     - match: '"'
       scope: punctuation.definition.string.begin.codt7.gsc
       push:
@@ -1351,7 +1423,7 @@ contexts:
           pop: true
         - include: expressions
     - match: (?={{identifier}}\s*\()
-      set: global-function-t5
+      set: global-function-t6
     - match: (?=\S)
       pop: true
 
@@ -1531,8 +1603,8 @@ contexts:
       #      #   #  #    ##  #       #    #  #   #  #    ##      #
       #       ###   #     #   ###    #    #   ###   #     #   ###
 
-  global-function-t5:
-    - match: '{{identifier}}(?=\s*(\(|$))'
+  global-function-t6:
+    - match: '{{t6_function_decl}}'
       scope: meta.function.codt7.gsc entity.name.function.codt7.gsc
       set: function-definition-params
 

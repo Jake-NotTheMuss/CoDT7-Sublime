@@ -3,7 +3,7 @@
 REGISTER_SYSTEM("test", &__init__, undefined)
 /* <- - entity.name */
 
-t5_function(&param, param1)
+t6_function(&param, param1)
 /* <- meta.function entity.name */
 /*         ^ meta.function.parameters */
 /*           ^ variable.parameter */

@@ -105,6 +105,47 @@ function operators_test()
 }
 
 
+#if XFILE_VERSION >= 553
+/* <- keyword.control.import */
+function CodeCallback_ExtraCamRenderCharacterBodyItem( localClientNum, jobIndex, extraCamIndex, sessionMode, characterIndex, itemIndex, defaultItemRender )
+/* <- keyword.declaration.function  */
+/*       ^ entity.name.function */
+/*                                                     ^ variable.parameter */
+/*                                                                     ^ variable.parameter */
+/*                                                                               ^ variable.parameter */
+/*                                                                                              ^ variable.parameter */
+/*                                                                                                           ^ variable.parameter */
+/*                                                                                                                           ^ variable.parameter */
+/*                                                                                                                                      ^ variable.parameter */
+{
+/* <- meta.block punctuation.section.block.begin */
+#else // #if XFILE_VERSION >= 553
+/* <- keyword.control.import */
+function CodeCallback_ExtraCamRenderCharacterBodyItem( localClientNum, jobIndex, extraCamIndex, sessionMode, characterIndex, itemIndex )
+/* <- keyword.declaration.function  */
+/*       ^ entity.name.function */
+/*                                                     ^ variable.parameter */
+/*                                                                     ^ variable.parameter */
+/*                                                                               ^ variable.parameter */
+/*                                                                                              ^ variable.parameter */
+/*                                                                                                           ^ variable.parameter */
+/*                                                                                                                           ^ variable.parameter */
+{
+/* <- meta.block punctuation.section.block.begin */
+  defaultItemRender = false;
+#endif // #else // #if XFILE_VERSION >= 553
+/* <- keyword.control.import */
+	
+  if ( isdefined( level.extra_cam_render_character_body_item_func_callback ) )
+  {
+/*^ meta.block punctuation.section.block.begin */
+    [[level.extra_cam_render_character_body_item_func_callback]]( localClientNum, jobIndex, extraCamIndex, sessionMode, characterIndex, itemIndex, defaultItemRender );
+  }
+/*^ meta.block punctuation.section.block.end */
+}
+/* <- meta.block punctuation.section.block.end */
+
+
 function main(){
   a=5;
   while(a>0)a--;
@@ -368,6 +409,39 @@ function foo(val, val2)
 }
 /* <- meta.function punctuation.section.block.end */
  /* <- - meta.function */
+
+
+#if XFILE_VERSION >= 553
+function CodeCallback_ExtraCamRenderCharacterBodyItem( localClientNum, jobIndex, extraCamIndex, sessionMode, characterIndex, itemIndex, defaultItemRender )
+{
+#else // #if XFILE_VERSION >= 553
+function CodeCallback_ExtraCamRenderCharacterBodyItem( localClientNum, jobIndex, extraCamIndex, sessionMode, characterIndex, itemIndex )
+{
+	defaultItemRender = false;
+#endif // #else // #if XFILE_VERSION >= 553
+	
+	if ( isdefined( level.extra_cam_render_character_body_item_func_callback ) )
+	{
+		[[level.extra_cam_render_character_body_item_func_callback]]( localClientNum, jobIndex, extraCamIndex, sessionMode, characterIndex, itemIndex, defaultItemRender );
+	}
+}
+
+#if XFILE_VERSION >= 568
+function CodeCallback_ExtraCamRenderWCPaintjobIcon( localClientNum, extraCamIndex, jobIndex, attachmentVariantString, weaponOptions, weaponPlusAttachments, loadoutSlot, paintjobIndex, paintjobSlot, isFilesharePreview )
+{
+#else //#if XFILE_VERSION >= 568
+function CodeCallback_ExtraCamRenderWCPaintjobIcon( localClientNum, extraCamIndex, jobIndex, attachmentVariantString, weaponOptions, weaponPlusAttachments, loadoutSlot, paintjobIndex, paintjobSlot )
+{	
+#endif //#else //#if XFILE_VERSION >= 568
+	if ( isdefined( level.extra_cam_render_wc_paintjobicon_func_callback ) )
+	{
+#if XFILE_VERSION >= 568
+		[[level.extra_cam_render_wc_paintjobicon_func_callback]]( localClientNum, extraCamIndex, jobIndex, attachmentVariantString, weaponOptions, weaponPlusAttachments, loadoutSlot, paintjobIndex, paintjobSlot, isFilesharePreview );
+#else //#if XFILE_VERSION >= 568
+		[[level.extra_cam_render_wc_paintjobicon_func_callback]]( localClientNum, extraCamIndex, jobIndex, attachmentVariantString, weaponOptions, weaponPlusAttachments, loadoutSlot, paintjobIndex, paintjobSlot );
+#endif	//#else //#if XFILE_VERSION >= 568
+	}
+}
 
 
 /////////////////////////////////////////////
