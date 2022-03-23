@@ -140,8 +140,31 @@ contexts:
     # TODO
     - include: scope:source.codt7.common#numbers
 
+  # Use lookaheads for line comments so that the newline
+  # does not get consumed, allowing the row context to
+  # correctly pop
   comments:
-    - include: scope:source.codt7.common#comments
+    - match: /\*
+      scope: punctuation.definition.comment.codt7.common
+      push:
+        - meta_scope: comment.block.codt7.common
+        - match: \*/
+          scope: punctuation.definition.comment.codt7.common
+          pop: true
+        - match: ^\s*(\*)(?!/)
+          captures:
+            1: punctuation.definition.comment.codt7.common
+    - match: \*/(?!\*)
+      scope: invalid.illegal.stray-comment-end.codt7.common
+    - match: //
+      scope: punctuation.definition.comment.codt7.common
+      push:
+        - meta_scope: comment.line.double-slash.codt7.common
+        - match: '(\\)$\n'
+          captures:
+            1: punctuation.separator.continuation.codt7.common
+        - match: (?=\n)
+          pop: true
 
   # override comment tokens from TableCommon.sublime-syntax
   unexpected-character:

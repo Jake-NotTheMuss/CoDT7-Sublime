@@ -71,6 +71,9 @@ contexts:
       scope: punctuation.definition.comment.codt7.table.common
       push: comments-body
 
+  # Use lookaheads for line comments so that the newline
+  # does not get consumed, allowing the row context to
+  # correctly pop
   comments-body:
     - meta_scope: comment.line.number-sign.codt7.table.common
     # NOTE: The reason for consuming the newline character is as follows.
@@ -82,7 +85,7 @@ contexts:
     # will never be a comment scope. That is, unless we consume the newline
     # character (or we are editing something in the middle of an existing
     # comment).
-    - match: \n
+    - match: (?=\n)
       pop: true
 
   # For names that are referenced beyong just the sound table,

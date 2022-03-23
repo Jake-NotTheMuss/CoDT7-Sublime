@@ -22,3 +22,19 @@ some_alias,some_file_name,-10298.2398,SOME_ENUM,some_global_id,some_other_alias,
 #                                                             ^ punctuation.separator
 #                                                              ^ meta.column.reference-id entity.name.alias-reference
 #                                                                              ^ invalid.illegal.unexpected-character
+
+some_alias,some_file_name,-10298.2398,SOME_ENUM,some_global_id,some_other_alias # comment
+some_alias,some_file_name,-10298.2398,SOME_ENUM,some_global_id,some_other_alias # comment
+# <- meta.column.name entity.name
+#         ^ punctuation.separator
+#          ^ meta.column.file-name entity.name.filename
+#                        ^ punctuation.separator
+#                         ^ meta.column.level keyword.operator.arithmetic
+#                          ^ meta.number constant.numeric.value
+#                               ^ punctuation.separator.decimal
+#                                    ^ punctuation.separator
+#                                     ^ meta.column.type support.constant
+#                                              ^ punctuation.separator
+#                                               ^ meta.column.global-id entity.name.global-reference
+#                                                             ^ punctuation.separator
+#                                                              ^ meta.column.reference-id entity.name.alias-reference

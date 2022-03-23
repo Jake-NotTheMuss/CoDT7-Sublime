@@ -68,3 +68,8 @@ rawfile,mod.cfg
 /*^^^^^^^^^^^^^ meta.asset */
 /*^ support.type.raw */
 /*     ^ punctuation.separator */
+
+scriptparsetree,scripts/zm/_load.csc // comment
+scriptparsetree,scripts/zm/_load.gsc // comment
+/* <- support.type */
+/*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.asset */
