@@ -129,7 +129,7 @@ contexts:
     - match: '(?<!&)(&)(?=\s*[[:alpha:]_])'
       captures:
         1: keyword.operator.address-of.codt7.gsc
-      push: builtin-function-call-maybe-with-namespace
+      push: function-pointer-reference
 
   operator-percent-sign:
     # modulus
@@ -1131,6 +1131,15 @@ contexts:
       pop: true
     - match: (?=\S)
       pop: true
+
+  # For when '&' is encountered followed by an identifier
+  function-pointer-reference:
+    - match: '{{namespace}}\s*(::)\s*\w*'
+      scope: meta.developer-function-name.codt7.gsc
+      captures:
+        1: punctuation.accessor.codt7.gsc
+      pop: true
+    - include: builtin-function-call-maybe-with-namespace
 
   builtin-function-call-maybe-with-namespace:
     - match: \b(?i:sys)\s*(::)

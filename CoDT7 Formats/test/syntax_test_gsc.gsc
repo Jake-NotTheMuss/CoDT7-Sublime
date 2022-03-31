@@ -76,6 +76,10 @@ function array_test( &array, array )
   a = &sys::delete;
 /*        ^^ punctuation.accessor */
 /*          ^ support.function.builtin */
+
+  a = &array::add;
+/*     ^ - support */
+/*          ^^ punctuation.accessor */
 }
 
 
