@@ -41,7 +41,7 @@ variables:
   type_qualifier: 'const'
   compiler_directive: 'private|autoexec'
   modifiers: '{{type_qualifier}}|{{compiler_directive}}'
-  keyword_operators: 'isdefined|assert|assertmsg|wait|waitrealtime|gettime|vectorscale|waittill|waittillmatch|notify|endon|profilestart|profileend'
+  keyword_operators: 'isdefined|assert|assertmsg|assertex|wait|waitrealtime|gettime|vectorscale|waittill|waittillmatch|notify|endon|profilestart|profileend'
   non_func_keywords: 'if|for|foreach|switch|while|{{keyword_operators}}'
 
   language_constant: 'undefined|self|world|classes|level|game|anim|vararg|false|true'
