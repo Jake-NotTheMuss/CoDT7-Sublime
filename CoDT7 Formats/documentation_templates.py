@@ -82,6 +82,8 @@ class InsertGscDocumentationTemplateCommand(sublime_plugin.TextCommand):
 
         pt = view.sel()[0].begin()
 
+        ptlimit = view.size()
+
         start_token, end_token = get_documentation_comment_tokens(view, pt)
 
         if not start_token or not end_token:
@@ -108,14 +110,14 @@ class InsertGscDocumentationTemplateCommand(sublime_plugin.TextCommand):
         # middle, e.g. some_func( array = array(), array1 )
 
         # advance to start of param list
-        while not score(scope):
+        while not score(scope) and pt < ptlimit:
             pt += 1
 
         # don't need the initial open paren
         pt_begin = pt + 1
 
         # advance to end of param list
-        while score(scope):
+        while score(scope) and pt < ptlimit:
             pt += 1
 
         # don't need the last close paren
@@ -203,10 +205,10 @@ class InsertGscDocumentationTemplateCommand(sublime_plugin.TextCommand):
 
         pt = symbol_region.begin() - 1
         # backtrack to before the function declaration
-        while score('meta.function'):
+        while pt >= 0 and score('meta.function'):
             pt -= 1
 
-        while not score('comment.block.documentation'):
+        while pt >= 0 and not score('comment.block.documentation'):
             pt -= 1
             # stop if encountering any construct before a
             # documentation block
@@ -230,7 +232,7 @@ class InsertGscDocumentationTemplateCommand(sublime_plugin.TextCommand):
             pt = symbol_region.begin() - 1
             default_pt = view.line(pt).begin() - 1
             search_range = 20
-            while search_range > 0:
+            while pt >= 0 and search_range > 0:
                 if score('keyword.declaration'):
                     pt = view.line(pt).begin() - 1
                     break
@@ -240,10 +242,15 @@ class InsertGscDocumentationTemplateCommand(sublime_plugin.TextCommand):
             if search_range == 0:
                 pt = default_pt
 
+            if pt < 0:
+                pt = 0
+
             old_comment_region = sublime.Region(pt)
 
-            # if not replacing an existing comment, add a leading newline
-            start_token = '\n' + start_token
+            # Since this is not replacing an existing doc comment, add
+            # a leading newline... unless this is the start of the file.
+            if pt != 0:
+                start_token = '\n' + start_token
 
         str_new_comment = start_token + '\n' + str_new_comment + '\n' + end_token
 
