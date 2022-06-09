@@ -1,0 +1,26 @@
+%YAML 1.2
+---
+# http://www.sublimetext.com/docs/3/syntax.html
+
+# This file is part of the T7-Sublime project.
+# T7-Sublime is an enhanced syntax-highlighting package for (almost) all Call of Duty Black Ops III developer file formats.
+# LUI is a custom lua library used for UI functionality in Call of Duty
+
+# This syntax exists to provide an isolated scope for things like auto-completiongs to target
+# The scope still has the source.lua root so that it inherits everything from regular lua
+
+name: CoD Lua UI
+first_line_match: |-
+  (?ix:
+    # requiring a ui/* file e.g. require("ui.uieditor.widgets...")
+    (?: ^\s* require \s* \( \s* "(?:ui|ui_mp)\. .* $ ) |
+    # LUI comment at start of file e.g. --- CoD T7 LUI
+    (?: ^\s* -- .* \b (?:LUI|COD|T7) \b .* $ )
+  )
+version: 2
+scope: source.lua.lui
+extends: Packages/Lua/Lua.sublime-syntax
+
+contexts:
+  main:
+    - include: scope:source.lua#main
