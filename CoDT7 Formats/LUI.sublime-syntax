@@ -22,5 +22,21 @@ scope: source.lua.lui
 extends: Packages/Lua/Lua.sublime-syntax
 
 contexts:
-  main:
-    - include: scope:source.lua#main
+
+  builtin-modules:
+    - meta_append: true
+    - match: Engine{{identifier_break}}
+      set:
+        - match: \.
+          scope: punctuation.accessor.lua.lui
+          set:
+            # I have a redundant set here so that 'meta.engine-function'
+            # meta_scope does not get assigned to the dot accessor above.
+            # Using a meta_content_scope instead does not work because
+            # original lua's 'property' context pops for each match.
+            - match: ''
+              set:
+                - meta_scope: meta.engine-function.lua.lui
+                - include: property
+        - include: else-pop
+

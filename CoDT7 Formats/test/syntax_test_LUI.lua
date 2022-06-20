@@ -2,3 +2,6 @@
 
 LUI = {}
 -- <- source.lua.lui
+
+Engine.Exec("disconnect")
+--     ^ meta.engine-function.lua.lui
