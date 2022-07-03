@@ -25,18 +25,37 @@ contexts:
 
   builtin-modules:
     - meta_append: true
+    # Engine
     - match: Engine{{identifier_break}}
       set:
         - match: \.
           scope: punctuation.accessor.lua.lui
           set:
-            # I have a redundant set here so that 'meta.engine-function'
-            # meta_scope does not get assigned to the dot accessor above.
-            # Using a meta_content_scope instead does not work because
-            # original lua's 'property' context pops for each match.
-            - match: ''
-              set:
-                - meta_scope: meta.engine-function.lua.lui
-                - include: property
+            - match: '{{identifier}}{{function_call_ahead}}'
+              scope: meta.property.lua meta.function-call.lua variable.function.lua meta.engine-function.lua.lui
+              pop: true
+            - match: '{{identifier}}'
+              scope: meta.property.lua meta.engine-function.lua.lui
+              pop: true
+            - include: else-pop
         - include: else-pop
 
+    # Enum
+    - match: Enum{{identifier_break}}
+      set:
+        - match: \.
+          scope: punctuation.accessor.lua.lui
+          set:
+            - match: '{{identifier}}'
+              scope: meta.property.lua meta.lui-enum-group.lua.lui
+              set:
+                - match: \.
+                  scope: punctuation.accessor.lua.lui
+                  set:
+                    - match: '{{identifier}}'
+                      scope: meta.property.lua meta.lui-enum-id.lua.lui
+                      pop: true
+                    - include: else-pop
+                - include: else-pop
+            - include: else-pop
+        - include: else-pop
