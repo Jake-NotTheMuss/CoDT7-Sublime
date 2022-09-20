@@ -5,7 +5,7 @@
 # This file is part of the T7-Sublime project.
 # T7-Sublime is an enhanced syntax-highlighting package for (almost) all Call of Duty Black Ops III developer file formats.
 
-# Generated on: 06/07/2022 04:52
+# Generated on: 09/20/2022 09:50
 
 name: GSC Support
 hidden: true
@@ -196,6 +196,7 @@ variables:
     | BotReleaseManualControl
     | BotSetDefaultClass
     | BotSetFailSafeNode
+    | BotSetGoal
     | BotSetLookAngles
     | BotSetMoveMagnitude
     | BotSetRandomCharacterCustomization

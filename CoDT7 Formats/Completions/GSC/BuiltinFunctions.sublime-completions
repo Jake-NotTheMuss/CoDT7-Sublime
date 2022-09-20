@@ -1,5 +1,5 @@
 {
-	// Generated on: 02/26/2022 16:36
+	// Generated on: 09/20/2022 09:50
 	"scope": "(source.codt7.gsc) - (meta.compiler, (meta.function.parameters - meta.function.parameters.assignment), entity.name, meta.developer-function-name, meta.anim-reference, string.quoted.double, meta.field-access, meta.method-access)",
 	"completions":
 	[
@@ -184,6 +184,7 @@
 		"BotReleaseManualControl",
 		"BotSetDefaultClass",
 		"BotSetFailSafeNode",
+		"BotSetGoal",
 		"BotSetLookAngles",
 		"BotSetMoveMagnitude",
 		"BotSetRandomCharacterCustomization",
@@ -698,6 +699,7 @@
 		"GetDropToFloorPosition",
 		"GetDStat",
 		"GetDStatArrayCount",
+		"GetDvar",
 		"GetDvarFloat",
 		"GetDvarInt",
 		"GetDvarString",
