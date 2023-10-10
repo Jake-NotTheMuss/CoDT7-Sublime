@@ -87,6 +87,7 @@ contexts:
                 | {{dec_exponent}}
                 | (?!\.)
               )
+              | {{dec_exponent}}
             )
           ) ({{dec_suffix}})?
           | ( (\.) {{dec_digits}} {{dec_exponent}}? ) ({{dec_suffix}})?
