@@ -282,7 +282,7 @@
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>^\s*#\s*(if|ifdef|ifndef|else|elif|endif|define|insert|using|precache|using_animtree)\b</string>
+					<string>^\s*#\s*(if|ifdef|ifndef|else|elif|endif|define|insert|include|using|precache|using_animtree)\b</string>
 					<key>name</key>
 					<string>keyword.preprocessor.source.gsc</string>
 				</dict>
